@@ -1,0 +1,101 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.signIn {
+  width: 450px;
+  height: 500px;
+  margin-left: 54px;
+  background: rgba(238, 238, 238, 1);
+  box-shadow: 11px 19px 29px 3px rgba(19, 19, 19, 0.25);
+  border-radius: 5px;
+
+  .closeWarp {
+    height: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+
+    .close {
+      width: 15px;
+      height: 15px;
+      background-color: deeppink;
+    }
+
+
+  }
+
+  .user {
+    margin-top: 30px;
+
+    @include childXCenter;
+
+    .userInfo {
+      width: 60px;
+      flex-direction: column;
+      @include childXCenter;
+
+      .userImg {
+        width: 60px;
+        height: 60px;
+        background: red;
+
+      }
+
+      .logoin {
+        width: 100%;
+        font-size: 18px;
+        line-height: 18px;
+        padding-top: 12px;
+        text-align: center;
+      }
+    }
+  }
+
+  .signInfoWarp {
+    padding-top: 54px;
+    @include childXCenter;
+
+    .signInfo {
+      p {
+        width: 300px;
+        height: 45px;
+        @include childXYCenter;
+        border-radius: 5px;
+
+        input {
+          width: 258px;
+          border: none;
+          outline: none;
+          padding-left: 17px;
+          background: #EEE;
+        }
+
+        .icon {
+          width: 17px;
+          height: 17px;
+          background: red;
+        }
+      }
+
+      .textWarp {
+        border: 1px solid rgba(210, 210, 210, 1);
+      }
+
+      .passwordWarp {
+        margin-top: 23px;
+        margin-bottom: 44px;
+        border: 1px solid rgba(210, 210, 210, 1);
+      }
+
+      .signInWarp {
+        background: linear-gradient(91deg, rgba(229, 57, 53, 1) 0%, rgba(227, 93, 91, 1) 100%);
+        border-radius: 5px;
+        font-size: 14px;
+        color: $white;
+      }
+    }
+
+  }
+}

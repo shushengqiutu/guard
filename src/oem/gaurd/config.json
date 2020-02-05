@@ -1,0 +1,5 @@
+[{
+  "name": "lang",
+  "src": "./gaurd/lang",
+  "dest": "../lang/item/lang"
+}]

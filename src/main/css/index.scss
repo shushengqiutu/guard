@@ -1,0 +1,75 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.warp {
+  display: flex;
+  height: 600px;
+  width: 920px;
+}
+
+.leftMean {
+  height: 580px;
+  width: 160px;
+  padding: 10px;
+
+  .logo {
+    margin-top: 8px;
+    background: #888888;
+    height: 25px;
+    width: 100%;
+    @include childYCenter;
+
+    .logoImg {
+      width: 23px;
+      height: 25px;
+    }
+
+    .itemName {
+      font-size: 14px;
+      line-height: 25px;
+      margin-left: 5px;
+      font-family: "Source Han Sans CN";
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  .user {
+    padding-top: 21px;
+
+    @include childXCenter;
+
+    .userInfo {
+      width: 60px;
+      flex-direction: column;
+      @include childXCenter;
+
+      .userImg {
+        width: 60px;
+        height: 60px;
+        background: red;
+
+      }
+
+      .logoin {
+        width: 100%;
+        font-size: 12px;
+        line-height: 14px;
+        padding-top: 15px;
+        text-align: center;
+      }
+    }
+  }
+
+  .mean {
+    height: 300px;
+    background: deeppink;
+  }
+}
+
+.rightView {
+  width: 740px;
+  background: pink;
+  height: 600px;
+  overflow: hidden;
+}
