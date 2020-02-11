@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="tabs">
-
-    </div>
-
+    alll
   </div>
 
 </template>

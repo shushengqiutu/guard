@@ -1,11 +1,11 @@
 <template>
   <div class="tabs">
-    <el-tabs v-model="$route.name"
+    <el-tabs v-model="activeName"
              @tab-click="handleClick">
       <template v-for="(val, key, index) in tabsConfig.tabs">
         <el-tab-pane :label="val"
                      :key="index"
-                     :name="key"> </el-tab-pane>
+                     :name='key'> </el-tab-pane>
       </template>
     </el-tabs>
   </div>
@@ -17,7 +17,17 @@ export default {
   name: 'tabs',
   data () {
     return {
-      activeName: 'second'
+
+    }
+  },
+  computed: {
+    activeName: {
+      get: function () {
+        return this.$route.name
+      },
+      set: function () {
+        return this.$route.name
+      }
     }
   },
   props: {

@@ -61,7 +61,7 @@ export default {
       },
       // 展示在顶部
       routeArr: [
-        '/',
+        '/smartExam',
         '/securityAudit/securityAudit',
         '/auditManagement/auditManagement',
         '/operationLog/operationLog',

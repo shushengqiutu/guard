@@ -1,7 +1,15 @@
 @import './theme1.scss';
 @import './theme2.scss';
 
-.tabs {
-  position: relative;
-  top: -40px;
+.securityPolicy {
+  .conntent {
+    padding: 0 10px 10px 10px;
+
+    .operation {
+      height: 22px;
+      padding: 10px 0;
+      @include childXBetween;
+    }
+  }
+
 }
