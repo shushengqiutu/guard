@@ -7,7 +7,7 @@ export default {
   // 登录页面
   'SignIn': SignIn,
   // 智能扫描
-  'SmartExam': () => import('@/page/a01-smartExam/b01-smartExam/smartExam.vue'),
+  'SmartExam': () => import('@/page/a01-smartExam/b01-smartExam/smart/smartExam.vue'),
   // 安全审计
   'SecurityAudit': () => import('@/page/a02-securityAudit/b01-securityAudit/securityAudit.vue'),
   // 审计管理
