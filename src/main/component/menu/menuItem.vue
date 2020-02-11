@@ -7,11 +7,13 @@
            class="menuIcon"></i>
         <span slot="title"> {{$t(`main.menu.${datas.path}`)}}</span>
       </template>
-      <el-menu-item v-for="item of datas.children"
+
+      <el-menu-item v-for="item of filtersDatas"
                     :index="datas.path+'/'+item.path"
                     :key="datas.path+'/'+item.path">
         <span slot="title"> {{$t(`main.menu.${datas.path+'/'+item.path}`)}}</span>
       </el-menu-item>
+
     </el-submenu>
   </div>
 </template>
@@ -22,7 +24,11 @@ export default {
   props: ['datas', 'parent'],
   data () {
     return {}
+  },
+  created () {
+    this.filtersDatas = this.datas.children.filter((res) => !res.meta.hidden)
   }
+
 }
 </script>
 

@@ -118,18 +118,18 @@ let router = [
         name: 'securityPolicy',
         component: 'SecurityPolicy',
         meta: {
-          title: '安全策略',
+          title: '安全策略', // 当前策略
           hidden: false
 
         }
       },
       {
-        path: 'dataProtect',
-        name: 'dataProtect',
-        component: 'DataProtect',
+        path: 'allPolicy',
+        name: 'allPolicy',
+        component: 'AllPolicy',
         meta: {
-          title: '数据防护',
-          hidden: false
+          title: '所有策略',
+          hidden: true
 
         }
       },

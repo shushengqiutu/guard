@@ -16,7 +16,9 @@ export default {
 
   'OperationLog': () => import('@/page/a03-b-operationLog/b01-operationLog/operationLog.vue'),
   // 策略中心-安全策略
-  'SecurityPolicy': () => import('@/page/a04-strategyCenter/b00-securityPolicy/securityPolicy.vue'),
+  'SecurityPolicy': () => import('@/page/a04-strategyCenter/b00-securityPolicy/securityPolicy/securityPolicy.vue'),
+  // 策略中心-安全策略-所有策略
+  'AllPolicy': () => import('@/page/a04-strategyCenter/b00-securityPolicy/allPolicy/allPolicy.vue'),
   // 策略中心-数据防护
   'DataProtect': () => import('@/page/a04-strategyCenter/b01-dataProtect/dataProtect.vue'),
   // 策略中心-外联探测设置

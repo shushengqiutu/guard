@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routerMapComponents from '@/router/routerMapComponents'
+
+// 重写路由的push方法
+
+const routerPush = Router.prototype.push
+Router.prototype.push = function push (location) {
+  return routerPush.call(this, location).catch(error => error)
+}
 Vue.use(Router)
 
 // 如首页和登录页和一些不用权限的公用页面 静态路由

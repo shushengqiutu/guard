@@ -5,7 +5,7 @@
     <my-scroll>
       <div class="menu">
 
-        <el-menu :default-active="$route.path"
+        <el-menu :default-active="defaultUrl"
                  :unique-opened="false"
                  :text-color="variables.menuText"
                  :active-text-color="variables.menuActiveText"
@@ -72,7 +72,14 @@ export default {
       menu: 'getroutes',
       getTheme: 'getTheme'
 
-    })
+    }),
+    defaultUrl: function () {
+      if (this.$route.name === 'allPolicy') {
+        return '/policyCentral/securityPolicy'
+      } else {
+        return this.$route.path
+      }
+    }
 
   },
   methods: {
@@ -93,6 +100,7 @@ export default {
       }
     }
   },
+
   watch: {
     // 对主题监听实时更新
     getTheme: function (val) {

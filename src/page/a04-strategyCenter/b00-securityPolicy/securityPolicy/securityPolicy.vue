@@ -1,0 +1,22 @@
+<template>
+  <div>
+    <div class="tabs">
+
+    </div>
+
+  </div>
+
+</template>
+<script>
+export default {
+  name: 'dataProtect',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
+</script>
+<style lang='scss'  scoped>
+@import "./css/index.scss";
+</style>

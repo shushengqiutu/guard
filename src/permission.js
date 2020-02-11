@@ -1,6 +1,7 @@
 import router from './router'
 import store from './store'
 import routerMapComponents from '@/router/routerMapComponents'
+
 const whiteList = ['/signIn'] // 不重定向白名单
 const formatRoutes = function (routes) {
   routes.forEach(route => {

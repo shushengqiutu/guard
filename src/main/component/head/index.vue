@@ -1,21 +1,15 @@
 <template>
   <div class="head">
     <div class="left">
-      <!-- <div  v-if="routeArr.indexOf($route.path)">
-        {{$t(`main.menu.${$route.path}`)}}
-      </div> -->
 
-      <!-- <el-tabs v-model="activeName"
-               @tab-click="handleClick">
-        <el-tab-pane label="用户管理"
-                     name="first">1111 </el-tab-pane>
-        <el-tab-pane label="配置管理"
-                     name="second">222</el-tab-pane>
-        <el-tab-pane label="角色管理"
-                     name="third">2222</el-tab-pane>
-        <el-tab-pane label="定时任务补偿"
-                     name="fourth">333</el-tab-pane>
-      </el-tabs> -->
+      <template v-if="routeArr.indexOf($route.path)>-1">
+        <div class="commonly">
+          {{$t(`main.menu.${$route.path}`)}}
+        </div>
+      </template>
+      <template v-if="securityPolicyConfig.routeNameArr.indexOf($route.name)>-1">
+        <tabs :tabsConfig='securityPolicyConfig'></tabs>
+      </template>
     </div>
     <div class="right">
       <div class="mean iconWarp"
@@ -39,20 +33,40 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import tabs from '@/component/tabs/'
 
 export default {
   name: 'myHead',
-
+  components: {
+    tabs
+  },
   data () {
     return {
       subMean: false,
+      securityPolicyConfig: {
+        routeNameArr: ['securityPolicy', 'allPolicy'],
+        tabs: {
+          'securityPolicy': '当前策略',
+          'allPolicy': '所有策略'
+        },
+        // default: this.$route.name,
+        openPage: (tab) => {
+          if (tab.name === 'securityPolicy') {
+            this.$router.push({ name: 'securityPolicy' })
+          }
+          if (tab.name === 'allPolicy') {
+            this.$router.push({ name: 'allPolicy' })
+          }
+        }
+      },
+      // 展示在顶部
       routeArr: [
-        '/smartExam',
+        '/',
         '/securityAudit/securityAudit',
         '/auditManagement/auditManagement',
         '/operationLog/operationLog',
         '/policyCentral',
-        '/policyCentral/securityPolicy',
+        // '/policyCentral/securityPolicy',
         '/policyCentral/dataProtect',
         '/policyCentral/outDetectionSet',
         '/policyCentral/usbScanSet',
@@ -62,6 +76,8 @@ export default {
         '/policyCentral/secretUsb',
         '/systemSetup/systemSetup'
       ]
+      // 安全策略
+
     }
   },
   computed: {
