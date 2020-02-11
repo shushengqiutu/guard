@@ -1,20 +1,12 @@
 <template>
   <div>
-    <div class="test1">
-      内容1
-
-    </div>
-    <div class="test2">
-      内容2
-
-    </div>
-
+    策略中心-防护应用
   </div>
 
 </template>
 <script>
 export default {
-  name: 'user',
+  name: 'appProtect',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

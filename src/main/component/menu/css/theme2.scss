@@ -1,0 +1,39 @@
+//菜单文字颜色需要在 index.vue 中修改数据源 variables
+.theme2 {
+
+  // 菜单颜色控制
+  .menu {
+
+    //整体菜单
+    >>>.el-menu {
+      border-right: none;
+      background: none;
+
+    }
+
+    // 菜单中的ico颜色
+    >>>.el-submenu__title i {
+      color: #ffff
+    }
+
+    >>>.menuIcon {
+      color: #fff;
+    }
+
+    //所有菜单子项背景色
+    >>>.el-submenu.is-active .el-submenu__title,
+    >>>.el-menu-item.is-active,
+    >>>.el-menu-item:focus,
+    >>>.el-menu-item:hover,
+    >>>.el-submenu__title:focus,
+    >>>.el-submenu__title:hover {
+      outline: 0;
+      background: rgba(255, 255, 255, 0.2)
+    }
+
+    //2级别菜单选中时颜色
+    >>>.el-menu.el-menu--inline .el-menu-item.is-active {
+      background: none;
+    }
+  }
+}

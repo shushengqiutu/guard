@@ -4,6 +4,7 @@ export default {
   // 获取主题
   getTheme (state) {
     if (localStorage.getItem('theme')) {
+      // debugger
       state.theme = localStorage.getItem('theme')
     }
     return state.theme

@@ -10,15 +10,39 @@
       <div class="user">
         <div class="userInfo">
           <img class="userImg"
-               src="@/assets/img/public/allow.png"
+               src="@/assets/img/public/person.png"
                alt="">
-          <span class="logoin"> {{$t('public.signIn')}} </span>
+          <div class=" logoinWarp"
+               @mouseenter="operationShow=true"
+               @mouseleave="setOperationShow">
+            <span class="logoin"> {{getname||$t('public.signIn')}} </span>
+            <i v-show="getname&&!operationShow"
+               class="el-icon-caret-bottom"></i>
+            <i v-show="getname&&operationShow"
+               class="el-icon-caret-top"></i>
+
+          </div>
+
         </div>
       </div>
-      <div class="mean">
+      <div class="operation"
+           v-show="getname&&operationShow"
+           @mouseenter="operationShow=true"
+           @mouseleave="operationShow=false">
 
+        <p class="item"
+           @click="setPasswordShow=!setPasswordShow">修改密码</p>
+        <p class="item">退出</p>
+      </div>
+      <div class="setPasswordWarp"
+           v-show="getname&&setPasswordShow">
+        <set-password @func="getPasswordShow"></set-password>
+      </div>
+      <div class="mean">
+        <my-menu></my-menu>
       </div>
     </div>
+
     <div class="rightView">
       <!-- <div class="head">
         <span @click="change_theme({theme:'1'})"> 主题1</span>
@@ -30,31 +54,53 @@
       </div> -->
 
       <my-head></my-head>
-      <router-view />
+
+      <div class=" contentWarp">
+        <my-scroll>
+          <router-view />
+        </my-scroll>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import myHead from './component/head/myHead.vue'
 
+import myHead from './component/head/'
+import myMenu from './component/menu/'
+import setPassword from '@/component/setpassword/'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Main',
   components: {
-    myHead
+    myHead, myMenu, setPassword
   },
   data () {
     return {
-
+      operationShow: false,
+      setPasswordShow: false
     }
   },
+
+  computed: {
+    ...mapGetters({
+      getname: 'getname'
+
+    })
+  },
   created () {
-    console.log(this, 91119)
-    console.log(this.$store, 91119)
+    console.log(this, 99)
   },
   methods: {
-    ...mapMutations(['change_theme', 'change_lang'])
+    setOperationShow () {
+      //
+
+      this.operationShow = false
+    },
+    getPasswordShow (boolean) {
+      this.setPasswordShow = boolean
+    }
   }
 }
 </script>

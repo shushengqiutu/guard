@@ -1,11 +1,8 @@
 <template>
   <div>
-    <div class="test1">
-      内容1
 
-    </div>
-    <div class="test2">
-      内容2
+    策略中心-U盘扫描设置
+    <div>
 
     </div>
 
@@ -14,7 +11,7 @@
 </template>
 <script>
 export default {
-  name: 'user',
+  name: 'usbScanSet',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

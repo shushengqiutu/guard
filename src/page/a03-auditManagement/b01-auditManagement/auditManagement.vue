@@ -1,20 +1,12 @@
 <template>
   <div>
-    <div class="test1">
-      内容1
-
-    </div>
-    <div class="test2">
-      内容2
-
-    </div>
-
+    审计管理
   </div>
 
 </template>
 <script>
 export default {
-  name: 'user',
+  name: 'auditManagement',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

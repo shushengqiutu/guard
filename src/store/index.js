@@ -7,6 +7,9 @@ import state from './state'
 import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
+import user from './modules/user'
+import router from './modules/router'
+import app from './modules/app'
 // 注入vuex
 Vue.use(Vuex)
 // 开发环境输出logger
@@ -16,6 +19,11 @@ export default new Vuex.Store({
   state,
   mutations,
   getters,
-  actions
+  actions,
+  modules: {
+    user,
+    router,
+    app
+  }
   // plugins: [createPersistedState()] //防止数据刷新丢失
 })

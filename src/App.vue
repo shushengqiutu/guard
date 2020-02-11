@@ -16,6 +16,10 @@ export default {
     }
   },
   created () {
+    // this.$http.get('/user/login').then(res => {
+    //   console.log(res, 113333331)
+    // })
+
     // 主题参数赋值
     this.setTheme()
     // 语言参数 lang 赋值
@@ -61,10 +65,10 @@ export default {
 
 </script>
 <style lang="scss">
-html {
-  width: 920px;
-  height: 600px;
-}
+// html {
+//   width: 920px;
+//   height: 600px;
+// }
 body {
   width: 920px;
   height: 600px;

@@ -1,14 +1,24 @@
 <template>
-  <div>
-    <div class="test1">
-      智能扫描
+  <div class="smartWarp">
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
 
-    </div>
-    <!-- <div class="test2">
-      内容2
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
+    <div class="top">111 </div>
 
-    </div> -->
-
+    <div class="center"></div>
+    <div class="bottom"> </div>
   </div>
 
 </template>

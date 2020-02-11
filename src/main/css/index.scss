@@ -5,19 +5,24 @@
   display: flex;
   height: 600px;
   width: 920px;
+
 }
 
 .leftMean {
-  height: 580px;
-  width: 160px;
-  padding: 10px;
+  height: 592px;
+  width: 180px;
+  // padding: 8px 10px;
+  padding-top: 8px;
+  position: relative;
+  // opacity: 0.1;
+  // background: yellow;
 
   .logo {
-    margin-top: 8px;
-    background: #888888;
+
     height: 25px;
-    width: 100%;
+    // width: 100%;
     @include childYCenter;
+    padding: 0 10px;
 
     .logoImg {
       width: 23px;
@@ -30,46 +35,114 @@
       margin-left: 5px;
       font-family: "Source Han Sans CN";
       font-weight: bold;
-      color: rgba(255, 255, 255, 1);
+
     }
   }
 
   .user {
     padding-top: 21px;
-
+    // margin-bottom: 12px;
     @include childXCenter;
 
     .userInfo {
-      width: 60px;
+      // width: 60px;
       flex-direction: column;
+      align-items: center;
       @include childXCenter;
+      font-size: 12px;
+
 
       .userImg {
         width: 60px;
         height: 60px;
-        background: red;
+        margin-bottom: 5px;
+
 
       }
 
-      .logoin {
-        width: 100%;
-        font-size: 12px;
-        line-height: 14px;
-        padding-top: 15px;
-        text-align: center;
+      .logoinWarp {
+        // position: relative;
+        cursor: pointer;
+        padding-bottom: 12px;
+
+        .logoin {
+          width: 100%;
+          font-size: 12px;
+          line-height: 14px;
+          max-width: 120px;
+          // padding-top: 15px;
+          text-align: center;
+          margin-right: 2px;
+
+        }
+
+
       }
+
     }
   }
 
-  .mean {
-    height: 300px;
-    background: deeppink;
+  .operation {
+    position: absolute;
+    right: 10px;
+    // background-color: gold;
+    width: 100px;
+
+    color: #555555;
+    z-index: 999;
+    box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.35);
+    border-radius: 3px;
+    top: 145px;
+    background: #ffffff;
+
+
+
+    .item {
+
+      height: 30px;
+      line-height: 30px;
+      font-size: 12px;
+      cursor: pointer;
+      padding-left: 30px;
+
+      &:hover {
+        background: rgba(226, 218, 218, 0.4);
+        color: #D84019
+      }
+
+      &:focus {
+        color: #D84019
+      }
+
+      &:active {
+        color: #D84019
+      }
+    }
+
+  }
+
+  .setPasswordWarp {
+    position: absolute;
+    top: 160px;
+    width: 415px;
+    height: 270px;
+    left: 318px;
+    background: #fff;
+    box-shadow: 6px 10px 15px 1px rgba(19, 19, 19, 0.25);
+    border-radius: 5px;
+
+
   }
 }
 
 .rightView {
   width: 740px;
-  background: pink;
+  // background: pink;
   height: 600px;
-  overflow: hidden;
+  // overflow: hidden;
+
+  .contentWarp {
+    height: 560px;
+    width: 740px;
+  }
 }

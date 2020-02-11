@@ -1,18 +1,28 @@
 .theme2 {
-
-
-
-
-  .test1 {
-
-    background: #666;
+  .warp {
+    background: linear-gradient(91deg, rgba(0, 0, 0, 1) 0%, rgba(37, 37, 37, 1) 100%);
   }
 
-  .test2 {
+  .leftMean {
 
-    background: pink;
+    background: rgba(255, 255, 255, 0.1);
+
+    .logo {
+      background: #888888;
+
+      .itemName {
+
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+
+    .user {
+      .userInfo {
+        .userImg {
+          // background: red;
+        }
+      }
+    }
 
   }
-
-
 }
