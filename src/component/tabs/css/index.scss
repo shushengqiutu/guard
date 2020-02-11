@@ -1,0 +1,25 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.titleWarp {
+  font-size: 16px;
+  height: 16px;
+  line-height: 16px;
+  margin-top: 13px;
+  background: pink;
+  position: relative;
+  @include childXYCenter;
+
+  .title {}
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 17px;
+    width: 15px;
+    height: 15px;
+    background: gold;
+    color: #BFBFBF;
+    font-size: 16px;
+  }
+}
