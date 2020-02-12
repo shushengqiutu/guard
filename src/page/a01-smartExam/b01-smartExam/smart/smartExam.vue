@@ -22,9 +22,14 @@
        </div>
      </div>
    </div>
-    <div style="margin-top: 95px">
+    <div class="scanCont">
       <div class="scanAll">
           全盘扫描
+      </div>
+      <div class="targetScan">
+        <span style=" cursor: pointer;">
+          指定目录扫描
+        </span>
       </div>
     </div>
     <div class="endSty">
@@ -92,20 +97,34 @@ export default {
     font-weight:400;
     color:rgba(255,255,255,1);
   }
+  .scanCont{
+    margin-top: 95px;
+    display: flex;
+  }
   .scanAll{
     justify-content:center;
     display: flex;
-    margin: 0 auto;
     width:230px;
     height:55px;
+    margin-left: 230px;
     line-height: 55px;
     background:rgba(255,255,255,1);
-    border-radius:10px;
+    border-radius:5px;
     font-size:30px;
     font-family:Microsoft YaHei;
     font-weight:400;
     color:rgba(195,58,35,1);
     cursor: pointer;
+  }
+  .targetScan{
+    height:55px;
+    width:96px;
+    line-height: 55px;
+    margin-left: 30px;
+    font-size:16px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
   }
   .textSty{
     margin: 10px;
