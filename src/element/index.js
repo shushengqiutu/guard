@@ -13,7 +13,8 @@ import {
   Icon,
   Tabs,
   TabPane,
-  Progress
+  Progress,
+  Switch
 } from 'element-ui'
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 Vue.use(Button)
@@ -27,5 +28,6 @@ Vue.use(Icon)
 Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Progress)
+Vue.use(Switch)
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
