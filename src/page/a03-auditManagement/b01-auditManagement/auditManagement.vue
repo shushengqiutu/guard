@@ -1,6 +1,6 @@
 <template>
   <div>
-    审计管理
+    审计事件
   </div>
 
 </template>
