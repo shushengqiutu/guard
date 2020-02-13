@@ -1,6 +1,6 @@
 <template>
   <div class="scanFinish">
-    <div class="headerSty" style="margin-top: 23px;">
+    <div class="headerSty" style="padding-top: 23px;">
       <div class="img1">
         <img class="img1" src="@/assets/img/public/完成@2x.png"/>
       </div>
@@ -123,5 +123,6 @@ export default {
     color:rgba(195,58,35,1);
     line-height: 40px;
     text-align: center;
+    cursor: pointer;
   }
 </style>

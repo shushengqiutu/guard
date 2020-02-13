@@ -82,7 +82,7 @@ export default {
 @import "./css/index.scss";
 .headerSty{
   display: flex;
-  margin-top: 83px;
+  padding-top: 83px;
 }
   .leftCont{
     flex: 5.5;

@@ -78,7 +78,7 @@ export default {
   color: white;
 }
  .headerSty{
-   margin-top: 30px;
+   padding-top: 30px;
    display: flex;
    justify-content: space-around;
    margin-bottom: 24px;
