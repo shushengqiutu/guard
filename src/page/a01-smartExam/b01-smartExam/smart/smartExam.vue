@@ -152,6 +152,7 @@ export default {
   }
   .img3{
     width: 48px;
+
     height: 48px;
     cursor: pointer;
   }

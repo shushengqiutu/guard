@@ -1,9 +1,7 @@
 <template>
   <div class="smartWarp">
    <div class="headerSty">
-     <div>
-       放大镜图片
-     </div>
+     <img class="imgSty" src="@/assets/img/public/鉴定@2x.png"/>
    </div>
     <div class="headScanText">
       <div>
@@ -22,8 +20,8 @@
     </div>
     <div class="bodyScanText" style="margin-top: 25px">
       <div class="bodyText">
-        <div class="iconImg">
-          图
+        <div>
+          <img class="iconImg" src="@/assets/img/public/白名单@2x.png"/>
         </div>
         <div>
           白名单文件数量:4826
@@ -32,8 +30,8 @@
     </div>
     <div class="bodyScanText">
       <div class="bodyText">
-        <div class="iconImg">
-         图
+        <div>
+          <img class="iconImg" src="@/assets/img/public/小usb@2x.png"/>
         </div>
         <div>
           USB数量：5
@@ -42,8 +40,8 @@
     </div>
     <div class="bodyScanText">
       <div class="bodyText">
-        <div class="iconImg">
-          图
+        <div>
+          <img class="iconImg" src="@/assets/img/public/网卡管理@2x.png"/>
         </div>
         <div>
           网卡个数：1
@@ -76,11 +74,18 @@ export default {
 >>>.el-progress-bar__outer{
   background: grey;
 }
+>>>.el-progress__text{
+  color: white;
+}
  .headerSty{
    margin-top: 30px;
    display: flex;
    justify-content: space-around;
-   height: 60px;
+   margin-bottom: 24px;
+ }
+ .imgSty{
+   width: 66px;
+   height: 66px;
  }
   .headerImg{
     width: 60px;

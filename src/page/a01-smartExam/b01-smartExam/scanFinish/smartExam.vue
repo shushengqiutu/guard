@@ -21,15 +21,15 @@
         <img class="img2" src="@/assets/img/public/USB@2x.png"/>
       </div>
     </div>
-    <div class="contentSty contText baseText">
+    <div class="contentSty contText baseText" style="margin-top: 14px">
       <div class="flexImg">
-        <i class="el-icon-success iconSty"></i>扫描系统应用程序
+        <img class="iconSty" src="@/assets/img/public/组 18@2x.png"/>扫描系统应用程序
       </div>
       <div class="flexImg">
-        <i class="el-icon-success iconSty"></i>扫描网卡
+        <img class="iconSty" src="@/assets/img/public/组 18@2x.png"/>扫描网卡
       </div>
       <div class="flexImg">
-        <i class="el-icon-success iconSty"></i>扫描USB
+        <img class="iconSty" src="@/assets/img/public/组 18@2x.png"/>扫描USB
       </div>
     </div>
     <div class="contentSty resultText baseText">
@@ -84,6 +84,7 @@ export default {
     display: flex;
     justify-content: center;
     flex: 1;
+    line-height: 16px;
   }
   .img2{
     width: 81px;
@@ -99,12 +100,11 @@ export default {
   }
   .resultText{
     font-size:14px;
+    margin-top: 11px;
   }
   .iconSty{
-    color: rgba(1,202,39,1);
     width:16px;
     height:16px;
-    font-size: 16px;
     margin-right: 5px
   }
   .endSty{
