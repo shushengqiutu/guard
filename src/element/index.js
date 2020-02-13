@@ -14,7 +14,11 @@ import {
   Tabs,
   TabPane,
   Progress,
-  Switch
+  Switch,
+  Table,
+  TableColumn,
+  Pagination,
+  Row
 } from 'element-ui'
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 Vue.use(Button)
@@ -29,5 +33,10 @@ Vue.use(Tabs)
 Vue.use(TabPane)
 Vue.use(Progress)
 Vue.use(Switch)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Row)
+Vue.use(Pagination)
+
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)

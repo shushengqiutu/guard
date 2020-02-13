@@ -1,0 +1,17 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.myoption {
+  border: 1px solid #fff;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 4px;
+  display: flex;
+  // color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+
+  .text {
+    margin-left: 4px;
+  }
+}

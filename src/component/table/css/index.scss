@@ -1,0 +1,73 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.myTable {
+
+
+  >>>.el-table {
+    background: transparent;
+    color: #fff;
+  }
+
+  >>>.el-table--small td,
+  >>>.el-table--small th {
+    padding: 8px 0;
+  }
+
+  >>>.el-checkbox__inner {
+    background: transparent;
+    width: 14px;
+    height: 14px;
+    text-align: center;
+    line-height: 12px;
+    font-size: 12px;
+    transition: none;
+    outline: none;
+  }
+
+  >>>.el-table thead {
+    color: #fff;
+  }
+
+  >>>.el-table::before {
+    height: 0;
+  }
+
+  >>>.el-table .cell {
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  >>>.el-table td,
+  >>>.el-table th.is-leaf {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  >>>.el-table th,
+  >>>.el-table tr {
+    background: transparent;
+  }
+
+  >>>.el-checkbox__input.is-checked .el-checkbox__inner:focus,
+  >>>.el-checkbox__input.is-checked .el-checkbox__inner:hover,
+  >>>.el-checkbox__input.is-checked .el-checkbox__inner,
+  >>>.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    border-color: #fff
+  }
+
+  >>>.el-checkbox__inner:hover,
+  >>>.el-checkbox__inner:focus {
+    border-color: #fff
+  }
+
+  >>>.el-checkbox__input .el-checkbox__inner::after,
+  >>>.el-checkbox__input.is-checked .el-checkbox__inner::after {
+    border-color: #fff
+  }
+
+  >>>.el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+}

@@ -34,6 +34,7 @@ export default {
   methods: {
     changeCar (item) {
       this.carsConfig.defaultOpenCarId = item.carId
+      this.$emit('getCarId', item.carId)
     }
   }
 

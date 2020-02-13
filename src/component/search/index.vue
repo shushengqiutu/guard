@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       searchVal: '',
-      showX: false
+      showX: true
     }
   },
   watch: {
@@ -53,32 +53,43 @@ export default {
 @import "./css/index.scss";
 .mySearch {
   // position: absolute;
-  z-index: 20;
-  right: 10px;
+
   display: flex;
   justify-content: flex-start;
-  float: right;
+  align-items: center;
+  height: 20px;
   position: relative;
-  margin-top: 0px !important;
+  background: rgba(255, 255, 255, 0.1);
+
+  >>> .el-input--small .el-input__inner {
+    height: 20px;
+    background: transparent;
+    width: 200px;
+  }
   .btn {
     display: inline-block;
-    width: 22px;
-    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
     text-align: center;
     padding: 0;
     border: 0;
     outline: none;
-    background: #ff0000;
-    border: 1px solid transparent;
-    border-left: none;
+    padding-right: 10px;
+
+    // // background: #ff0000;
+    // border: 1px solid transparent;
+    // border-left: none;
     color: #fff;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+    background: transparent;
   }
   .delete-value {
     position: absolute;
-    right: 27px;
-    top: 5px;
+    top: 0;
+    right: 22px;
+    line-height: 20px;
+    width: 15px;
+    height: 22px;
     color: #da4e4e;
   }
 }
