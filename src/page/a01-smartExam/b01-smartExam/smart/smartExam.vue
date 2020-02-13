@@ -153,6 +153,7 @@ export default {
   .img3{
     width: 48px;
     height: 48px;
+    cursor: pointer;
   }
   .avgFlex{
     display:flex;
@@ -162,6 +163,5 @@ export default {
   }
   .ItemFlex{
     flex: 1;
-    cursor: pointer;
   }
 </style>
