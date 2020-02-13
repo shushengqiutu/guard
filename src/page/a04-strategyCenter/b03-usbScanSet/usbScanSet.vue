@@ -1,24 +1,37 @@
 <template>
-  <div>
-
-    策略中心-U盘扫描设置
-    <div>
-
+  <div class="usbScanSet">
+    <div class="device">
+      <device-status
+        :imgUrl="imgUrl"
+        :requestUrl = 'requestUrl'
+        :status="status"
+      >
+      </device-status>
     </div>
-
   </div>
-
 </template>
 <script>
+import deviceStatus from '@/component/deviceStatus/index.vue'
+import imgUrl from '@/assets/img/public/USB3@2x.png'
 export default {
   name: 'usbScanSet',
+  components: {
+    deviceStatus
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      imgUrl: imgUrl,
+      requestUrl: '待请求的接口', // 请求开关接口地址
+      status: false, // 进入页面请求后台返回开关状态
     }
   }
 }
 </script>
 <style lang='scss'  scoped>
 @import "./css/index.scss";
+.device{
+  padding-top: 134px;
+  display: flex;
+  justify-content: center;
+}
 </style>
