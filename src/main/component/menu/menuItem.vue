@@ -5,15 +5,15 @@
 
         <i :class="datas.icon"
            class="menuIcon"></i>
-        <span slot="title"> {{$t(`main.menu.${datas.path}`)}}</span>
+        <span slot="title">{{$t(`main.menu.${datas.redirect}`)}}</span>
       </template>
 
       <el-menu-item v-for="item of filtersDatas"
                     :index="datas.path+'/'+item.path"
                     :key="datas.path+'/'+item.path">
-        <span slot="title"> {{$t(`main.menu.${datas.path+'/'+item.path}`)}}</span>
+        <span slot="title"> {{$t(`main.menu.${item.name}`)}} </span>
       </el-menu-item>
-
+<!-- {{$t(`main.menu.${datas.path+'/'+item.path}`)}} -->
     </el-submenu>
   </div>
 </template>

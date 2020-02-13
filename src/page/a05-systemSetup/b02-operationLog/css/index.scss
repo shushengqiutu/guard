@@ -1,10 +1,30 @@
 @import './theme1.scss';
 @import './theme2.scss';
 
-.test1 {
-  background: plum;
-  width: 100px;
-  height: 100px;
-  font-style: italic;
-  font-size: 20px;
+.allPolicy {
+  padding: 0 10px 10px 10px;
+
+  .operation {
+    height: 22px;
+    padding: 10px 0;
+    @include childXBetween;
+    // background: yellowgreen;
+
+    .func {
+      display: flex;
+
+    }
+
+    .search {}
+  }
+
+  .tableWarp {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .myPaginationWarp {
+    @include childXRight
+  }
 }

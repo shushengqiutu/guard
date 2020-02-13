@@ -1,5 +1,5 @@
 // 中文语言模板
 
-exports.auditManagement = {
-  name: '审计管理'
+exports.securityAudit = {
+  name: '安全审计'
 }

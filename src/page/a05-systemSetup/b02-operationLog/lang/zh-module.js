@@ -1,5 +1,5 @@
 // 中文语言模板
 
-exports.systemSetup = {
-  name: '系统设置'
+exports.securityAudit = {
+  name: '安全审计'
 }

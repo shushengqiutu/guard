@@ -20,7 +20,7 @@
                           :index="item.redirect">
               <i :class="item.icon"
                  class="menuIcon"></i>
-              <span slot="title"> {{$t(`main.menu.${item.redirect}`)}}</span>
+              <span slot="title">{{$t(`main.menu.${item.children[0].name}`)}}</span>
             </el-menu-item>
             <!-- 需要显示子菜单 -->
             <my-menu-item v-else-if="item.children&&!item.singleTag&&!item.hidden"

@@ -2,9 +2,10 @@
   <div class="head">
     <div class="left">
 
-      <template v-if="routeArr.indexOf($route.path)>-1">
+      <template v-if="routeArr.indexOf($route.name)>-1">
         <div class="commonly">
-          {{$t(`main.menu.${$route.path}`)}}
+
+          {{$t(`main.menu.${$route.name}`)}}
         </div>
       </template>
       <template v-if="securityPolicyConfig.routeNameArr.indexOf($route.name)>-1">
@@ -61,20 +62,10 @@ export default {
       },
       // 展示在顶部
       routeArr: [
-        '/smartExam',
-        '/securityAudit/securityAudit',
-        '/auditManagement/auditManagement',
-        '/operationLog/operationLog',
-        '/policyCentral',
-        // '/policyCentral/securityPolicy',
-        '/policyCentral/dataProtect',
-        '/policyCentral/outDetectionSet',
-        '/policyCentral/usbScanSet',
-        '/policyCentral/workMode',
-        '/policyCentral/appProtect',
-        '/policyCentral/peripheralProtect',
-        '/policyCentral/secretUsb',
-        '/systemSetup/systemSetup'
+        'smartExam',
+        'auditManagement',
+        'operationLog',
+        'systemSetup'
       ]
       // 安全策略
 

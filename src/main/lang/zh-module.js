@@ -2,21 +2,20 @@
 exports.main = {
   // 菜单
   menu: {
-    '/smartExam': '智能扫描',
-    '/securityPolicy/securityPolicy': '安全策略',
-    '/auditManagement/auditManagement': '审计事件',
-    '/policyCentral': '策略中心',
-    '/policyCentral/dataProtect': '数据防护',
-    '/policyCentral/outDetectionSet': '外联探测设置',
-    '/policyCentral/usbScanSet': 'U盘扫描设置',
-    '/policyCentral/workMode': '工作模式',
-    '/policyCentral/appProtect': '防护应用',
-    '/policyCentral/peripheralProtect': '外防设置',
-    '/policyCentral/secretUsb': '安全U盘',
-    '/systemSetup': '系统中心',
-    '/systemSetup/systemSetup': '系统设置',
-    '/systemSetup/operationLog': '操作日志',
-    '/systemSetup/userManagement': '用户管理'
+    'smartExam': '智能扫描',
+    'securityPolicy': '安全策略',
+    'auditManagement': '审计事件',
+    '/policyCentral/dataProtect': '策略中心',
+    'dataProtect': '数据防护',
+    'outDetectionSet': '外联探测设置',
+    'usbScanSet': 'U盘扫描设置',
+    'workMode': '工作模式',
+    'appProtect': '防护应用',
+    'peripheralProtect': '外防设置',
+    'secretUsb': '安全U盘',
+    '/systemSetup/systemSetup': '系统中心',
+    'systemSetup': '系统设置',
+    'operationLog': '操作日志',
+    'userManagement': '用户管理'
   }
-
 }
