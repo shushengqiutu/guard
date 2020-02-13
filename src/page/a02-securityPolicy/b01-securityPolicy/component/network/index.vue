@@ -1,12 +1,9 @@
 <template>
-  <div class="allPolicy">
+  <div class="network">
       <div class='operation'>
         <div class='func'>
             <my-option icon='el-icon-delete-solid' text='删除'> </my-option>
-            <my-option icon='el-icon-delete-solid' text='导入'> </my-option>
-             <my-option icon='el-icon-delete-solid' text='导出'> </my-option>
-               <my-option icon='el-icon-delete-solid' text='部署'> </my-option>
-                 <my-option icon='el-icon-delete-solid' text='预制'> </my-option>
+            <my-option icon='el-icon-delete-solid' text='追加'> </my-option>
         </div>
         <div class='search'>
             <my-search> </my-search>
@@ -28,7 +25,7 @@ import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
 export default {
-  name: 'allPolicy',
+  name: 'network',
   components: {
     cars, mySearch, myOption, myTable, myPagination
   }

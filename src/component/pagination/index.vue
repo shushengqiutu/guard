@@ -4,6 +4,10 @@
     <el-pagination @size-change="handleSizeChange"
                    @current-change="handleCurrentChange"
                    :current-page="pagination.page"
+                   :pager-count='5'
+                   background='#fff'
+                   prev-text='上一页'
+                   next-text='下一页'
                    :page-sizes="pagination.pageSizesArr"
                    :page-size="pagination.pageSizes"
                    layout="total, sizes, prev, pager, next, jumper"
@@ -29,9 +33,9 @@ export default {
       default: () => {
         return {
           page: 1, // 当前页码默认为
-          pageSizes: 20, // 当前页码默认显示数据为15
+          pageSizes: 10, // 当前页码默认显示数据为15
           pageSizesArr: [10, 20, 30, 40, 50], // 可选分页
-          total: 20 // 总数据默认条数
+          total: 200 // 总数据默认条数
         }
       }
 

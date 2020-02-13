@@ -12,7 +12,7 @@ export default {
   props: {
     margin: {
       type: String,
-      default: '0'
+      default: '0 10px 0 0'
     },
     color: {
       type: String,
