@@ -20,6 +20,14 @@
         </div>
       </div>
     </div>
+    <div v-if="readStatus">
+      <div class="scanTypeSty" style="margin-top: 20px">
+        <el-radio v-model="reqParams.readStatus" label="1">设为只读</el-radio>
+      </div>
+      <div class="scanTypeSty" style="margin-top: 10px">
+        <el-radio v-model="reqParams.readStatus" label="2">设为读写</el-radio>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -50,11 +58,20 @@ export default {
     requestUrl: {
       type: String,
       required: false
+    },
+    readStatus: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   data () {
     return {
-      status: this.status
+      status: this.status,
+      reqParams: {
+        status: this.status,
+        readStatus: this.readStatus
+      }
     }
   },
   methods: {
@@ -62,7 +79,8 @@ export default {
       // 请求开关的接口
       // this.requestUrl 请求路径
       // 请求参数 val
-      ajax(this.requestUrl, { status: status }, 'post')
+      this.reqParams.status = status
+      ajax(this.requestUrl, this.reqParams, 'post')
     }
   },
   created () {
@@ -92,7 +110,15 @@ export default {
     font-size:12px;
     font-family:Microsoft YaHei;
     font-weight:400;
-    color:rgba(255,255,255,1);
+    color:rgba(255,255,255,1) !important;
+    width: 175px;
+    text-align: center;
+  }
+  >>>.el-radio__label{
+    font-size:12px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1) !important;
     width: 175px;
     text-align: center;
   }

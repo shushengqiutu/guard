@@ -18,7 +18,8 @@ import {
   Table,
   TableColumn,
   Pagination,
-  Row
+  Row,
+  Radio
 } from 'element-ui'
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 Vue.use(Button)
@@ -37,6 +38,6 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Row)
 Vue.use(Pagination)
-
+Vue.use(Radio)
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
