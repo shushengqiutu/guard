@@ -12,7 +12,8 @@ import i18n from './vue-i18n'
 import './element'
 // 引入滚动条
 import './vuescroll'
-
+// 引入确认组件并挂载到原型上
+import theConfirm from './component/comfirm/comfirm.js'
 // 引入mockjs 调试接口
 // import '../mock'
 // import axios from 'axios' // mock.js
@@ -22,7 +23,7 @@ import './vuescroll'
 // Vue.prototype.$http = axios
 /* eslint-disable no-new */
 import './permission'
-
+Vue.prototype.$confirm = theConfirm // 将确认框挂载到原型上
 new Vue({
   el: '#app',
   i18n,
