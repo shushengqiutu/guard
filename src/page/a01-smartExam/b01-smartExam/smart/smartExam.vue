@@ -2,21 +2,21 @@
   <div class="smartWarp">
     <div class="headerSty">
      <div class="leftCont">
-       <div class="img1">
-          图片
+       <div style="margin-left: 20px;margin-right: 10px;">
+         <img class="img1" src="@/assets/img/public/1@2x.png"/>
       </div>
        <div class="content">
-          <div style="margin-top: 20px;margin-left: 10px">214天</div>
+          <div style="margin-top: 20px;margin-left: 10px"><span class="largText">214</span>天</div>
           <div class="textSty">实时保护您的电脑</div>
           <div class="textSty">上次扫描：2019-10-23 12:00:00</div>
        </div>
      </div>
      <div class="rightCont">
-       <div class="img1">
-         图片
+       <div style="margin-right: 10px;">
+         <img class="img1" src="@/assets/img/public/2@2x.png"/>
        </div>
        <div class="content">
-         <div style="margin-top: 20px;margin-left: 10px">214条</div>
+         <div style="margin-top: 20px;margin-left: 10px"><span class="largText">214</span>条</div>
          <div class="textSty">已发现威胁事件</div>
          <div class="textSty">安全等级：中</div>
        </div>
@@ -33,31 +33,37 @@
       </div>
     </div>
     <div class="endSty">
-      <div class="endItem">
-        客户端正常
+      <div style="flex: 4"></div>
+      <div  class="avgFlex">
+        <div class="ItemFlex">
+          <img class="img3" src="@/assets/img/public/客户端@2x.png"/>
+        </div>
+        <div class="ItemFlex">
+          <img class="img3" src="@/assets/img/public/审计@2x.png"/>
+        </div>
+        <div class="ItemFlex">
+          <img class="img3" src="@/assets/img/public/策略@2x.png"/>
+        </div>
+        <div class="ItemFlex">
+          <img class="img3" src="@/assets/img/public/ITM@2x.png"/>
+        </div>
       </div>
-      <div class="endItem">
-        模式保护
-      </div>
-      <div class="endItem">
-        XJ2019
-      </div>
-      <div class="endItem" style="margin-right:30px">
+    </div>
+    <div class="endSty" style="margin-top: 5px">
+      <div style="flex: 4"></div>
+      <div  class="avgFlex">
+        <div class="ItemFlex">
+          客户端正常
+        </div>
+        <div class="ItemFlex">
+          模式保护
+        </div>
+        <div class="ItemFlex">
+          XJ-205668885
+        </div>
+        <div class="ItemFlex">
           在线
         </div>
-    </div>
-    <div class="endSty" style="margin-top: 10px;text-align: center">
-      <div class="endItemText4">
-        客户端正常
-      </div>
-      <div class="endItemText3">
-        模式保护
-      </div>
-      <div class="endItemText2">
-        XJ2019005522
-      </div>
-      <div class="endItemText1">
-        在线
       </div>
     </div>
   </div>
@@ -79,17 +85,22 @@ export default {
   margin-top: 83px;
 }
   .leftCont{
-    flex: 6;
+    flex: 5.5;
     display: flex;
   }
   .rightCont{
-    flex: 4;
+    flex: 4.5;
     display: flex;
   }
   .img1{
     width:127px;
     height:127px;
-    margin-left: 20px;
+  }
+  .largText{
+    font-size:26px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
   }
   .content{
     font-size:14px;
@@ -132,33 +143,25 @@ export default {
   .endSty{
     display: flex;
     justify-content:  flex-end;
+    justify-items: center;
     margin-top: 107px;
     font-size:12px;
     font-family:Microsoft YaHei;
     font-weight:400;
     color:rgba(255,255,255,1);
   }
-  .endItem{
+  .img3{
     width: 48px;
     height: 48px;
-    margin-right: 60px;
-    background: blue;
+  }
+  .avgFlex{
+    display:flex;
+    flex:6;
+    justify-content: center;
+    text-align: center;
+  }
+  .ItemFlex{
+    flex: 1;
     cursor: pointer;
   }
-  .endItemText1{
-    width:60px;
-    margin-right: 30px;
-  }
-.endItemText2{
-  width:102px;
-  margin-right: 21px;
-}
-.endItemText3{
-  width:48px;
-  margin-right: 32px;
-}
-.endItemText4{
-  width:60px;
-  margin-right: 55px;
-}
 </style>
