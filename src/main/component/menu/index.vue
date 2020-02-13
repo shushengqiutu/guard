@@ -6,7 +6,7 @@
       <div class="menu">
 
         <el-menu :default-active="defaultUrl"
-                 :unique-opened="false"
+                 :unique-opened="true"
                  :text-color="variables.menuText"
                  :active-text-color="variables.menuActiveText"
                  :default-openeds="openeds"
@@ -75,7 +75,7 @@ export default {
     }),
     defaultUrl: function () {
       if (this.$route.name === 'allPolicy') {
-        return '/policyCentral/securityPolicy'
+        return '/securityPolicy/securityPolicy'
       } else {
         return this.$route.path
       }

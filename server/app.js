@@ -47,72 +47,14 @@ let router = [
       }]
   },
   {
-    path: '/securityAudit',
-    redirect: '/securityAudit/securityAudit',
+    path: '/securityPolicy',
+    redirect: '/securityPolicy/securityPolicy',
     component: 'Main',
-    title: '安全审计',
+    title: '安全策略',
     hidden: false,
     singleTag: true,
     icon: 'el-icon-setting',
     children: [
-      {
-        path: 'securityAudit',
-        name: 'securityAudit',
-        component: 'SecurityAudit',
-        meta: {
-          title: '安全审计',
-          hidden: false
-        }
-      }]
-  },
-  {
-    path: '/auditManagement',
-    redirect: '/auditManagement/auditManagement',
-    component: 'Main',
-    title: '审计管理',
-    icon: 'el-icon-setting',
-    hidden: false,
-    singleTag: true,
-    children: [
-      {
-        path: 'auditManagement',
-        name: 'auditManagement',
-        component: 'AuditManagement',
-        meta: {
-          title: '审计管理',
-          hidden: false
-        }
-      }]
-  },
-  {
-    path: '/operationLog',
-    redirect: '/operationLog/operationLog',
-    component: 'Main',
-    title: '操作日志',
-    icon: 'el-icon-setting',
-    hidden: false,
-    singleTag: true,
-    children: [
-      {
-        path: 'operationLog',
-        name: 'operationLog',
-        component: 'OperationLog',
-        meta: {
-          title: '操作日志',
-          hidden: false
-        }
-      }]
-  },
-  {
-    path: '/policyCentral',
-    redirect: '/policyCentral/securityPolicy',
-    component: 'Main',
-    title: '策略中心',
-    icon: 'el-icon-setting',
-    hidden: false,
-    singleTag: false,
-    children: [
-
       {
         path: 'securityPolicy',
         name: 'securityPolicy',
@@ -131,6 +73,46 @@ let router = [
           title: '所有策略',
           hidden: true
 
+        }
+      }
+    ]
+  },
+  {
+    path: '/auditManagement',
+    redirect: '/auditManagement/auditManagement',
+    component: 'Main',
+    title: '审计事件',
+    icon: 'el-icon-setting',
+    hidden: false,
+    singleTag: true,
+    children: [
+      {
+        path: 'auditManagement',
+        name: 'auditManagement',
+        component: 'AuditManagement',
+        meta: {
+          title: '审计事件  ',
+          hidden: false
+        }
+      }]
+  },
+
+  {
+    path: '/policyCentral',
+    redirect: '/policyCentral/dataProtect',
+    component: 'Main',
+    title: '策略中心',
+    icon: 'el-icon-setting',
+    hidden: false,
+    singleTag: false,
+    children: [
+      {
+        path: 'dataProtect',
+        name: 'dataProtect',
+        component: 'DataProtect',
+        meta: {
+          title: '数据防护',
+          hidden: false
         }
       },
       {
@@ -193,9 +175,9 @@ let router = [
     path: '/systemSetup',
     redirect: '/systemSetup/systemSetup',
     component: 'Main',
-    title: '系统设置',
+    title: '系统中心',
     hidden: false,
-    singleTag: true,
+    singleTag: false,
     icon: 'el-icon-setting',
     children: [
       {
@@ -206,7 +188,27 @@ let router = [
           title: '系统设置',
           hidden: false
         }
-      }]
+      },
+      {
+        path: 'operationLog',
+        name: 'operationLog',
+        component: 'OperationLog',
+        meta: {
+          title: '操作日志',
+          hidden: false
+        }
+      },
+      {
+        path: 'userManagement',
+        name: 'userManagement',
+        component: 'UserManagement',
+        meta: {
+          title: '用户管理',
+          hidden: false
+        }
+      }
+
+    ]
   }
 ]
 // 用户信息

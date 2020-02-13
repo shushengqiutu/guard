@@ -1,13 +1,12 @@
 <template>
   <div>
-
-    安全审计
+    操作日志
   </div>
 
 </template>
 <script>
 export default {
-  name: 'securityAudit',
+  name: 'SystemSetup',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

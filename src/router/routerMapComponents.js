@@ -8,17 +8,12 @@ export default {
   'SignIn': SignIn,
   // 智能扫描
   'SmartExam': () => import('@/page/a01-smartExam/b01-smartExam/smart/smartExam.vue'),
-  // 安全审计
-  'SecurityAudit': () => import('@/page/a02-securityAudit/b01-securityAudit/securityAudit.vue'),
-  // 审计管理
+  // 安全策略-安全策略
+  'SecurityPolicy': () => import('@/page/a02-securityPolicy/b01-securityPolicy/securityPolicy.vue'),
+  // 安全策略-所有策略
+  'AllPolicy': () => import('@/page/a02-securityPolicy/b02-allPolicy/allPolicy.vue'),
+  // 审计事件
   'AuditManagement': () => import('@/page/a03-auditManagement/b01-auditManagement/auditManagement.vue'),
-  // 操作日志
-
-  'OperationLog': () => import('@/page/a03-b-operationLog/b01-operationLog/operationLog.vue'),
-  // 策略中心-安全策略
-  'SecurityPolicy': () => import('@/page/a04-strategyCenter/b00-securityPolicy/securityPolicy/securityPolicy.vue'),
-  // 策略中心-安全策略-所有策略
-  'AllPolicy': () => import('@/page/a04-strategyCenter/b00-securityPolicy/allPolicy/allPolicy.vue'),
   // 策略中心-数据防护
   'DataProtect': () => import('@/page/a04-strategyCenter/b01-dataProtect/dataProtect.vue'),
   // 策略中心-外联探测设置
@@ -33,7 +28,12 @@ export default {
   'PeripheralProtect': () => import('@/page/a04-strategyCenter/b06-peripheralProtect/peripheralProtect.vue'),
   // 策略中心-安全U盘
   'SecretUsb': () => import('@/page/a04-strategyCenter/b07-secretUsb/secretUsb.vue'),
-  // 系统设置
-  'SystemSetup': () => import('@/page/a05-systemSetup/b01-systemSetup/systemSetup.vue')
+  // 系统中心-系统设置
+  'SystemSetup': () => import('@/page/a05-systemSetup/b01-systemSetup/systemSetup.vue'),
+  // 系统中心-操作日志
+  // eslint-disable-next-line no-dupe-keys
+  'OperationLog': () => import('@/page/a05-systemSetup/b02-operationLog/operationLog.vue'),
+  // 系统中心-用户管理
+  'UserManagement': () => import('@/page/a05-systemSetup/b03-userManagement/userManagement.vue')
 
 }
