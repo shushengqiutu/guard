@@ -1,59 +1,46 @@
 <template>
   <div class="workmode">
-    <div class="headText">
-      工作模式
-    </div>
-    <div class="device">
-      <div class="deviceItem1">
-        <device-status
-          :imgUrl="protectObj.protectImgUrl"
-          :status="protectObj.protectStatus"
-          :name="protectObj.name"
-          @func="getProtectStatus"
-        >
-        </device-status>
-      </div>
-      <div class="deviceItem2">
-        <device-status
-          :imgUrl="auditObj.auditImgUrl"
-          :status="auditObj.auditStatus"
-          :name="auditObj.name"
-          @func="getAuditObjStatus"
-        >
-        </device-status>
-      </div>
-    </div>
+    <open-one
+      :firstObj="firstObj"
+      :secondObj="secondObj"
+      :title="title"
+      @changeFirstStatus="protectMode"
+      @changeSecondStatus="auditMode"
+    ></open-one>
   </div>
 </template>
 <script>
-import deviceStatus from '@/component/deviceStatus/index.vue'
+import openOne from '@/component/openOne/index.vue'
 import protectImgUrl from '@/assets/img/public/审计@2x(2).png'
 import auditImgUrl from '@/assets/img/public/图层 13 拷贝@2x.png'
 export default {
   name: 'workMode',
   components: {
-    deviceStatus
+    openOne
   },
   data () {
     return {
-      protectObj: {
-        protectImgUrl: protectImgUrl,
-        protectStatus: false,
+      title: '工作模式',
+      firstObj: {
+        imgUrl: protectImgUrl,
+        status: false,
         name: '保护模式'
       },
-      auditObj: {
-        auditImgUrl: auditImgUrl,
-        auditStatus: false, // 进入页面请求后台返回开关状态
+      secondObj: {
+        imgUrl: auditImgUrl,
+        status: false, // 进入页面请求后台返回开关状态
         name: '审计模式'
       }
     }
   },
   methods: {
-    getProtectStatus (val) {
-      console.log(val)
+    // 保护模式
+    protectMode (val) {
+
     },
-    getAuditObjStatus (val) {
-      console.log(val)
+    // 审计模式
+    auditMode (val) {
+
     }
   }
 }
