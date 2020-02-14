@@ -12,7 +12,7 @@
         </div>
         <div style="margin-left: 5px">
           <el-switch
-            v-model="status"
+            v-model="openStatus"
             @change="changeStatus"
             active-color="#13ce66"
             inactive-color="black">
@@ -45,11 +45,16 @@ export default {
       type: String,
       required: false,
       default: 'U盘扫描'
+    },
+    status: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
     return {
-      status: this.status
+      openStatus: this.status
     }
   },
   methods: {
