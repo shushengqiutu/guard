@@ -5,8 +5,9 @@
     </div>
     <div class="device">
       <device-status
-        :imgUrl="imgUrl"
-        :status="status"
+        :imgUrl="secUbs.secUbsImgUrl"
+        :status="secUbs.secUbsStatus"
+        :name="secUbs.name"
         @func="getStatus"
       >
       </device-status>
@@ -25,7 +26,7 @@
 </template>
 <script>
 import deviceStatus from '@/component/deviceStatus/index.vue'
-import imgUrl from '@/assets/img/public/USB3@2x.png'
+import secUbsImgUrl from '@/assets/img/public/锁定@2x.png'
 export default {
   name: 'secreUsb',
   components: {
@@ -33,8 +34,11 @@ export default {
   },
   data () {
     return {
-      imgUrl: imgUrl,
-      status: false, // 进入页面请求后台返回开关状态
+      secUbs: {
+        secUbsImgUrl: secUbsImgUrl,
+        secUbsStatus: false,
+        name: '安全U盘'
+      },
       readStatus: '1'
     }
   },
