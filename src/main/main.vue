@@ -42,25 +42,17 @@
       </div>
     </div>
 
-    <div class="rightView">
-      <!-- <div class="head">
-        <span @click="change_theme({theme:'1'})"> 主题1</span>
-        <span @click="change_theme({theme:'2'})">主题2 </span>
-        <span @click="change_lang({lang:'zh'})"> 中文1</span>
-        <span @click="change_lang({lang:'en'})">英文2 {{$t('item.name')}}</span>
-
-        <span></span>
-      </div> -->
-
+      <div class="rightView">
       <my-head></my-head>
-
-      <div class=" contentWarp">
+      <div class="contentWarp">
         <my-scroll>
-          <router-view />
+    <transition name="slide-right">
+               <router-view />
+  </transition>
         </my-scroll>
       </div>
-
     </div>
+
   </div>
 </template>
 
@@ -110,5 +102,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss'  scoped>
+
 @import "./css/index.scss";
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+ will-change: transform;
+ transition: all 500ms;
+ position: absolute;
+}
+.slide-right-enter {
+ opacity: 0;
+ transform: translate3d(0, 100%, 0);
+}
+.slide-right-leave-active {
+ opacity: 0;
+ transform: translate3d(0, -100%, 0);
+}
+.slide-left-enter {
+ opacity: 0;
+ transform: translate3d(100%, 0, 0);
+}
+.slide-left-leave-active {
+ opacity: 0;
+ transform: translate3d(-100%, 0, 0);
+}
+
 </style>

@@ -1,8 +1,8 @@
 <template>
 
   <div class="securityPolicy">
-    <cars :carsConfig='securityPolicycarsConfig'
-          @getCarId='getCarId'></cars>
+    <!-- <cars :carsConfig='securityPolicycarsConfig'
+          @getCarId='getCarId'></cars> -->
     <div class="conntent">
        <div v-show="defaultOpenTable==='program'">
         <program></program>

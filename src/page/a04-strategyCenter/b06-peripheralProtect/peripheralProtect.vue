@@ -1,5 +1,5 @@
 <template>
-  <div class="usbScanSet">
+  <div class="peripheralProtect">
     <div class="headText">
       外设防护
     </div>

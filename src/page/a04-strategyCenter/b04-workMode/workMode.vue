@@ -1,5 +1,5 @@
 <template>
-  <div class="usbScanSet">
+  <div class="workmode">
     <div class="headText">
       工作模式
     </div>
