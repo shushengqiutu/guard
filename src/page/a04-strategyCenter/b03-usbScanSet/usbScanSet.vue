@@ -1,10 +1,13 @@
 <template>
   <div class="usbScanSet">
+    <div class="headText">
+      U盘扫描设置
+    </div>
     <div class="device">
       <device-status
         :imgUrl="imgUrl"
-        :requestUrl = 'requestUrl'
         :status="status"
+        @func="getStatus"
       >
       </device-status>
     </div>
@@ -21,16 +24,28 @@ export default {
   data () {
     return {
       imgUrl: imgUrl,
-      requestUrl: '待请求的接口', // 请求开关接口地址
-      status: false, // 进入页面请求后台返回开关状态
+      status: false // 进入页面请求后台返回开关状态
+    }
+  },
+  methods: {
+    getStatus (val) {
+      alert(val)
     }
   }
 }
 </script>
 <style lang='scss'  scoped>
 @import "./css/index.scss";
+.headText{
+  padding-top: 94px;
+  margin-left: 42px;
+  font-size:20px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+}
 .device{
-  padding-top: 134px;
+  margin-top: 21px;
   display: flex;
   justify-content: center;
 }

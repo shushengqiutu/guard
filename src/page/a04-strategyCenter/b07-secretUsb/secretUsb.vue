@@ -1,13 +1,25 @@
 <template>
   <div class="usbScanSet">
+    <div class="headText">
+      安全U盘设置
+    </div>
     <div class="device">
       <device-status
         :imgUrl="imgUrl"
-        :requestUrl = 'requestUrl'
         :status="status"
-        :readStatus="readStatus"
+        @func="getStatus"
       >
       </device-status>
+    </div>
+    <div class="scanTypeSty">
+      <div  style="margin-top: 20px">
+        <el-radio v-model="readStatus" label="1">设为只读</el-radio>
+      </div>
+    </div>
+    <div class="scanTypeSty">
+      <div  style="margin-top: 10px">
+        <el-radio v-model="readStatus" label="2">设为读写</el-radio>
+      </div>
     </div>
   </div>
 </template>
@@ -22,18 +34,47 @@ export default {
   data () {
     return {
       imgUrl: imgUrl,
-      requestUrl: '待请求的接口', // 请求开关接口地址
       status: false, // 进入页面请求后台返回开关状态
-      readStatus: 1
+      readStatus: '1'
+    }
+  },
+  methods: {
+    getStatus (val) {
+      alert(val)
     }
   }
 }
 </script>
 <style lang='scss'  scoped>
   @import "./css/index.scss";
+  .headText{
+    padding-top: 94px;
+    margin-left: 42px;
+    font-size:20px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+  }
   .device{
-    padding-top: 134px;
+    margin-top: 21px;
     display: flex;
     justify-content: center;
+  }
+  .scanTypeSty{
+    display: flex;
+    justify-content:center;
+    font-size:12px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1) !important;
+    text-align: center;
+  }
+  >>>.el-radio__label{
+    font-size:12px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1) !important;
+    width: 175px;
+    text-align: center;
   }
 </style>

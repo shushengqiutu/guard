@@ -8,7 +8,7 @@
     <div>
       <div class="scanTypeSty">
         <div>
-          {{scanType}}
+          {{name}}
         </div>
         <div style="margin-left: 5px">
           <el-switch
@@ -20,18 +20,9 @@
         </div>
       </div>
     </div>
-    <div v-if="readStatus">
-      <div class="scanTypeSty" style="margin-top: 20px">
-        <el-radio v-model="reqParams.readStatus" label="1">设为只读</el-radio>
-      </div>
-      <div class="scanTypeSty" style="margin-top: 10px">
-        <el-radio v-model="reqParams.readStatus" label="2">设为读写</el-radio>
-      </div>
-    </div>
   </div>
 </template>
 <script>
-import ajax from '@/api/ajax.js'
 export default {
   name: 'deviceStatus',
   props: {
@@ -50,37 +41,20 @@ export default {
       required: false,
       default: 'width:175px;height:175px'
     },
-    scanType: {
+    name: {
       type: String,
       required: false,
       default: 'U盘扫描'
-    },
-    requestUrl: {
-      type: String,
-      required: false
-    },
-    readStatus: {
-      type: Number,
-      required: false,
-      default: 0
     }
   },
   data () {
     return {
-      status: this.status,
-      reqParams: {
-        status: this.status,
-        readStatus: this.readStatus
-      }
+      status: this.status
     }
   },
   methods: {
     changeStatus (status) {
-      // 请求开关的接口
-      // this.requestUrl 请求路径
-      // 请求参数 val
-      this.reqParams.status = status
-      ajax(this.requestUrl, this.reqParams, 'post')
+      this.$emit('func', status)
     }
   },
   created () {
@@ -107,14 +81,6 @@ export default {
   .scanTypeSty{
     display: flex;
     justify-content:center;
-    font-size:12px;
-    font-family:Microsoft YaHei;
-    font-weight:400;
-    color:rgba(255,255,255,1) !important;
-    width: 175px;
-    text-align: center;
-  }
-  >>>.el-radio__label{
     font-size:12px;
     font-family:Microsoft YaHei;
     font-weight:400;
