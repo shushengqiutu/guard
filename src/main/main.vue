@@ -34,9 +34,8 @@
            @click="setPasswordShow=!setPasswordShow">修改密码</p>
         <p class="item">退出</p>
       </div>
-      <div class="setPasswordWarp"
-           v-show="getname&&setPasswordShow">
-        <set-password @func="getPasswordShow"></set-password>
+      <div v-show="getname&&setPasswordShow">
+        <set-password @func="getPasswordShow" :getname="getname" :setPasswordShow="setPasswordShow"></set-password>
       </div>
       <div class="mean">
         <my-menu></my-menu>
@@ -82,7 +81,11 @@ export default {
       setPasswordShow: false
     }
   },
+  watch: {
+    setPasswordShow (newVal, oldVal) {
 
+    }
+  },
   computed: {
     ...mapGetters({
       getname: 'getname'
