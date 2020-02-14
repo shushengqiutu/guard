@@ -2,9 +2,11 @@
 @import './theme2.scss';
 
 .allPolicy {
+  width: 720px;
   padding: 0 10px 10px 10px;
 
   .operation {
+
     height: 22px;
     padding: 10px 0;
     @include childXBetween;
@@ -15,16 +17,10 @@
 
     }
 
+
+
     .search {}
   }
 
-  .tableWarp {
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
 
-  .myPaginationWarp {
-    @include childXRight
-  }
 }

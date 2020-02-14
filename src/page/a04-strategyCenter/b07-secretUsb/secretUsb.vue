@@ -1,5 +1,5 @@
 <template>
-  <div class="usbScanSet">
+  <div class="secretUsb">
     <div class="headText">
       安全U盘设置
     </div>
