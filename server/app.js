@@ -45,6 +45,28 @@ let router = [
           hidden: false
 
         }
+      },
+      {
+        path: 'scaning',
+        name: 'scaning',
+        component: 'Scaning',
+        meta: {
+          animationId: 101,
+          title: '智能扫描中',
+          hidden: true
+
+        }
+      },
+      {
+        path: 'scanFinish',
+        name: 'scanFinish',
+        component: 'ScanFinish',
+        meta: {
+          animationId: 201,
+          title: '智能扫描完成',
+          hidden: true
+
+        }
       }]
   },
   {

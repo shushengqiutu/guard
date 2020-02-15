@@ -8,6 +8,10 @@ export default {
   'SignIn': SignIn,
   // 智能扫描
   'SmartExam': () => import('@/page/a01-smartExam/b01-smartExam/smart/smartExam.vue'),
+  // 智能扫描中
+  'Scaning': () => import('@/page/a01-smartExam/b01-smartExam/scaning/scaning.vue'),
+  // 智能扫描完成
+  'ScanFinish': () => import('@/page/a01-smartExam/b01-smartExam/scanFinish/scanFinsh.vue'),
   // 安全策略-安全策略
   'SecurityPolicy': () => import('@/page/a02-securityPolicy/b01-securityPolicy/securityPolicy.vue'),
   // 安全策略-所有策略
