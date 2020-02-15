@@ -21,6 +21,10 @@ import {
   Row,
   Radio
 } from 'element-ui'
+// fade/zoom 等
+import 'element-ui/lib/theme-chalk/base.css'
+// collapse 展开折叠
+import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 }
 Vue.use(Button)
 Vue.use(Input)
@@ -41,3 +45,5 @@ Vue.use(Pagination)
 Vue.use(Radio)
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
+
+Vue.component(CollapseTransition.name, CollapseTransition)

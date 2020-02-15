@@ -1,19 +1,29 @@
 <template>
 
   <div class="securityPolicy">
-    <!-- <cars :carsConfig='securityPolicycarsConfig'
-          @getCarId='getCarId'></cars> -->
+    <cars :carsConfig='securityPolicycarsConfig'
+          @getCarId='getCarId'></cars>
+
     <div class="conntent">
-       <div v-show="defaultOpenTable==='program'">
-        <program></program>
-      </div>
-      <div v-show="defaultOpenTable==='usb'">
-        <usb></usb>
-      </div>
-      <div v-show="defaultOpenTable==='network'">
-        <network></network>
-      </div>
+
+      <el-collapse-transition>
+        <div v-show="defaultOpenTable==='program'">
+          <program></program>
+        </div>
+      </el-collapse-transition>
+
+      <el-collapse-transition>
+        <div v-show="defaultOpenTable==='usb'">
+          <usb></usb>
+        </div>
+      </el-collapse-transition>
+      <el-collapse-transition>
+        <div v-show="defaultOpenTable==='network'">
+          <network></network>
+        </div>
+      </el-collapse-transition>
     </div>
+
   </div>
 
 </template>

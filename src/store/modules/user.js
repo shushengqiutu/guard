@@ -3,10 +3,10 @@
 import { commontRouterMap, resetRouter } from '@/router'
 import {
   req_login,
-  req_userinfo
-
+  req_userinfo,
+  req_logout
 } from '@/api'
-console.log(req_login, 111)
+
 let app = 'token'
 let storage = window.localStorage
 const user = {
@@ -67,6 +67,28 @@ const user = {
         commit('SET_AVATAR', data.avatar)
         // 保存后端返回路由表到vuex
         commit('SET_ROUTES', data.router)
+        return result
+      }
+    },
+    // 退出登录
+    async  Logout ({ commit, state }) {
+      const result = await req_logout()
+      debugger
+      if (result) {
+        // 置空 角色 到vuex
+        commit('SET_ROLES', '')
+        // 置空 用户名 到vuex
+        commit('SET_NAME', '')
+        // 置空 vuex
+        commit('SET_AVATAR', '')
+        // 置空
+        commit('SET_ROUTES', '')
+        //
+        commit('SET_TOKEN', '')
+        // 删除token
+        storage.removeItem(app)
+        // 清空路由
+        resetRouter()
         return result
       }
     }

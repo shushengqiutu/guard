@@ -40,6 +40,7 @@ let router = [
         name: 'smartExam',
         component: 'SmartExam',
         meta: {
+          animationId: 1,
           title: '智能扫描',
           hidden: false
 
@@ -56,10 +57,12 @@ let router = [
     icon: 'el-icon-setting',
     children: [
       {
+
         path: 'securityPolicy',
         name: 'securityPolicy',
         component: 'SecurityPolicy',
         meta: {
+          animationId: 2,
           title: '安全策略', // 当前策略
           hidden: false
 
@@ -70,6 +73,7 @@ let router = [
         name: 'allPolicy',
         component: 'AllPolicy',
         meta: {
+          animationId: 102,
           title: '所有策略',
           hidden: true
 
@@ -87,10 +91,12 @@ let router = [
     singleTag: true,
     children: [
       {
+
         path: 'auditManagement',
         name: 'auditManagement',
         component: 'AuditManagement',
         meta: {
+          animationId: 3,
           title: '审计事件  ',
           hidden: false
         }
@@ -111,6 +117,7 @@ let router = [
         name: 'dataProtect',
         component: 'DataProtect',
         meta: {
+          animationId: 4,
           title: '数据防护',
           hidden: false
         }
@@ -120,6 +127,7 @@ let router = [
         name: 'outDetectionSet',
         component: 'OutDetectionSet',
         meta: {
+          animationId: 5,
           title: '外联探测设置',
           hidden: false
         }
@@ -129,6 +137,7 @@ let router = [
         name: 'usbScanSet',
         component: 'UsbScanSet',
         meta: {
+          animationId: 6,
           title: 'U盘扫描设置',
           hidden: false
         }
@@ -138,6 +147,7 @@ let router = [
         name: 'workMode',
         component: 'WorkMode',
         meta: {
+          animationId: 7,
           title: '工作模式',
           hidden: false
         }
@@ -147,6 +157,7 @@ let router = [
         name: 'appProtect',
         component: 'AppProtect',
         meta: {
+          animationId: 8,
           title: '防护应用',
           hidden: false
         }
@@ -156,6 +167,7 @@ let router = [
         name: 'peripheralProtect',
         component: 'PeripheralProtect',
         meta: {
+          animationId: 9,
           title: '外防设置',
           hidden: false
         }
@@ -165,6 +177,7 @@ let router = [
         name: 'secretUsb',
         component: 'SecretUsb',
         meta: {
+          animationId: 10,
           title: '安全U盘',
           hidden: false
         }
@@ -181,10 +194,12 @@ let router = [
     icon: 'el-icon-setting',
     children: [
       {
+
         path: 'systemSetup',
         name: 'systemSetup',
         component: 'SystemSetup',
         meta: {
+          animationId: 12,
           title: '系统设置',
           hidden: false
         }
@@ -194,6 +209,7 @@ let router = [
         name: 'operationLog',
         component: 'OperationLog',
         meta: {
+          animationId: 13,
           title: '操作日志',
           hidden: false
         }
@@ -203,6 +219,7 @@ let router = [
         name: 'userManagement',
         component: 'UserManagement',
         meta: {
+          animationId: 14,
           title: '用户管理',
           hidden: false
         }
@@ -257,7 +274,9 @@ app.get('/user/getInfo', function (req, res) {
     res.send({ code: 10001, mes: '无效token' })
   }
 })
-
+app.get('/user/logout', function (req, res) {
+  res.send({ code: 200, mes: '退出成功' })
+})
 app.listen('8888', '127.0.0.1', function (err) {
   if (err) {
     console.log(err)

@@ -32,23 +32,26 @@
 
         <p class="item"
            @click="setPasswordShow=!setPasswordShow">修改密码</p>
-        <p class="item">退出</p>
+        <p class="item"
+           @click='appLogout'>退出</p>
       </div>
       <div v-show="getname&&setPasswordShow">
-        <set-password @func="getPasswordShow" :getname="getname" :setPasswordShow="setPasswordShow"></set-password>
+        <set-password @func="getPasswordShow"
+                      :getname="getname"
+                      :setPasswordShow="setPasswordShow"></set-password>
       </div>
       <div class="mean">
         <my-menu></my-menu>
       </div>
     </div>
 
-      <div class="rightView">
+    <div class="rightView">
       <my-head></my-head>
       <div class="contentWarp">
         <my-scroll>
-    <transition name="slide-right">
-               <router-view />
-  </transition>
+          <transition :name="transitionName">
+            <router-view />
+          </transition>
         </my-scroll>
       </div>
     </div>
@@ -61,7 +64,8 @@
 import myHead from './component/head/'
 import myMenu from './component/menu/'
 import setPassword from '@/component/setpassword/'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'Main',
   components: {
@@ -70,12 +74,8 @@ export default {
   data () {
     return {
       operationShow: false,
-      setPasswordShow: false
-    }
-  },
-  watch: {
-    setPasswordShow (newVal, oldVal) {
-
+      setPasswordShow: false,
+      transitionName: ''
     }
   },
   computed: {
@@ -88,13 +88,51 @@ export default {
     console.log(this, 99)
   },
   methods: {
+    ...mapActions(['Logout']),
+    appLogout () {
+      this.Logout().then(res => {
+        if (res.code === 200) {
+          debugger
+          this.$router.push({ name: 'signIn' })
+        }
+      })
+    },
     setOperationShow () {
       //
-
       this.operationShow = false
     },
     getPasswordShow (boolean) {
       this.setPasswordShow = boolean
+    }
+  },
+  watch: {
+    // 使用watch 监听$router的变化
+    $route (to, from) {
+      console.log(to, 9)
+      let n = to.meta.animationId - from.meta.animationId
+      let b = n % 100
+      debugger
+      // 如果to索引大于from索引,判断为前进状态,反之则为后退状态
+      if (b !== 0) {
+        // 设置动画名称
+        if (n > 0) {
+          // 前进
+          this.transitionName = 'slide-top'
+        } else {
+          // 后退
+          this.transitionName = 'slide-bottom'
+        }
+      } else {
+        // 设置动画名称
+        if (n > 0) {
+          // 右滑
+
+          this.transitionName = 'slide-left'
+        } else {
+          // 左滑
+          this.transitionName = 'slide-right'
+        }
+      }
     }
   }
 }
@@ -102,31 +140,49 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss'  scoped>
-
 @import "./css/index.scss";
+.slide-bottom-enter-active,
+.slide-bottom-leave-active,
+.slide-top-enter-active,
+.slide-top-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
- will-change: transform;
- transition: all 500ms;
- position: absolute;
+  will-change: transform;
+  transition: all 500ms;
+  position: absolute;
+}
+.slide-top-enter {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
+}
+.slide-top-leave-active {
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+}
+.slide-bottom-enter {
+  opacity: 0;
+  transform: translate3d(0, -100%, 0);
+}
+.slide-bottom-leave-active {
+  opacity: 0;
+  transform: translate3d(0, 100%, 0);
 }
 .slide-right-enter {
- opacity: 0;
- transform: translate3d(0, 100%, 0);
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
 }
 .slide-right-leave-active {
- opacity: 0;
- transform: translate3d(0, -100%, 0);
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
 }
 .slide-left-enter {
- opacity: 0;
- transform: translate3d(100%, 0, 0);
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
 }
 .slide-left-leave-active {
- opacity: 0;
- transform: translate3d(-100%, 0, 0);
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
 }
-
 </style>
