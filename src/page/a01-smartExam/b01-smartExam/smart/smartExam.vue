@@ -86,7 +86,6 @@ export default {
   },
   methods: {
     jumpRouter (name) {
-      debugger
       this.$router.push({ name: name })
     }
   }

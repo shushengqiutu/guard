@@ -5,7 +5,7 @@
                    @current-change="handleCurrentChange"
                    :current-page="pagination.page"
                    :pager-count='5'
-                   background='#fff'
+                   background
                    prev-text='上一页'
                    next-text='下一页'
                    :page-sizes="pagination.pageSizesArr"

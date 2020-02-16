@@ -73,7 +73,7 @@ const user = {
     // 退出登录
     async  Logout ({ commit, state }) {
       const result = await req_logout()
-      debugger
+
       if (result) {
         // 置空 角色 到vuex
         commit('SET_ROLES', '')

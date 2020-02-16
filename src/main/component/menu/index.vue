@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     setVariables (theme) {
-      debugger
       switch (theme) {
         case '1':
           this.variables.menuText = this.theme1Variables.menuText

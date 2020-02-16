@@ -92,7 +92,6 @@ export default {
     appLogout () {
       this.Logout().then(res => {
         if (res.code === 200) {
-          debugger
           this.$router.push({ name: 'signIn' })
         }
       })
@@ -111,7 +110,7 @@ export default {
       console.log(to, 9)
       let n = to.meta.animationId - from.meta.animationId
       let b = n % 100
-      debugger
+
       // 如果to索引大于from索引,判断为前进状态,反之则为后退状态
       if (b !== 0) {
         // 设置动画名称
