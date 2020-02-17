@@ -4,3 +4,88 @@
 .scaning {
   width: 740px;
 }
+.margin1{
+  margin-top: 28px
+}
+.margin2{
+  margin-top: 18px
+}
+.margin3{
+  width: 98%
+}
+.margin4{
+  margin-top: 25px
+}
+>>> .el-progress-bar__outer {
+  height: 4px !important;
+}
+>>> .el-progress-bar__outer {
+  background: grey;
+}
+>>> .el-progress__text {
+  color: white;
+}
+.headerSty {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 24px;
+}
+.imgSty {
+  width: 66px;
+  height: 66px;
+}
+.headerImg {
+  width: 60px;
+}
+.headScanText {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}
+.scanText {
+  width: 470px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bodyText {
+  width: 470px;
+  display: flex;
+}
+.iconImg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.bodyScanText {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}
+.stopScan {
+  margin-top: 62px;
+  display: flex;
+  justify-content: space-around;
+}
+.stopScanText {
+  width: 175px;
+  height: 40px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+  font-size: 20px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: rgba(195, 58, 35, 1);
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+}

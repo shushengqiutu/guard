@@ -4,3 +4,78 @@
 .scanFinish {
   width: 740px;
 }
+.margin1{
+  padding-top: 23px;
+}
+.margin2{
+  margin-top: 15px
+}
+.margin3{
+  margin-top: 40px
+}
+.margin4{
+  margin-top: 14px
+}
+.headerSty{
+  display: flex;
+  justify-content:center;
+  flex: 1;
+}
+.img1{
+  width: 78px;
+  height: 78px;
+}
+.scanText{
+  font-size:18px;
+  font-family:Microsoft YaHei;
+  font-weight:200;
+  color:rgba(255,255,255,1);
+}
+.contentSty{
+  display: flex;
+}
+.flexImg{
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  line-height: 16px;
+}
+.img2{
+  width: 81px;
+  height: 97px;
+}
+.baseText{
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+}
+.contText{
+  font-size:12px;
+}
+.resultText{
+  font-size:14px;
+  margin-top: 11px;
+}
+.iconSty{
+  width:16px;
+  height:16px;
+  margin-right: 5px
+}
+.endSty{
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+.searchDetail{
+  width:175px;
+  height:40px;
+  background:rgba(255,255,255,1);
+  border-radius:6px;
+  font-size:20px;
+  font-family:Microsoft YaHei;
+  font-weight:400;
+  color:rgba(195,58,35,1);
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
