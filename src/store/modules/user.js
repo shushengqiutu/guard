@@ -48,9 +48,10 @@ const user = {
   actions: {
     async Login ({ commit }, userInfo) {
       const result = await req_login(userInfo)
+      debugger
       // 存储token
-      storage.setItem(app, result.result)
-      commit('SET_TOKEN', result.result)
+      storage.setItem(app, result.result.token)
+      commit('SET_TOKEN', result.result.token)
       // 结果返回给页面处理页面逻辑
       return result
     },

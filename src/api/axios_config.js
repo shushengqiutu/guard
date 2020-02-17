@@ -1,5 +1,9 @@
 import axios from 'axios'
-
+// 设置请求头
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+axios.defaults.headers.post['Access-Control-Allow-Headers'] = '*'
+axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'PUT,POST,GET,DELETE,OPTIONS'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 // import { Message } from 'element-ui'
 /** **** 创建axios实例 ******/
 const service = axios.create({
@@ -25,8 +29,11 @@ service.interceptors.response.use(
   function (response) {
     // 对响应数据做点什么
     // debugger
-    const res = response.data
-    console.log('添加响应拦截器', response)
+
+    let res = response.data
+
+    console.log('添加响应拦截器', response, 999988)
+    debugger
     if (res.code !== 200) {
       // Message({
       //   type: 'error',
@@ -34,7 +41,7 @@ service.interceptors.response.use(
       //   duration: 5 * 1000
       // })
     } else {
-      return response.data
+      return res
     }
   },
   function (error) {

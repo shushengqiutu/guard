@@ -65,11 +65,13 @@ export default {
 
 </script>
 <style lang="scss">
-// html {
-//   width: 920px;
-//   height: 600px;
-// }
+html {
+}
 body {
+  width: 920px;
+  height: 600px;
+}
+#app {
   width: 920px;
   height: 600px;
 }
