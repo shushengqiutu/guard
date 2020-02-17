@@ -47,22 +47,4 @@ export default {
 </script>
 <style lang='scss'  scoped>
   @import "./css/index.scss";
-  .headText{
-    padding-top: 94px;
-    margin-left: 42px;
-    font-size:20px;
-    font-family:Microsoft YaHei;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-  }
-  .device{
-    margin-top: 21px;
-    display: flex;
-  }
-  .deviceItem1{
-    margin-left: 143px;
-  }
-  .deviceItem2{
-    margin-left: 105px;
-  }
 </style>

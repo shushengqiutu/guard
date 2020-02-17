@@ -13,12 +13,12 @@
       </device-status>
     </div>
     <div class="scanTypeSty">
-      <div  style="margin-top: 20px">
+      <div class="margin1">
         <el-radio v-model="readStatus" label="1">设为只读</el-radio>
       </div>
     </div>
     <div class="scanTypeSty">
-      <div  style="margin-top: 10px">
+      <div class="margin2">
         <el-radio v-model="readStatus" label="2">设为读写</el-radio>
       </div>
     </div>
@@ -51,34 +51,4 @@ export default {
 </script>
 <style lang='scss'  scoped>
   @import "./css/index.scss";
-  .headText{
-    padding-top: 94px;
-    margin-left: 42px;
-    font-size:20px;
-    font-family:Microsoft YaHei;
-    font-weight:400;
-    color:rgba(255,255,255,1);
-  }
-  .device{
-    margin-top: 21px;
-    display: flex;
-    justify-content: center;
-  }
-  .scanTypeSty{
-    display: flex;
-    justify-content:center;
-    font-size:12px;
-    font-family:Microsoft YaHei;
-    font-weight:400;
-    color:rgba(255,255,255,1) !important;
-    text-align: center;
-  }
-  >>>.el-radio__label{
-    font-size:12px;
-    font-family:Microsoft YaHei;
-    font-weight:400;
-    color:rgba(255,255,255,1) !important;
-    width: 175px;
-    text-align: center;
-  }
 </style>
