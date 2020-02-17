@@ -56,7 +56,8 @@
         </div>
       </div>
     </div>
-    <div class="endSty margin5">
+    <div class="endSty"
+         style="margin-top: 5px">
       <div style="flex: 4"></div>
       <div class="avgFlex">
         <div class="ItemFlex">
