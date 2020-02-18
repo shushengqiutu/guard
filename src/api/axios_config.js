@@ -8,13 +8,13 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 /** **** 创建axios实例 ******/
 const service = axios.create({
   // baseURL: process.env.BASE_URL, // api的base_url
-  timeout: 5000 // 请求超时时间
+  timeout: 50000 // 请求超时时间
 })
 // 添加请求拦截器
 service.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-
+    debugger
     console.log('添加请求拦截器', config)
     return config
   },
@@ -28,7 +28,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   function (response) {
     // 对响应数据做点什么
-    // debugger
+    debugger
 
     let res = response.data
 

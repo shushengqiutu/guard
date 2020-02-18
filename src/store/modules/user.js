@@ -48,7 +48,7 @@ const user = {
   actions: {
     async Login ({ commit }, userInfo) {
       const result = await req_login(userInfo)
-      debugger
+
       // 存储token
       storage.setItem(app, result.result.token)
       commit('SET_TOKEN', result.result.token)
