@@ -14,7 +14,6 @@ const service = axios.create({
 service.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-    debugger
     console.log('添加请求拦截器', config)
     return config
   },
@@ -28,13 +27,9 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   function (response) {
     // 对响应数据做点什么
-    debugger
-
     let res = response.data
-
     console.log('添加响应拦截器', response, 999988)
-    debugger
-    if (res.code !== 200) {
+    if (response.status !== 200) {
       // Message({
       //   type: 'error',
       //   message: '111',

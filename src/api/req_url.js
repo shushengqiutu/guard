@@ -12,3 +12,5 @@ export const LOGOUT_URL = `${BASE_URL}/user/logout`
 export const SHOWWHITELIST_URL = `${BASE_URL}/whitelist/list`
 // 查询操作日志列表
 export const OPERATELOGLIST_URL = `${BASE_URL}/operateLog/list`
+// 白名单扫描
+export const SCANWHITELIST_URL = `${BASE_URL}/whitelist/scan`

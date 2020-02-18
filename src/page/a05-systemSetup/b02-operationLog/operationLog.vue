@@ -51,8 +51,6 @@ export default {
   methods: {
     async operateloglist (data) {
       const result = await req_operateloglist(data)
-      console.log(result)
-      debugger
     }
   }
 }

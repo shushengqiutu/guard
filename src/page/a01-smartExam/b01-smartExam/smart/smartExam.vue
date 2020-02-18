@@ -26,11 +26,11 @@
     </div>
     <div class="scanCont">
       <div class="scanAll"
-           @click="jumpRouter('scaning')">
+           @click="jumpRouter({name:'scaning',params:{scanType:'all'}})">
         全盘扫描
       </div>
       <div class="targetScan">
-        <span style=" cursor: pointer;">
+        <span style=" cursor: pointer;" @click="jumpRouter({name:'scaning',params:{scanType:'target'}})">
           指定目录扫描
         </span>
       </div>
@@ -81,12 +81,15 @@ export default {
   name: 'user',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      targetPath: 'd://dkdk/'
     }
   },
   methods: {
-    jumpRouter (name) {
-      this.$router.push({ name: name })
+    jumpRouter (searchObj) {
+      if (searchObj.scanType === 'target') {
+        searchObj.params.targetPath = this.targetPath
+      }
+      this.$router.push(searchObj)
     }
   }
 }

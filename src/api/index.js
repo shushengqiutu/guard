@@ -8,7 +8,8 @@ import {
   RESETPASSWORD_URL,
   LOGOUT_URL,
   SHOWWHITELIST_URL,
-  OPERATELOGLIST_URL
+  OPERATELOGLIST_URL,
+  SCANWHITELIST_URL
 }
   from './req_url'
 
@@ -47,7 +48,7 @@ export const req_ShowWhiteList = (data) => ajax(SHOWWHITELIST_URL, {
 /** *************************************显示白名单明结束********************************************/
 
 /** *************************************文件扫描接口开始 序号02********************************************/
-
+export const req_ScanFile = (data) => ajax(SCANWHITELIST_URL, data, 'POST')
 /** *************************************文件扫描接口结束********************************************/
 
 /** *************************************文件扫描停止接口开始 序号03  ********************************************/

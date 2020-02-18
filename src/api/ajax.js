@@ -23,14 +23,10 @@ export default function ajax (url, data = {}, type = 'GET') {
     }
     promise.then(req => {
       // 成功回调
-      // debugger
-      debugger
       resolve(req)
     }
 
     ).catch(error => {
-      // debugger
-
       reject(error)
       // 失败回调
     })

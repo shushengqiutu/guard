@@ -6,17 +6,17 @@
     </div>
     <div class="headScanText">
       <div>
-        正在进行扫描网卡
+        {{scanResult.scanName}}
       </div>
     </div>
     <div class="headScanText margin1">
       <div class="scanText">
-        C:\User\dcjk\dd\c\s\c\s\e\c\\s
+        {{scanResult.scanPath}}
       </div>
     </div>
     <div class="headScanText margin2">
       <div class="margin3">
-        <el-progress :percentage="50"
+        <el-progress :percentage="scanResult.scanProgress"
                      :color="color"></el-progress>
       </div>
     </div>
@@ -27,7 +27,7 @@
                src="@/assets/img/public/白名单@2x.png" />
         </div>
         <div>
-          白名单文件数量:4826
+          白名单文件数量:{{scanResult.whiteListCount}}
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
                src="@/assets/img/public/小usb@2x.png" />
         </div>
         <div>
-          USB数量：5
+          USB数量：{{scanResult.usbCount}}
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
                src="@/assets/img/public/网卡管理@2x.png" />
         </div>
         <div>
-          网卡个数：1
+          网卡个数：{{scanResult.netCount}}
         </div>
       </div>
     </div>
@@ -61,13 +61,37 @@
   </div>
 </template>
 <script>
+import { req_ScanFile } from '@/api'
 export default {
   name: 'user',
   data () {
     return {
       color: 'white',
-      msg: 'Welcome to Your Vue.js App'
+      scanResult: {
+        scanName: '',
+        scanPath: '',
+        scanProgress: 0,
+        whiteListCount: 0,
+        usbCount: 0,
+        netCount: 0
+      }
     }
+  },
+  async created () {
+    await req_ScanFile({
+      'cmdlist': [{
+        'cmd': 132097,
+        'data': {
+          'path': ['//']
+        },
+        'usb': 1,
+        'net': 1,
+        'ncmd': 'WhileListStartScan'
+      }]
+    }).then(res => {
+      console.log(res)
+      debugger
+    })
   }
 }
 </script>
