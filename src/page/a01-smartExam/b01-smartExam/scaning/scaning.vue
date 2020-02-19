@@ -152,8 +152,6 @@ export default {
     }
   },
   async created () {
-    // 初始化
-    this.init()
     // 开始扫描
     await req_scanFile({
       'cmdlist': [{
@@ -174,7 +172,8 @@ export default {
     })
   },
   mounted () {
-
+    // 初始化
+    this.init()
   },
   destroyed () {
     // 销毁监听
