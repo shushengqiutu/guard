@@ -46,6 +46,7 @@
   </div>
 </template>
 <script>
+// eslint-disable-next-line camelcase
 import { req_resetpass } from '@/api'
 export default {
   name: 'setPassword',
@@ -118,7 +119,7 @@ export default {
             this.$emit('func', false)
           })
         } else {
-          console.log('error submit!!')
+          // console.log('error submit!!')
           return false
         }
       })

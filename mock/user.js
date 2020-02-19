@@ -52,7 +52,7 @@ export default {
     const { username, password } = JSON.parse(res.body) // 解构 username
     // debugger
     // if (username || password) {
-    //   debugger
+
     //   return { aa: 11 }
     // }
     if (username in tokens && tokens[username].pas === password) {

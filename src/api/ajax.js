@@ -8,7 +8,7 @@ export default function ajax (url, data = {}, type = 'GET') {
       Object.keys(data).forEach(key => {
         dataStr += key + '=' + data[key] + '&'
       })
-      console.log(dataStr, 111)
+      // console.log(dataStr, 111)
 
       if (dataStr !== '') {
         dataStr = dataStr.substring(0, dataStr.lastIndexOf('&'))
@@ -17,8 +17,6 @@ export default function ajax (url, data = {}, type = 'GET') {
 
       promise = service.get(url)
     } else {
-      console.log(data, 1111)
-
       promise = service.post(url, data)
     }
     promise.then(req => {

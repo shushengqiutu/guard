@@ -85,7 +85,7 @@ export default {
     })
   },
   created () {
-    console.log(this, 99)
+    // console.log(this, 99)
   },
   methods: {
     ...mapActions(['Logout']),
@@ -107,7 +107,7 @@ export default {
   watch: {
     // 使用watch 监听$router的变化
     $route (to, from) {
-      console.log(to, 9)
+      // console.log(to, 9)
       let n = to.meta.animationId - from.meta.animationId
       let b = n % 100
 

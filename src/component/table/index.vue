@@ -11,7 +11,8 @@
               :row-class-name="getRowClass">
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
-        <el-table-column type="selection"
+        <el-table-column v-if="checkBox"
+                         type="selection"
                          width="55">
         </el-table-column>
       </template>
@@ -22,7 +23,7 @@
           <!-- 无需自定义的列 -->
           <el-table-column v-if="!item.isCustom"
                            :type="item.type?item.type:''"
-                           :label="item.mylabel"
+                           :label="item.label"
                            :prop="item.prop?item.prop:''"
                            :key="index"
                            :width="item.width"
@@ -55,7 +56,7 @@ export default {
       default: () => {
         return [
           {
-            mylabel: '序号', // 表头
+            label: '序号', // 表头
             state: true, // 是否显示列
             isCustom: false, // 是否自定义
             type: 'index', // type 类型
@@ -66,18 +67,20 @@ export default {
           },
           // { label: '事件名称', state: true, isCustom: true, slotName: 'name' },
           {
-            mylabel: '事件类型',
+            label: '事件类型',
             prop: 'name',
             state: true,
             isCustom: false,
             slotName: 'model',
-            width: 200          },
+            width: 200
+          },
           {
-            mylabel: '级别',
+            label: '级别',
             prop: 'address',
             state: true,
             isCustom: false,
-            slotName: 'score'          }
+            slotName: 'score'
+          }
 
         ]
       }

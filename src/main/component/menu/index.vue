@@ -65,7 +65,7 @@ export default {
   created () {
     // 主题参数赋值
     this.setVariables(this.getTheme)
-    console.log(this.variables, 333)
+    // console.log(this.variables, 333)
   },
   computed: {
     ...mapGetters({

@@ -11,17 +11,12 @@ const formatRoutes = function (routes) {
     }
   })
 }
-// main.js
-router.beforeEach((to, from, next) => {
-  console.log('路由拦截', to.path)
-  console.log('store.getters.gettoken', store.getters.gettoken)
 
+router.beforeEach((to, from, next) => {
   if (store.getters.gettoken) {
     // 判断是否有token
     // 有token访问登录页面跳到首页智能扫描
     if (to.path === '/signIn') {
-      console.log('有token , 将要去登录页,转到首页')
-      // debugger
       next({ path: '/' })
     } else {
       // 有token访问非登录页面
@@ -35,9 +30,9 @@ router.beforeEach((to, from, next) => {
             // debugger
             // 根据后端路由生成动态路由表
             const routes = res.result.router
-            console.log(store, 99711)
+
             // store.commit('SET_ROUTES', routes)
-            console.log(store, 997)
+
             // 后台返回路由数据处理
             formatRoutes(routes)
             // 动态添加路由

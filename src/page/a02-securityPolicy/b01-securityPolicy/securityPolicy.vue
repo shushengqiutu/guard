@@ -65,7 +65,7 @@ export default {
   methods: {
     getCarId (carId) {
       this.defaultOpenTable = carId
-      console.log(carId, 111)
+      // console.log(carId, 111)
     },
     www () {
       alert(1)

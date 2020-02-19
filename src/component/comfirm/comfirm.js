@@ -11,12 +11,12 @@ let theConfirm = function (text) {
     document.body.appendChild(confirmDom.$el) // new一个对象，然后插入body里面
 
     confirmDom.text = text // 为了使confirm的扩展性更强，这个采用对象的方式传入，所有的字段都可以根据需求自定义
-    confirmDom.ok = function () {
-      resolve()
+    confirmDom.ok = function (cb) {
+      resolve(cb)
       confirmDom.isShow = false
     }
-    confirmDom.close = function () {
-      reject()
+    confirmDom.close = function (cb) {
+      reject(cb)
       confirmDom.isShow = false
     }
   })
