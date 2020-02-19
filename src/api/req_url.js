@@ -14,3 +14,7 @@ export const SHOWWHITELIST_URL = `${BASE_URL}/whitelist/list`
 export const OPERATELOGLIST_URL = `${BASE_URL}/operateLog/list`
 // 白名单扫描
 export const SCANWHITELIST_URL = `${BASE_URL}/whitelist/scan`
+// 停止白名单扫描
+export const STOPSCAN_URL = `${BASE_URL}/whitelist/stopscan`
+// 查询扫描任务状态
+export const SCANSTATUS_URL = `${BASE_URL}/whitelist/ScanStatus`

@@ -91,6 +91,11 @@ export default {
       }
       this.$router.push(searchObj)
     }
+  },
+  created () {
+    if (localStorage.getItem('policyId')) {
+      this.$router.push({name: 'scaning', params: {scanType: 'all'}})
+    }
   }
 }
 </script>
