@@ -6,18 +6,17 @@
     </div>
     <div class="headScanText">
       <div>
-        {{scanResult.scanName}}
+        {{scanName}}
       </div>
     </div>
     <div class="headScanText margin1">
-      <div class="scanText"
-           :title="scanPath">
-        {{scanPath}}111
+      <div class="scanText" :title="scanPath">
+        {{scanPath}}
       </div>
     </div>
     <div class="headScanText margin2">
       <div class="margin3">
-        <el-progress :percentage="scanResult.scanProgress"
+        <el-progress :percentage="scanProgress"
                      :color="color"></el-progress>
       </div>
     </div>
@@ -28,7 +27,7 @@
                src="@/assets/img/public/白名单@2x.png" />
         </div>
         <div>
-          白名单文件数量:{{scanResult.whiteListCount}}
+          白名单文件数量:{{whiteListCount}}
         </div>
       </div>
     </div>
@@ -39,7 +38,7 @@
                src="@/assets/img/public/小usb@2x.png" />
         </div>
         <div>
-          USB数量：{{scanResult.usbCount}}
+          USB数量：{{usbCount}}
         </div>
       </div>
     </div>
@@ -50,12 +49,11 @@
                src="@/assets/img/public/网卡管理@2x.png" />
         </div>
         <div>
-          网卡个数：{{scanResult.netCount}}
+          网卡个数：{{netCount}}
         </div>
       </div>
     </div>
-    <div class="stopScan"
-         @click="stopScan">
+    <div class="stopScan" @click="stopScan">
       <div class="stopScanText">
         <span>停止扫描</span>
       </div>
@@ -72,91 +70,91 @@ export default {
   name: 'user',
   data () {
     return {
-      path: 'ws://127.0.0.1:8000',
       socket: '',
       color: 'white',
       policyID: '',
-      scanPath: '',
-      websock: {},
-      scanResult: {
-        scanName: '',
-        scanProgress: 0,
-        whiteListCount: 0,
-        usbCount: 0,
-        netCount: 0
-      }
+      scanName: '',
+      scanPath: '', // 扫描的路径
+      scanProgress: 0, // 扫描进度
+      whiteListCount: 0, // 白名单文件数量
+      usbCount: 0, // USB数量
+      netCount: 0 // 网卡数据
     }
   },
   watch: {
-    scanPath (val, oldVal) { // 普通的watch监听
-      this.scanPath = val
+    scanPath (val, oldVal) {
+      // 普通的watch监听
+      console.log('进watch了' + val)
     }
   },
   methods: {
-    init: function () {
+    // 初始化websocket
+    init () {
       if (typeof (WebSocket) === 'undefined') {
         alert('您的浏览器不支持socket')
       } else {
         // 实例化socket
-        this.socket = new WebSocket(this.path)
+        this.socket = new WebSocket('ws://127.0.0.1:8000')
         // 监听socket连接
         this.socket.onopen = this.open
         // 监听socket错误信息
         this.socket.onerror = this.error
         // 监听socket消息
         this.socket.onmessage = this.getMessage
+        // 关闭websocket
+        this.socket.onclose = this.close
       }
     },
-    open: function () {
+    open () {
       console.log('socket连接成功')
     },
-    error: function () {
+    error () {
       console.log('连接错误')
     },
-    getMessage: function (msg) {
+    // 获取从websocket获取的数据
+    getMessage (msg) {
       let data = JSON.parse(msg.data)
-      this.scanPath = data.results.path
-      console.log(this.scanPath)
+      // 判断扫描类型
+      switch (data.cmd) {
+        case 133377: // 文件扫描
+          this.scanPath = data.results.path
+          this.scanProgress = data.progress
+          this.whiteListCount = data.executor
+        case 133378: // USB扫描
+          this.usbCount = data.results.total
+        case 133379: // 网卡扫描
+          this.netCount = data.results.total
+      }
+      console.log(data)
     },
-    send: function () {
+    close () {
+      console.log('关闭websocket')
+    },
+    send () {
       this.socket.send('发送信息给服务器端')
-    },
-    close: function () {
-      console.log('socket已经关闭')
-    },
-    // 查询扫描任务状态
-    async searchScanStatus () {
-      let data = {        'cmdlist': [{
-          'cmd': 132102,
-          'ncmd': 'whileListScanStatus',
-          'data': {
-            'policyID': this.policyID
-          }
-        }]      }
-      await req_scanStatus(data).then(res => {
-        console.log(res)
-      })
     },
     // 停止扫描
     async stopScan () {
       localStorage.removeItem('policyId')
-      let data = {        'cmdlist': [{
-          'cmd': 132098,
-          'ncmd': 'WhiteListStopScan',
-          'data': {
-            'policyID': this.policyID,
-            'issave': false
-          }
-        }]      }
+      let data = {'cmdlist': [{
+        'cmd': 132098,
+        'ncmd': 'WhiteListStopScan',
+        'data': {
+          'policyID': this.policyID,
+          'issave': false
+        }
+      }]}
       await req_stopScan(data).then(res => {
-        this.socket.onclose = this.close
+        this.socket.close()
       })
     }
   },
-  async created () {
-    debugger
+  created () {
+
+  },
+  mounted () {
     // 开始扫描
-    await req_scanFile({
+    req_scanFile({
       'cmdlist': [{
         'cmd': 132097,
         'data': {
@@ -168,19 +166,15 @@ export default {
       }]
     }).then(res => {
       if (res.results.status) {
+        // 初始化
+        this.init()
         localStorage.setItem('policyId', res.results.policyID)
         this.policyID = res.results.policyID
-        this.searchScanStatus()
       }
     })
   },
-  mounted () {
-    // 初始化
-    this.init()
-  },
   destroyed () {
-    // 销毁监听
-    // this.socket.onclose = this.close
+    // this.socket.close()  关闭websocket
   }
 }
 </script>
