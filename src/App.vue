@@ -66,10 +66,15 @@ export default {
 </script>
 <style lang="scss">
 html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 body {
-  width: 920px;
+   width: 920px;
   height: 600px;
+  background:linear-gradient(152deg,rgba(201,75,75,1) 0%,rgba(75,19,79,1) 100%);
 }
 #app {
   width: 920px;
