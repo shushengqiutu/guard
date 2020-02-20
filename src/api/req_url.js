@@ -12,6 +12,10 @@ export const LOGOUT_URL = `${BASE_URL}/user/logout`
 export const SHOWWHITELIST_URL = `${BASE_URL}/whitelist/list`
 // 查询操作日志列表
 export const OPERATELOGLIST_URL = `${BASE_URL}/operateLog/list`
+// 查询审计事件列表
+export const EVENTLIST_URL = `${BASE_URL}/event/list`
+// 搜索审计事件
+export const EVENTQUERY_URL = `${BASE_URL}/event/query`
 // 白名单扫描
 export const SCANWHITELIST_URL = `${BASE_URL}/whitelist/scan`
 // 停止白名单扫描

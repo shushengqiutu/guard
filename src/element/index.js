@@ -19,7 +19,8 @@ import {
   TableColumn,
   Pagination,
   Row,
-  Radio
+  Radio,
+  DatePicker
 } from 'element-ui'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css'
@@ -43,7 +44,7 @@ Vue.use(TableColumn)
 Vue.use(Row)
 Vue.use(Pagination)
 Vue.use(Radio)
+Vue.use(DatePicker, { size: 'small', zIndex: 3000 })
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
-
 Vue.component(CollapseTransition.name, CollapseTransition)

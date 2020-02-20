@@ -10,8 +10,9 @@
       </div>
     </div>
     <div class="headScanText margin1">
-      <div class="scanText" :title="scanPath">
-        {{scanPath}}
+      <div class="scanText"
+           :title="scanPath">
+        {{scanPath}}111
       </div>
     </div>
     <div class="headScanText margin2">
@@ -53,7 +54,8 @@
         </div>
       </div>
     </div>
-    <div class="stopScan" @click="stopScan">
+    <div class="stopScan"
+         @click="stopScan">
       <div class="stopScanText">
         <span>停止扫描</span>
       </div>
@@ -124,13 +126,13 @@ export default {
     },
     // 查询扫描任务状态
     async searchScanStatus () {
-      let data = {'cmdlist': [{
-        'cmd': 132102,
-        'ncmd': 'whileListScanStatus',
-        'data': {
-          'policyID': this.policyID
-        }
-      }]}
+      let data = {        'cmdlist': [{
+          'cmd': 132102,
+          'ncmd': 'whileListScanStatus',
+          'data': {
+            'policyID': this.policyID
+          }
+        }]      }
       await req_scanStatus(data).then(res => {
         console.log(res)
       })
@@ -138,20 +140,21 @@ export default {
     // 停止扫描
     async stopScan () {
       localStorage.removeItem('policyId')
-      let data = {'cmdlist': [{
-        'cmd': 132098,
-        'ncmd': 'WhiteListStopScan',
-        'data': {
-          'policyID': this.policyID,
-          'issave': false
-        }
-      }]}
+      let data = {        'cmdlist': [{
+          'cmd': 132098,
+          'ncmd': 'WhiteListStopScan',
+          'data': {
+            'policyID': this.policyID,
+            'issave': false
+          }
+        }]      }
       await req_stopScan(data).then(res => {
         this.socket.onclose = this.close
       })
     }
   },
   async created () {
+    debugger
     // 开始扫描
     await req_scanFile({
       'cmdlist': [{
