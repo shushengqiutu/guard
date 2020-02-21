@@ -36,3 +36,44 @@
   padding: 0;
   border-radius: 0;
 }
+
+.el-date-range-picker.has-sidebar {
+  width: 650px;
+  font-size: 12px !important;
+}
+
+.el-date-range-picker__content {
+  width: 49%;
+}
+
+.el-picker-panel__shortcut {
+  font-size: 12px;
+}
+
+.el-picker-panel [slot=sidebar],
+.el-picker-panel__sidebar {
+  width: 85px;
+}
+
+.el-picker-panel [slot=sidebar]+.el-picker-panel__body,
+.el-picker-panel__sidebar+.el-picker-panel__body {
+  margin-left: 85px;
+
+
+}
+
+.el-date-range-picker__content .el-date-range-picker__header div {
+  font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  // border-radius:5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, .1)
+}

@@ -1,12 +1,11 @@
 <template>
-  <div class="datePicker">
-    <div class="block"
-         style="">
-      <span class="demonstration"></span>
-      <el-date-picker v-model="value2"
+  <div class="filters">
+    <div class="datePicker">
+      <span class="demonstration">时间：</span>
+      <el-date-picker v-model="timeArry"
                       type="datetimerange"
                       size='mini'
-                      @change="func"
+                      @change="timeChange"
                       validate-event
                       unlink-panels
                       value-format="yyyy-MM-dd hh:mm:ss"
@@ -16,10 +15,6 @@
                       :picker-options="pickerOptions">
       </el-date-picker>
     </div>
-    <!-- <el-date-picker v-model="value1"
-                    type="datetime"
-                    placeholder="选择日期时间"
-                    value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker> -->
   </div>
 
 </template>
@@ -66,13 +61,14 @@ export default {
             }
           }]
       },
-      value1: '',
-      value2: ''
+
+      timeArry: ''
     }
   },
   methods: {
-    func () {
-      console.log(this.value1, this.value2, 111)
+    timeChange () {
+      this.$emit('paramsChange', 'time', this.timeArry)
+      console.log(11, this.timeArry, 111)
     }
   }
 }

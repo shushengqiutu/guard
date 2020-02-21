@@ -7,13 +7,12 @@ import {
   USERINFO_URL,
   RESETPASSWORD_URL,
   LOGOUT_URL,
-  SHOWWHITELIST_URL,
-  OPERATELOGLIST_URL,
   SCANWHITELIST_URL,
   STOPSCAN_URL,
   SCANSTATUS_URL,
-  EVENTQUERY_URL,
-  EVENTLIST_URL
+  SHOWWHITELIST_URL,
+  OPERATELOGQUERY_URL,
+  EVENTQUERY_URL
 
 }
   from './req_url'
@@ -70,30 +69,7 @@ export const req_scanStatus = (data) => ajax(SCANSTATUS_URL, data, 'POST')
 /** *************************************删除策略下的白名单接口开始 序号17********************************************/
 /** *************************************删除策略下的白名单接口结束********************************************/
 
-/** *************************************查看审计列表接口开始 序号34********************************************/
-
-// let eventlistParams = {
-//   cmdlist: [{
-//     cmd: 0x0002050d,
-//     ncmd: 'eventlist',
-//     data:
-//     {
-//       page: '页数',
-//       size: '每页记录数', // 可选
-//       status: 0// 事件状态 0全部 1已上报事件等 可选
-//     }
-//   }]
-// }
-export const req_eventlist = (data) => ajax(EVENTLIST_URL, {
-  cmdlist: [{
-    cmd: 0x0002050d,
-    ncmd: 'eventlist',
-    data: data
-  }]
-}, 'POST')
-/** *************************************查看审计事件列表接口结束   ********************************************/
-
-/** *************************************搜索安全事件开始序号35********************************************/
+/** *************************************安全事件开始序号35********************************************/
 
 // let eventqueryParams = {
 //   cmdlist: [{
@@ -112,27 +88,38 @@ export const req_eventlist = (data) => ajax(EVENTLIST_URL, {
 //     }
 //   }]
 // }
-
-/** *************************************搜索安全事件结束   ********************************************/
-
-/** *************************************操作日志列表接口开始序号38********************************************/
-// let operateloglist = {
-//   cmdlist: [{
-//     cmd: 0x0002050f,
-//     ncmd: 'operateloglist',
-//     data:
-//     {
-//       page: '页数', size: '每页记录数' // 可选
-//     }
-//   }]
-// }
-export const req_operateloglist = (data) => ajax(OPERATELOGLIST_URL, {
+export const req_eventquery = (data) => ajax(EVENTQUERY_URL, {
   cmdlist: [{
-    cmd: 0x0002050f,
-    ncmd: 'operateloglist',
+    cmd: 0x0002050e,
+    ncmd: 'eventquery',
     data: data
   }]
 }, 'POST')
+/** *************************************搜索安全事件结束   ********************************************/
+// let eventqueryParams = {
+//   cmdlist: [{
+//     cmd: 0x00020510,
+//     ncmd: 'operatelogquery',
+//     data:
+//     {
+//       page: '页数',
+//       size: '每页记录数', // 可选
+//       start_time: '开始时间',
+//       end_time: '结束时间',
+//       params: {
+//         "action: 'xxxx', // 执行对象
+//       }
+//     }
+//   }]
+// }
+export const req_operatelogquery = (data) => ajax(OPERATELOGQUERY_URL, {
+  cmdlist: [{
+    cmd: 0x00020510,
+    ncmd: 'operatelogquery',
+    data: data
+  }]
+}, 'POST')
+/** *************************************操作日志列表接口开始序号39********************************************/
 
 /** *************************************操作日志列表接口结束  ********************************************/
 

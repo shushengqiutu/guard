@@ -1,0 +1,46 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.filters {
+  .demonstration {
+    font-size: 12px;
+    line-height: 12px;
+    padding: 3px 0;
+    color: #fff;
+  }
+
+  .datePicker {
+    >>>.el-picker-panel__body-wrapper {
+      font-size: 12px !important;
+    }
+
+    >>>.el-range-editor--mini .el-range-input {
+      font-size: 12px;
+    }
+
+    >>>.el-range-editor--mini .el-range-separator {
+      font-size: 12px;
+      line-height: 16px;
+    }
+
+    >>>.el-range-editor--mini .el-range__close-icon,
+    >>>.el-range-editor--mini .el-range__icon {
+      line-height: 16px;
+    }
+
+
+
+    >>>.el-range-editor--mini.el-input__inner {
+      width: 320px;
+      height: 22px;
+      line-height: 16px;
+      font-size: 12px !important;
+      padding: 3px 5px;
+    }
+
+  }
+}
+
+>>>.el-date-range-picker.has-sidebar {
+  width: none;
+}

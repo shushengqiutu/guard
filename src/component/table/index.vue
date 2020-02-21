@@ -1,14 +1,15 @@
 // 表格组件
 <template>
-  <el-row class="myTable"
-          :style="tableHeight">
+  <el-row class="myTable">
     <!-- <ai-scroll> -->
 
     <el-table :data="tableData"
+              :height="tableHeight"
               @cell-dblclick="childCelledit"
               @selection-change="handleSelectionChge"
               @filter-change="childrenFilterChange"
               :row-class-name="getRowClass">
+
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
         <el-table-column v-if="checkBox"
@@ -36,8 +37,9 @@
           </slot>
         </template>
       </template>
+
     </el-table>
-    <!-- </ai-scroll> -->
+
   </el-row>
 
 </template>
@@ -117,7 +119,7 @@ export default {
     },
     tableHeight: {
       type: String,
-      default: 'height: 400px'
+      default: '435'
     },
     handleSelectionChange: {
       type: Function,

@@ -18,6 +18,8 @@ import {
   Table,
   TableColumn,
   Pagination,
+  Collapse,
+  CollapseItem,
   Row,
   Radio,
   DatePicker
@@ -44,6 +46,8 @@ Vue.use(TableColumn)
 Vue.use(Row)
 Vue.use(Pagination)
 Vue.use(Radio)
+Vue.use(Collapse)
+Vue.use(CollapseItem)
 Vue.use(DatePicker, { size: 'small', zIndex: 3000 })
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
