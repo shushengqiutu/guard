@@ -17,9 +17,12 @@ import './vuescroll'
 // 引入确认组件并挂载到原型上
 import theConfirm from './component/comfirm/comfirm.js'
 
+// 引入websocket
+import global from './global.js'
 /* eslint-disable no-new */
 import './permission'
 Vue.prototype.$confirm = theConfirm // 将确认框挂载到原型上
+Vue.prototype.global = global
 new Vue({
   el: '#app',
   i18n,

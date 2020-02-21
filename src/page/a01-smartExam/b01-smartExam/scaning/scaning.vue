@@ -83,41 +83,58 @@ export default {
   },
   watch: {
     scanPath (val, oldVal) {
+
+    },
+    scanProgress (val, oldVal) {
       // 普通的watch监听
       console.log('进watch了' + val)
     }
   },
   methods: {
+    handdleMsg () {
+      let that = this
+      console.log(that.global.ws)
+      if (that.global.ws && that.global.ws.readyState === 1) {
+        console.log('发送信息')
+      }
+      that.global.ws.onmessage = function (res) {
+        that.scanType(JSON.parse(res.data))
+        console.log('收到服务器内容', res.data)
+      }
+    },
     // 开始扫描
     startScan () {
-      let queryObj = this.$route.params
-      let scanPath = []
-      if (queryObj.scanType === 'target') {
-        scanPath = queryObj.path
-      } else {
-        scanPath = ['//']
-      }
-      // 开始扫描
-      req_scanFile({
-        'cmdlist': [{
-          'cmd': 132097,
-          'data': {
-            'path': scanPath
-          },
-          'usb': 1,
-          'net': 1,
-          'ncmd': 'WhileListStartScan'
-        }]
-      }).then(res => {
-        if (res.results.status) {
-          localStorage.setItem('policyId', res.results.policyID)
-          this.policyID = res.results.policyID
+      let that = this
+      if (!localStorage.getItem('policyId')) {
+        let queryObj = this.$route.params
+        let scanPath = []
+        if (queryObj.scanType === 'target') {
+          scanPath = queryObj.path
+        } else {
+          scanPath = ['//']
         }
-      })
+        // 开始扫描
+        req_scanFile({
+          'cmdlist': [{
+            'cmd': 132097,
+            'data': {
+              'path': scanPath
+            },
+            'usb': 1,
+            'net': 1,
+            'ncmd': 'WhileListStartScan'
+          }]
+        }).then(res => {
+          if (res.results.status) {
+            localStorage.setItem('policyId', res.results.policyID)
+            that.policyID = res.results.policyID
+          }
+        })
+      }
     },
     // 停止扫描
     async stopScan () {
-      localStorage.removeItem('policyId')
+      this.policyID = parseInt(localStorage.getItem('policyId'))
       let data = {'cmdlist': [{
         'cmd': 132098,
         'ncmd': 'WhiteListStopScan',
@@ -127,15 +144,14 @@ export default {
         }
       }]}
       await req_stopScan(data).then(res => {
-
+        localStorage.removeItem('policyId')
       })
     },
     // 判断扫描类型
-    scanType () {
+    scanType (data) {
       // 判断扫描类型
-      let data = JSON.parse(localStorage.getItem('websocketObj'))
       if (data.cmd === 133377) { // 文件扫描
-        this.scanPath = data.results.path
+        this.scanPath = data.results.name
         this.scanProgress = data.results.progress
         this.whiteListCount = data.results.executor
       } else if (data.cmd === 133378) { // USB扫描
@@ -147,6 +163,7 @@ export default {
   },
   created () {
     this.startScan()
+    this.handdleMsg()
   },
   mounted () {
 
