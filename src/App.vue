@@ -12,10 +12,12 @@ export default {
   data: function () {
     return {
       lang: '',
-      theme: ''
+      theme: '',
+      socket: ''
     }
   },
   created () {
+    this.init()
     // this.$http.get('/user/login').then(res => {
     //   console.log(res, 113333331)
     // })
@@ -33,6 +35,41 @@ export default {
     })
   },
   methods: {
+    // 初始化websocket
+    init () {
+      if (typeof (WebSocket) === 'undefined') {
+        alert('您的浏览器不支持socket')
+      } else {
+        // 实例化socket
+        this.socket = new WebSocket('ws://127.0.0.1:8000')
+        // 监听socket连接
+        this.socket.onopen = this.open
+        // 监听socket错误信息
+        this.socket.onerror = this.error
+        // 监听socket消息
+        this.socket.onmessage = this.getMessage
+        // 关闭websocket
+        this.socket.onclose = this.close
+      }
+    },
+    open () {
+      console.log('socket连接成功')
+    },
+    error () {
+      console.log('连接错误')
+    },
+    // 获取从websocket获取的数据
+    getMessage (msg) {
+      let data = JSON.parse(msg.data)
+      localStorage.setItem('websocketObj', JSON.stringify(data))
+      console.log(data)
+    },
+    close () {
+      console.log('关闭websocket')
+    },
+    send () {
+      this.socket.send('发送信息给服务器端')
+    },
     // theme 赋值
     setTheme (val) {
       if (val) {

@@ -22,7 +22,9 @@ import {
   CollapseItem,
   Row,
   Radio,
-  DatePicker
+  DatePicker,
+  Tree,
+  Drawer
 } from 'element-ui'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css'
@@ -48,6 +50,8 @@ Vue.use(Pagination)
 Vue.use(Radio)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
+Vue.use(Tree)
+Vue.use(Drawer)
 Vue.use(DatePicker, { size: 'small', zIndex: 3000 })
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)

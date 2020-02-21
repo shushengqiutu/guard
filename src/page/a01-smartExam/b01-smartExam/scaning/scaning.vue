@@ -88,50 +88,32 @@ export default {
     }
   },
   methods: {
-    // 初始化websocket
-    init () {
-      if (typeof (WebSocket) === 'undefined') {
-        alert('您的浏览器不支持socket')
+    // 开始扫描
+    startScan () {
+      let queryObj = this.$route.params
+      let scanPath = []
+      if (queryObj.scanType === 'target') {
+        scanPath = queryObj.path
       } else {
-        // 实例化socket
-        this.socket = new WebSocket('ws://127.0.0.1:8000')
-        // 监听socket连接
-        this.socket.onopen = this.open
-        // 监听socket错误信息
-        this.socket.onerror = this.error
-        // 监听socket消息
-        this.socket.onmessage = this.getMessage
-        // 关闭websocket
-        this.socket.onclose = this.close
+        scanPath = ['//']
       }
-    },
-    open () {
-      console.log('socket连接成功')
-    },
-    error () {
-      console.log('连接错误')
-    },
-    // 获取从websocket获取的数据
-    getMessage (msg) {
-      let data = JSON.parse(msg.data)
-      // 判断扫描类型
-      switch (data.cmd) {
-        case 133377: // 文件扫描
-          this.scanPath = data.results.path
-          this.scanProgress = data.progress
-          this.whiteListCount = data.executor
-        case 133378: // USB扫描
-          this.usbCount = data.results.total
-        case 133379: // 网卡扫描
-          this.netCount = data.results.total
-      }
-      console.log(data)
-    },
-    close () {
-      console.log('关闭websocket')
-    },
-    send () {
-      this.socket.send('发送信息给服务器端')
+      // 开始扫描
+      req_scanFile({
+        'cmdlist': [{
+          'cmd': 132097,
+          'data': {
+            'path': scanPath
+          },
+          'usb': 1,
+          'net': 1,
+          'ncmd': 'WhileListStartScan'
+        }]
+      }).then(res => {
+        if (res.results.status) {
+          localStorage.setItem('policyId', res.results.policyID)
+          this.policyID = res.results.policyID
+        }
+      })
     },
     // 停止扫描
     async stopScan () {
@@ -145,36 +127,32 @@ export default {
         }
       }]}
       await req_stopScan(data).then(res => {
-        this.socket.close()
+
       })
+    },
+    // 判断扫描类型
+    scanType () {
+      // 判断扫描类型
+      let data = JSON.parse(localStorage.getItem('websocketObj'))
+      if (data.cmd === 133377) { // 文件扫描
+        this.scanPath = data.results.path
+        this.scanProgress = data.results.progress
+        this.whiteListCount = data.results.executor
+      } else if (data.cmd === 133378) { // USB扫描
+        this.usbCount = data.results.total
+      } else if (data.cmd === 133379) { // 网卡扫描
+        this.netCount = data.results.total
+      }
     }
   },
   created () {
-
+    this.startScan()
   },
   mounted () {
-    // 开始扫描
-    req_scanFile({
-      'cmdlist': [{
-        'cmd': 132097,
-        'data': {
-          'path': ['//']
-        },
-        'usb': 1,
-        'net': 1,
-        'ncmd': 'WhileListStartScan'
-      }]
-    }).then(res => {
-      if (res.results.status) {
-        // 初始化
-        this.init()
-        localStorage.setItem('policyId', res.results.policyID)
-        this.policyID = res.results.policyID
-      }
-    })
+
   },
   destroyed () {
-    // this.socket.close()  关闭websocket
+
   }
 }
 </script>
