@@ -6,6 +6,7 @@
     <input type="text"
            class="content"
            v-model="content"
+           @keyup.enter="$event.target.blur"
            :class="{ 'active':active }"
            placeholder="搜索..."
            @blur="changeblur">
@@ -30,10 +31,10 @@ export default {
       if (this.content) {
         this.active = true
         debugger
-        this.$emit('paramsChange', 'key', this.content)
       } else {
         this.active = false
       }
+      this.$emit('paramsChange', 'key', this.content)
     }
   }
 }

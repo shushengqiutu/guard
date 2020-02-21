@@ -9,7 +9,7 @@ export const RESETPASSWORD_URL = `${BASE_URL}/user/resetPassword`
 // 退出登录
 export const LOGOUT_URL = `${BASE_URL}/user/logout`
 // 显示白名单明细
-export const SHOWWHITELIST_URL = `${BASE_URL}/whitelist/list`
+export const SHOWWHITELIST_URL = `${BASE_URL}/whitelist/query`
 // 日志列表
 export const OPERATELOGQUERY_URL = `${BASE_URL}/operateLog/query`
 // 审计事件

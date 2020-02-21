@@ -39,6 +39,7 @@ export default {
   },
   data () {
     return {
+      // 默认显示应用程序
       defaultOpenTable: 'program',
       securityPolicycarsConfig: {
         defaultOpenCarId: 'program',
@@ -66,10 +67,8 @@ export default {
     getCarId (carId) {
       this.defaultOpenTable = carId
       // console.log(carId, 111)
-    },
-    www () {
-      alert(1)
     }
+
   }
 }
 </script>

@@ -10,8 +10,9 @@
       </div>
     </div>
     <div class="headScanText margin1">
-      <div class="scanText" :title="scanPath">
-        {{scanPath}}
+      <div class="scanText"
+           :title="scanPath">
+        {{scanPath}}1
       </div>
     </div>
     <div class="headScanText margin2">
@@ -53,7 +54,8 @@
         </div>
       </div>
     </div>
-    <div class="stopScan" @click="stopScan">
+    <div class="stopScan"
+         @click="stopScan">
       <div class="stopScanText">
         <span>停止扫描</span>
       </div>
@@ -135,14 +137,14 @@ export default {
     // 停止扫描
     async stopScan () {
       this.policyID = parseInt(localStorage.getItem('policyId'))
-      let data = {'cmdlist': [{
-        'cmd': 132098,
-        'ncmd': 'WhiteListStopScan',
-        'data': {
-          'policyID': this.policyID,
-          'issave': false
-        }
-      }]}
+      let data = {        'cmdlist': [{
+          'cmd': 132098,
+          'ncmd': 'WhiteListStopScan',
+          'data': {
+            'policyID': this.policyID,
+            'issave': false
+          }
+        }]      }
       await req_stopScan(data).then(res => {
         localStorage.removeItem('policyId')
       })

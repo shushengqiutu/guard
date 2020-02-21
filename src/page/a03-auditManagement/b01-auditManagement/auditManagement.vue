@@ -34,7 +34,7 @@
       </div> -->
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight='435'
+                :tableHeight="'435'"
                 :checkBox='false'>
         <el-table-column slot="index"
                          type="index"
@@ -246,9 +246,12 @@ export default {
           this.initTableParams.end_time = ''
         }
         // 搜索
-      } else {
-        debugger
-        this.initTableParams.params[type] = val
+      } else if (type === 'key') {
+        if (val) {
+          this.initTableParams.params[type] = val
+        } else {
+          delete (this.initTableParams.params[type])
+        }
       }
 
       this.paramsChangeTableInit()
