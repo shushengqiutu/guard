@@ -4,6 +4,7 @@ exports.main = {
   menu: {
     'smartExam': '智能扫描',
     'securityPolicy': '安全策略',
+    'policyInfo': '策略详情',
     'auditManagement': '审计事件',
     '/policyCentral/dataProtect': '策略中心',
     'dataProtect': '数据防护',

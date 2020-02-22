@@ -1,0 +1,46 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.program {
+  width: 720px;
+
+  .operation {
+    height: 22px;
+    padding: 10px 0;
+    @include childXRight;
+    // background: yellowgreen;
+
+
+    .screenBtn {
+      margin-right: 10px;
+    }
+
+  }
+
+  .filtersWarp {
+    padding: 20px 10px;
+    // margin-bottom: 42px;
+    margin-bottom: 10px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+  }
+
+  .tableWarp {
+
+    position: relative;
+
+    .func {
+      position: absolute;
+      top: -32px;
+      display: flex;
+
+    }
+  }
+
+
+
+  .myPaginationWarp {
+    @include childXRight
+  }
+}

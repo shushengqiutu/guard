@@ -12,10 +12,16 @@ export default {
   'Scaning': () => import('@/page/a01-smartExam/b01-smartExam/scaning/scaning.vue'),
   // 智能扫描完成
   'ScanFinish': () => import('@/page/a01-smartExam/b01-smartExam/scanFinish/scanFinsh.vue'),
-  // 安全策略-安全策略
+  // 安全策略-当前策略
   'SecurityPolicy': () => import('@/page/a02-securityPolicy/b01-securityPolicy/securityPolicy.vue'),
   // 安全策略-所有策略
   'AllPolicy': () => import('@/page/a02-securityPolicy/b02-allPolicy/allPolicy.vue'),
+  // 安全策略-授信策略
+  'CreditPolicy': () => import('@/page/a02-securityPolicy/b03-creditPolicy/creditPolicy.vue'),
+
+  // 安全策略-策略详情
+  'PolicyInfo': () => import('@/page/a02-securityPolicy/b04-policyInfo/policyInfo.vue'),
+
   // 审计事件
   'AuditManagement': () => import('@/page/a03-auditManagement/b01-auditManagement/auditManagement.vue'),
   // 策略中心-数据防护

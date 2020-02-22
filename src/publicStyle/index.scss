@@ -29,6 +29,11 @@
   justify-content: flex-end;
 }
 
+.link {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 //去除elment input默认样式
 .el-input--small .el-input__inner {
   border: none;

@@ -33,7 +33,7 @@ import program from '@/page/a02-securityPolicy/component/program/'
 import usb from '@/page/a02-securityPolicy/component/usb/'
 import network from '@/page/a02-securityPolicy/component/network/'
 export default {
-  name: 'securityPolicy',
+  name: 'policyInfo',
   components: {
     cars, program, usb, network
   },

@@ -5,11 +5,7 @@
 
     <el-table :data="tableData"
               :height="tableHeight"
-              @cell-dblclick="childCelledit"
-              @selection-change="handleSelectionChge"
-              @filter-change="childrenFilterChange"
-              :row-class-name="getRowClass">
-
+              @row-dblclick='handelDblclick'>
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
         <el-table-column v-if="checkBox"
@@ -105,30 +101,15 @@ export default {
       type: Boolean,
       default: false
     },
-    ShowColumnInfo: {
-      type: Array,
-      default: () => []
-    },
-    getRowClassFather: {
-      type: Function,
-      default: null
-    },
-    celledit: {
-      type: Function,
-      default: null
-    },
     tableHeight: {
       type: String,
       default: '435'
     },
-    handleSelectionChange: {
-      type: Function,
-      default: null
-    },
-    handleFilterChange: {
+    faterRowDblclick: {
       type: Function,
       default: null
     }
+
   },
 
   data () {
@@ -140,31 +121,9 @@ export default {
 
   },
   methods: {
-    handleSelectionChge (val) {
-      if (this.handleSelectionChange) {
-        this.handleSelectionChange(val)
-      }
-    },
-    childrenFilterChange (filters) {
-      if (this.handleFilterChange) {
-        this.handleFilterChange(filters)
-      }
-    },
-    sortChange (column, prop, order) {
-    },
-    fileterRow (row, prop) {
-      return row[prop]
-    },
-    childCelledit (row, column, cell, event) {
-      if (this.celledit) {
-        this.celledit(row, column, cell, event)
-      }
-    },
-    rowClick (row, event, column) {
-    },
-    getRowClass: function (row) {
-      if (this.getRowClassFather) {
-        return this.getRowClassFather(row)
+    handelDblclick (row, column, event) {
+      if (this.faterRowDblclick) {
+        this.faterRowDblclick(row, column, event)
       }
     }
   }
