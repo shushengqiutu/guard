@@ -11,7 +11,7 @@
     <div class='tableWarp'>
       <div class='func'>
         <my-option icon='el-icon-delete-solid'
-                   text='删除1'> </my-option>
+                   text='删除'> </my-option>
         <my-option icon='el-icon-delete-solid'
                    text='追加'> </my-option>
       </div>

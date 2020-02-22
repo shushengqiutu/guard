@@ -8,7 +8,7 @@
     </div>
     <div class="text1 inputSty">
       <div>
-        <el-input v-model="path1"></el-input>
+        <el-input type="textarea" v-model="path1"></el-input>
       </div>
       <div class="buttonMargin">
         自定义
