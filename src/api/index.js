@@ -14,8 +14,8 @@ import {
   OPERATELOGQUERY_URL,
   EVENTQUERY_URL,
   SHOWPOLICYLIST_URL,
-  SHOWWHITELIST_USB_NET_URL
-
+  SHOWWHITELIST_USB_NET_URL,
+  WORKMODE_URL
 }
   from './req_url'
 
@@ -184,3 +184,7 @@ export const req_operatelogquery = (data) => ajax(OPERATELOGQUERY_URL, {
 
 /** *************************************网卡扫描接口开始 序号44********************************************/
 /** *************************************网卡扫描接口结束********************************************/
+
+/** *************************************切换工作模式开始 序号44********************************************/
+export const req_workmode = (data) => ajax(WORKMODE_URL, data, 'POST')
+/** *************************************切换工作模式结束********************************************/

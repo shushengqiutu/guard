@@ -27,3 +27,5 @@ export const STOPSCAN_URL = `${BASE_URL}/whitelist/stopscan`
 export const SCANSTATUS_URL = `${BASE_URL}/whitelist/ScanStatus`
 // 获取磁盘目录结构
 export const DISKDIRECTORY_URL = `${BASE_URL}/disk/directorys`
+// 切换工作模式
+export const WORKMODE_URL = `${BASE_URL}/policy/operatingmode`

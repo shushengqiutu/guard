@@ -10,6 +10,7 @@
   </div>
 </template>
 <script>
+import {req_workmode} from '@/api'
 import openOne from '@/component/openOne/index.vue'
 import protectImgUrl from '@/assets/img/public/审计@2x(2).png'
 import auditImgUrl from '@/assets/img/public/图层 13 拷贝@2x.png'
@@ -23,7 +24,7 @@ export default {
       title: '工作模式',
       firstObj: {
         imgUrl: protectImgUrl,
-        status: false,
+        status: true,
         name: '保护模式'
       },
       secondObj: {
@@ -36,11 +37,43 @@ export default {
   methods: {
     // 保护模式
     protectMode (val) {
+      if (!val) {
+        this.secondObj.status = true
+        let queryParams = {
+          cmdlist: [{
+            'cmd': 132865,
+            'ncmd': 'SwitchOperatingMode',
+            'data': {
+              'mode': 0 // 0 审计，1保护
+            }
+          }]
+        }
+        req_workmode(queryParams).then(res => {
+          if (res.results.status) {
 
+          }
+        })
+      }
     },
     // 审计模式
     auditMode (val) {
+      if (!val) {
+        this.firstObj.status = true
+        let queryParams = {
+          cmdlist: [{
+            'cmd': 132865,
+            'ncmd': 'SwitchOperatingMode',
+            'data': {
+              'mode': 1 // 0 审计，1保护
+            }
+          }]
+        }
+        req_workmode(queryParams).then(res => {
+          if (res.results.status) {
 
+          }
+        })
+      }
     }
   }
 }
