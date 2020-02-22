@@ -14,7 +14,7 @@
         <!-- 是否开启复选 -->
         <el-table-column v-if="checkBox"
                          type="selection"
-                         width="55">
+                         width="24">
         </el-table-column>
       </template>
 

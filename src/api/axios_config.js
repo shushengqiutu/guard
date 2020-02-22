@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.post['Access-Control-Allow-Headers'] = '*'
 axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'PUT,POST,GET,DELETE,OPTIONS'
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
 // import { Message } from 'element-ui'
 /** **** 创建axios实例 ******/
 const service = axios.create({

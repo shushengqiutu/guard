@@ -13,18 +13,12 @@
         <my-option icon='el-icon-delete-solid'
                    text='删除'> </my-option>
         <my-option icon='el-icon-delete-solid'
-                   text='导入'> </my-option>
-        <my-option icon='el-icon-delete-solid'
-                   text='导出'> </my-option>
-        <my-option icon='el-icon-delete-solid'
-                   text='部署'> </my-option>
-        <my-option icon='el-icon-delete-solid'
-                   text='预制'> </my-option>
+                   text='追加'> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight="'435'"
-                :checkBox='false'>
+                :tableHeight="'430'"
+                :checkBox='true'>
         <el-table-column slot="index"
                          type="index"
                          label="序号"
@@ -34,7 +28,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column slot="status"
+        <!-- <el-table-column slot="status"
                          prop="status"
                          label="上报状态"
                          :width="80">
@@ -43,17 +37,8 @@
             <span>{{scope.row.status|filterStatus}}</span>
           </template>
 
-        </el-table-column>
-        <el-table-column slot="tag_status"
-                         prop="tag_status"
-                         label="模块类型"
-                         :width="80">
-          <template slot-scope="scope">
+        </el-table-column> -->
 
-            <span>{{scope.row.tag_status|filterTagStatus}}</span>
-          </template>
-
-        </el-table-column>
       </my-table>
     </div>
     <div class='myPaginationWarp'
@@ -77,16 +62,17 @@ import myPagination from '@/component/pagination/'
 import {
 
   // eslint-disable-next-line camelcase
-  req_ShowWhiteList
+  req_ShowPolicyList, req_ShowWhiteList
 } from '@/api'
 export default {
   name: 'program',
+
   components: {
     cars, mySearch, myOption, myTable, myPagination
   },
   data: function () {
     return {
-
+      ss: '',
       filtersWarpOpen: false,
       tableData: [],
       pagination: {
@@ -98,9 +84,9 @@ export default {
       },
       initTableParams: {
         page: 0,
-        size: 10, // 可选
-        policyID: 1,
-        type: 2,
+        size: 10,
+        policyID: 0,
+        type: 3,
         params: {
 
         }
@@ -119,20 +105,20 @@ export default {
         },
 
         {
-          label: '执行对象',
-          prop: 'operation_name',
+          label: '文件名',
+          prop: 'name',
           state: true,
           isCustom: false,
-          slotName: 'operation_name',
+          slotName: 'name',
           width: 100
         },
         {
-          label: '对象特征',
-          prop: 'operation_feature',
+          label: '全路径',
+          prop: 'file',
           state: true,
           isCustom: false,
-          slotName: 'operation_feature',
-          width: 70
+          slotName: 'file',
+          width: 150
         },
         // {
         //   label: 'policyID',
@@ -143,65 +129,80 @@ export default {
         //   width: 80
         // },
         {
-          label: '重复次数',
-          prop: 'repeat',
+          label: '描述',
+          prop: 'desc',
           state: true,
           isCustom: false,
-          slotName: 'repeat',
-          width: 80
+          slotName: 'desc',
+          width: 150
         },
         {
-          label: '上报状态',
-          prop: 'status',
+          label: '文件签名',
+          prop: 'file_cert',
           state: true,
           isCustom: true,
-          slotName: 'status',
+          slotName: 'file_cert',
           width: 80
         },
 
         {
-          label: '是否确认',
-          prop: 'tag_status',
+          label: '文件类型',
+          prop: 'file_type',
           state: true,
           isCustom: true,
-          slotName: 'tag_status',
+          slotName: 'file_type',
           width: 80
         },
 
         {
-          label: '用户',
-          prop: 'user',
+          label: 'MD5',
+          prop: 'md5',
           state: true,
           isCustom: false,
-          slotName: 'user',
+          slotName: 'md5',
           width: 80
         },
         {
-          label: '开始时间',
-          prop: 'start_time',
+          label: '文件大小',
+          prop: 'size',
           state: true,
           isCustom: false,
-          slotName: 'start_time'
+          slotName: 'size'
 
         }]
 
     }
   },
   created () {
-    this.initTable()
+    this.getpolicyID().then(policyID => {
+      if (policyID) {
+        this.initTable()
+      }
+    })
   },
 
   methods: {
+    // 获取策略Id
+    async getpolicyID () {
+      const result = await req_ShowPolicyList({
 
-    changeStatus (status) {
-      this.filtersWarpOpen = status
+        page: 0, // 第几页 0为第一页
+        size: 10, // 每页记录数，可选参数
+        status: 1 // 可选参数 1为当前策略
+      })
+      let policyID = result.results.list[0].policyID
+      if (policyID) {
+        this.initTableParams.policyID = policyID
+        return policyID
+      }
     },
+
     /** *********************************************表格*************************************** */
     // 表格初始化
     initTable () {
       this.getTableData(this.initTableParams)
         .then(res => {
-          this.setTableData(res.results.eventlist, res.results.total)
+          this.setTableData(res.results.list, res.results.total)
         })
     },
     // 获取表格数据

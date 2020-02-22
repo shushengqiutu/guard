@@ -39,7 +39,6 @@ export default {
   },
   data () {
     return {
-      // 默认显示应用程序
       defaultOpenTable: 'program',
       securityPolicycarsConfig: {
         defaultOpenCarId: 'program',

@@ -1,29 +1,44 @@
 @import './theme1.scss';
 @import './theme2.scss';
 
-.usb {
+.program {
   width: 720px;
 
   .operation {
     height: 22px;
     padding: 10px 0;
-    @include childXBetween;
+    @include childXRight;
     // background: yellowgreen;
 
-    .func {
-      display: flex;
 
+    .screenBtn {
+      margin-right: 10px;
     }
 
-    .search {}
+  }
+
+  .filtersWarp {
+    padding: 20px 10px;
+    // margin-bottom: 42px;
+    margin-bottom: 10px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
   }
 
   .tableWarp {
-    width: 720px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    position: relative;
+
+    .func {
+      position: absolute;
+      top: -32px;
+      display: flex;
+
+    }
   }
+
+
 
   .myPaginationWarp {
     @include childXRight

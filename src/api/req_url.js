@@ -8,8 +8,13 @@ export const USERINFO_URL = `${BASE_URL}/user/getInfo`
 export const RESETPASSWORD_URL = `${BASE_URL}/user/resetPassword`
 // 退出登录
 export const LOGOUT_URL = `${BASE_URL}/user/logout`
-// 显示白名单明细
+// 查询策略列表
+export const SHOWPOLICYLIST_URL = `${BASE_URL}/whitelist/policylist`
+
+// 显示白名单明细（策略详情 应用程序）
 export const SHOWWHITELIST_URL = `${BASE_URL}/whitelist/query`
+// 查询策略列表(策略详情 USB 网卡)
+export const SHOWWHITELIST_USB_NET_URL = `${BASE_URL}/whitelist/list`
 // 日志列表
 export const OPERATELOGQUERY_URL = `${BASE_URL}/operateLog/query`
 // 审计事件
