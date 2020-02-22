@@ -34,13 +34,13 @@
     </div>
     <div class="contentSty resultText baseText">
       <div class="flexImg">
-        白名单数量：10032
+        白名单数量：{{scanResult.whiteListCount ? scanResult.whiteListCount : 0}}
       </div>
       <div class="flexImg">
-        网卡个数：1
+        网卡个数：{{scanResult.netCount ? scanResult.netCount : 0}}
       </div>
       <div class="flexImg">
-        USB数量：5
+        USB数量：{{scanResult.usbCount ? scanResult.usbCount : 0}}
       </div>
     </div>
     <div class="endSty">
@@ -55,8 +55,11 @@ export default {
   name: 'scanFinish',
   data () {
     return {
-
+      scanResult: {}
     }
+  },
+  created () {
+    this.scanResult = this.$route.params
   }
 }
 </script>

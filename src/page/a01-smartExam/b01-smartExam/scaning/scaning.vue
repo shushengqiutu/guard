@@ -12,7 +12,7 @@
     <div class="headScanText margin1">
       <div class="scanText"
            :title="scanPath">
-        {{scanPath}}1
+        {{scanPath}}
       </div>
     </div>
     <div class="headScanText margin2">
@@ -154,7 +154,15 @@ export default {
           }
         }]}
         req_stopScan(data).then(res => {
-          localStorage.removeItem('policyId')
+          if (res.results.status) {
+            let scanResult = {
+              whiteListCount: this.whiteListCount, // 白名单文件数量
+              usbCount: this.usbCount, // USB数量
+              netCount: this.netCount // 网卡数量
+            }
+            localStorage.removeItem('policyId')
+            this.$router.push({name: 'scanFinish', params: scanResult})
+          }
         })
       })
         .catch(() => {
