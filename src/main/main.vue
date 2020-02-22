@@ -35,11 +35,6 @@
         <p class="item"
            @click='appLogout'>退出</p>
       </div>
-      <div v-show="getname&&setPasswordShow">
-        <set-password @func="getPasswordShow"
-                      :getname="getname"
-                      :setPasswordShow="setPasswordShow"></set-password>
-      </div>
       <div class="mean">
         <my-menu></my-menu>
       </div>
@@ -55,7 +50,11 @@
         </my-scroll>
       </div>
     </div>
-
+    <div v-show="getname&&setPasswordShow">
+      <set-password @func="getPasswordShow"
+                    :getname="getname"
+                    :setPasswordShow="setPasswordShow"></set-password>
+    </div>
   </div>
 </template>
 

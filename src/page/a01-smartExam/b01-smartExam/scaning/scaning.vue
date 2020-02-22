@@ -135,19 +135,31 @@ export default {
       }
     },
     // 停止扫描
-    async stopScan () {
-      this.policyID = parseInt(localStorage.getItem('policyId'))
-      let data = {        'cmdlist': [{
+    stopScan () {
+      this.$confirm({
+        type: '提示',
+        msg: '是否停止扫描？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(() => {
+        this.policyID = parseInt(localStorage.getItem('policyId'))
+        let data = {'cmdlist': [{
           'cmd': 132098,
           'ncmd': 'WhiteListStopScan',
           'data': {
             'policyID': this.policyID,
             'issave': false
           }
-        }]      }
-      await req_stopScan(data).then(res => {
-        localStorage.removeItem('policyId')
+        }]}
+        req_stopScan(data).then(res => {
+          localStorage.removeItem('policyId')
+        })
       })
+        .catch(() => {
+          console.log('no')
+        })
     },
     // 判断扫描类型
     scanType (data) {

@@ -177,9 +177,11 @@ export default {
   background: rgba(238, 238, 238, 1);
   box-shadow: 11px 19px 29px 3px rgba(19, 19, 19, 0.25);
   border-radius: 5px;
-  position: fixed;
-  top: 150px;
-  left: 330px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -135px;
+  margin-left: -207px;
   z-index: 100;
 }
 .titleWarp {
