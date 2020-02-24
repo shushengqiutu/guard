@@ -42,3 +42,25 @@ Vue.filter('filterStatus', function (status) {
       return '已上报'
   }
 })
+// 内置白名单列表白名单类型  wl_type过滤
+Vue.filter('filterWlType', function (wlType) {
+  let numWlType = parseInt(wlType)
+  switch (numWlType) {
+    case 0:
+      return '操作系统'
+    case 1:
+      return '工控应用'
+    case 2:
+      return '非工控应用'
+  }
+})
+// 内置白名单列表是否国产  os_type过滤
+Vue.filter('filterOsType', function (osType) {
+  let numOsType = parseInt(osType)
+  switch (numOsType) {
+    case 0:
+      return '国外'
+    case 1:
+      return '国产'
+  }
+})

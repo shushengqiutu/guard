@@ -18,10 +18,12 @@ export default {
   'AllPolicy': () => import('@/page/a02-securityPolicy/b02-allPolicy/allPolicy.vue'),
   // 安全策略-授信策略
   'CreditPolicy': () => import('@/page/a02-securityPolicy/b03-creditPolicy/creditPolicy.vue'),
-
   // 安全策略-策略详情
   'PolicyInfo': () => import('@/page/a02-securityPolicy/b04-policyInfo/policyInfo.vue'),
-
+  // 安全策略-内置白名单
+  'InWhiteList': () => import('@/page/a05-inWhiteList/b01-inWhiteList/inWhiteList.vue'),
+  // 安全策略-内置白名单详情
+  'InWhiteListInfo': () => import('@/page/a05-inWhiteList/b02-inWhiteListInfo/inWhiteListInfo.vue'),
   // 审计事件
   'AuditManagement': () => import('@/page/a03-auditManagement/b01-auditManagement/auditManagement.vue'),
   // 策略中心-数据防护

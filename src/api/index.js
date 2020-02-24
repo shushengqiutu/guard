@@ -16,6 +16,8 @@ import {
   SHOWPOLICYLIST_URL,
   SHOWWHITELIST_USB_NET_URL,
   WORKMODE_URL,
+  INWHITELIST_URL,
+  INWHITELISTINFO_URL,
   DISKDIRECTORY_URL
 }
   from './req_url'
@@ -47,6 +49,7 @@ export const req_logout = () => ajax(LOGOUT_URL)
     }
   }]
 } */
+
 export const req_ShowPolicyList = (data) => ajax(SHOWPOLICYLIST_URL, {
   cmdlist: [{
     cmd: 0x00020503,
@@ -84,7 +87,7 @@ export const req_ShowWhiteList = (data) => ajax(SHOWWHITELIST_URL, {
 }, 'POST')
 /** *************************************显示策略详情 应用程序白名单明细结束********************************************/
 
-/** *************************************显示策略详情 usb 网卡白名单明细开始***********************************/
+/** *************************************查询内置白名单列表开始***********************************/
 // api文档接口09 不支持搜索
 /* let ShowWhiteListParams = {
   cmdlist: [{
@@ -106,7 +109,57 @@ export const req_ShowWhiteUsbNetList = (data) => ajax(SHOWWHITELIST_USB_NET_URL,
     data: data
   }]
 }, 'POST')
-/** *************************************显示策略详情 usb 网卡白名单明细结束********************************/
+/** *************************************查询内置白名单列表结束********************************/
+
+/** *************************************查询内置白名单列表开始***********************************/
+// api文档接口21
+/* let ShowWhiteListParams = {
+  cmdlist: [{
+    cmd:   0x00020511,
+    ncmd: 'WhiteListCreditCategoryList',
+    data:
+    {
+
+      page: 0, // 第几页 0为第一页
+      size: 10, // 每页记录数，可选参数
+      wl_type: 0  //白名单类型（0：操作系统，1：工控应用，2：非工控应用），可选参数
+    }
+  }]
+} */
+export const req_Inwhitelist = (data) => ajax(INWHITELIST_URL, {
+  cmdlist: [{
+    cmd: 0x00020511,
+    ncmd: 'WhiteListCreditCategoryList',
+    data: data
+  }]
+}, 'POST')
+/** *************************************查询内置白名单列表结束********************************/
+
+/** *************************************查看内置白名单详情开始***********************************/
+// api文档接口22
+/* let ShowWhiteListParams = {
+  cmdlist: [{
+    cmd:   0x00020512,
+    ncmd: 'WhiteListCreditCategory',
+    data:
+    {
+
+      page: 0, // 第几页 0为第一页
+      size: 10, // 每页记录数，可选参数
+       wl_type: 1, //白名单类型（0：操作系统，1：工控应用，2：非工控应用）
+       os_version:"windows:6.0.2.1"
+    }
+  }]
+} */
+export const req_InwhitelistInfo = (data) => ajax(INWHITELISTINFO_URL, {
+  cmdlist: [{
+    cmd: 0x00020512,
+    ncmd: 'WhiteListCreditCategory',
+    data: data
+  }]
+}, 'POST')
+/** *************************************查看内置白名单详情结束********************************/
+
 /** *************************************文件扫描接口开始 序号02********************************************/
 export const req_scanFile = (data) => ajax(SCANWHITELIST_URL, data, 'POST')
 /** *************************************文件扫描接口结束********************************************/

@@ -10,9 +10,18 @@
       </template>
       <!-- 策略详情 -->
       <template v-if="$route.name==='policyInfo'">
-        <div class="policyInfo">
+        <div class="policyInfo info">
           <i class="el-icon-arrow-left icon"
              @click="linkTo('allPolicy')"></i>
+          <span class="text"> {{$t(`main.menu.${$route.name}`)}}</span>
+
+        </div>
+      </template>
+      <!-- 内置白名单详情 -->
+      <template v-if="$route.name==='inWhiteListInfo'">
+        <div class="inWhiteListInfo info">
+          <i class="el-icon-arrow-left icon"
+             @click="linkTo('inWhiteList')"></i>
           <span class="text"> {{$t(`main.menu.${$route.name}`)}}</span>
 
         </div>
@@ -55,11 +64,12 @@ export default {
     return {
       subMean: false,
       securityPolicyConfig: {
-        routeNameArr: ['securityPolicy', 'creditPolicy', 'allPolicy'],
+        routeNameArr: ['securityPolicy', 'creditPolicy', 'allPolicy', 'inWhiteList'],
         tabs: {
           'securityPolicy': '当前策略',
           'creditPolicy': '授信策略',
-          'allPolicy': '所有策略'
+          'allPolicy': '所有策略',
+          'inWhiteList': '内置白名单'
         },
         // default: this.$route.name,
         openPage: (tab) => {
@@ -76,8 +86,13 @@ export default {
               }
             })
           }
+          // 所有策略
           if (tab.name === 'allPolicy') {
             this.$router.push({ name: 'allPolicy' })
+          }
+          // 内置白名单
+          if (tab.name === 'inWhiteList') {
+            this.$router.push({ name: 'inWhiteList' })
           }
         }
       },

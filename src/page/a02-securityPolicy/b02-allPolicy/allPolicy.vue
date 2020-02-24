@@ -86,8 +86,8 @@ export default {
       },
       initTableParams: {
         page: 0, // 第几页 0为第一页
-        size: 10 // 每页记录数，可选参数
-
+        size: 10, // 每页记录数，可选参数
+        type: ''
       },
       tHead: [
         {

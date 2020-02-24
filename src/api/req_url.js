@@ -29,3 +29,7 @@ export const SCANSTATUS_URL = `${BASE_URL}/whitelist/ScanStatus`
 export const DISKDIRECTORY_URL = `${BASE_URL}/disk/directorys`
 // 切换工作模式
 export const WORKMODE_URL = `${BASE_URL}/policy/operatingmode`
+// 查询内置白名单列表
+export const INWHITELIST_URL = `${BASE_URL}/whitelist/categoryList`
+// 查看内置白名单详情
+export const INWHITELISTINFO_URL = `${BASE_URL}/whitelist/category`

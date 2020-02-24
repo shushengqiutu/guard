@@ -1,5 +1,5 @@
 <template>
-  <div class="program">
+  <div class="allPolicy">
     <div class='operation'>
 
       <div class='search'>
@@ -11,14 +11,15 @@
     <div class='tableWarp'>
       <div class='func'>
         <my-option icon='el-icon-delete-solid'
-                   text='删除'> </my-option>
+                   text='删除1'> </my-option>
         <my-option icon='el-icon-delete-solid'
                    text='追加'> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
                 :tableHeight="'430'"
-                :checkBox='true'>
+                :checkBox='true'
+                :faterRowDblclick='faterRowDblclick'>
         <el-table-column slot="index"
                          type="index"
                          label="序号"
@@ -28,16 +29,33 @@
           </template>
         </el-table-column>
 
-        <!-- <el-table-column slot="status"
-                         prop="status"
-                         label="上报状态"
-                         :width="80">
+        <el-table-column slot="wl_type"
+                         label="类型"
+                         :width="100">
           <template slot-scope="scope">
 
-            <span>{{scope.row.status|filterStatus}}</span>
+            <span class="wl_type"> {{scope.row.wl_type|filterWlType}}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column slot="os_type"
+                         label="是否国产"
+                         :width="100">
+          <template slot-scope="scope">
+
+            <span class="os_type"> {{scope.row.os_type|filterOsType}} </span>
+          </template>
+        </el-table-column>
+
+        <el-table-column slot="link"
+                         label="操作"
+                         :width="80">
+          <template slot-scope="scope">
+            <span class="link"
+                  @click="linkTo(scope.row.wl_type,scope.row.os_vendor)"> 详情</span>
           </template>
 
-        </el-table-column> -->
+        </el-table-column>
 
       </my-table>
     </div>
@@ -53,8 +71,9 @@
   </div>
 
 </template>
+
 <script>
-import cars from '@/component/cars/'
+
 import mySearch from '@/component/search/'
 import myOption from '@/component/option/'
 import myTable from '@/component/table/'
@@ -62,13 +81,13 @@ import myPagination from '@/component/pagination/'
 import {
 
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_ShowWhiteList
+  req_Inwhitelist
 } from '@/api'
 export default {
-  name: 'program',
+  name: 'allPolicy',
 
   components: {
-    cars, mySearch, myOption, myTable, myPagination
+    mySearch, myOption, myTable, myPagination
   },
   data: function () {
     return {
@@ -83,13 +102,8 @@ export default {
         total: null // 总数据默认条数
       },
       initTableParams: {
-        page: 0,
-        size: 10,
-        policyID: 0,
-        type: 3,
-        params: {
-
-        }
+        page: 0, // 第几页 0为第一页
+        size: 10 // 每页记录数，可选参数
 
       },
       tHead: [
@@ -103,122 +117,56 @@ export default {
           prop: 'date',
           sortable: false // 是否排序
         },
-
         {
-          label: '文件名',
-          prop: 'name',
+          label: '类型',
+          prop: 'wl_type',
           state: true,
-          isCustom: false,
-          slotName: 'name',
+          isCustom: true,
+          slotName: 'wl_type',
           width: 100
         },
         {
-          label: '全路径',
-          prop: 'file',
+          label: '系统厂商',
+          prop: 'os_vendor',
           state: true,
           isCustom: false,
-          slotName: 'file',
-          width: 150
-        },
-        // {
-        //   label: 'policyID',
-        //   prop: 'policyID',
-        //   state: true,
-        //   isCustom: false,
-        //   slotName: 'policyID',
-        //   width: 80
-        // },
-        {
-          label: '描述',
-          prop: 'desc',
-          state: true,
-          isCustom: false,
-          slotName: 'desc',
-          width: 150
+          slotName: 'os_vendor',
+          width: 100
         },
         {
-          label: '文件签名',
-          prop: 'file_cert',
+          label: '是否国产',
+          prop: 'os_type',
           state: true,
           isCustom: true,
-          slotName: 'file_cert',
-          width: 80
-        },
+          slotName: 'os_type'
 
+        },
         {
-          label: '文件类型',
-          prop: 'file_type',
+          label: '系统版本',
+          prop: 'os_vendor',
+          state: true,
+          isCustom: false,
+          slotName: 'os_vendor'
+
+        },
+        {
+          label: '操作',
           state: true,
           isCustom: true,
-          slotName: 'file_type',
+          slotName: 'link',
           width: 80
-        },
-
-        {
-          label: 'MD5',
-          prop: 'md5',
-          state: true,
-          isCustom: false,
-          slotName: 'md5',
-          width: 80
-        },
-        {
-          label: '文件大小',
-          prop: 'size',
-          state: true,
-          isCustom: false,
-          slotName: 'size'
-
-        }]
+        }
+      ]
 
     }
   },
   created () {
-    this.firstInintTable()
+    this.initTable()
   },
 
   methods: {
-    // 第一次初始化数据
-    firstInintTable () {
-      let result = this.getRouterPolicyID()
-      if (result) {
-        this.initTable()
-      } else {
-        this.getpolicyID().then(policyID => {
-          if (policyID) {
-            this.initTable()
-          }
-        })
-      }
-    },
-    // 判断路由是否携带 policyID
-    getRouterPolicyID () {
-      let policyID = this.$route.query.policyID
-      console.log(policyID, this.$route)
-      if (policyID === 0 || policyID) {
-        this.initTableParams.policyID = parseInt(policyID)
-        return true
-      } else {
-        return false
-      }
-    },
-    // 获取策略Id
-    async getpolicyID () {
-      const result = await req_ShowPolicyList({
-
-        page: 0, // 第几页 0为第一页
-        size: 10, // 每页记录数，可选参数
-        status: 1,
-        type: '' // 可选参数 1为当前策略
-      })
-      let policyID = result.results.list[0].policyID
-      if (policyID) {
-        this.initTableParams.policyID = policyID
-        return policyID
-      }
-    },
-
     /** *********************************************表格*************************************** */
+
     // 表格初始化
     initTable () {
       this.getTableData(this.initTableParams)
@@ -228,7 +176,7 @@ export default {
     },
     // 获取表格数据
     async getTableData (data) {
-      const result = await req_ShowWhiteList(data)
+      const result = await req_Inwhitelist(data)
       console.log(result, 77)
       return result
     },
@@ -267,7 +215,23 @@ export default {
       this.$nextTick(() => { // 重新渲染分页
         this.pagination.isShow = true
       })
+    },
+    // rowDblclick
+    faterRowDblclick (row, column, event) {
+      this.linkTo(row.wl_type, row.os_vendor)
+      console.log(row, column, event, 99)
+    },
+    // 双击Row或者点击详情
+    linkTo (type, version) {
+      this.$router.push({
+        name: 'inWhiteListInfo',
+        query: {
+          wl_type: type,
+          os_version: version
+        }
+      })
     }
+
   }
 }
 </script>
