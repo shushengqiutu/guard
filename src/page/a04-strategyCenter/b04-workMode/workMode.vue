@@ -8,7 +8,6 @@
       @changeSecondStatus="auditMode"
     ></open-one>
     <show-tipmsg :tipmsg="tipmsg">
-      <!--<span v-html="tipmsg"></span>-->
     </show-tipmsg>
   </div>
 </template>
@@ -18,7 +17,7 @@ import openOne from '@/component/openOne/index.vue'
 import protectImgUrl from '@/assets/img/public/审计@2x(2).png'
 import auditImgUrl from '@/assets/img/public/图层 13 拷贝@2x.png'
 import showTipmsg from '@/component/showTipmsg/'
-import {workModeTip} from '@/assets/tipMsg/index.js'
+import {workModeTip} from '@/component/showTipmsg/lang/zh-module.js'
 export default {
   name: 'workMode',
   components: {
