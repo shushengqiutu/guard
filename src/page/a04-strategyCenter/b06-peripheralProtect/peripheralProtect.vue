@@ -7,19 +7,25 @@
      @changeFirstStatus="usbStore"
      @changeSecondStatus="unusbStore"
    ></open-one>
+    <show-tipmsg :tipmsg="tipmsg">
+    </show-tipmsg>
   </div>
 </template>
 <script>
 import openOne from '@/component/openOne/index.vue'
 import usbImgUrl from '@/assets/img/public/USB3@2x.png'
 import unusbImgUrl from '@/assets/img/public/关闭USB@2x.png'
+import showTipmsg from '@/component/showTipmsg/'
+import {defendCfg} from '@/component/showTipmsg/lang/zh-module.js'
 export default {
   name: 'peripheraProtect',
   components: {
-    openOne
+    openOne,
+    showTipmsg
   },
   data () {
     return {
+      tipmsg: defendCfg.replace(/\n/g, ' <br>'),
       title: '外设防护',
       firstObj: {
         imgUrl: usbImgUrl,
