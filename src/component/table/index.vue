@@ -5,6 +5,8 @@
 
     <el-table :data="tableData"
               :height="tableHeight"
+              @select="select"
+              @select-all="selectAll"
               @row-dblclick='handelDblclick'>
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
@@ -121,6 +123,12 @@ export default {
 
   },
   methods: {
+    selectAll (selection) {
+      this.$emit('chooseData', selection)
+    },
+    select (selection, row) {
+      this.$emit('chooseData', selection)
+    },
     handelDblclick (row, column, event) {
       if (this.faterRowDblclick) {
         this.faterRowDblclick(row, column, event)

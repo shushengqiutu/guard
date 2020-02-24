@@ -18,7 +18,8 @@
       <my-table :tableData='tableData'
                 :tHead='tHead'
                 :tableHeight="'430'"
-                :checkBox='true'>
+                :checkBox='true'
+                @chooseData="chooseData">
         <el-table-column slot="index"
                          type="index"
                          label="序号"
@@ -27,18 +28,6 @@
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
           </template>
         </el-table-column>
-
-        <!-- <el-table-column slot="status"
-                         prop="status"
-                         label="上报状态"
-                         :width="80">
-          <template slot-scope="scope">
-
-            <span>{{scope.row.status|filterStatus}}</span>
-          </template>
-
-        </el-table-column> -->
-
       </my-table>
     </div>
     <div class='myPaginationWarp'
@@ -72,7 +61,7 @@ export default {
   },
   data: function () {
     return {
-      ss: '',
+      selectData: [],
       filtersWarpOpen: false,
       tableData: [],
       pagination: {
@@ -117,14 +106,6 @@ export default {
           slotName: 'file',
           width: 150
         },
-        // {
-        //   label: 'policyID',
-        //   prop: 'policyID',
-        //   state: true,
-        //   isCustom: false,
-        //   slotName: 'policyID',
-        //   width: 80
-        // },
         {
           label: '描述',
           prop: 'desc',
@@ -167,7 +148,6 @@ export default {
           slotName: 'size'
 
         }]
-
     }
   },
   created () {
@@ -175,6 +155,10 @@ export default {
   },
 
   methods: {
+    // 获取复选框选中的数据
+    chooseData (data) {
+      this.selectData = data
+    },
     // 第一次初始化数据
     firstInintTable () {
       let result = this.getRouterPolicyID()
