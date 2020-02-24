@@ -1,8 +1,7 @@
 <template>
   <div class="scaning">
     <div class="headerSty">
-      <img class="imgSty"
-           src="@/assets/img/public/鉴定@2x.png" />
+      <div class="radar"></div>
     </div>
     <div class="headScanText">
       <div>
