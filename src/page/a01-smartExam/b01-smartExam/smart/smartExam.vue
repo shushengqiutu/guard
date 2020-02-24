@@ -74,12 +74,11 @@
         </div>
       </div>
     </div>
-    <choose-path :drawer="drawer">
+    <choose-path :drawer="drawer" @changeDrawer="changeDrawer">
     </choose-path>
   </div>
 </template>
 <script>
-// import {req_diskDirectory} from '@/api'
 import choosePath from '@/component/choosePath/'
 export default {
   name: 'user',
@@ -92,6 +91,9 @@ export default {
     }
   },
   methods: {
+    changeDrawer (v) {
+      this.drawer = v
+    },
     // 打开树形结构,选择指定目录
     chooseFile () {
       this.drawer = true

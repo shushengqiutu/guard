@@ -2,9 +2,10 @@
 <template>
  <div>
    <el-drawer
-     title="我是标题"
-     :visible.sync="drawer"
-     :with-header="false">
+     title="本地目录"
+     :visible.sync="newDrawer"
+     :wrapperClosable="false"
+   >
      <div style="height: 500px;overflow: auto">
        <el-tree
          :props="propsData"
@@ -34,7 +35,16 @@ export default {
       default: false
     }
   },
-
+  computed: {
+    newDrawer: {
+      get () {
+        return this.drawer
+      },
+      set (v) {
+        this.$emit('changeDrawer', v)
+      }
+    }
+  },
   data () {
     return {
       propsData: {
