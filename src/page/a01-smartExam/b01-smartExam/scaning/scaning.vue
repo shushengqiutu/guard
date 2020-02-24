@@ -89,7 +89,15 @@ export default {
     },
     scanProgress (val, oldVal) {
       // 普通的watch监听
-      console.log('进watch了' + val)
+      if (val === 100) {
+        localStorage.removeItem('policyId')
+        let scanResult = {
+          whiteListCount: this.whiteListCount, // 白名单文件数量
+          usbCount: this.usbCount, // USB数量
+          netCount: this.netCount // 网卡数量
+        }
+        this.$router.push({name: 'scanFinish', params: scanResult})
+      }
     }
   },
   methods: {
