@@ -29,15 +29,22 @@
           </template>
         </el-table-column>
 
-        <el-table-column slot="link"
-                         label="操作"
-                         :width="80">
+        <el-table-column slot="wl_type"
+                         label="类型"
+                         :width="100">
           <template slot-scope="scope">
 
-            <span class="link"
-                  @click="linkTo(scope.row.policyID,scope.row.status)"> 详情</span>
+            <span class="wl_type"> {{scope.row.wl_type|filterWlType}}</span>
           </template>
+        </el-table-column>
 
+        <el-table-column slot="os_type"
+                         label="是否国产"
+                         :width="100">
+          <template slot-scope="scope">
+
+            <span class="os_type"> {{scope.row.os_type|filterOsType}} </span>
+          </template>
         </el-table-column>
 
       </my-table>
@@ -101,71 +108,37 @@ export default {
           prop: 'date',
           sortable: false // 是否排序
         },
-
         {
-          label: '策略名称',
-          prop: 'policyName',
+          label: '类型',
+          prop: 'wl_type',
           state: true,
-          isCustom: false,
-          slotName: 'policyName',
+          isCustom: true,
+          slotName: 'wl_type',
           width: 100
         },
         {
-          label: '状态',
-          prop: 'status',
+          label: '系统厂商',
+          prop: 'os_vendor',
           state: true,
           isCustom: false,
-          slotName: 'status',
-          width: 50
-        },
-        // {
-        //   label: 'policyID',
-        //   prop: 'policyID',
-        //   state: true,
-        //   isCustom: false,
-        //   slotName: 'policyID',
-        //   width: 80
-        // },
-        {
-          label: '描述',
-          prop: 'desc',
-          state: true,
-          isCustom: false,
-          slotName: 'desc'
-
+          slotName: 'os_vendor',
+          width: 100
         },
         {
-          label: '修改时间',
-          prop: 'modify_time',
-          state: true,
-          isCustom: false,
-          slotName: 'modify_time',
-          width: 80
-        },
-
-        {
-          label: '类型',
-          prop: 'type',
+          label: '是否国产',
+          prop: 'os_type',
           state: true,
           isCustom: true,
-          slotName: 'type',
-          width: 80
-        },
+          slotName: 'os_type'
 
+        },
         {
-          label: '用户',
-          prop: 'user',
+          label: '系统版本',
+          prop: 'os_version',
           state: true,
           isCustom: false,
-          slotName: 'user',
-          width: 80
-        },
-        {
-          label: '操作',
-          state: true,
-          isCustom: true,
-          slotName: 'link',
-          width: 80
+          slotName: 'os_version'
+
         }
       ]
 

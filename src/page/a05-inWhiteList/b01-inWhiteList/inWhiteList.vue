@@ -52,7 +52,7 @@
                          :width="80">
           <template slot-scope="scope">
             <span class="link"
-                  @click="linkTo(scope.row.wl_type,scope.row.os_vendor)"> 详情</span>
+                  @click="linkTo(scope.row.wl_type,scope.row.os_version)"> 详情</span>
           </template>
 
         </el-table-column>
@@ -143,10 +143,10 @@ export default {
         },
         {
           label: '系统版本',
-          prop: 'os_vendor',
+          prop: 'os_version',
           state: true,
           isCustom: false,
-          slotName: 'os_vendor'
+          slotName: 'os_version'
 
         },
         {
@@ -218,7 +218,7 @@ export default {
     },
     // rowDblclick
     faterRowDblclick (row, column, event) {
-      this.linkTo(row.wl_type, row.os_vendor)
+      this.linkTo(row.wl_type, row.os_version)
       console.log(row, column, event, 99)
     },
     // 双击Row或者点击详情
