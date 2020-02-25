@@ -11,7 +11,7 @@
     <div class='tableWarp'>
       <div class='func'>
         <my-option icon='el-icon-delete-solid'
-                   text='删除'> </my-option>
+                   text='删除' @click.native="deleteData"> </my-option>
         <my-option icon='el-icon-delete-solid'
                    text='追加'> </my-option>
       </div>
@@ -49,13 +49,11 @@ import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
 import {
-
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_ShowWhiteUsbNetList
+  req_ShowPolicyList, req_ShowWhiteUsbNetList, req_delnet
 } from '@/api'
 export default {
   name: 'program',
-
   components: {
     cars, mySearch, myOption, myTable, myPagination
   },
@@ -155,6 +153,32 @@ export default {
   },
 
   methods: {
+    // 删除
+    deleteData () {
+      if (this.selectData.length) {
+        let netlist = []
+        for (let i = 0; i < this.selectData.length; i++) {
+          netlist.push(this.selectData[i].id)
+        }
+        let params = {
+          'cmdlist': [{
+            'cmd': 132361,
+            'ncmd': 'deleteWhitelist',
+            'data': {
+              'policyID': this.initTableParams.policyID,
+              'netlist': netlist
+            }
+          }]
+        }
+        req_delnet(params).then(res => {
+          if (res.results.status) {
+            this.initTable()
+          }
+        })
+      } else {
+
+      }
+    },
     // 获取复选框选中的数据
     chooseData (data) {
       this.selectData = data

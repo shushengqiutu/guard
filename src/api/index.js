@@ -18,7 +18,8 @@ import {
   WORKMODE_URL,
   INWHITELIST_URL,
   INWHITELISTINFO_URL,
-  DISKDIRECTORY_URL
+  DISKDIRECTORY_URL,
+  DELETENET_URL
 }
   from './req_url'
 
@@ -241,4 +242,7 @@ export const req_operatelogquery = (data) => ajax(OPERATELOGQUERY_URL, {
 
 /** *************************************切换工作模式开始 序号44********************************************/
 export const req_workmode = (data) => ajax(WORKMODE_URL, data, 'POST')
+/** *************************************切换工作模式结束********************************************/
+/** *************************************删除当前策略网卡 序号17********************************************/
+export const req_delnet = (data) => ajax(DELETENET_URL, data, 'POST')
 /** *************************************切换工作模式结束********************************************/
