@@ -50,7 +50,7 @@ import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
 import {
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_ShowWhiteUsbNetList, req_delnet
+  req_ShowPolicyList, req_ShowWhiteUsbNetList, req_delCurrentPolicy
 } from '@/api'
 export default {
   name: 'program',
@@ -170,7 +170,7 @@ export default {
             }
           }]
         }
-        req_delnet(params).then(res => {
+        req_delCurrentPolicy(params).then(res => {
           if (res.results.status) {
             this.initTable()
           }
