@@ -35,47 +35,12 @@ export default {
     })
   },
   methods: {
-    /* // 初始化websocket
-    init () {
-      if (typeof (WebSocket) === 'undefined') {
-        alert('您的浏览器不支持socket')
-      } else {
-        // 实例化socket
-        this.socket = new WebSocket('ws://127.0.0.1:8000')
-        // 监听socket连接
-        this.socket.onopen = this.open
-        // 监听socket错误信息
-        this.socket.onerror = this.error
-        // 监听socket消息
-        this.socket.onmessage = this.getMessage
-        // 关闭websocket
-        this.socket.onclose = this.close
-      }
-    },
-    open () {
-      console.log('socket连接成功')
-    },
-    error () {
-      console.log('连接错误')
-    },
-    // 获取从websocket获取的数据
-    getMessage (msg) {
-      let data = JSON.parse(msg.data)
-      localStorage.setItem('websocketObj', JSON.stringify(data))
-      console.log(data)
-    },
-    close () {
-      console.log('关闭websocket')
-    },
-    send () {
-      this.socket.send('发送信息给服务器端')
-    }, */
     localSocket () {
       let that = this
       if ('WebSocket' in window) {
         console.log('您的浏览器支持 WebSocket!')
 
-        that.ws = new WebSocket(`ws://127.0.0.1:8000`)
+        that.ws = new WebSocket(`ws://192.168.43.145:8900`)
         that.global.setWs(that.ws)
         that.ws.onopen = function () {
           console.log('连接建立')
@@ -91,6 +56,38 @@ export default {
       } else {
         // 浏览器不支持 WebSocket
         console.log('您的浏览器不支持 WebSocket!')
+      }
+      that.global.ws.onmessage = function (res) {
+        let receiveData = JSON.parse(res.data)
+        if (receiveData.cmd === 133380) {
+          let resData = receiveData.results
+          let startTime = resData.start_time // 开始时间
+          let operationName = resData.operation_name // 执行对象
+          let eventTypeObj = {
+            10: '进程执行',
+            11: '进程拦截',
+            20: 'USB发现',
+            21: 'USB拦截',
+            30: '网卡发现',
+            31: '网卡禁用',
+            32: '网卡卸载',
+            40: '非法外联检测',
+            41: '非法外联拦截',
+            50: 'BAT执行',
+            51: 'BAT阻止',
+            60: 'VBS执行',
+            61: 'VBS阻止'
+          }
+          let eventType = eventTypeObj[resData.event_type] // 事件类型
+          that.$notify({
+            title: '安全事件',
+            dangerouslyUseHTMLString: true,
+            message: `<div>开始时间:${startTime}</div>
+                      <div>执行对象:${operationName}</div>
+                      <div>事件类型:${eventType}</div>`,
+            type: 'warning'
+          })
+        }
       }
     },
     // theme 赋值
@@ -125,6 +122,10 @@ export default {
 
 </script>
 <style lang="scss">
+  >>>.el-notification right{
+    color: #D84019 !important;
+    top: 10px !important;
+  }
 html {
   display: flex;
   justify-content: center;
