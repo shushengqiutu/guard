@@ -20,7 +20,9 @@ import {
   INWHITELISTINFO_URL,
   DISKDIRECTORY_URL,
   DELCURRENTPOLICY_URL,
-  DELETEWHITELISTPOLICY_URL
+  DELETEWHITELISTPOLICY_URL,
+  ADDWHITELISTPOLICY_URL,
+  UPDATAWHITELISTPOLICY_URL
 }
   from './req_url'
 
@@ -256,3 +258,11 @@ export const req_deleteWhiteListPolicy = (data) => ajax(DELETEWHITELISTPOLICY_UR
   }]
 }, 'POST')
 /** *************************************删除当前策略********************************************/
+
+/** *************************************创建白名单策略 序号10********************************************/
+export const req_addWhiteList = (data) => ajax(ADDWHITELISTPOLICY_URL, data, 'POST')
+/** *************************************删除当前策略网卡********************************************/
+
+/** *************************************修改白名单策略 序号10********************************************/
+export const req_updataWhiteList = (data) => ajax(UPDATAWHITELISTPOLICY_URL, data, 'POST')
+/** *************************************删除当前策略网卡********************************************/

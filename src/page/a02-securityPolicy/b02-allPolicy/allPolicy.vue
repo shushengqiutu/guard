@@ -13,8 +13,8 @@
         <my-option icon='el-icon-delete-solid'
                    @click.native="deletetPolicy"
                    text='删除'> </my-option>
-        <my-option icon='el-icon-delete-solid'
-                   text='追加'> </my-option>
+        <my-option icon='el-icon-plus'
+                   text='添加' @click.native="add"> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -38,8 +38,9 @@
 
             <span class="link"
                   @click="linkTo(scope.row.policyID,scope.row.status)"> 详情</span>
+            <span class="link"
+                  @click="edit(scope.row)">编辑</span>
           </template>
-
         </el-table-column>
 
       </my-table>
@@ -53,6 +54,21 @@
                     @paginationChange='paginationChange'>
       </myPagination>
     </div>
+    <el-drawer
+      title="策略名称"
+      :visible.sync="drawer"
+      :wrapperClosable="false"
+    >
+      <el-form ref="form"  label-width="80px" size="mini">
+        <el-form-item label="策略名称">
+          <el-input v-model="policyName"></el-input>
+        </el-form-item>
+        <el-form-item size="large">
+          <el-button type="primary" @click="onSubmit">确定</el-button>
+          <el-button @click="closeDrawer">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-drawer>
   </div>
 
 </template>
@@ -66,7 +82,7 @@ import myPagination from '@/component/pagination/'
 import {
 
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_deleteWhiteListPolicy
+  req_ShowPolicyList, req_deleteWhiteListPolicy, req_addWhiteList, req_updataWhiteList
 } from '@/api'
 export default {
   name: 'allPolicy',
@@ -76,7 +92,10 @@ export default {
   },
   data: function () {
     return {
-      ss: '',
+      drawer: false,
+      actionFlag: '',
+      policyName: '',
+      editPolicyId: '',
       filtersWarpOpen: false,
       tableData: [],
       radioData: {},
@@ -120,14 +139,6 @@ export default {
           slotName: 'status',
           width: 50
         },
-        // {
-        //   label: 'policyID',
-        //   prop: 'policyID',
-        //   state: true,
-        //   isCustom: false,
-        //   slotName: 'policyID',
-        //   width: 80
-        // },
         {
           label: '描述',
           prop: 'desc',
@@ -178,6 +189,63 @@ export default {
   },
 
   methods: {
+    // 编辑
+    edit (val) {
+      this.actionFlag = 'edit'
+      this.drawer = true
+      this.editPolicyId = val.policyID
+      this.policyName = val.policyName
+    },
+    // 提交按钮
+    onSubmit () {
+      if (this.actionFlag === 'add') {
+        let params = {
+          cmdlist: [{
+            cmd: 132363,
+            ncmd: 'CreatePolicy',
+            data: {
+              name: this.policyName
+            }
+          }]
+        }
+        req_addWhiteList(params).then(res => {
+          if (res.results.status) {
+            this.drawer = false
+            this.initTable()
+          } else {
+
+          }
+        })
+      } else {
+        let params = {
+          cmdlist: [{
+            cmd: 132357,
+            ncmd: 'updatePolicy',
+            data: {
+              policyID: this.editPolicyId,
+              name: this.policyName
+            }
+          }]
+        }
+        req_updataWhiteList(params).then(res => {
+          if (res.results.status) {
+            this.drawer = false
+            this.initTable()
+          } else {
+
+          }
+        })
+      }
+    },
+    // 取消
+    closeDrawer () {
+      this.drawer = false
+      this.policyName = ''
+    },
+    add () {
+      this.actionFlag = 'add'
+      this.drawer = true
+    },
     /** *********************************************表格*************************************** */
     // 删除策略
     async deletetPolicy () {
@@ -205,7 +273,6 @@ export default {
     // 获取表格数据
     async getTableData (data) {
       const result = await req_ShowPolicyList(data)
-      console.log(result, 77)
       return result
     },
     // 处理数据

@@ -37,3 +37,7 @@ export const INWHITELISTINFO_URL = `${BASE_URL}/whitelist/category`
 export const DELCURRENTPOLICY_URL = `${BASE_URL}/whitelist/delete`
 // 删除所有策略
 export const DELETEWHITELISTPOLICY_URL = `${BASE_URL}/whitelist/deletePolicy`
+// 新增白名单策略
+export const ADDWHITELISTPOLICY_URL = `${BASE_URL}/whitelist/createPolicy`
+// 修改白名单策略
+export const UPDATAWHITELISTPOLICY_URL = `${BASE_URL}/whitelist/updatePolicy`
