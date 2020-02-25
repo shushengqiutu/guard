@@ -7,15 +7,23 @@
               :height="tableHeight"
               @select="select"
               @select-all="selectAll"
+              @current-change="clickChange"
               @row-dblclick='handelDblclick'>
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
-        <el-table-column v-if="checkBox"
-                         type="selection"
+        <el-table-column type="selection"
                          width="24">
         </el-table-column>
       </template>
-
+      <template v-if="radioBox">
+        <el-table-column label="选择"
+                         width="55">
+          <template slot-scope="scope">
+            <el-radio v-model="tableRadio"
+                      :label="scope.row"><i></i></el-radio>
+          </template>
+        </el-table-column>
+      </template>
       <template v-for="(item,index) in tHead">
 
         <template v-if="item.state">
@@ -49,7 +57,11 @@ export default {
   props: {
     checkBox: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    radioBox: {
+      type: Boolean,
+      default: false
     },
     tHead: {
       type: Array,
@@ -116,13 +128,17 @@ export default {
 
   data () {
     return {
-
+      tableRadio: ''
     }
   },
   mounted () {
 
   },
   methods: {
+    clickChange (row) {
+      this.$emit('changeRadioData', row)
+    },
+
     selectAll (selection) {
       this.$emit('chooseData', selection)
     },

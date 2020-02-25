@@ -35,3 +35,5 @@ export const INWHITELIST_URL = `${BASE_URL}/whitelist/categoryList`
 export const INWHITELISTINFO_URL = `${BASE_URL}/whitelist/category`
 // 删除当前策略网卡
 export const DELCURRENTPOLICY_URL = `${BASE_URL}/whitelist/delete`
+// 删除所有策略
+export const DELETEWHITELISTPOLICY_URL = `${BASE_URL}/whitelist/deletePolicy`

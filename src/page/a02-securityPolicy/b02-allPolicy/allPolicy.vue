@@ -11,6 +11,7 @@
     <div class='tableWarp'>
       <div class='func'>
         <my-option icon='el-icon-delete-solid'
+                   @click.native="deletetPolicy"
                    text='删除'> </my-option>
         <my-option icon='el-icon-delete-solid'
                    text='追加'> </my-option>
@@ -18,7 +19,8 @@
       <my-table :tableData='tableData'
                 :tHead='tHead'
                 :tableHeight="'430'"
-                :checkBox='true'
+                :radioBox='true'
+                @changeRadioData='changeRadioData'
                 :faterRowDblclick='faterRowDblclick'>
         <el-table-column slot="index"
                          type="index"
@@ -64,7 +66,7 @@ import myPagination from '@/component/pagination/'
 import {
 
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList
+  req_ShowPolicyList, req_deleteWhiteListPolicy
 } from '@/api'
 export default {
   name: 'allPolicy',
@@ -77,6 +79,7 @@ export default {
       ss: '',
       filtersWarpOpen: false,
       tableData: [],
+      radioData: {},
       pagination: {
         isShow: true,
         page: 1,
@@ -176,6 +179,22 @@ export default {
 
   methods: {
     /** *********************************************表格*************************************** */
+    // 删除策略
+    async deletetPolicy () {
+      let params = { policyID: this.radioData.policyID }
+      const result = await req_deleteWhiteListPolicy(params)
+
+      if (result.results.status === 'true') {
+        // 删除成功
+        this.initTable()
+      } else {
+        // 删除失败
+      }
+    },
+    // 储存单选数据
+    changeRadioData (row) {
+      this.radioData = row
+    },
     // 表格初始化
     initTable () {
       this.getTableData(this.initTableParams)
