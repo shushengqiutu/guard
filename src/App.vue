@@ -122,10 +122,6 @@ export default {
 
 </script>
 <style lang="scss">
-  >>>.el-notification right{
-    color: #D84019 !important;
-    top: 10px !important;
-  }
 html {
   display: flex;
   justify-content: center;
