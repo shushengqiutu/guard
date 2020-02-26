@@ -1,6 +1,20 @@
 @import './theme1.scss';
 @import './theme2.scss';
-
+.pathSty{
+  width: 320px;
+  height: 100px;
+  border:1px solid rgba(255,255,255,1);
+  border-radius: 1px;
+  overflow: auto;
+}
+.spanSty{
+  background: #880822;
+  margin: 5px;
+  display: table;
+  border-color: #e9e9eb;
+  border-radius: 3px;
+  padding: 3px;
+}
 .test1 {
   background: plum;
   width: 100px;
@@ -10,7 +24,7 @@
 }
 >>>.el-textarea__inner{
   width: 320px;
-  height: 32px;
+  height: 100px;
   border:1px solid rgba(255,255,255,1);
   border-radius: 1px
 }
@@ -61,6 +75,7 @@
 .inputSty{
   display: flex;
   margin-top: 16px;
+  align-items: center;
 }
 .buttonMargin{
   width:87px;

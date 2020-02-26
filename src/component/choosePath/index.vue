@@ -18,7 +18,8 @@
          @node-click="handleNodeClick"
          @check="checkChoose"
        ></el-tree>
-       <el-button @click="startScan">扫描</el-button>
+       <el-button @click="startScan" v-if="!choosePath">扫描</el-button>
+       <el-button @click="addPath" v-if="choosePath">添加</el-button>
      </div>
    </el-drawer>
  </div>
@@ -31,6 +32,10 @@ export default {
   name: 'choosePath',
   props: {
     drawer: {
+      type: Boolean,
+      default: false
+    },
+    choosePath: {
       type: Boolean,
       default: false
     }
@@ -59,6 +64,10 @@ export default {
 
   },
   methods: {
+    // 将选择的数据传递给父级
+    addPath () {
+      this.$emit('selectPath', this.pathArr)
+    },
     // 选择目录扫描
     startScan () {
       let searchObj = {

@@ -80,6 +80,7 @@
 </template>
 <script>
 import choosePath from '@/component/choosePath/'
+import {req_homeStatus} from '@/api'
 export default {
   name: 'user',
   components: {
@@ -91,6 +92,21 @@ export default {
     }
   },
   methods: {
+    // 获取首页状态信息
+    getHomeStatus () {
+      let data = {'cmdlist': [{
+        'cmd': 132373,
+        'ncmd': '首页状态'
+      }]}
+      req_homeStatus(data).then(res => {
+        /* "results": {
+          "status": true,  //执行成功
+            "week_event_count": 214,  //本周安全事件数（读数据库）
+            "day_event_count": 214,  //今日安全事件数（读数据库）
+            "day_threat_count": 15,  //今日威胁事件数（读数据库）
+        } */
+      })
+    },
     changeDrawer (v) {
       this.drawer = v
     },
@@ -104,6 +120,7 @@ export default {
     }
   },
   created () {
+    this.getHomeStatus()
     if (localStorage.getItem('policyId')) {
       this.$router.push({name: 'scaning', params: {scanType: 'all'}})
     }

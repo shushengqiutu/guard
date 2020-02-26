@@ -7,10 +7,14 @@
       完整性目录（当前目录写保护不能写入，不推荐系统盘和网络共享目录）
     </div>
     <div class="text1 inputSty">
-      <div>
-        <el-input type="textarea" v-model="path1"></el-input>
+      <div class="pathSty">
+           <span v-for="(value,index) in  path" :key="index" class="spanSty">
+             <span style="margin-right: 5px">{{value}}</span>
+             <i class="el-icon-circle-close" @click="delPath(index)"></i>
+             <br>
+           </span>
       </div>
-      <div class="buttonMargin">
+      <div class="buttonMargin" @click="drawer=true">
         自定义
       </div>
     </div>
@@ -36,14 +40,23 @@
            :style="noActive"
            @click="resetForm()">取消</div>
     </div>
+    <choose-path :drawer="drawer" :choosePath="choosePath" @selectPath="selectPath" @changeDrawer="changeDrawer">
+    </choose-path>
   </div>
 
 </template>
 <script>
+import choosePath from '@/component/choosePath/'
 export default {
   name: 'dataProtect',
+  components: {
+    choosePath
+  },
   data () {
     return {
+      drawer: false,
+      choosePath: true,
+      path: [],
       okActive: ' background:rgba(255,255,255,0.2)',
       noActive: ' background:rgba(255,255,255,0.2)',
       path1: '',
@@ -51,6 +64,15 @@ export default {
     }
   },
   methods: {
+    delPath (index) {
+      this.path.splice(index, 1)
+    },
+    changeDrawer (v) {
+      this.drawer = v
+    },
+    selectPath (pathArr) {
+      this.path = pathArr
+    },
     submitForm () {
 
     },
