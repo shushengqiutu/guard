@@ -4,20 +4,11 @@
 .top {
   margin-top: 78px;
 }
-
+.marginSty{
+  margin-bottom: 20px;
+}
 .smartWarp {
   width: 740px;
-}
-.margin1{
-  margin-left: 20px;
-  margin-right: 10px;
-}
-.margin2{
-  margin-top: 20px;
-  margin-left: 10px
-}
-.margin3{
-  margin-right: 10px;
 }
 .margin4{
   margin-top: 20px;
@@ -25,22 +16,19 @@
 }
 .headerSty {
   display: flex;
+  justify-content: center;
   padding-top: 83px;
+  text-align: center;
 }
-.leftCont {
-  flex: 5.5;
-  display: flex;
-}
-.rightCont {
-  flex: 4.5;
-  display: flex;
+.flexCont{
+  flex: 1;
 }
 .img1 {
   width: 127px;
   height: 127px;
 }
 .largText {
-  font-size: 26px;
+  font-size: 20px;
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
@@ -50,9 +38,10 @@
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
+  text-align: center;
 }
 .scanCont {
-  margin-top: 95px;
+  margin-top: 50px;
   display: flex;
 }
 .scanAll {

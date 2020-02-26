@@ -43,3 +43,5 @@ export const ADDWHITELISTPOLICY_URL = `${BASE_URL}/whitelist/createPolicy`
 export const UPDATAWHITELISTPOLICY_URL = `${BASE_URL}/whitelist/updatePolicy`
 // 首页状态信息
 export const HOMESTATUS_URL = `${BASE_URL}/home/status`
+// 客户端状态信息
+export const PROGRAMSTATUS_URL = `${BASE_URL}/program/status`

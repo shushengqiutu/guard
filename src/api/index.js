@@ -23,7 +23,8 @@ import {
   DELETEWHITELISTPOLICY_URL,
   ADDWHITELISTPOLICY_URL,
   UPDATAWHITELISTPOLICY_URL,
-  HOMESTATUS_URL
+  HOMESTATUS_URL,
+  PROGRAMSTATUS_URL
 }
   from './req_url'
 
@@ -271,3 +272,7 @@ export const req_updataWhiteList = (data) => ajax(UPDATAWHITELISTPOLICY_URL, dat
 /** *************************************首页状态信息 序号49********************************************/
 export const req_homeStatus = (data) => ajax(HOMESTATUS_URL, data, 'POST')
 /** *************************************首页状态信息********************************************/
+
+/** *************************************卫士客户端状态 序号50********************************************/
+export const req_programStatus = (data) => ajax(PROGRAMSTATUS_URL, data, 'POST')
+/** *************************************卫士客户端状态********************************************/
