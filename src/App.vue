@@ -40,7 +40,7 @@ export default {
       if ('WebSocket' in window) {
         console.log('您的浏览器支持 WebSocket!')
 
-        that.ws = new WebSocket(`ws://192.168.43.145:8900`)
+        that.ws = new WebSocket(`ws://127.0.0.1:8000`)
         that.global.setWs(that.ws)
         that.ws.onopen = function () {
           console.log('连接建立')
