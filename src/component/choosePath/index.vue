@@ -1,33 +1,33 @@
 // 选择本地目录
 <template>
- <div>
-   <el-drawer
-     title="本地目录"
-     :visible.sync="newDrawer"
-     :wrapperClosable="false"
-   >
-     <div style="height: 500px;overflow: auto">
-       <el-tree
-         :props="propsData"
-         :load="loadNode"
-         node-key="id"
-         ref="tree"
-         highlight-current
-         lazy
-         show-checkbox
-         @node-click="handleNodeClick"
-         @check="checkChoose"
-       ></el-tree>
-       <el-button @click="startScan" v-if="!choosePath">扫描</el-button>
-       <el-button @click="addPath" v-if="choosePath">添加</el-button>
-     </div>
-   </el-drawer>
- </div>
+
+  <div>
+    <el-drawer title="本地目录"
+               :visible.sync="newDrawer"
+               :wrapperClosable="false">
+      <div style="height: 500px;overflow: auto">
+        <el-tree :props="propsData"
+                 :load="loadNode"
+                 node-key="id"
+                 ref="tree"
+                 highlight-current
+                 lazy
+                 show-checkbox
+                 @node-click="handleNodeClick"
+                 @check="checkChoose"></el-tree>
+        <el-button @click="startScan"
+                   v-if="!choosePath">扫描</el-button>
+        <el-button @click="addPath"
+                   v-if="choosePath">添加</el-button>
+      </div>
+    </el-drawer>
+  </div>
 
 </template>
 
 <script>
-import {req_diskDirectory} from '@/api'
+// eslint-disable-next-line camelcase
+import { req_diskDirectory, req_scanFile } from '@/api'
 export default {
   name: 'choosePath',
   props: {
@@ -38,6 +38,10 @@ export default {
     choosePath: {
       type: Boolean,
       default: false
+    },
+    policyId: {
+      type: Number
+
     }
   },
   computed: {
@@ -69,15 +73,34 @@ export default {
       this.$emit('selectPath', this.pathArr)
     },
     // 选择目录扫描
+    // 开始扫描
     startScan () {
-      let searchObj = {
-        name: 'scaning',
-        params: {
-          scanType: 'target',
-          path: this.pathArr
-        }
+      // 判断扫描类型
+      let targetType = this.judgeType()
+      // 发送扫描指令
+      if (targetType) {
+      } else {
+        this.sendScan(this.pathArr).then(res => {
+          if (res.policyID) {
+            localStorage.setItem('policyId', res.policyID)
+            this.$router.push({ name: 'scaning' })
+          }
+        })
       }
-      this.$router.push(searchObj)
+    },
+
+    // 判断扫描类型
+    judgeType (type) {
+      if (this.policyId) {
+        return true // 追加
+      } else {
+        return false // 直接扫描
+      }
+    },
+    // 执行扫描函数
+    async sendScan (pathArr) {
+      let result = await req_scanFile({ path: pathArr })
+      return result.results
     },
     // 获取复选框数据
     checkChoose (data1, data2) {
@@ -106,13 +129,15 @@ export default {
     },
     // 异步加载叶子节点数据函数
     getIndex (path, resolve) {
-      let reqParams = {cmdlist: [{
-        'cmd': 132144,
-        'ncmd': '文件目录',
-        'data': {
-          'path': path // 目录，目录为"/"时返回磁盘
-        }
-      }]}
+      let reqParams = {
+        cmdlist: [{
+          'cmd': 132144,
+          'ncmd': '文件目录',
+          'data': {
+            'path': path // 目录，目录为"/"时返回磁盘
+          }
+        }]
+      }
       let resData = []
       req_diskDirectory(reqParams).then(res => {
         if (res.results.file_lists) {
@@ -123,13 +148,15 @@ export default {
     },
     // 首次加载一级节点数据函数
     requestTree (resolve) {
-      let reqParams = {cmdlist: [{
-        'cmd': 132144,
-        'ncmd': '文件目录',
-        'data': {
-          'path': '/' // 目录，目录为"/"时返回磁盘
-        }
-      }]}
+      let reqParams = {
+        cmdlist: [{
+          'cmd': 132144,
+          'ncmd': '文件目录',
+          'data': {
+            'path': '/' // 目录，目录为"/"时返回磁盘
+          }
+        }]
+      }
       let resData = []
       req_diskDirectory(reqParams).then(res => {
         if (res.results.file_lists) {

@@ -71,6 +71,7 @@ export default {
   name: 'user',
   data () {
     return {
+
       socket: '',
       color: 'white',
       policyID: '',
@@ -83,19 +84,19 @@ export default {
     }
   },
   watch: {
+    $route (to, from) {
+      debugger
+      console.log(to, from, 88)
+    },
     scanPath (val, oldVal) {
 
     },
     scanProgress (val, oldVal) {
       // 普通的watch监听
       if (val === 100) {
-        localStorage.removeItem('policyId')
-        let scanResult = {
-          whiteListCount: this.whiteListCount, // 白名单文件数量
-          usbCount: this.usbCount, // USB数量
-          netCount: this.netCount // 网卡数量
-        }
-        this.$router.push({name: 'scanFinish', params: scanResult})
+        this.$router.push({
+          name: 'scanFinish'
+        })
       }
     }
   },
@@ -111,76 +112,62 @@ export default {
         console.log('收到服务器内容', res.data)
       }
     },
-    // 开始扫描
-    startScan () {
-      let that = this
-      if (!localStorage.getItem('policyId')) {
-        let queryObj = this.$route.params
-        let scanPath = []
-        if (queryObj.scanType === 'target') {
-          scanPath = queryObj.path
-        } else {
-          scanPath = ['//']
-        }
-        // 开始扫描
-        req_scanFile({
-          'cmdlist': [{
-            'cmd': 132097,
-            'data': {
-              'path': scanPath
-            },
-            'usb': 1,
-            'net': 1,
-            'ncmd': 'WhileListStartScan'
-          }]
-        }).then(res => {
-          if (res.results.status) {
-            localStorage.setItem('policyId', res.results.policyID)
-            that.policyID = res.results.policyID
-          }
-        })
-      }
+    getPolicyID () {
+      this.policyID = parseInt(localStorage.getItem('policyId'))
     },
     // 停止扫描
     stopScan () {
       this.$confirm({
         type: '提示',
-        msg: '是否停止扫描？',
+        msg: '停止扫描并保存数据？',
         btn: {
-          ok: '确定',
-          no: '取消'
+          ok: '保存',
+          no: '不保存'
         }
-      }).then(() => {
-        this.policyID = parseInt(localStorage.getItem('policyId'))
-        let data = {'cmdlist': [{
-          'cmd': 132098,
-          'ncmd': 'WhiteListStopScan',
-          'data': {
-            'policyID': this.policyID,
-            'issave': false
-          }
-        }]}
-        req_stopScan(data).then(res => {
-          if (res.results.status) {
-            let scanResult = {
-              whiteListCount: this.whiteListCount, // 白名单文件数量
-              usbCount: this.usbCount, // USB数量
-              netCount: this.netCount // 网卡数量
-            }
-            localStorage.removeItem('policyId')
-            this.$router.push({name: 'scanFinish', params: scanResult})
+      }).then((res) => {
+        // req_stopScan(data).then(res => {
+        //   if (res.results.status) {
+        //     let scanResult = {
+        //       whiteListCount: this.whiteListCount, // 白名单文件数量
+        //       usbCount: this.usbCount, // USB数量
+        //       netCount: this.netCount // 网卡数量
+        //     }
+        //     localStorage.removeItem('policyId')
+        //     this.$router.push({ name: 'scanFinish', params: scanResult })
+        //   }
+        // })
+        this.sendStopScan(this.policyID, true).then((res) => {
+          if (res.status) {
+            // 执行成功 进度100% watch监听 保存结果 去完成页面
+            localStorage.setItem('stop', true)
           }
         })
       })
         .catch(() => {
-          console.log('no')
+          this.sendStopScan(this.policyID, false).then((res) => {
+            debugger
+            console.log(res)
+            if (res.status) {
+              // 执行成功 不保存 去首页
+              localStorage.removeItem('policyId')
+              this.$router.push({ name: 'smartExam' })
+            }
+          })
         })
+    },
+    async  sendStopScan (policyID, issave) {
+      let result = await req_stopScan({
+        policyID,
+        issave
+      })
+      return result.results
     },
     // 判断扫描类型
     scanType (data) {
       // 判断扫描类型
       if (data.cmd === 133377) { // 文件扫描
         this.scanPath = data.results.name
+
         this.scanProgress = data.results.progress
         this.whiteListCount = data.results.executor
       } else if (data.cmd === 133378) { // USB扫描
@@ -188,10 +175,44 @@ export default {
       } else if (data.cmd === 133379) { // 网卡扫描
         this.netCount = data.results.total
       }
+    },
+    initPage () {
+      // 后端请求当前有无在扫描任务 如果有判断状态 未完成进入扫描 完成进入完成页面
+      /** ******************************目前前端保存id实现方案开始 后期接口实现更换*****************************/
+      // 获取当前扫描的ID ID存在停在当前页面不做处理
+      let policyId = localStorage.getItem('policyId')
+      // id存在进行状态查询
+      if (policyId) {
+        this.getScanStatus(policyId).then((res) => {
+          if (res) {
+            this.$router.push({ name: 'scanFinish' })
+          }
+
+          console.log(res, 22)
+        })
+      }
+      /** *****************************目前前端保存id实现方案结束********************************************** */
+    },
+    // 获取扫描状态
+    async getScanStatus (id) {
+      let policyID = parseInt(id)
+      let result = await req_scanStatus({ policyID })
+      debugger
+      if (result.results.progress === 100) {
+        return true // 扫描中
+      }
     }
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例
+      vm.initPage()
+      console.log(vm, 88)
+    })
+  },
   created () {
-    this.startScan()
+    // this.startScan()
+    this.getPolicyID()
     this.handdleMsg()
   },
   mounted () {

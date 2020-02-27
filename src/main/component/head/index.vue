@@ -8,6 +8,24 @@
           {{$t(`main.menu.${$route.name}`)}}
         </div>
       </template>
+      <!-- 扫描中 -->
+      <template v-if="$route.name==='scaning'">
+        <div class=" info">
+          <i class="el-icon-arrow-left icon"
+             @click="back('scaning','smartExam')"></i>
+          <span class="text"> </span>
+
+        </div>
+      </template>
+      <!-- 扫描完成 -->
+      <template v-if="$route.name==='scanFinish'">
+        <div class=" info">
+          <i class="el-icon-arrow-left icon"
+             @click="back('scanFinish','smartExam')"></i>
+          <span class="text"> </span>
+
+        </div>
+      </template>
       <!-- 策略详情 -->
       <template v-if="$route.name==='policyInfo'">
         <div class="policyInfo info">
@@ -53,6 +71,11 @@
 
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import {
+
+  // eslint-disable-next-line camelcase
+  req_stopScan
+} from '@/api'
 import tabs from '@/component/tabs/'
 
 export default {
@@ -62,6 +85,7 @@ export default {
   },
   data () {
     return {
+      policyID: '',
       subMean: false,
       securityPolicyConfig: {
         routeNameArr: ['securityPolicy', 'creditPolicy', 'allPolicy', 'inWhiteList'],
@@ -113,12 +137,65 @@ export default {
       getLang: 'getLang'
     })
   },
+  created () {
+    this.getPolicyID()
+  },
   methods: {
     ...mapMutations(['change_theme', 'change_lang']),
     linkTo (name) {
       this.$router.push({ name })
     },
+    back (now, to) {
+      if (now === 'scaning') {
+        this.stopScan()
+      }
+      if (now === 'scanFinish') {
+        localStorage.removeItem('policyId')
+        localStorage.removeItem('stop')
 
+        this.$router.push({ name: 'smartExam' })
+      }
+    },
+    getPolicyID () {
+      this.policyID = parseInt(localStorage.getItem('policyId'))
+    },
+    // 停止扫描
+    stopScan () {
+      this.$confirm({
+        type: '提示',
+        msg: '停止扫描并保存数据？',
+        btn: {
+          ok: '保存',
+          no: '不保存'
+        }
+      }).then((res) => {
+        this.sendStopScan(this.policyID, true).then((res) => {
+          if (res.status) {
+            // 执行成功 保存结果 去完成页面
+
+            this.$router.push({ name: 'scanFinish' })
+          }
+        })
+      })
+        .catch(() => {
+          this.sendStopScan(this.policyID, false).then((res) => {
+            debugger
+            console.log(res)
+            if (res.status) {
+              // 执行成功 不保存 去首页
+              localStorage.removeItem('policyId')
+              this.$router.push({ name: 'smartExam' })
+            }
+          })
+        })
+    },
+    async  sendStopScan (policyID, issave) {
+      let result = await req_stopScan({
+        policyID,
+        issave
+      })
+      return result.results
+    },
     switchTheme () {
       // debugger
       this.getTheme === '1' ? this.change_theme({ theme: '2' }) : this.change_theme({ theme: '1' })

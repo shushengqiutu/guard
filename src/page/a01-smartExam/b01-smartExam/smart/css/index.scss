@@ -4,35 +4,43 @@
 .top {
   margin-top: 78px;
 }
-.marginSty{
+
+.marginSty {
   margin-bottom: 20px;
 }
+
 .smartWarp {
   width: 740px;
 }
-.margin4{
+
+.margin4 {
   margin-top: 20px;
   margin-left: 10px
 }
+
 .headerSty {
   display: flex;
   justify-content: center;
   padding-top: 83px;
   text-align: center;
 }
-.flexCont{
+
+.flexCont {
   flex: 1;
 }
+
 .img1 {
   width: 127px;
   height: 127px;
 }
+
 .largText {
   font-size: 20px;
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
 }
+
 .content {
   font-size: 14px;
   font-family: Microsoft YaHei;
@@ -40,10 +48,12 @@
   color: rgba(255, 255, 255, 1);
   text-align: center;
 }
+
 .scanCont {
   margin-top: 50px;
   display: flex;
 }
+
 .scanAll {
   justify-content: center;
   display: flex;
@@ -59,6 +69,7 @@
   color: rgba(195, 58, 35, 1);
   cursor: pointer;
 }
+
 .targetScan {
   height: 55px;
   width: 96px;
@@ -69,9 +80,11 @@
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
 }
+
 .textSty {
   margin: 10px;
 }
+
 .endSty {
   display: flex;
   justify-content: flex-end;
@@ -82,18 +95,21 @@
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
 }
+
 .img3 {
   width: 48px;
 
   height: 48px;
   cursor: pointer;
 }
+
 .avgFlex {
   display: flex;
   flex: 6;
   justify-content: center;
   text-align: center;
 }
+
 .ItemFlex {
   flex: 1;
 }

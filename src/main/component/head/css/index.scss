@@ -37,6 +37,21 @@
 
     }
 
+    .back {
+      height: 39px;
+      padding-left: 10px;
+      display: flex;
+
+      .icon {
+        width: 15px;
+        height: 39px;
+        line-height: 39px;
+        padding-right: 10px;
+      }
+
+
+    }
+
     .policyInfo::after {
       content: "";
       position: absolute;

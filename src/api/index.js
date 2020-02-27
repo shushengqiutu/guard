@@ -167,11 +167,42 @@ export const req_InwhitelistInfo = (data) => ajax(INWHITELISTINFO_URL, {
 /** *************************************查看内置白名单详情结束********************************/
 
 /** *************************************文件扫描接口开始 序号02********************************************/
-export const req_scanFile = (data) => ajax(SCANWHITELIST_URL, data, 'POST')
+// let params = {
+//   "cmd": 0x00020401,
+//   "ncmd": "WhileListStartScan",
+//   "data": {
+//     "policyID":
+//       可选参数，若传值则按照添加白名单逻辑处理
+//             * "path": ["d:\\", "c:\\program files"]
+//           }
+// }
+export const req_scanFile = (data) => ajax(SCANWHITELIST_URL, {
+  cmdlist: [{
+    cmd: 0x00020401,
+    ncmd: 'WhileListStartScan',
+    data: data
+  }]
+}, 'POST')
+
+// export const req_scanFile = (data) => ajax(SCANWHITELIST_URL, data, 'POST')
 /** *************************************文件扫描接口结束********************************************/
 
 /** *************************************文件扫描停止接口开始 序号03  ********************************************/
-export const req_stopScan = (data) => ajax(STOPSCAN_URL, data, 'POST')
+// let params = {
+//   "cmd": 0x00020402,
+//   "ncmd": "WhiteListStopScan"
+//  "data": {
+//     "policyID": 1,  //策略ID        "issave": false    是否保存已扫描的数据，默认不保存
+//   }
+// }
+
+export const req_stopScan = (data) => ajax(STOPSCAN_URL, {
+  cmdlist: [{
+    cmd: 0x00020402,
+    ncmd: 'WhiteListStopScan',
+    data: data
+  }]
+}, 'POST')
 /** *************************************文件扫描停止接口结束********************************************/
 
 /** *************************************获取磁盘目录结构 序号54  ********************************************/
@@ -179,7 +210,26 @@ export const req_diskDirectory = (data) => ajax(DISKDIRECTORY_URL, data, 'POST')
 /** *************************************获取磁盘目录结构********************************************/
 
 /** *************************************查询扫描任务状态接口开始 序号05********************************************/
-export const req_scanStatus = (data) => ajax(SCANSTATUS_URL, data, 'POST')
+// let Params = {
+//   cmdlist: [{
+//     cmd:  0x00020406,
+//     ncmd: '"whileListScanStatus',
+//     data:
+//     {
+//       policyID: 1,
+
+//
+//       }
+//     }
+//   }]
+// }
+export const req_scanStatus = (data) => ajax(SCANSTATUS_URL, {
+  cmdlist: [{
+    cmd: 0x00020406,
+    ncmd: 'whileListScanStatus',
+    data: data
+  }]
+}, 'POST')
 /** *************************************查询扫描任务状态接口结束  ********************************************/
 
 /** *************************************审计事件开始序号35********************************************/

@@ -2,34 +2,41 @@
   <div class="scanFinish">
     <div class="headerSty margin1">
       <div class="img1">
-        <img class="img1" src="@/assets/img/public/完成@2x.png"/>
+        <img class="img1"
+             src="@/assets/img/public/完成@2x.png" />
       </div>
     </div>
     <div class="headerSty margin2">
       <div class="scanText">
-        扫描完成
+        扫描<span v-if="!text">完成</span><span v-if="text">中止</span>
       </div>
     </div>
     <div class="contentSty margin3">
       <div class="flexImg">
-        <img class="img2" src="@/assets/img/public/应用程序@2x.png"/>
+        <img class="img2"
+             src="@/assets/img/public/应用程序@2x.png" />
       </div>
       <div class="flexImg">
-        <img class="img2" src="@/assets/img/public/网口@2x.png"/>
+        <img class="img2"
+             src="@/assets/img/public/网口@2x.png" />
       </div>
       <div class="flexImg">
-        <img class="img2" src="@/assets/img/public/USB@2x.png"/>
+        <img class="img2"
+             src="@/assets/img/public/USB@2x.png" />
       </div>
     </div>
     <div class="contentSty contText baseText margin4">
       <div class="flexImg">
-        <img class="iconSty" src="@/assets/img/public/组 18@2x.png"/>扫描系统应用程序
+        <img class="iconSty"
+             src="@/assets/img/public/组 18@2x.png" />扫描系统应用程序
       </div>
       <div class="flexImg">
-        <img class="iconSty" src="@/assets/img/public/组 18@2x.png"/>扫描网卡
+        <img class="iconSty"
+             src="@/assets/img/public/组 18@2x.png" />扫描网卡
       </div>
       <div class="flexImg">
-        <img class="iconSty" src="@/assets/img/public/组 18@2x.png"/>扫描USB
+        <img class="iconSty"
+             src="@/assets/img/public/组 18@2x.png" />扫描USB
       </div>
     </div>
     <div class="contentSty resultText baseText">
@@ -44,23 +51,59 @@
       </div>
     </div>
     <div class="endSty">
-      <div class="searchDetail">
+      <div class="searchDetail"
+           @click="linkTo">
         查看详情
       </div>
     </div>
   </div>
 </template>
 <script>
+import {
+  // eslint-disable-next-line camelcase
+  req_scanStatus
+} from '@/api'
 export default {
   name: 'scanFinish',
   data () {
     return {
-      scanResult: {}
+      text: false,
+      scanResult: {
+        whiteListCount: 0, // 白名单文件数量
+        usbCount: 0, // USB数量
+        netCount: 0 // 网卡数量
+      }
     }
   },
   created () {
-    this.scanResult = this.$route.params
+    this.getScanStatus()
+    this.$nextTick(() => {
+      let stop = localStorage.getItem('stop')
+      if (stop) {
+        this.text = stop
+      }
+    })
+  },
+  methods: {
+    // 双击Row或者点击详情
+    linkTo () {
+      let policyID = parseInt(localStorage.getItem('policyId'))
+      this.$router.push({
+        name: 'policyInfo',
+        query: {
+          policyID: policyID
+        }
+      })
+      localStorage.removeItem('policyId')
+    },
+    // 获取扫描状态
+    async getScanStatus () {
+      let policyID = parseInt(localStorage.getItem('policyId'))
+      let result = await req_scanStatus({ policyID })
+      this.scanResult.whiteListCount = result.results.executor
+    }
   }
+
 }
 </script>
 <style lang='scss'  scoped>

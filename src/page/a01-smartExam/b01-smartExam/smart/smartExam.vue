@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 <template>
   <div class="smartWarp">
     <div class="headerSty">
@@ -50,22 +51,28 @@
     </div>
     <div class="scanCont">
       <div class="scanAll"
-           @click="jumpRouter({name:'scaning',params:{scanType:'all'}})">
+           @click="startAllScan">
         全盘扫描
       </div>
       <div class="targetScan">
-        <span style=" cursor: pointer;" @click="chooseFile">
+        <span style=" cursor: pointer;"
+              @click="chooseFile">
           指定目录扫描
         </span>
       </div>
     </div>
-    <choose-path :drawer="drawer" @changeDrawer="changeDrawer">
+    <choose-path :drawer="drawer"
+                 @changeDrawer="changeDrawer">
     </choose-path>
   </div>
 </template>
 <script>
 import choosePath from '@/component/choosePath/'
-import {req_homeStatus, req_programStatus} from '@/api'
+import {
+  // eslint-disable-next-line camelcase
+  req_homeStatus, req_programStatus, req_scanFile, req_scanStatus
+} from '@/api'
+
 export default {
   name: 'user',
   components: {
@@ -73,6 +80,8 @@ export default {
   },
   data () {
     return {
+      show: false,
+      loading: false,
       drawer: false,
       programObj: {
         day: '',
@@ -92,13 +101,16 @@ export default {
       }
     }
   },
+
   methods: {
     // 获取首页状态信息
     getHomeStatus () {
-      let data = {'cmdlist': [{
-        'cmd': 132373,
-        'ncmd': '首页状态'
-      }]}
+      let data = {
+        'cmdlist': [{
+          'cmd': 132373,
+          'ncmd': '首页状态'
+        }]
+      }
       req_homeStatus(data).then(res => {
         if (res.results.status) {
           this.homeObj.weekCount = res.results.week_event_count // 本周安全事件数
@@ -109,10 +121,12 @@ export default {
     },
     // 获取客户端状态信息
     getProgramStatus () {
-      let data = {'cmdlist': [{
-        'cmd': 132400,
-        'ncmd': '客户端状态'
-      }]}
+      let data = {
+        'cmdlist': [{
+          'cmd': 132400,
+          'ncmd': '客户端状态'
+        }]
+      }
       req_programStatus(data).then(res => {
         if (res.results.status) {
           let resultData = res.results
@@ -127,11 +141,58 @@ export default {
         }
       })
     },
+    // 进入首页进行页面路由选择
+    initPage () {
+      // 后端请求当前有无在扫描任务 如果有判断状态 未完成进入扫描 完成进入完成页面
+      /** ******************************目前前端保存id实现方案开始 后期接口实现更换*****************************/
+      // 获取当前扫描的ID ID存在停在当前页面不做处理
+      let policyId = localStorage.getItem('policyId')
+      // id存在进行状态查询
+      if (policyId) {
+        // this.loading = true
+        // this.getScanStatus(policyId).then((res) => {
+        //   if (res) {
+        //     this.$router.push({ name: 'scaning' })
+        //   }
+        //   this.loading = false
+        //   console.log(res, 22)
+        // })
+        this.$router.push({ name: 'scaning' })
+      } else {
+        this.show = true
+      }
+      /** *****************************目前前端保存id实现方案结束********************************************** */
+    },
+    // 获取扫描状态
+    async getScanStatus (id) {
+      let policyID = parseInt(id)
+      let result = await req_scanStatus({ policyID })
+      if (result.results.progress >= 0) {
+        return true // 扫描中
+      }
+    },
+    // 全盘扫描
+    async  startAllScan () {
+      // 检查是否有正在扫描任务 后期添加
+      let scanPath = ['//']
+      this.sendScan(scanPath).then(res => {
+        if (res.policyID) {
+          localStorage.setItem('policyId', res.policyID)
+          this.$router.push({ name: 'scaning' })
+        }
+      })
+    },
+    // 执行扫描函数
+    async sendScan (pathArr) {
+      let result = await req_scanFile({ path: pathArr })
+      return result.results
+    },
     changeDrawer (v) {
       this.drawer = v
     },
     // 打开树形结构,选择指定目录
     chooseFile () {
+      // 检查是否有正在扫描任务 后期添加
       this.drawer = true
     },
     // 跳转到下一个扫描中页面
@@ -139,12 +200,17 @@ export default {
       this.$router.push(searchObj)
     }
   },
+
   created () {
     this.getHomeStatus()
     this.getProgramStatus()
-    if (localStorage.getItem('policyId')) {
-      this.$router.push({name: 'scaning', params: {scanType: 'all'}})
-    }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      // 通过 `vm` 访问组件实例
+      vm.initPage()
+      console.log(vm, 88)
+    })
   }
 }
 </script>
