@@ -131,7 +131,7 @@ html {
 body {
    width: 920px;
   height: 600px;
-  background:linear-gradient(152deg,rgba(201,75,75,1) 0%,rgba(75,19,79,1) 100%);
+  background:linear-gradient(152deg,#232526 0%,#414345 100%);
 }
 #app {
   width: 920px;
