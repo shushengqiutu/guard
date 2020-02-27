@@ -30,7 +30,8 @@
           </div>
           <div class="textSty">当前策略:{{programObj.policy}}</div>
           <div class="textSty">系统服务：{{programObj.sysStatus}}</div>
-          <div class="textSty">集群服务：{{programObj.ip}}</div>
+          <div class="textSty">集群服务：{{programObj.clusterStatus}}</div>
+          <div class="textSty">集群地址：{{programObj.itm}}</div>
         </div>
       </div>
       <div class="flexCont">
@@ -92,7 +93,8 @@ export default {
         policy: '',
         sysStatus: '',
         ip: '',
-        clusterStatus: null
+        clusterStatus: null,
+        itm: ''
       },
       homeObj: {
         weekCount: 0,
@@ -130,7 +132,7 @@ export default {
       req_programStatus(data).then(res => {
         if (res.results.status) {
           let resultData = res.results
-          this.programObj.day = (resultData.start_time / 3600).toFixed(2) // 返回服务启动经过时间
+          this.programObj.day = (resultData.start_time / 86400).toFixed(2) // 返回服务启动经过时间
           this.programObj.appStatus = resultData.app_def ? '运行' : '停止' // 应用防护（0-停止，1-运行）
           this.programObj.peripherals = resultData.peripheral_def ? '运行' : '停止' // 外设防护（0-停止，1-运行）
           this.programObj.net = resultData.net_def ? '运行' : '停止' // 网络防护（0-停止，1-运行）
@@ -138,6 +140,7 @@ export default {
           this.programObj.sysStatus = resultData.drive ? '正常' : '异常' // 驱动运行状态，检测是否正常
           this.programObj.policy = resultData.policy_name // 当前策略
           this.programObj.clusterStatus = resultData.cluster_service ? '正常' : '异常' // 集群服务
+          this.programObj.itm = resultData.itm
         }
       })
     },
