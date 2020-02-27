@@ -10,10 +10,10 @@
     </div>
     <div class='tableWarp'>
       <div class='func'>
-        <my-option icon='el-icon-delete-solid'
+        <my-option icon='icon iconfont iconshanchu2'
                    @click.native="deletetPolicy"
                    text='删除'> </my-option>
-        <my-option icon='el-icon-plus'
+        <my-option icon='icon iconfont iconxinzeng'
                    text='添加' @click.native="add"> </my-option>
       </div>
       <my-table :tableData='tableData'

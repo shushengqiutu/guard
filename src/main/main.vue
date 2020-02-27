@@ -9,9 +9,7 @@
       </div>
       <div class="user">
         <div class="userInfo">
-          <img class="userImg"
-               src="@/assets/img/public/person.png"
-               alt="">
+          <i class="icon iconfont icongerenzhongxin1"></i>
           <div class=" logoinWarp"
                @mouseenter="operationShow=true"
                @mouseleave="setOperationShow">
