@@ -19,6 +19,8 @@ import theConfirm from './component/comfirm/comfirm.js'
 import { Notification } from 'element-ui'
 // 引入阿里矢量图标
 import '@/assets/font/iconfont.css'
+// 引入思源字体
+import '@/assets/font/fontcss.css'
 // 引入websocket
 import global from './global.js'
 /* eslint-disable no-new */
