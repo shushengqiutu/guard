@@ -18,12 +18,8 @@
             <el-menu-item v-if="item.children&&item.singleTag&&!item.hidden"
                           :key="item.path"
                           :index="item.redirect">
-              <i :class="item.icon" v-if="$t(`main.menu.${item.children[0].name}`) === '智能扫描'"
-                 class="icon iconfont iconzhinenghua marginSty"></i>
-              <i :class="item.icon" v-if="$t(`main.menu.${item.children[0].name}`) === '安全策略'"
-                 class="icon iconfont iconwangluoguanli marginSty"></i>
-              <i :class="item.icon" v-if="$t(`main.menu.${item.children[0].name}`) === '审计事件'"
-                 class="icon iconfont iconshenji marginSty"></i>
+              <i :class="item.icon"
+                 class="menuIcon"></i>
               <span slot="title">{{$t(`main.menu.${item.children[0].name}`)}}</span>
             </el-menu-item>
             <!-- 需要显示子菜单 -->

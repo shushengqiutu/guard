@@ -3,10 +3,8 @@
     <el-submenu :index="datas.path">
       <template slot="title">
 
-        <i :class="datas.icon" v-if="$t(`main.menu.${datas.redirect}`) === '策略中心'"
-           class="icon iconfont iconshenji marginSty"></i>
-        <i :class="datas.icon" v-if="$t(`main.menu.${datas.redirect}`) === '系统中心'"
-           class="icon iconfont iconxitongpeizhi marginSty"></i>
+        <i :class="datas.icon"
+           class="menuIcon"></i>
         <span slot="title">{{$t(`main.menu.${datas.redirect}`)}}</span>
       </template>
 
@@ -15,7 +13,7 @@
                     :key="datas.path+'/'+item.path">
         <span slot="title"> {{$t(`main.menu.${item.name}`)}} </span>
       </el-menu-item>
-<!-- {{$t(`main.menu.${datas.path+'/'+item.path}`)}} -->
+      <!-- {{$t(`main.menu.${datas.path+'/'+item.path}`)}} -->
     </el-submenu>
   </div>
 </template>
@@ -38,7 +36,7 @@ export default {
 .title {
   color: #fff;
 }
-  .marginSty{
-    margin-right: 5px;
-  }
+.marginSty {
+  margin-right: 5px;
+}
 </style>
