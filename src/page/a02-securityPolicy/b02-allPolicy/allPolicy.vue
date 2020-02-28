@@ -14,7 +14,8 @@
                    @click.native="deletetPolicy"
                    text='删除'> </my-option>
         <my-option icon='icon iconfont iconxinzeng'
-                   text='添加' @click.native="add"> </my-option>
+                   text='添加'
+                   @click.native="add"> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -54,17 +55,18 @@
                     @paginationChange='paginationChange'>
       </myPagination>
     </div>
-    <el-drawer
-      title="策略名称"
-      :visible.sync="drawer"
-      :wrapperClosable="false"
-    >
-      <el-form ref="form"  label-width="80px" size="mini">
+    <el-drawer title="策略名称"
+               :visible.sync="drawer"
+               :wrapperClosable="false">
+      <el-form ref="form"
+               label-width="80px"
+               size="mini">
         <el-form-item label="策略名称">
           <el-input v-model="policyName"></el-input>
         </el-form-item>
         <el-form-item size="large">
-          <el-button type="primary" @click="onSubmit">确定</el-button>
+          <el-button type="primary"
+                     @click="onSubmit">确定</el-button>
           <el-button @click="closeDrawer">取消</el-button>
         </el-form-item>
       </el-form>
@@ -108,8 +110,8 @@ export default {
       },
       initTableParams: {
         page: 0, // 第几页 0为第一页
-        size: 10, // 每页记录数，可选参数
-        type: ''
+        size: 10 // 每页记录数，可选参数
+        // type: ''
       },
       tHead: [
         {

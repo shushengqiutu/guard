@@ -13,8 +13,13 @@
         <my-option icon='icon iconfont iconshanchu2'
                    text='删除'
                    @click.native="deleteData"> </my-option>
+
         <my-option icon='icon iconfont iconxinzeng'
-                   text='追加'> </my-option>
+                   text='追加目录'
+                   @click.native='addList'> </my-option>
+        <my-option icon='icon iconfont iconxinzeng'
+                   text='追加文件'
+                   @click.native='addFlie'> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -40,6 +45,15 @@
                     @paginationChange='paginationChange'>
       </myPagination>
     </div>
+    <choose-path :drawer="listDrawer"
+                 @changeDrawer="changeDrawer"
+                 :policyID="initTableParams.policyID">
+    </choose-path>
+    <add-flie :drawer="flieDrawer"
+              :type='1'
+              :policyID="initTableParams.policyID "
+              @changeFlieDrawer="changeFlieDrawer">
+    </add-flie>
   </div>
 
 </template>
@@ -49,20 +63,24 @@ import mySearch from '@/component/search/'
 import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
+import choosePath from '@/component/choosePath/'
+import addFlie from '@/component/addFlie/'
 import {
 
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_ShowWhiteList, req_delCurrentPolicy
+  req_ShowPolicyList, req_ShowWhiteList, req_delCurrentPolicy, req_scanStatus
 } from '@/api'
 export default {
   name: 'program',
 
   components: {
-    cars, mySearch, myOption, myTable, myPagination
+    cars, mySearch, myOption, myTable, myPagination, choosePath, addFlie
   },
   data: function () {
     return {
       selectData: [],
+      listDrawer: false,
+      flieDrawer: false,
       filtersWarpOpen: false,
       tableData: [],
       pagination: {
@@ -160,6 +178,52 @@ export default {
   },
 
   methods: {
+    // 追加目录
+    addList () {
+      this.getScanStatus().then(res => {
+        if (res) {
+          this.clearPolicyID()
+          this.listDrawer = true
+        } else {
+          this.$confirm({
+            type: '提示',
+            msg: '当前有扫描任务正在进行中，请等待本次扫描结束，或前往智能扫描关闭后再追加',
+            btn: {
+              ok: '确定',
+              no: '取消'
+            }
+          })
+        }
+      })
+    },
+    // 有policyId 就删除
+    clearPolicyID () {
+      let policyID = parseInt(localStorage.getItem('policyId'))
+      if (policyID) {
+        localStorage.removeItem('policyId')
+      }
+    },
+    // 获取扫描状态
+    async getScanStatus (id) {
+      let policyID = parseInt(localStorage.getItem('policyId'))
+      if (policyID) {
+        let result = await req_scanStatus({ policyID })
+        if (result.results.progres === 100) {
+          return true // 扫描完成
+        } else {
+          return false // 有任务正在扫描
+        }
+      } else {
+        // 没有任务扫描
+        return new Promise(resolve => {
+          resolve(true)
+        })
+      }
+    },
+    // 追加文件
+    addFlie () {
+      this.flieDrawer = true
+    },
     // 删除
     deleteData () {
       if (this.selectData.length) {
@@ -255,6 +319,12 @@ export default {
       }
       this.initTableParams[type] = val
       this.initTable()
+    },
+    changeDrawer (v) {
+      this.drawer = v
+    },
+    changeFlieDrawer (v) {
+      this.flieDrawer = v
     },
     /** *********************************************日期选择*************************************** */
     paramsChange (type, val) {

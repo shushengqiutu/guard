@@ -191,7 +191,7 @@ export default {
     // 判断路由是否携带 policyID
     getRouterPolicyID () {
       let policyID = this.$route.query.policyID
-      debugger
+
       console.log(policyID, this.$route)
       if (policyID === 0 || policyID) {
         this.initTableParams.policyID = parseInt(policyID)

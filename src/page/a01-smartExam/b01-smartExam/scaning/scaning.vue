@@ -63,9 +63,8 @@
 </template>
 <script>
 import {
-  req_scanFile,
-  req_stopScan,
-  req_scanStatus
+  // eslint-disable-next-line camelcase
+  req_stopScan, req_scanStatus
 } from '@/api'
 export default {
   name: 'user',
@@ -85,7 +84,6 @@ export default {
   },
   watch: {
     $route (to, from) {
-      debugger
       console.log(to, from, 88)
     },
     scanPath (val, oldVal) {
@@ -145,7 +143,6 @@ export default {
       })
         .catch(() => {
           this.sendStopScan(this.policyID, false).then((res) => {
-            debugger
             console.log(res)
             if (res.status) {
               // 执行成功 不保存 去首页
@@ -197,7 +194,7 @@ export default {
     async getScanStatus (id) {
       let policyID = parseInt(id)
       let result = await req_scanStatus({ policyID })
-      debugger
+
       if (result.results.progress === 100) {
         return true // 扫描中
       }

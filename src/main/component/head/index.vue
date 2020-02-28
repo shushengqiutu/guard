@@ -179,7 +179,6 @@ export default {
       })
         .catch(() => {
           this.sendStopScan(this.policyID, false).then((res) => {
-            debugger
             console.log(res)
             if (res.status) {
               // 执行成功 不保存 去首页
