@@ -30,7 +30,6 @@ export default {
     changeblur () {
       if (this.content) {
         this.active = true
-        debugger
       } else {
         this.active = false
       }

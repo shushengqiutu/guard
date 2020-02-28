@@ -24,7 +24,8 @@ import {
   ADDWHITELISTPOLICY_URL,
   UPDATAWHITELISTPOLICY_URL,
   HOMESTATUS_URL,
-  PROGRAMSTATUS_URL
+  PROGRAMSTATUS_URL,
+  ADDWHILELIST_URL
 }
   from './req_url'
 
@@ -166,7 +167,7 @@ export const req_InwhitelistInfo = (data) => ajax(INWHITELISTINFO_URL, {
 }, 'POST')
 /** *************************************查看内置白名单详情结束********************************/
 
-/** *************************************文件扫描接口开始 序号02********************************************/
+/** *************************************文件扫描接口 追加目录开始 序号02********************************************/
 // let params = {
 //   "cmd": 0x00020401,
 //   "ncmd": "WhileListStartScan",
@@ -186,6 +187,39 @@ export const req_scanFile = (data) => ajax(SCANWHITELIST_URL, {
 
 // export const req_scanFile = (data) => ajax(SCANWHITELIST_URL, data, 'POST')
 /** *************************************文件扫描接口结束********************************************/
+/** *************************************追加白名单文件开始********************************************/
+// let params = {
+//   "cmd": 0x0002050c,
+//   "ncmd": "addWhileList",
+//   "data": {
+//     "policyID": 1, 策略ID
+//     "type": 1  白名单类型：1文件、2usb、3网卡
+//       "files": [{//可以是多个文件
+//       "name": "c:\\windows\\123.exe",
+//       "md5": "1c2b3bd3322ddffee",  //MD5值，可选参数
+//       "desc": "文件描述"  //可选参数
+//     }],
+//     "usb": [{
+//       "name": "usb名称",
+//       "hardware_id": "硬件id",
+//       "desc": "描述"
+//     }]
+//       "net": [{
+//       "name": "网卡名称",
+//       "status": "网卡状态",
+//       "desc": "网卡描述"
+//     }]
+//   }
+// }
+export const req_addWhileList = (data) => ajax(ADDWHILELIST_URL, {
+  cmdlist: [{
+    cmd: 0x0002050c,
+    ncmd: 'addWhileList',
+    data: data
+  }]
+}, 'POST')
+
+/** *************************************追加白名单文件结束********************************************/
 
 /** *************************************文件扫描停止接口开始 序号03  ********************************************/
 // let params = {

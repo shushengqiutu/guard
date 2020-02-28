@@ -187,7 +187,10 @@ export default {
     },
     // 执行扫描函数
     async sendScan (pathArr) {
-      let result = await req_scanFile({ path: pathArr })
+      let result = await req_scanFile({
+        path: pathArr
+
+      })
       return result.results
     },
     changeDrawer (v) {

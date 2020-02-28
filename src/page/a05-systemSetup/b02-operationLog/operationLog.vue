@@ -194,7 +194,6 @@ export default {
     /** *********************************************日期选择*************************************** */
     paramsChange (type, val) {
       // 日期时间
-      debugger
       if (type === 'time') {
         if (val) {
           this.initTableParams.start_time = val[0]

@@ -11,7 +11,8 @@
     <div class='tableWarp'>
       <div class='func'>
         <my-option icon='icon iconfont iconshanchu2'
-                   text='删除' @click.native="deleteData"> </my-option>
+                   text='删除'
+                   @click.native="deleteData"> </my-option>
         <my-option icon='icon iconfont iconxinzeng'
                    text='追加'> </my-option>
       </div>
@@ -202,7 +203,7 @@ export default {
     // 判断路由是否携带 policyID
     getRouterPolicyID () {
       let policyID = this.$route.query.policyID
-      debugger
+
       console.log(policyID, this.$route)
       if (policyID === 0 || policyID) {
         this.initTableParams.policyID = parseInt(policyID)

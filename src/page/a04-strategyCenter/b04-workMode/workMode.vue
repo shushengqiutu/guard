@@ -1,23 +1,22 @@
 <template>
   <div class="workmode">
-    <open-one
-      :firstObj="firstObj"
-      :secondObj="secondObj"
-      :title="title"
-      @changeFirstStatus="protectMode"
-      @changeSecondStatus="auditMode"
-    ></open-one>
+    <open-one :firstObj="firstObj"
+              :secondObj="secondObj"
+              :title="title"
+              @changeFirstStatus="protectMode"
+              @changeSecondStatus="auditMode"></open-one>
     <show-tipmsg :tipmsg="tipmsg">
     </show-tipmsg>
   </div>
 </template>
 <script>
-import {req_workmode} from '@/api'
+// eslint-disable-next-line camelcase
+import { req_workmode } from '@/api'
 import openOne from '@/component/openOne/index.vue'
 import protectImgUrl from '@/assets/img/public/审计@2x(2).png'
 import auditImgUrl from '@/assets/img/public/图层 13 拷贝@2x.png'
 import showTipmsg from '@/component/showTipmsg/'
-import {workModeTip} from '@/component/showTipmsg/lang/zh-module.js'
+import { workModeTip } from '@/component/showTipmsg/lang/zh-module.js'
 export default {
   name: 'workMode',
   components: {
@@ -85,5 +84,5 @@ export default {
 }
 </script>
 <style lang='scss'  scoped>
-  @import "./css/index.scss";
+@import "./css/index.scss";
 </style>
