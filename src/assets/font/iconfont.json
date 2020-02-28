@@ -1,0 +1,142 @@
+{
+  "id": "1646319",
+  "name": "工业卫士",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11761185",
+      "name": "检查",
+      "font_class": "jiancha",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "4982152",
+      "name": "新增",
+      "font_class": "xinzeng",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "11277701",
+      "name": "关闭",
+      "font_class": "guanbi1",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "5474546",
+      "name": "帮助",
+      "font_class": "bangzhu",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "13091452",
+      "name": "USB",
+      "font_class": "USB",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "13091453",
+      "name": "网口",
+      "font_class": "wangkou",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "13091454",
+      "name": "白名单_1",
+      "font_class": "baimingdan_",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "13090623",
+      "name": "缩小",
+      "font_class": "suoxiao",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "13090624",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "13090625",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "3249841",
+      "name": "用户应用态势-01",
+      "font_class": "yonghuyingyongtaishi-",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "3542027",
+      "name": "审计",
+      "font_class": "shenji",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "3542032",
+      "name": "智能化",
+      "font_class": "zhinenghua",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "3773275",
+      "name": "系统配置",
+      "font_class": "xitongpeizhi",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "4029522",
+      "name": "网络管理",
+      "font_class": "wangluoguanli",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "11272193",
+      "name": "个人中心",
+      "font_class": "gerenzhongxin1",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "11288629",
+      "name": "修改",
+      "font_class": "xiugai",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "11288630",
+      "name": "删除",
+      "font_class": "shanchu2",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "11303360",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    }
+  ]
+}
