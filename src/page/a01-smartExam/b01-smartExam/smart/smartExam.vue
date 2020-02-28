@@ -44,8 +44,8 @@
           <div class="textSty marginSty">
             威胁回溯分析
           </div>
-          <div class="textSty">今日安全:{{homeObj.weekCount}}条</div>
-          <div class="textSty">本周安全：{{homeObj.dayEventCount}}</div>
+          <div class="textSty">今日安全:{{homeObj.dayEventCount}}条</div>
+          <div class="textSty">本周安全：{{homeObj.weekCount}}</div>
           <div class="textSty">今日威胁：{{homeObj.dayThreatCount}}次</div>
         </div>
       </div>

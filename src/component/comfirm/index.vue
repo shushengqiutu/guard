@@ -1,23 +1,29 @@
 <template>
-  <div class="comfirm"
-       v-if="isShow">
-    <div class="tipSty">
-      {{text.type}}
-    </div>
-    <div class="tipText">
-      {{text.msg}}
-    </div>
-    <div class="btn">
-      <div class="okSty"
-           @mouseover="mouseOverOk"
-           @mouseleave="mouseLeaveOk"
-           :style="okActive"
-           @click="ok()">{{text.btn.ok}}</div>
-      <div class="okSty"
-           @mouseover="mouseOverNo"
-           @mouseleave="mouseLeaveNo"
-           :style="noActive"
-           @click="close()">{{text.btn.no}}</div>
+  <div  v-if="isShow" class="maskdiv">
+    <div class="comfirm">
+      <div style="display: flex">
+        <div class="tipSty">
+          {{text.type}}
+        </div>
+        <div class="closeIcon">
+         <i class="icon iconfont iconguanbi" @click="close()"></i>
+        </div>
+      </div>
+      <div class="tipText">
+        {{text.msg}}
+      </div>
+      <div class="btn">
+        <div class="okSty"
+             @mouseover="mouseOverOk"
+             @mouseleave="mouseLeaveOk"
+             :style="okActive"
+             @click="ok()">{{text.btn.ok}}</div>
+        <div class="okSty"
+             @mouseover="mouseOverNo"
+             @mouseleave="mouseLeaveNo"
+             :style="noActive"
+             @click="close()">{{text.btn.no}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -40,10 +46,10 @@ export default {
   },
   methods: {
     close () {
-      console.log('关闭')
+      this.isShow = false
     },
     ok () {
-      console.log('确定')
+      this.isShow = false
     },
     mouseOverOk () {
       this.okActive = 'background:red;color: rgba(255,255,255,1)'
@@ -64,6 +70,18 @@ export default {
 </script>
 <style lang='scss' scoped>
 @import "./css/index.scss";
+.maskdiv{
+  width: 920px;
+  height: 600px;
+  background:rgba(0, 0, 0, 0.5);
+  margin-top: -300px;
+  margin-left: -460px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -300px;
+  margin-left: -460px;
+}
 .comfirm {
   z-index: 9999;
   width: 415px;
@@ -111,4 +129,8 @@ export default {
   font-weight: 400;
   border-radius: 3px;
 }
+  .closeIcon{
+    padding-top: 10px;
+    padding-right: 10px;
+  }
 </style>
