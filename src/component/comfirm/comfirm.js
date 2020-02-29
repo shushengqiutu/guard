@@ -16,7 +16,6 @@ let theConfirm = function (text) {
       confirmDom.isShow = false
     }
     confirmDom.close = function (cb) {
-      alert(cb)
       reject(cb)
       confirmDom.isShow = false
     }
