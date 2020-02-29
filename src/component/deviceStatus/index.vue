@@ -57,6 +57,12 @@ export default {
       openStatus: this.status
     }
   },
+  watch: {
+    status (newVal, oldVal) {
+      this.status = newVal
+      this.openStatus = newVal
+    }
+  },
   methods: {
     changeStatus (status) {
       this.$emit('func', status)

@@ -23,7 +23,7 @@
      </div>
     <div class="text1 inputSty">
       <div>
-        <el-input v-model="path2"></el-input>
+        <el-input v-model="fileType"></el-input>
       </div>
       <div class="buttonMargin">
        自定义
@@ -47,6 +47,8 @@
 </template>
 <script>
 import choosePath from '@/component/choosePath/'
+// eslint-disable-next-line
+import {req_sysConfig,req_getConfig} from '@/api'
 export default {
   name: 'dataProtect',
   components: {
@@ -59,11 +61,33 @@ export default {
       path: [],
       okActive: ' background:rgba(255,255,255,0.2)',
       noActive: ' background:rgba(255,255,255,0.2)',
-      path1: '',
-      path2: ''
+      fileType: ''
     }
   },
   methods: {
+    // 获取系统参数配置
+    getConfig () {
+      let key = ['except_app_type', 'dir_def']
+      for (let i = 0; i < key.length; i++) {
+        let params = {
+          cmdlist: [{
+            'cmd': 132372,
+            'ncmd': 'getSystemConfig',
+            'data': {
+              'key': key[i] // 根据key获取配置值
+            }
+          }]
+        }
+        req_getConfig(params).then(res => {
+          if (res.results.config.key === 'except_app_type') {
+            this.fileType = res.results.config.value
+          } else {
+            this.path = res.results.config.value.split(';')
+          }
+        })
+      }
+    },
+    // 完整性目录中的删除功能
     delPath (index) {
       this.path.splice(index, 1)
     },
@@ -74,7 +98,31 @@ export default {
       this.path = pathArr
     },
     submitForm () {
+      let fileTypeitem = {
+        'key': 'except_app_type',
+        'value': this.fileType
+      }
+      let pathItem = {
+        'key': 'dir_def',
+        'value': this.path.join(';')
+      }
+      let data = []
+      data.push(pathItem)
+      data.push(fileTypeitem)
+      let params = {
+        cmdlist: [{
+          'cmd': 132374,
+          'ncmd': 'setSystemConfig',
+          data: {
+            params: data
+          }
+        }]
+      }
+      req_sysConfig(params).then(res => {
+        if (res.results.status) {
 
+        }
+      })
     },
     resetForm () {
 
@@ -93,6 +141,9 @@ export default {
     mouseLeaveNo () {
       this.noActive = ' background:rgba(255,255,255,0.2)'
     }
+  },
+  created () {
+    this.getConfig()
   }
 }
 </script>

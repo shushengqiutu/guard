@@ -25,7 +25,9 @@ import {
   UPDATAWHITELISTPOLICY_URL,
   HOMESTATUS_URL,
   PROGRAMSTATUS_URL,
-  ADDWHILELIST_URL
+  ADDWHILELIST_URL,
+  SYSCONFIG_URL,
+  GETCONFIG_URL
 }
   from './req_url'
 
@@ -360,3 +362,11 @@ export const req_homeStatus = (data) => ajax(HOMESTATUS_URL, data, 'POST')
 /** *************************************卫士客户端状态 序号50********************************************/
 export const req_programStatus = (data) => ajax(PROGRAMSTATUS_URL, data, 'POST')
 /** *************************************卫士客户端状态********************************************/
+
+/** *************************************下发系统参数配置 序号30.2********************************************/
+export const req_sysConfig = (data) => ajax(SYSCONFIG_URL, data, 'POST')
+/** *************************************下发系统参数配置********************************************/
+
+/** *************************************获取系统参数配置接口 序号30.1********************************************/
+export const req_getConfig = (data) => ajax(GETCONFIG_URL, data, 'POST')
+/** *************************************获取系统参数配置接口********************************************/

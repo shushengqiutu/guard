@@ -47,3 +47,7 @@ export const HOMESTATUS_URL = `${BASE_URL}/home/status`
 export const PROGRAMSTATUS_URL = `${BASE_URL}/program/status`
 // 追加白名单文件
 export const ADDWHILELIST_URL = `${BASE_URL}/whitelist/addDir`
+// 下发系统参数配置
+export const SYSCONFIG_URL = `${BASE_URL}/system/systemconfig`
+// 获取系统参数配置接口
+export const GETCONFIG_URL = `${BASE_URL}/system/systemconfigbykey`
