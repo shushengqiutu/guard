@@ -131,7 +131,13 @@ export default {
         params.net = itemArr
       }
       this.sendAddFlie(params).then(res => {
-        console.log(res)
+        if (res.results.status) {
+          this.newDrawer = false
+          this.$msg({
+            message: '追加成功',
+            type: 'success'
+          })
+        }
       })
     },
     addFlieSrc () {
@@ -140,7 +146,7 @@ export default {
     // 添加文件函数
     async sendAddFlie (data) {
       let result = req_addWhileList(data)
-      return result.results
+      return result
     },
     // 获取文件名
     getFiles (src) {

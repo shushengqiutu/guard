@@ -60,3 +60,8 @@ Vue.use(DatePicker, { size: 'small', zIndex: 3000 })
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)
 Vue.component(CollapseTransition.name, CollapseTransition)
+Vue.prototype.$message = Message
+Vue.prototype.$msg = function (data) {
+  data.duration = 2000
+  this.$message(data)
+}

@@ -143,7 +143,7 @@ export default {
       } else {
         if (data2.checkedKeys.length > 0) {
           this.$refs.tree.setCheckedNodes([data1])
-
+          debugger
           this.pathArr = data1.path
         }
       }
@@ -197,8 +197,12 @@ export default {
           }
 
           resData = fiterList.map(item => {
-            item.path = scanPath + item.name
+            if (scanPath.substr(scanPath.length - 1, 1) === '\\') {
+              scanPath = scanPath.slice(0, scanPath.length - 1)
+            }
 
+            item.path = scanPath + '\\' + item.name
+            console.log(item)
             return item
           })
         }

@@ -3,22 +3,22 @@
     <div class='operation'>
 
       <div class='search'>
+        <!-- 搜索占时不启用 -->
+        <!-- <my-search @paramsChange='paramsChange'> </my-search> -->
 
-        <my-search @paramsChange='paramsChange'> </my-search>
       </div>
 
     </div>
     <div class='tableWarp'>
       <div class='func'>
-        <my-option icon='icon iconfont iconshanchu2'
-                   text='删除'> </my-option>
+        <!-- <my-option icon='icon iconfont iconshanchu2'
+                   text='删除'> </my-option> -->
         <my-option icon='icon iconfont iconxinzeng'
-                   text='追加'> </my-option>
+                   text='添加'> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
                 :tableHeight="'430'"
-                :checkBox='true'
                 :faterRowDblclick='faterRowDblclick'>
         <el-table-column slot="index"
                          type="index"

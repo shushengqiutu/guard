@@ -3,8 +3,8 @@
     <div class='operation'>
 
       <div class='search'>
-
-        <my-search @paramsChange='paramsChange'> </my-search>
+        <!-- 占时不支持搜索 -->
+        <!-- <my-search @paramsChange='paramsChange'> </my-search> -->
       </div>
 
     </div>
@@ -14,7 +14,7 @@
                    text='删除'
                    @click.native="deleteData"> </my-option>
         <my-option icon='icon iconfont iconxinzeng'
-                   text='追加'> </my-option>
+                   text='追加网卡'> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -100,7 +100,7 @@ export default {
         {
           label: '状态',
           prop: 'status',
-          state: true,
+          state: false,
           isCustom: false,
           slotName: 'file',
           width: 150

@@ -3,7 +3,6 @@
     <div class='operation'>
 
       <div class='search'>
-
         <my-search @paramsChange='paramsChange'> </my-search>
       </div>
 

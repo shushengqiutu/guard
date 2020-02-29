@@ -78,11 +78,11 @@ export default {
   },
   data: function () {
     return {
-      selectData: [],
-      listDrawer: false,
-      flieDrawer: false,
-      filtersWarpOpen: false,
-      tableData: [],
+      selectData: [], // 保存复选对象
+      listDrawer: false, // 追加目录弹窗
+      flieDrawer: false, // 追加问价弹窗
+      tableData: [], // 表格数据
+      // 分页参数
       pagination: {
         isShow: true,
         page: 1,
@@ -90,6 +90,7 @@ export default {
         pageSizesArr: [10, 20, 30, 40, 50], // 可选分页
         total: null // 总数据默认条数
       },
+      // 渲染表格参数
       initTableParams: {
         page: 0,
         size: 10,
@@ -100,6 +101,7 @@ export default {
         }
 
       },
+      // 配置表格渲染字段
       tHead: [
         {
           label: '序号', // 表头
@@ -178,53 +180,7 @@ export default {
   },
 
   methods: {
-    // 追加目录
-    addList () {
-      this.getScanStatus().then(res => {
-        if (res) {
-          this.clearPolicyID()
-          this.listDrawer = true
-        } else {
-          this.$confirm({
-            type: '提示',
-            msg: '当前有扫描任务正在进行中，请等待本次扫描结束，或前往智能扫描关闭后再追加',
-            btn: {
-              ok: '确定',
-              no: '取消'
-            }
-          })
-        }
-      })
-    },
-    // 有policyId 就删除
-    clearPolicyID () {
-      let policyID = parseInt(localStorage.getItem('policyId'))
-      if (policyID) {
-        localStorage.removeItem('policyId')
-      }
-    },
-    // 获取扫描状态
-    async getScanStatus (id) {
-      let policyID = parseInt(localStorage.getItem('policyId'))
-      if (policyID) {
-        let result = await req_scanStatus({ policyID })
-        if (result.results.progres === 100) {
-          return true // 扫描完成
-        } else {
-          return false // 有任务正在扫描
-        }
-      } else {
-        // 没有任务扫描
-        return new Promise(resolve => {
-          resolve(true)
-        })
-      }
-    },
-    // 追加文件
-    addFlie () {
-      this.flieDrawer = true
-    },
-    // 删除
+    /** *************************************** 删除************************************/
     deleteData () {
       if (this.selectData.length) {
         let filelist = []
@@ -254,22 +210,63 @@ export default {
     chooseData (data) {
       this.selectData = data
     },
-    // 第一次初始化数据
-    firstInintTable () {
-      // 有id
-      let result = this.getRouterPolicyID()
-      if (result) {
-        this.initTable()
+
+    /** *************************************** 追加目录************************************/
+    addList () {
+      this.getScanStatus().then(res => {
+        if (res) {
+          this.clearPolicyID()
+          this.listDrawer = true
+        } else {
+          this.$confirm({
+            type: '提示',
+            msg: '当前有扫描任务正在进行中，请等待本次扫描结束，或前往智能扫描关闭后再追加',
+            btn: {
+              ok: '确定',
+              no: '取消'
+            }
+          })
+        }
+      })
+    },
+    // 获取扫描状态
+    async getScanStatus (id) {
+      let policyID = parseInt(localStorage.getItem('policyId'))
+      if (policyID) {
+        let result = await req_scanStatus({ policyID })
+        if (result.results.progres === 100) {
+          return true // 扫描完成
+        } else {
+          return false // 有任务正在扫描
+        }
       } else {
-        // 没有策略id 显示详情页
-        this.getpolicyID().then(policyID => {
-          if (policyID) {
-            this.initTable()
-          }
+        // 没有任务扫描
+        return new Promise(resolve => {
+          resolve(true)
         })
       }
     },
-    // 判断路由是否携带 policyID
+    changeDrawer (v) {
+      this.listDrawer = v
+    },
+    // 有policyId 就删除
+    clearPolicyID () {
+      let policyID = parseInt(localStorage.getItem('policyId'))
+      if (policyID) {
+        localStorage.removeItem('policyId')
+      }
+    },
+    /** ***************************************追加文件************************************/
+    // 追加文件
+    addFlie () {
+      this.flieDrawer = true
+    },
+    changeFlieDrawer (v) {
+      this.flieDrawer = v
+    },
+
+    /** *********************************************根据路由加载数据*************************************** */
+    // 判断路由是否携带 policyID 路由有根据policyID加载数据
     getRouterPolicyID () {
       let policyID = this.$route.query.policyID
       console.log(policyID, this.$route)
@@ -280,7 +277,7 @@ export default {
         return false
       }
     },
-    // 获取策略Id
+    // 没有policyID则默认为当前策略 获取当前策略policyID加载数据
     async getpolicyID () {
       const result = await req_ShowPolicyList({
         page: 0, // 第几页 0为第一页
@@ -295,8 +292,23 @@ export default {
       }
     },
 
-    /** *********************************************表格*************************************** */
-    // 表格初始化
+    /** *********************************************表格初始化*************************************** */
+    // 根据有无policyID选择加载当前策略还是其他策略数据方案
+    firstInintTable () {
+      // policyID
+      let result = this.getRouterPolicyID()
+      if (result) {
+        this.initTable()
+      } else {
+        // 没有策略id
+        this.getpolicyID().then(policyID => {
+          if (policyID) {
+            this.initTable()
+          }
+        })
+      }
+    },
+    // 表格初始化主函数
     initTable () {
       this.getTableData(this.initTableParams)
         .then(res => {
@@ -306,30 +318,17 @@ export default {
     // 获取表格数据
     async getTableData (data) {
       const result = await req_ShowWhiteList(data)
-      console.log(result, 77)
       return result
     },
-    // 处理数据
+    // 处理表格数据
     setTableData (data, total) {
       this.tableData = data
       this.pagination.total = total
     },
-    paginationChange (type, val) {
-      if (type === 'page') {
-        val = val - 1
-      }
-      this.initTableParams[type] = val
-      this.initTable()
-    },
-    changeDrawer (v) {
-      this.drawer = v
-    },
-    changeFlieDrawer (v) {
-      this.flieDrawer = v
-    },
-    /** *********************************************日期选择*************************************** */
+
+    /** *********************************************搜索功能*************************************** */
+    // 搜索主函数
     paramsChange (type, val) {
-      // 搜索
       if (type === 'key') {
         if (val) {
           this.initTableParams.params[type] = val
@@ -340,6 +339,7 @@ export default {
 
       this.paramsChangeTableInit()
     },
+    // 重新渲染分页
     paramsChangeTableInit () {
       this.pagination.page = 1
       this.pagination.size = 10
@@ -350,7 +350,16 @@ export default {
       this.$nextTick(() => { // 重新渲染分页
         this.pagination.isShow = true
       })
+    },
+    /** *******************************************分页数据改变*************************************** */
+    paginationChange (type, val) {
+      if (type === 'page') {
+        val = val - 1
+      }
+      this.initTableParams[type] = val
+      this.initTable()
     }
+
   }
 }
 </script>
