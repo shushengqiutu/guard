@@ -11,7 +11,7 @@
 </template>
 <script>
 // eslint-disable-next-line camelcase
-import { req_workmode } from '@/api'
+import { req_workmode, req_programStatus} from '@/api'
 import openOne from '@/component/openOne/index.vue'
 import protectImgUrl from '@/assets/img/public/审计@2x(2).png'
 import auditImgUrl from '@/assets/img/public/图层 13 拷贝@2x.png'
@@ -29,7 +29,7 @@ export default {
       title: '工作模式',
       firstObj: {
         imgUrl: protectImgUrl,
-        status: true,
+        status: false,
         name: '保护模式'
       },
       secondObj: {
@@ -40,6 +40,26 @@ export default {
     }
   },
   methods: {
+    // 获取客户端状态信息
+    getProgramStatus () {
+      let data = {
+        'cmdlist': [{
+          'cmd': 132400,
+          'ncmd': '客户端状态'
+        }]
+      }
+      req_programStatus(data).then(res => {
+        if (res.results.status) {
+          if (res.results.work_mode === 1) {
+            this.firstObj.status = true // 当前工作模式（ 0 审计，1 保护）
+            this.secondObj.status = false
+          } else {
+            this.firstObj.status = false
+            this.secondObj.status = true
+          }
+        }
+      })
+    },
     // 保护模式
     protectMode (val) {
       if (!val) {
@@ -49,7 +69,7 @@ export default {
             'cmd': 132865,
             'ncmd': 'SwitchOperatingMode',
             'data': {
-              'mode': 0 // 0 审计，1保护
+              'mode': 0 // 0 审计，1 保护
             }
           }]
         }
@@ -69,7 +89,7 @@ export default {
             'cmd': 132865,
             'ncmd': 'SwitchOperatingMode',
             'data': {
-              'mode': 1 // 0 审计，1保护
+              'mode': 1 // 0 保护，1 审计
             }
           }]
         }
@@ -80,6 +100,9 @@ export default {
         })
       }
     }
+  },
+  created () {
+    this.getProgramStatus()
   }
 }
 </script>
