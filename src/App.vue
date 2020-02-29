@@ -7,6 +7,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+let config = require('./../config') // 引入配置文件信息
 export default {
   name: 'App',
   data: function () {
@@ -18,10 +19,6 @@ export default {
   },
   created () {
     this.localSocket()
-    // this.$http.get('/user/login').then(res => {
-    //   console.log(res, 113333331)
-    // })
-
     // 主题参数赋值
     this.setTheme()
     // 语言参数 lang 赋值
@@ -39,8 +36,8 @@ export default {
       let that = this
       if ('WebSocket' in window) {
         console.log('您的浏览器支持 WebSocket!')
-
-        that.ws = new WebSocket(`ws://127.0.0.1:8000`)
+        let serverIp = config.dev.proxyTable['/api']['target'].split('//')[1] // 从配置文件中获取的服务器地址
+        that.ws = new WebSocket(`ws://` + serverIp)
         that.global.setWs(that.ws)
         that.ws.onopen = function () {
           console.log('连接建立')
