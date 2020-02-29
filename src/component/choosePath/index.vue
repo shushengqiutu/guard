@@ -197,7 +197,7 @@ export default {
           }
 
           resData = fiterList.map(item => {
-            item.path = scanPath + '/' + item.name
+            item.path = scanPath + item.name
 
             return item
           })

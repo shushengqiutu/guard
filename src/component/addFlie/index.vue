@@ -104,7 +104,9 @@ export default {
 
       // 数据处理
       // 文件地址转数组去空
-      let filesArr = this.form.name.split(/[(\r\n)\r\n]+/).filter(item => item !== '')
+      console.log(this.form.name, 99)
+      let filesArr = this.form.name.split(/[\r\n]+/).filter(item => item !== '')
+
       // 去重
       let setFilesArr = new Set(filesArr)
       let itemArr = []
@@ -150,6 +152,12 @@ export default {
     },
     changeDrawer (v) {
       this.listDrawer = v
+    }
+  },
+  watch: {
+    policyID (id) {
+      this.form.policyID = id
+      console.log(id, 99)
     }
   }
 

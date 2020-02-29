@@ -93,8 +93,8 @@ export default {
       initTableParams: {
         page: 0,
         size: 10,
-        policyID: 0,
-        type: 3,
+        policyID: 2,
+        type: 1,
         params: {
 
         }
@@ -256,10 +256,12 @@ export default {
     },
     // 第一次初始化数据
     firstInintTable () {
+      // 有id
       let result = this.getRouterPolicyID()
       if (result) {
         this.initTable()
       } else {
+        // 没有策略id 显示详情页
         this.getpolicyID().then(policyID => {
           if (policyID) {
             this.initTable()
@@ -281,11 +283,10 @@ export default {
     // 获取策略Id
     async getpolicyID () {
       const result = await req_ShowPolicyList({
-
         page: 0, // 第几页 0为第一页
         size: 10, // 每页记录数，可选参数
-        status: 1,
-        type: '' // 可选参数 1为当前策略
+        status: 1
+        // type: '' // 可选参数 1为当前策略
       })
       let policyID = result.results.list[0].policyID
       if (policyID) {
