@@ -12,7 +12,7 @@
           <div class="textSty marginSty">
             保护系统安全运行<span class="largText">{{programObj.day}}</span>天
           </div>
-          <div class="textSty">应用防护:{{programObj.appStatus}}</div>
+          <div class="textSty">应用防护：{{programObj.appStatus}}</div>
           <div class="textSty">外设防护：{{programObj.peripherals}}</div>
           <div class="textSty">网络防护：{{programObj.net}}</div>
           <div class="textSty">目录防护：{{programObj.dircetory}}</div>
@@ -24,11 +24,11 @@
                src="@/assets/img/public/策略@2x.png" />
         </div>
         <div class="content">
-          <div><span class="largText">审计模式</span></div>
+          <div><span class="largText">{{programObj.workMode}}</span></div>
           <div class="textSty marginSty">
             消除潜在威胁
           </div>
-          <div class="textSty">当前策略:{{programObj.policy}}</div>
+          <div class="textSty">当前策略：{{programObj.policy}}</div>
           <div class="textSty">系统服务：{{programObj.sysStatus}}</div>
           <div class="textSty">集群服务：{{programObj.clusterStatus}}</div>
           <div class="textSty">集群地址：{{programObj.itm}}</div>
@@ -44,8 +44,8 @@
           <div class="textSty marginSty">
             威胁回溯分析
           </div>
-          <div class="textSty">今日安全:{{homeObj.dayEventCount}}条</div>
-          <div class="textSty">本周安全：{{homeObj.weekCount}}</div>
+          <div class="textSty">今日安全：{{homeObj.dayEventCount}}条</div>
+          <div class="textSty">本周安全：{{homeObj.weekCount}}条</div>
           <div class="textSty">今日威胁：{{homeObj.dayThreatCount}}次</div>
         </div>
       </div>
@@ -94,7 +94,8 @@ export default {
         sysStatus: '',
         ip: '',
         clusterStatus: null,
-        itm: ''
+        itm: '',
+        workMode: ''
       },
       homeObj: {
         weekCount: 0,
@@ -141,6 +142,7 @@ export default {
           this.programObj.policy = resultData.policy_name // 当前策略
           this.programObj.clusterStatus = resultData.cluster_service ? '正常' : '异常' // 集群服务
           this.programObj.itm = resultData.itm
+          this.programObj.workMode = resultData.work_mode === 0 ? '审计模式' : '保护模式'
         }
       })
     },
@@ -152,14 +154,6 @@ export default {
       let policyId = localStorage.getItem('policyId')
       // id存在进行状态查询
       if (policyId) {
-        // this.loading = true
-        // this.getScanStatus(policyId).then((res) => {
-        //   if (res) {
-        //     this.$router.push({ name: 'scaning' })
-        //   }
-        //   this.loading = false
-        //   console.log(res, 22)
-        // })
         this.$router.push({ name: 'scaning' })
       } else {
         this.show = true
