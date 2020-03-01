@@ -13,15 +13,18 @@
         <my-option v-if='btn_delete'
                    icon='icon iconfont iconshanchu2'
                    text='删除'
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    @click.native="deleteData"> </my-option>
 
         <my-option v-if='btn_addDir'
                    icon='icon iconfont iconxinzeng'
                    text='追加目录'
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    @click.native='addList'> </my-option>
         <my-option v-if='btn_addFile'
                    icon='icon iconfont iconxinzeng'
                    text='追加文件'
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    @click.native='addFlie'> </my-option>
       </div>
       <my-table :tableData='tableData'
@@ -113,7 +116,7 @@ export default {
       initTableParams: {
         page: 0,
         size: 10,
-        policyID: 2,
+        policyID: -1,
         type: 1,
         params: {
 
@@ -297,6 +300,8 @@ export default {
       }
     },
     // 没有policyID则默认为当前策略 获取当前策略policyID加载数据
+
+    // 获取当前策略id
     async getpolicyID () {
       const result = await req_ShowPolicyList({
         page: 0, // 第几页 0为第一页
@@ -304,13 +309,13 @@ export default {
         status: 1
         // type: '' // 可选参数 1为当前策略
       })
-      let policyID = result.results.list[0].policyID
-      if (policyID) {
-        this.initTableParams.policyID = policyID
+      if (result.results.list) {
+        let policyID = result.results.list[0].policyID
         return policyID
+      } else {
+        return false
       }
     },
-
     /** *********************************************表格初始化*************************************** */
     // 根据有无policyID选择加载当前策略还是其他策略数据方案
     firstInintTable () {
@@ -322,7 +327,10 @@ export default {
         // 没有策略id
         this.getpolicyID().then(policyID => {
           if (policyID) {
+            this.initTableParams.policyID = parseInt(policyID)
             this.initTable()
+          } else {
+            return false
           }
         })
       }

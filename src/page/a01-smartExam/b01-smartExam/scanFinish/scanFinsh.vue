@@ -85,18 +85,26 @@ export default {
     })
   },
   methods: {
-    // 双击Row或者点击详情
+
     linkTo () {
       let policyID = parseInt(localStorage.getItem('policyId'))
       this.getpolicyID().then(res => {
-        console.log(res, 88)
-        if (policyID === res) {
-          this.$router.push({
-            name: 'securityPolicy',
-            query: {
-              policyID: policyID
-            }
-          })
+        if (res) {
+          if (policyID === res) {
+            this.$router.push({
+              name: 'securityPolicy',
+              query: {
+                policyID: policyID
+              }
+            })
+          } else {
+            this.$router.push({
+              name: 'policyInfo',
+              query: {
+                policyID: policyID
+              }
+            })
+          }
         } else {
           this.$router.push({
             name: 'policyInfo',
@@ -105,7 +113,6 @@ export default {
             }
           })
         }
-        debugger
       })
 
       localStorage.removeItem('policyId')
@@ -118,9 +125,11 @@ export default {
         status: 1
         // type: '' // 可选参数 1为当前策略
       })
-      let policyID = result.results.list[0].policyID
-      if (policyID) {
+      if (result.results.list) {
+        let policyID = result.results.list[0].policyID
         return policyID
+      } else {
+        return false
       }
     },
     // 获取扫描状态

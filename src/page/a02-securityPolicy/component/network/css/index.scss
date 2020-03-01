@@ -35,6 +35,11 @@
       top: -32px;
       display: flex;
 
+      .notClick {
+        pointer-events: none;
+        background: #ccc;
+      }
+
     }
   }
 

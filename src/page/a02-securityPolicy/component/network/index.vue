@@ -13,8 +13,10 @@
         <my-option v-if="btn_delete"
                    icon='icon iconfont iconshanchu2'
                    text='删除'
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    @click.native="deleteData"> </my-option>
         <my-option v-if="btn_addNet"
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    icon='icon iconfont iconxinzeng'
                    text='追加网卡'> </my-option>
       </div>
@@ -88,7 +90,7 @@ export default {
       initTableParams: {
         page: 0,
         size: 10,
-        policyID: 0,
+        policyID: -1,
         type: 3
 
       },
@@ -207,7 +209,10 @@ export default {
       } else {
         this.getpolicyID().then(policyID => {
           if (policyID) {
+            this.initTableParams.policyID = parseInt(policyID)
             this.initTable()
+          } else {
+            return false
           }
         })
       }
@@ -223,22 +228,22 @@ export default {
         return false
       }
     },
-    // 获取策略Id
+
+    // 获取当前策略id
     async getpolicyID () {
       const result = await req_ShowPolicyList({
-
         page: 0, // 第几页 0为第一页
         size: 10, // 每页记录数，可选参数
-        status: 1, // 可选参数 1为当前策略
-        type: ''
+        status: 1
+        // type: '' // 可选参数 1为当前策略
       })
-      let policyID = result.results.list[0].policyID
-      if (policyID) {
-        this.initTableParams.policyID = parseInt(policyID)
-        return parseInt(policyID)
+      if (result.results.list) {
+        let policyID = result.results.list[0].policyID
+        return policyID
+      } else {
+        return false
       }
     },
-
     /** *********************************************表格*************************************** */
     // 表格初始化
     initTable () {

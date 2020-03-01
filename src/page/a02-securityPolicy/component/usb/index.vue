@@ -13,9 +13,11 @@
         <my-option v-if='btn_delete'
                    icon='icon iconfont iconshanchu2'
                    text='删除'
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    @click.native="deleteData"> </my-option>
         <my-option v-if='btn_addUsb'
                    icon='icon iconfont iconxinzeng'
+                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    text='追加USB'> </my-option>
       </div>
       <my-table :tableData='tableData'
@@ -88,7 +90,7 @@ export default {
       initTableParams: {
         page: 0,
         size: 10,
-        policyID: 0,
+        policyID: -1,
         type: 2
 
       },
@@ -207,37 +209,28 @@ export default {
         this.initTable()
       } else {
         this.getpolicyID().then(policyID => {
+          this.initTableParams.policyID = parseInt(policyID)
           if (policyID) {
             this.initTable()
+          } else {
+            return false
           }
         })
       }
     },
-    // 判断路由是否携带 policyID
-    getRouterPolicyID () {
-      let policyID = this.$route.query.policyID
-
-      console.log(policyID, this.$route)
-      if (policyID === 0 || policyID) {
-        this.initTableParams.policyID = parseInt(policyID)
-        return true
-      } else {
-        return false
-      }
-    },
-    // 获取策略Id
+    // 获取当前策略id
     async getpolicyID () {
       const result = await req_ShowPolicyList({
-
         page: 0, // 第几页 0为第一页
         size: 10, // 每页记录数，可选参数
-        status: 1, // 可选参数 1为当前策略
-        type: ''
+        status: 1
+        // type: '' // 可选参数 1为当前策略
       })
-      let policyID = result.results.list[0].policyID
-      if (policyID) {
-        this.initTableParams.policyID = policyID
+      if (result.results.list) {
+        let policyID = result.results.list[0].policyID
         return policyID
+      } else {
+        return false
       }
     },
 
