@@ -27,7 +27,8 @@ import {
   PROGRAMSTATUS_URL,
   ADDWHILELIST_URL,
   SYSCONFIG_URL,
-  GETCONFIG_URL
+  GETCONFIG_URL,
+  DEPLOY_URL
 }
   from './req_url'
 
@@ -370,3 +371,7 @@ export const req_sysConfig = (data) => ajax(SYSCONFIG_URL, data, 'POST')
 /** *************************************获取系统参数配置接口 序号30.1********************************************/
 export const req_getConfig = (data) => ajax(GETCONFIG_URL, data, 'POST')
 /** *************************************获取系统参数配置接口********************************************/
+
+/** *************************************部署白名单策略 序号15********************************************/
+export const req_deploy = (data) => ajax(DEPLOY_URL, data, 'POST')
+/** *************************************部署白名单策略********************************************/

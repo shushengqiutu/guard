@@ -51,3 +51,5 @@ export const ADDWHILELIST_URL = `${BASE_URL}/whitelist/addDir`
 export const SYSCONFIG_URL = `${BASE_URL}/system/systemconfig`
 // 获取系统参数配置接口
 export const GETCONFIG_URL = `${BASE_URL}/system/systemconfigbykey`
+// 部署白名单策略
+export const DEPLOY_URL = `${BASE_URL}/whitelist/deploy`

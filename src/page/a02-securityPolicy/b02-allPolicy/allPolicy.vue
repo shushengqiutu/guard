@@ -41,13 +41,15 @@
 
         <el-table-column slot="link"
                          label="操作"
-                         :width="80">
+                         :width="120">
           <template slot-scope="scope">
 
             <span class="link"
                   @click="linkTo(scope.row.policyID,scope.row.status)"> 详情</span>
             <span class="link"
                   @click="edit(scope.row)">编辑</span>
+            <span class="link"
+                  @click="deploy(scope.row)">部署</span>
           </template>
         </el-table-column>
 
@@ -89,9 +91,8 @@ import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
 import {
-
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_deleteWhiteListPolicy, req_addWhiteList, req_updataWhiteList
+  req_ShowPolicyList, req_deleteWhiteListPolicy, req_addWhiteList, req_updataWhiteList, req_deploy
 } from '@/api'
 export default {
   name: 'allPolicy',
@@ -198,6 +199,21 @@ export default {
   },
 
   methods: {
+    // 策略部署
+    deploy (val) {
+      let params = {
+        cmdlist: [{
+          'cmd': 132359,
+          'ncmd': 'deployPolicy',
+          'data': {
+            'policyID': val.policyID
+          }
+        }]
+      }
+      req_deploy(params).then(res => {
+
+      })
+    },
     // 编辑
     edit (val) {
       this.actionFlag = 'edit'
