@@ -10,10 +10,12 @@
     </div>
     <div class='tableWarp'>
       <div class='func'>
-        <my-option icon='icon iconfont iconshanchu2'
+        <my-option v-if="btn_delete"
+                   icon='icon iconfont iconshanchu2'
                    text='删除'
                    @click.native="deleteData"> </my-option>
-        <my-option icon='icon iconfont iconxinzeng'
+        <my-option v-if="btn_addNet"
+                   icon='icon iconfont iconxinzeng'
                    text='追加网卡'> </my-option>
       </div>
       <my-table :tableData='tableData'
@@ -49,12 +51,25 @@ import mySearch from '@/component/search/'
 import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
+
 import {
   // eslint-disable-next-line camelcase
   req_ShowPolicyList, req_ShowWhiteUsbNetList, req_delCurrentPolicy
 } from '@/api'
 export default {
-  name: 'program',
+  name: 'network',
+  props: {
+    // 是否显示删除按钮
+    btn_delete: {
+      type: Boolean,
+      default: false
+    },
+    // 是否显示追加目录按钮
+    btn_addNet: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     cars, mySearch, myOption, myTable, myPagination
   },

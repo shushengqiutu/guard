@@ -61,7 +61,7 @@
 <script>
 import {
   // eslint-disable-next-line camelcase
-  req_scanStatus
+  req_scanStatus, req_ShowPolicyList
 } from '@/api'
 export default {
   name: 'scanFinish',
@@ -88,13 +88,40 @@ export default {
     // 双击Row或者点击详情
     linkTo () {
       let policyID = parseInt(localStorage.getItem('policyId'))
-      this.$router.push({
-        name: 'policyInfo',
-        query: {
-          policyID: policyID
+      this.getpolicyID().then(res => {
+        console.log(res, 88)
+        if (policyID === res) {
+          this.$router.push({
+            name: 'securityPolicy',
+            query: {
+              policyID: policyID
+            }
+          })
+        } else {
+          this.$router.push({
+            name: 'policyInfo',
+            query: {
+              policyID: policyID
+            }
+          })
         }
+        debugger
       })
+
       localStorage.removeItem('policyId')
+    },
+    // 获取当前策略id
+    async getpolicyID () {
+      const result = await req_ShowPolicyList({
+        page: 0, // 第几页 0为第一页
+        size: 10, // 每页记录数，可选参数
+        status: 1
+        // type: '' // 可选参数 1为当前策略
+      })
+      let policyID = result.results.list[0].policyID
+      if (policyID) {
+        return policyID
+      }
     },
     // 获取扫描状态
     async getScanStatus () {

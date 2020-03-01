@@ -10,10 +10,12 @@
     </div>
     <div class='tableWarp'>
       <div class='func'>
-        <my-option icon='icon iconfont iconshanchu2'
+        <my-option v-if='btn_delete'
+                   icon='icon iconfont iconshanchu2'
                    text='删除'
                    @click.native="deleteData"> </my-option>
-        <my-option icon='icon iconfont iconxinzeng'
+        <my-option v-if='btn_addUsb'
+                   icon='icon iconfont iconxinzeng'
                    text='追加USB'> </my-option>
       </div>
       <my-table :tableData='tableData'
@@ -55,8 +57,19 @@ import {
   req_ShowPolicyList, req_ShowWhiteUsbNetList, req_delCurrentPolicy
 } from '@/api'
 export default {
-  name: 'program',
-
+  name: 'usb',
+  props: {
+    // 是否显示删除按钮
+    btn_delete: {
+      type: Boolean,
+      default: false
+    },
+    // 是否显示追加usb
+    btn_addUsb: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     cars, mySearch, myOption, myTable, myPagination
   },

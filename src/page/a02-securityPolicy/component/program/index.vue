@@ -10,14 +10,17 @@
     </div>
     <div class='tableWarp'>
       <div class='func'>
-        <my-option icon='icon iconfont iconshanchu2'
+        <my-option v-if='btn_delete'
+                   icon='icon iconfont iconshanchu2'
                    text='删除'
                    @click.native="deleteData"> </my-option>
 
-        <my-option icon='icon iconfont iconxinzeng'
+        <my-option v-if='btn_addDir'
+                   icon='icon iconfont iconxinzeng'
                    text='追加目录'
                    @click.native='addList'> </my-option>
-        <my-option icon='icon iconfont iconxinzeng'
+        <my-option v-if='btn_addFile'
+                   icon='icon iconfont iconxinzeng'
                    text='追加文件'
                    @click.native='addFlie'> </my-option>
       </div>
@@ -72,7 +75,23 @@ import {
 } from '@/api'
 export default {
   name: 'program',
-
+  props: {
+    // 是否显示删除按钮
+    btn_delete: {
+      type: Boolean,
+      default: false
+    },
+    // 是否显示追加目录按钮
+    btn_addDir: {
+      type: Boolean,
+      default: false
+    },
+    // 是否显示追加文件按钮
+    btn_addFile: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     cars, mySearch, myOption, myTable, myPagination, choosePath, addFlie
   },

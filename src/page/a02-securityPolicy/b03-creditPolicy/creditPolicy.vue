@@ -8,18 +8,24 @@
 
       <el-collapse-transition>
         <div v-show="defaultOpenTable==='program'">
-          <program></program>
+          <program :btn_delete='true'
+                   :btn_addFile='true'>
+          </program>
         </div>
       </el-collapse-transition>
 
       <el-collapse-transition>
         <div v-show="defaultOpenTable==='usb'">
-          <usb></usb>
+          <usb :btn_delete='true'
+               :btn_addUsb='true'>
+
+          </usb>
         </div>
       </el-collapse-transition>
       <el-collapse-transition>
         <div v-show="defaultOpenTable==='network'">
-          <network></network>
+          <network :btn_delete='true'
+                   :btn_addNet='true'></network>
         </div>
       </el-collapse-transition>
     </div>

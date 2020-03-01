@@ -31,6 +31,13 @@
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
           </template>
         </el-table-column>
+        <el-table-column slot="policyName"
+                         label="策略名称"
+                         :width="100">
+          <template slot-scope="scope">
+            {{scope.row.status===1?'当前策略':scope.row.policyName}}
+          </template>
+        </el-table-column>
 
         <el-table-column slot="link"
                          label="操作"
@@ -129,7 +136,7 @@ export default {
           label: '策略名称',
           prop: 'policyName',
           state: true,
-          isCustom: false,
+          isCustom: true,
           slotName: 'policyName',
           width: 100
         },
@@ -154,8 +161,8 @@ export default {
           prop: 'modify_time',
           state: true,
           isCustom: false,
-          slotName: 'modify_time',
-          width: 80
+          slotName: 'modify_time'
+          // width: 80
         },
 
         {
