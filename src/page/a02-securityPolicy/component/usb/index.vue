@@ -13,12 +13,13 @@
         <my-option v-if='btn_delete'
                    icon='icon iconfont iconshanchu2'
                    text='删除'
-                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
+                   :class="selectData.length ? '' : 'notClick'"
                    @click.native="deleteData"> </my-option>
         <my-option v-if='btn_addUsb'
                    icon='icon iconfont iconxinzeng'
                    :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
-                   text='追加USB'> </my-option>
+                   text='追加USB'
+                   @click.native="addUsb"> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -44,6 +45,11 @@
                     @paginationChange='paginationChange'>
       </myPagination>
     </div>
+    <!-- 追加USB -->
+    <add-usb :usbDrawer="usbDrawer"
+             :policyID="initTableParams.policyID "
+             @changeUsbDrawer="changeUsbDrawer"
+             @isSuccess='isSuccess'></add-usb>
   </div>
 
 </template>
@@ -53,6 +59,7 @@ import mySearch from '@/component/search/'
 import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
+import addUsb from '@/component/addUsb/'
 import {
 
   // eslint-disable-next-line camelcase
@@ -73,10 +80,11 @@ export default {
     }
   },
   components: {
-    cars, mySearch, myOption, myTable, myPagination
+    cars, mySearch, myOption, myTable, myPagination, addUsb
   },
   data: function () {
     return {
+      usbDrawer: false,
       selectData: [],
       filtersWarpOpen: false,
       tableData: [],
@@ -172,9 +180,29 @@ export default {
   },
 
   methods: {
-    // 删除
+    /** ***********************************追加usb***********************************************/
+    addUsb () {
+      this.usbDrawer = true
+    },
+    changeUsbDrawer (v) {
+      this.usbDrawer = v
+    },
+    // 追加USb成功，表格刷新
+    isSuccess (Bool) {
+      if (Bool) {
+        this.initTable()
+      }
+    },
+    /** ***********************************删除***********************************************/
     deleteData () {
-      if (this.selectData.length) {
+      this.$confirm({
+        type: '提示',
+        msg: '你确定要删除选中USB？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
         let usblist = []
         for (let i = 0; i < this.selectData.length; i++) {
           usblist.push(parseInt(this.selectData[i].id))
@@ -192,16 +220,24 @@ export default {
         req_delCurrentPolicy(params).then(res => {
           if (res.results.status) {
             this.initTable()
+            this.$msg({
+              message: '删除成功',
+              type: 'success'
+            })
+          } else {
+            this.$msg({
+              message: '删除失败',
+              type: 'error'
+            })
           }
         })
-      } else {
-
-      }
+      })
     },
     // 获取复选框选中的数据
     chooseData (data) {
       this.selectData = data
     },
+    /** ********************************************************************************** */
     // 第一次初始化数据
     firstInintTable () {
       let result = this.getRouterPolicyID()
@@ -229,6 +265,17 @@ export default {
       if (result.results.list) {
         let policyID = result.results.list[0].policyID
         return policyID
+      } else {
+        return false
+      }
+    },
+    // 判断路由是否携带 policyID 路由有根据policyID加载数据
+    getRouterPolicyID () {
+      let policyID = this.$route.query.policyID
+      console.log(policyID, this.$route)
+      if (policyID === 0 || policyID) {
+        this.initTableParams.policyID = parseInt(policyID)
+        return true
       } else {
         return false
       }

@@ -55,9 +55,20 @@
           </template>
 
         </el-table-column>
+
+        <el-table-column slot="event_type"
+                         prop="event_type"
+                         label="事件类型"
+                         :width="80">
+          <template slot-scope="scope">
+
+            <span>{{scope.row.event_type|filterEventType}}</span>
+          </template>
+
+        </el-table-column>
         <el-table-column slot="tag_status"
                          prop="tag_status"
-                         label="模块类型"
+                         label="用户是否确认"
                          :width="80">
           <template slot-scope="scope">
 
@@ -172,14 +183,21 @@ export default {
         },
 
         {
-          label: '是否确认',
+          label: '用户是否确认',
           prop: 'tag_status',
-          state: true,
+          state: false,
           isCustom: true,
           slotName: 'tag_status',
           width: 80
         },
-
+        {
+          label: '事件类型',
+          prop: 'event_type',
+          state: true,
+          isCustom: true,
+          slotName: 'event_type',
+          width: 80
+        },
         {
           label: '用户',
           prop: 'user',

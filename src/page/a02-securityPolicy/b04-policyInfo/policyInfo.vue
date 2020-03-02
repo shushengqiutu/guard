@@ -2,7 +2,8 @@
 
   <div class="securityPolicy">
     <cars :carsConfig='securityPolicycarsConfig'
-          @getCarId='getCarId'></cars>
+          @getCarId='getCarId'
+          :policyID='policyID'></cars>
 
     <div class="conntent">
 
@@ -10,7 +11,8 @@
         <div v-show="defaultOpenTable==='program'">
           <program :btn_delete='true'
                    :btn_addDir='true'
-                   :btn_addFile='true'>
+                   :btn_addFile='true'
+                   @policyIdchange='policyIdchange'>
           </program>
         </div>
       </el-collapse-transition>
@@ -46,6 +48,7 @@ export default {
   },
   data () {
     return {
+      policyID: -1,
       defaultOpenTable: 'program',
       securityPolicycarsConfig: {
         defaultOpenCarId: 'program',
@@ -73,8 +76,10 @@ export default {
     getCarId (carId) {
       this.defaultOpenTable = carId
       // console.log(carId, 111)
+    },
+    policyIdchange (policyId) {
+      this.policyID = policyId
     }
-
   }
 }
 </script>

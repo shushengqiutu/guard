@@ -34,12 +34,21 @@
       top: -32px;
       display: flex;
 
+
     }
   }
 
 
+  .notClick {
+    pointer-events: none;
+    background: #ccc;
+  }
 
   .myPaginationWarp {
     @include childXRight
   }
+}
+
+.link {
+  cursor: pointer;
 }

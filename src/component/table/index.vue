@@ -7,7 +7,6 @@
               :height="tableHeight"
               @select="select"
               @select-all="selectAll"
-              @current-change="clickChange"
               @row-dblclick='handelDblclick'>
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
@@ -20,6 +19,7 @@
                          width="55">
           <template slot-scope="scope">
             <el-radio v-model="tableRadio"
+                      @change.native="getTemplateRow(scope.row)"
                       :label="scope.row"><i></i></el-radio>
           </template>
         </el-table-column>
@@ -135,7 +135,7 @@ export default {
 
   },
   methods: {
-    clickChange (row) {
+    getTemplateRow (row) {
       this.$emit('changeRadioData', row)
     },
 

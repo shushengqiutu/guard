@@ -13,6 +13,9 @@
 
       </template>
     </div>
+    <div class="policyID">
+      策略ID:{{policyID>=0?policyID:'无'}}
+    </div>
   </div>
 
 </template>
@@ -24,7 +27,12 @@ export default {
     carsConfig: {
       type: Object,
       required: true
+    },
+    policyID: {
+      type: Number,
+      required: true
     }
+
   },
   data () {
     return {

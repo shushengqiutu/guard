@@ -42,6 +42,31 @@ Vue.filter('filterStatus', function (status) {
       return '已上报'
   }
 })
+// 审计事件类型状态 EventType过滤T
+Vue.filter('filterEventType', function (eventType) {
+  let numEventType = parseInt(eventType)
+  switch (numEventType) {
+    case 10:
+      return '进程执行'
+    case 11:
+      return '进程拦截'
+    case 20:
+      return 'USB发现'
+    case 21:
+      return 'USB拦截'
+    case 30:
+      return '网卡发现'
+    case 31:
+      return '网卡禁用'
+    case 32:
+      return '网卡卸载'
+    case 40:
+      return '非法外联检测'
+    case 41:
+      return '非法外联拦截'
+  }
+})
+
 // 内置白名单列表白名单类型  wl_type过滤
 Vue.filter('filterWlType', function (wlType) {
   let numWlType = parseInt(wlType)

@@ -125,17 +125,19 @@ export default {
       let type = this.type
       if (type === 1) {
         params.files = itemArr
-      } else if (type === 2) {
-        params.usb = itemArr
-      } else if (type === 3) {
-        params.net = itemArr
       }
       this.sendAddFlie(params).then(res => {
         if (res.results.status) {
           this.newDrawer = false
+          this.$emit('isSuccess', true)
           this.$msg({
-            message: '追加成功',
+            message: '追加文件成功',
             type: 'success'
+          })
+        } else {
+          this.$msg({
+            message: '追加文件失败',
+            type: 'error'
           })
         }
       })

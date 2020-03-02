@@ -11,7 +11,8 @@
     <div class='tableWarp'>
       <div class='func'>
         <my-option icon='icon iconfont iconshanchu2'
-                   @click.native="deletetPolicy"
+                   @click.native="deleteMain"
+                   :class="radioData.policyID ? '' : 'notClick'"
                    text='删除'> </my-option>
         <my-option icon='icon iconfont iconxinzeng'
                    text='添加'
@@ -49,7 +50,8 @@
             <span class="link"
                   @click="edit(scope.row)">编辑</span>
             <span class="link"
-                  @click="deploy(scope.row)">部署</span>
+                  :class="scope.row.status===1?'notClick':''"
+                  @click="deploy(scope.row)">{{scope.row.status===1?'已部署':'部署'}}</span>
           </template>
         </el-table-column>
 
@@ -199,21 +201,42 @@ export default {
   },
 
   methods: {
-    // 策略部署
+    /** ********************************策略部署**************************************/
     deploy (val) {
-      let params = {
-        cmdlist: [{
-          'cmd': 132359,
-          'ncmd': 'deployPolicy',
-          'data': {
-            'policyID': val.policyID
+      this.$confirm({
+        type: '提示',
+        msg: '你确定要部署当前策略吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
+        let params = {
+          cmdlist: [{
+            'cmd': 132359,
+            'ncmd': 'deployPolicy',
+            'data': {
+              'policyID': val.policyID
+            }
+          }]
+        }
+        req_deploy(params).then(res => {
+          if (res.results.status) {
+            this.initTable()
+            this.$msg({
+              message: '部署成功',
+              type: 'success'
+            })
+          } else {
+            this.$msg({
+              message: '部署失败',
+              type: 'error'
+            })
           }
-        }]
-      }
-      req_deploy(params).then(res => {
-
+        })
       })
     },
+
     // 编辑
     edit (val) {
       this.actionFlag = 'edit'
@@ -229,16 +252,24 @@ export default {
             cmd: 132363,
             ncmd: 'CreatePolicy',
             data: {
-              name: this.policyName
+              name: this.policyName,
+              type: 2 // 用户添加类型
             }
           }]
         }
         req_addWhiteList(params).then(res => {
           if (res.results.status) {
             this.drawer = false
+            this.$msg({
+              message: '添加成功',
+              type: 'success'
+            })
             this.initTable()
           } else {
-
+            this.$msg({
+              message: '添加失败',
+              type: 'error'
+            })
           }
         })
       } else {
@@ -255,9 +286,16 @@ export default {
         req_updataWhiteList(params).then(res => {
           if (res.results.status) {
             this.drawer = false
+            this.$msg({
+              message: '修改成功',
+              type: 'success'
+            })
             this.initTable()
           } else {
-
+            this.$msg({
+              message: '修改失败',
+              type: 'error'
+            })
           }
         })
       }
@@ -271,23 +309,44 @@ export default {
       this.actionFlag = 'add'
       this.drawer = true
     },
-    /** *********************************************表格*************************************** */
+    /** *********************************************删除*************************************** */
     // 删除策略
+    // 储存单选数据
+    changeRadioData (row) {
+      this.radioData = row
+    },
+    deleteMain () {
+      this.$confirm({
+        type: '提示',
+        msg: '你确定要删除选中策略吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
+        this.deletetPolicy()
+      })
+    },
     async deletetPolicy () {
       let params = { policyID: this.radioData.policyID }
       const result = await req_deleteWhiteListPolicy(params)
 
       if (result.results.status === 'true') {
         // 删除成功
+        this.$msg({
+          message: '删除成功',
+          type: 'success'
+        })
         this.initTable()
       } else {
         // 删除失败
+        this.$msg({
+          message: '删除失败',
+          type: 'error'
+        })
       }
     },
-    // 储存单选数据
-    changeRadioData (row) {
-      this.radioData = row
-    },
+    /** *********************************************表格*************************************** */
     // 表格初始化
     initTable () {
       this.getTableData(this.initTableParams)

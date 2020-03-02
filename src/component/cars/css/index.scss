@@ -2,9 +2,12 @@
 @import './theme2.scss';
 
 .multiTable {
+  @include childXBetween;
+  background: rgba(255, 255, 255, 0.1);
+
   .cars {
     height: 32px;
-    background: rgba(255, 255, 255, 0.1);
+
     @include childYCenter;
 
     .line {
@@ -26,6 +29,13 @@
       cursor: pointer;
 
     }
+  }
+
+  .policyID {
+    font-size: 14px;
+    line-height: 32px;
+    margin-right: 10px;
+    color: #fff;
   }
 
 }

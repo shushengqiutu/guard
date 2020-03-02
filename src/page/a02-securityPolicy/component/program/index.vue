@@ -13,7 +13,7 @@
         <my-option v-if='btn_delete'
                    icon='icon iconfont iconshanchu2'
                    text='删除'
-                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
+                   :class="selectData.length ? '' : 'notClick'"
                    @click.native="deleteData"> </my-option>
 
         <my-option v-if='btn_addDir'
@@ -57,6 +57,7 @@
     </choose-path>
     <add-flie :drawer="flieDrawer"
               :type='1'
+              @isSuccess='isSuccess'
               :policyID="initTableParams.policyID "
               @changeFlieDrawer="changeFlieDrawer">
     </add-flie>
@@ -97,6 +98,16 @@ export default {
   },
   components: {
     cars, mySearch, myOption, myTable, myPagination, choosePath, addFlie
+  },
+  computed: {
+    policyID: {
+      get () {
+        return this.initTableParams.policyID
+      },
+      set (v) {
+        this.$emit('policyIdchange', v)
+      }
+    }
   },
   data: function () {
     return {
@@ -203,8 +214,16 @@ export default {
 
   methods: {
     /** *************************************** 删除************************************/
+
     deleteData () {
-      if (this.selectData.length) {
+      this.$confirm({
+        type: '提示',
+        msg: '你确定要删除选中程序？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
         let filelist = []
         for (let i = 0; i < this.selectData.length; i++) {
           filelist.push(this.selectData[i].id)
@@ -222,11 +241,18 @@ export default {
         req_delCurrentPolicy(params).then(res => {
           if (res.results.status) {
             this.initTable()
+            this.$msg({
+              message: '删除成功',
+              type: 'success'
+            })
+          } else {
+            this.$msg({
+              message: '删除失败',
+              type: 'error'
+            })
           }
         })
-      } else {
-
-      }
+      })
     },
     // 获取复选框选中的数据
     chooseData (data) {
@@ -234,6 +260,7 @@ export default {
     },
 
     /** *************************************** 追加目录************************************/
+
     addList () {
       this.getScanStatus().then(res => {
         if (res) {
@@ -286,7 +313,12 @@ export default {
     changeFlieDrawer (v) {
       this.flieDrawer = v
     },
-
+    // 追加成功，表格刷新
+    isSuccess (Bool) {
+      if (Bool) {
+        this.initTable()
+      }
+    },
     /** *********************************************根据路由加载数据*************************************** */
     // 判断路由是否携带 policyID 路由有根据policyID加载数据
     getRouterPolicyID () {
@@ -294,6 +326,7 @@ export default {
       console.log(policyID, this.$route)
       if (policyID === 0 || policyID) {
         this.initTableParams.policyID = parseInt(policyID)
+        this.policyID = parseInt(policyID)
         return true
       } else {
         return false
@@ -311,6 +344,7 @@ export default {
       })
       if (result.results.list) {
         let policyID = result.results.list[0].policyID
+        this.policyID = parseInt(policyID)
         return policyID
       } else {
         return false

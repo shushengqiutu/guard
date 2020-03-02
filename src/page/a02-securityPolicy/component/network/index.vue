@@ -13,12 +13,13 @@
         <my-option v-if="btn_delete"
                    icon='icon iconfont iconshanchu2'
                    text='删除'
-                   :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
+                   :class="selectData.length ? '' : 'notClick'"
                    @click.native="deleteData"> </my-option>
         <my-option v-if="btn_addNet"
                    :class="initTableParams.policyID ===-1 ? 'notClick' : ''"
                    icon='icon iconfont iconxinzeng'
-                   text='追加网卡'> </my-option>
+                   text='追加网卡'
+                   @click.native="addNet"> </my-option>
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -44,6 +45,10 @@
                     @paginationChange='paginationChange'>
       </myPagination>
     </div>
+    <add-net :netDrawer="netDrawer"
+             :policyID="initTableParams.policyID "
+             @changeNetDrawer="changeNetDrawer"
+             @isSuccess='isSuccess'></add-net>
   </div>
 
 </template>
@@ -53,6 +58,7 @@ import mySearch from '@/component/search/'
 import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
+import addNet from '@/component/addNet/'
 
 import {
   // eslint-disable-next-line camelcase
@@ -73,10 +79,11 @@ export default {
     }
   },
   components: {
-    cars, mySearch, myOption, myTable, myPagination
+    cars, mySearch, myOption, myTable, myPagination, addNet
   },
   data: function () {
     return {
+      netDrawer: false,
       selectData: [],
       filtersWarpOpen: false,
       tableData: [],
@@ -171,9 +178,30 @@ export default {
   },
 
   methods: {
-    // 删除
+    /** ***********************************追加usb***********************************************/
+    addNet () {
+      debugger
+      this.netDrawer = true
+    },
+    changeNetDrawer (v) {
+      this.netDrawer = v
+    },
+    // 追加成功，表格刷新
+    isSuccess (Bool) {
+      if (Bool) {
+        this.initTable()
+      }
+    },
+    /** ******************************** 删除*********************************/
     deleteData () {
-      if (this.selectData.length) {
+      this.$confirm({
+        type: '提示',
+        msg: '你确定要删除选中网卡吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
         let netlist = []
         for (let i = 0; i < this.selectData.length; i++) {
           netlist.push(this.selectData[i].id)
@@ -191,11 +219,18 @@ export default {
         req_delCurrentPolicy(params).then(res => {
           if (res.results.status) {
             this.initTable()
+            this.$msg({
+              message: '删除成功',
+              type: 'success'
+            })
+          } else {
+            this.$msg({
+              message: '删除失败',
+              type: 'error'
+            })
           }
         })
-      } else {
-
-      }
+      })
     },
     // 获取复选框选中的数据
     chooseData (data) {

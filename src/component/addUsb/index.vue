@@ -6,6 +6,7 @@
                :visible.sync="newDrawer"
                size="30%"
                :wrapperClosable="false"
+               custom-class='usbDrawer'
                ref="drawer">
       <div class="demo-drawer__content">
         <el-form ref="form"
@@ -17,15 +18,12 @@
             </el-input>
 
           </el-form-item>
-          <el-form-item label="文件路径">
-            <el-input type="textarea"
-                      v-model="form.name">
+          <el-form-item label="USB名称">
+            <el-input v-model="form.name">
             </el-input>
-            <button @click='addFlieSrc'>选择文件</button>
           </el-form-item>
-          <el-form-item label="MD5">
-            <el-input type="textarea"
-                      v-model="form.md5">
+          <el-form-item label="硬件id">
+            <el-input v-model="form.hardware_id">
             </el-input>
           </el-form-item>
           <el-form-item label="文件描述">
@@ -34,7 +32,7 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <button @click="startSend()">确定</button> <button>取消</button>
+            <button @click="startSendUsb()">确定</button>
           </el-form-item>
         </el-form>
       </div>
@@ -54,9 +52,10 @@ export default {
   name: 'addUsb',
   props: {
     type: {
-      type: Number
+      type: Number,
+      default: 2
     },
-    drawer: {
+    usbDrawer: {
       type: Boolean,
       default: false
     },
@@ -68,20 +67,19 @@ export default {
   computed: {
     newDrawer: {
       get () {
-        return this.drawer
+        return this.usbDrawer
       },
       set (v) {
-        this.$emit('changeFlieDrawer', v)
+        this.$emit('changeUsbDrawer', v)
       }
     }
   },
   data () {
     return {
-      listDrawer: false,
       form: {
         policyID: this.policyID,
         name: '',
-        md5: '',
+        hardware_id: '',
         desc: ''
 
       }
@@ -91,7 +89,48 @@ export default {
 
   },
   methods: {
+    /** ***********追加usb确定******************************* */
+    startSendUsb () {
+      // 对数据验证
+      // "usb": [{
+      //   "name": "usb名称",
+      //   "hardware_id": "硬件id",
+      //   "desc": "描述"      }]
 
+      // 下发参数
+      let params = {
+        policyID: this.policyID,
+        type: this.type,
+        usb: []
+      }
+      let usb = {}
+      usb.name = this.form.name
+      usb.hardware_id = this.form.hardware_id
+      usb.desc = this.form.desc
+      params.usb.push(usb)
+      this.sendAddUsb(params).then(res => {
+        if (res.results.status) {
+          this.newDrawer = false
+          this.$emit('isSuccess', true)
+          this.$msg({
+            message: '追加USB成功',
+            type: 'success'
+          })
+        } else {
+          this.$msg({
+            message: '追加USB失败',
+            type: 'error'
+          })
+        }
+        console.log(res, 999)
+      })
+    },
+    // 添加usb函数
+    async sendAddUsb (data) {
+      let result = req_addWhileList(data)
+      return result
+    },
+    // drawer状态
     changeDrawer (v) {
       this.listDrawer = v
     }
