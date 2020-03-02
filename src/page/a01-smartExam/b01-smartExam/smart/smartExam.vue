@@ -1,22 +1,38 @@
 /* eslint-disable camelcase */
 <template>
   <div class="smartWarp">
+    <div class="titleDes">
+      <span class="titleCenter">为工业生产保驾护航</span><span class="protectDay">安全防护{{programObj.day}}天</span>
+    </div>
+    <div class="desSty">
+      保护您的系统安全、稳定运行、及时运行扫描更新您的白名单策略
+    </div>
     <div class="headerSty">
       <div class="flexCont">
         <div>
           <img class="img1"
-               src="@/assets/img/public/1@2x.png" />
+               src="@/assets/img/public/安全防护-低@2x.png" />
         </div>
         <div class="content">
           <div><span class="largText">安全防护</span></div>
           <div class="textSty marginSty">
-            保护系统安全运行<span class="largText">{{programObj.day}}</span>天
+            保护系统安全运行
           </div>
-          <div class="textSty">应用防护：{{programObj.appStatus}}</div>
-          <div class="textSty">外设防护：{{programObj.peripherals}}</div>
-          <div class="textSty">网络防护：{{programObj.net}}</div>
-          <div class="textSty">目录防护：{{programObj.dircetory}}</div>
-        </div>
+          <div class="modeSty baseModeSty">
+            <div>
+              <div>应用防护 </div>
+              <div class="defendMargin">外设防护 </div>
+              <div class="defendMargin">网络防护 </div>
+              <div>目录防护 </div>
+            </div>
+            <div>
+              <div class="falseStatus" :class="{trueStatus:programObj.appStatus ==='运行'}">{{programObj.appStatus}}</div>
+              <div class="falseStatus defendStatus" :class="{trueStatus:programObj.peripherals ==='运行'}">{{programObj.peripherals}}</div>
+              <div class="falseStatus defendStatus" :class="{trueStatus:programObj.net ==='运行'}">{{programObj.net}}</div>
+              <div class="falseStatus defendStatus" :class="{trueStatus:programObj.dircetory ==='运行'}">{{programObj.dircetory}}</div>
+            </div>
+          </div>
+          </div>
       </div>
       <div class="flexCont">
         <div class="margin1">
@@ -28,25 +44,49 @@
           <div class="textSty marginSty">
             消除潜在威胁
           </div>
-          <div class="textSty">当前策略：{{programObj.policy}}</div>
-          <div class="textSty">系统服务：{{programObj.sysStatus}}</div>
-          <div class="textSty">集群服务：{{programObj.clusterStatus}}</div>
-          <div class="textSty">集群地址：{{programObj.itm}}</div>
+          <div class="modeSty baseModeSty">
+            <div>
+              <div>当前策略</div>
+              <div class="modeMargin">系统服务</div>
+              <div>集群服务</div>
+            </div>
+            <div>
+              <div class="textAlineSty">{{programObj.policy}}</div>
+              <div class="modeMargin textAlineSty">{{programObj.sysStatus}}</div>
+              <div class="textAlineSty clusterSty">{{programObj.itm}}</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="flexCont">
         <div>
           <img class="img1"
-               src="@/assets/img/public/2@2x.png" />
+               src="@/assets/img/public/安全事件-高@2x.png" />
         </div>
         <div class="content">
           <div><span class="largText">安全事件</span></div>
           <div class="textSty marginSty">
             威胁回溯分析
           </div>
-          <div class="textSty">今日安全：{{homeObj.dayEventCount}}条</div>
-          <div class="textSty">本周安全：{{homeObj.weekCount}}条</div>
-          <div class="textSty">今日威胁：{{homeObj.dayThreatCount}}次</div>
+          <div class="modeSty baseModeSty">
+            <div>
+              <div>今日事件</div>
+              <div class="modeMargin">本周事件</div>
+              <div>今日威胁</div>
+            </div>
+            <div>
+              <div class="textAlineSty">
+                <span class="countSty">{{homeObj.dayEventCount}}</span> 条
+              </div>
+              <div class="modeMargin textAlineSty">
+                <span class="countSty">{{homeObj.weekCount}}</span> 条
+              </div>
+              <div class="textAlineSty"><span class="countSty">
+                {{homeObj.dayThreatCount}}</span> <span style="line-height: 10px">次</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

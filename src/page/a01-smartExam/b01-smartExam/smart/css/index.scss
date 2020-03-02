@@ -1,12 +1,40 @@
 @import './theme1.scss';
 @import './theme2.scss';
-
+.titleDes{
+  padding-top: 29px;
+  font-size:24px;
+  font-family:SourceHanSansCN-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+}
+.titleCenter{
+  margin-left: 262px;
+}
+.protectDay{
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(195,195,195,1);
+  margin-left: 7px;
+}
+.desSty{
+  text-align: center;
+  margin-top: 13px;
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(230,230,230,1);
+}
 .top {
   margin-top: 78px;
 }
 
 .marginSty {
-  margin-bottom: 20px;
+  margin-top: 13px;
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(192,192,192,1);
 }
 
 .smartWarp {
@@ -21,7 +49,7 @@
 .headerSty {
   display: flex;
   justify-content: center;
-  padding-top: 83px;
+  margin-top: 16px;
   text-align: center;
 }
 
@@ -35,10 +63,11 @@
 }
 
 .largText {
-  font-size: 20px;
-  font-family: Microsoft YaHei;
   font-weight: 400;
-  color: rgba(255, 255, 255, 1);
+  font-size:18px;
+  font-family:SourceHanSansCN-Medium;
+  font-weight:500;
+  color:rgba(255,255,255,1);
 }
 
 .content {
@@ -46,43 +75,52 @@
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
-  text-align: center;
 }
 
 .scanCont {
-  margin-top: 50px;
+  margin-top: 73px;
   display: flex;
+  justify-content: center;
 }
 
 .scanAll {
   justify-content: center;
   display: flex;
-  width: 230px;
-  height: 55px;
-  margin-left: 230px;
-  line-height: 55px;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 5px;
-  font-size: 30px;
-  font-family: Microsoft YaHei;
-  font-weight: 400;
-  color: rgba(195, 58, 35, 1);
+  width:200px;
+  height:48px;
+  background:rgba(255,255,255,1);
+  border-radius:3px;
+  margin-left: 180px;
+  line-height: 48px;
+  font-size:26px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(195,58,35,1);
   cursor: pointer;
 }
 
 .targetScan {
-  height: 55px;
-  width: 96px;
-  line-height: 55px;
-  margin-left: 30px;
-  font-size: 16px;
-  font-family: Microsoft YaHei;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
+  width:150px;
+  height:36px;
+  line-height: 36px;
+  text-align: center;
+  background:rgba(255,255,255,0.2);
+  border:1px solid rgba(255,255,255,1);
+  border-radius:3px;
+  font-size:14px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,255,255,1);
+  margin-left: 12px;
+  margin-top: 6px;
 }
 
 .textSty {
-  margin: 10px;
+  margin: 6px;
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(194,194,194,1);
 }
 
 .endSty {
@@ -112,4 +150,70 @@
 
 .ItemFlex {
   flex: 1;
+}
+.baseStatus{
+  width:32px;
+  height:14px;
+  opacity:0.7;
+  border-radius:2px;
+  color:rgba(255,255,255,1);
+  margin-left: 3px;
+}
+.falseStatus{
+  background:rgba(255,0,0,1);
+  width: 32px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  margin-left: 5px;
+  color:rgba(255,255,255,1);
+  border-radius:2px;
+}
+.trueStatus{
+  background:rgba(73,188,52,1);
+  width: 32px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  margin-left: 5px;
+  color:rgba(255,255,255,1);
+  border-radius:2px;
+}
+
+.textAlineSty{
+  text-align: left;
+  margin-left: 5px;
+}
+.modeSty{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.baseModeSty{
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(194,194,194,1);
+}
+.modeMargin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.countSty{
+  font-size:16px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:#35BFFF;
+  line-height: 10px;
+}
+
+.defendMargin{
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.defendStatus{
+  margin-top: 11px;
+}
+.clusterSty{
+  color:#35BFFF;
 }

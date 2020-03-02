@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tipSty" @click="showTip">
-      <i class="el-icon-arrow-left
+      <i class="el-icon-arrow-left iconSty
 "></i>
     </div>
     <el-drawer
