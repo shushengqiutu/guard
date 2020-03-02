@@ -1,6 +1,10 @@
 /* eslint-disable camelcase */
 <template>
-  <div class="smartWarp">
+  <div class="smartWarp" v-loading="loading"
+       element-loading-text="拼命加载中"
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <div class="titleDes">
       <span class="titleCenter">为工业生产保驾护航</span><span class="protectDay">安全防护{{programObj.day}}天</span>
     </div>
@@ -122,7 +126,7 @@ export default {
   data () {
     return {
       show: false,
-      loading: false,
+      loading: true,
       drawer: false,
       programObj: {
         day: '',
@@ -156,6 +160,7 @@ export default {
       }
       req_homeStatus(data).then(res => {
         if (res.results.status) {
+          this.loading = false
           this.homeObj.weekCount = res.results.week_event_count // 本周安全事件数
           this.homeObj.dayEventCount = res.results.day_event_count // 今日安全事件数
           this.homeObj.dayThreatCount = res.results.day_threat_count // 今日威胁事件数
@@ -172,6 +177,7 @@ export default {
       }
       req_programStatus(data).then(res => {
         if (res.results.status) {
+          this.loading = false
           let resultData = res.results
           this.programObj.day = (resultData.start_time / 86400).toFixed(2) // 返回服务启动经过时间
           this.programObj.appStatus = resultData.app_def ? '运行' : '停止' // 应用防护（0-停止，1-运行）

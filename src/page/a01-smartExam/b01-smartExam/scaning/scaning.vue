@@ -1,5 +1,10 @@
 <template>
-  <div class="scaning">
+  <div class="scaning"
+       v-loading="loading"
+       element-loading-text="拼命加载中"
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <div class="headerSty">
       <div class="radar"></div>
     </div>
@@ -70,7 +75,7 @@ export default {
   name: 'user',
   data () {
     return {
-
+      loading: true,
       socket: '',
       color: 'white',
       policyID: '',
@@ -106,8 +111,8 @@ export default {
         console.log('发送信息')
       }
       that.global.ws.onmessage = function (res) {
+        that.loading = false
         that.scanType(JSON.parse(res.data))
-        console.log('收到服务器内容', res.data)
       }
     },
     getPolicyID () {

@@ -1,5 +1,10 @@
 <template>
-  <div class="scanFinish">
+  <div class="scanFinish"
+       v-loading="loading"
+       element-loading-text="拼命加载中"
+       element-loading-spinner="el-icon-loading"
+       element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
     <div class="headerSty margin1">
       <div class="img1">
         <img class="img1"
@@ -67,6 +72,7 @@ export default {
   name: 'scanFinish',
   data () {
     return {
+      loading: true,
       text: false,
       scanResult: {
         whiteListCount: 0, // 白名单文件数量
@@ -136,6 +142,7 @@ export default {
     async getScanStatus () {
       let policyID = parseInt(localStorage.getItem('policyId'))
       let result = await req_scanStatus({ policyID })
+      this.loading = false
       this.scanResult.whiteListCount = result.results.executor
     }
   }
