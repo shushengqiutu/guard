@@ -14,12 +14,16 @@
       </template>
     </div>
     <div class="policyID">
-      策略ID:{{policyID>=0?policyID:'无'}}
+      策略名称:{{policyName?policyName:'正在获取中...'}}
     </div>
   </div>
 
 </template>
 <script>
+import {
+  // eslint-disable-next-line camelcase
+  req_ShowPolicyList
+} from '@/api'
 
 export default {
   name: 'cars',
@@ -36,13 +40,29 @@ export default {
   },
   data () {
     return {
-
+      policyName: ''
     }
   },
   methods: {
     changeCar (item) {
       this.carsConfig.defaultOpenCarId = item.carId
       this.$emit('getCarId', item.carId)
+    }
+  },
+  watch: {
+    policyID: function (policyID) {
+      req_ShowPolicyList({
+        page: 0,
+        size: 10, // 每页记录数，可选参数
+        policyID: policyID
+      }).then(res => {
+        if (res.results.list) {
+          this.policyName = res.results.list[0].policyName
+        } else {
+          this.policyName = '获取失败'
+        }
+        console.log(res, 99)
+      })
     }
   }
 
