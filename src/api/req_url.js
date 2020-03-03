@@ -53,3 +53,5 @@ export const SYSCONFIG_URL = `${BASE_URL}/system/systemconfig`
 export const GETCONFIG_URL = `${BASE_URL}/system/systemconfigbykey`
 // 部署白名单策略
 export const DEPLOY_URL = `${BASE_URL}/whitelist/deploy`
+// 取消部署白名单策略
+export const UNDEPLOY_URL = `${BASE_URL}/whitelist/undeploy`

@@ -28,7 +28,8 @@ import {
   ADDWHILELIST_URL,
   SYSCONFIG_URL,
   GETCONFIG_URL,
-  DEPLOY_URL
+  DEPLOY_URL,
+  UNDEPLOY_URL
 }
   from './req_url'
 
@@ -375,3 +376,12 @@ export const req_getConfig = (data) => ajax(GETCONFIG_URL, data, 'POST')
 /** *************************************部署白名单策略 序号15********************************************/
 export const req_deploy = (data) => ajax(DEPLOY_URL, data, 'POST')
 /** *************************************部署白名单策略********************************************/
+/** *************************************取消部署白名单策略 接口18********************************************/
+export const req_undeploy = (data) => ajax(UNDEPLOY_URL, {
+  cmdlist: [{
+    cmd: 0x00020508,
+    ncmd: 'undeployPolicy',
+    data: data
+  }]
+}, 'POST')
+/** *************************************取消部署白名单策略********************************************/

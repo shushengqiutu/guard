@@ -6,9 +6,18 @@
   box-sizing: border-box;
   border: 1px solid rgba(255, 255, 255, 0.1);
 
+  >>>.el-table__expand-icon>.el-icon {
+    color: #fff;
+  }
+
   >>>.el-table {
     background: transparent;
     color: #fff;
+  }
+
+  >>>.el-table,
+  >>>.el-table__expanded-cell {
+    background: transparent;
   }
 
   >>>.el-table--small td,

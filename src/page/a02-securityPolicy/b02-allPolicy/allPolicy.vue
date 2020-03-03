@@ -24,6 +24,22 @@
                 :radioBox='true'
                 @changeRadioData='changeRadioData'
                 :faterRowDblclick='faterRowDblclick'>
+        <!-- 自定义展开列 -->
+        <el-table-column slot="expand"
+                         type="expand"
+                         :width="30">
+          <template slot-scope="props">
+            <el-form label-position="left"
+                     inline
+                     class="demo-table-expand">
+              <el-form-item label="商品名称">
+                <span>{{ props.row }}</span>
+              </el-form-item>
+
+            </el-form>
+          </template>
+        </el-table-column>
+
         <el-table-column slot="index"
                          type="index"
                          label="序号"
@@ -42,7 +58,7 @@
 
         <el-table-column slot="link"
                          label="操作"
-                         :width="120">
+                         :width="125">
           <template slot-scope="scope">
 
             <span class="link"
@@ -50,8 +66,7 @@
             <span class="link"
                   @click="edit(scope.row)">编辑</span>
             <span class="link"
-                  :class="scope.row.status===1?'notClick':''"
-                  @click="deploy(scope.row)">{{scope.row.status===1?'已部署':'部署'}}</span>
+                  @click="seclectDeploy(scope.row)">{{scope.row.status===1?'取消部署':'部署'}}</span>
           </template>
         </el-table-column>
 
@@ -94,7 +109,7 @@ import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
 import {
   // eslint-disable-next-line camelcase
-  req_ShowPolicyList, req_deleteWhiteListPolicy, req_addWhiteList, req_updataWhiteList, req_deploy
+  req_ShowPolicyList, req_deleteWhiteListPolicy, req_addWhiteList, req_updataWhiteList, req_deploy, req_undeploy
 } from '@/api'
 export default {
   name: 'allPolicy',
@@ -124,6 +139,7 @@ export default {
         // type: ''
       },
       tHead: [
+
         {
           label: '序号', // 表头
           state: true, // 是否显示列
@@ -190,7 +206,16 @@ export default {
           state: true,
           isCustom: true,
           slotName: 'link',
-          width: 80
+          width: 100
+        },
+        // 展开项
+        {
+          label: '展开列',
+          prop: 'expand',
+          state: true,
+          isCustom: true,
+          slotName: 'expand'
+
         }
       ]
 
@@ -202,6 +227,14 @@ export default {
 
   methods: {
     /** ********************************策略部署**************************************/
+    seclectDeploy (row) {
+      if (row.status === 1) {
+        this.closeDeploy(row)
+      } else {
+        this.deploy(row)
+      }
+    },
+    // 部署策略
     deploy (val) {
       this.$confirm({
         type: '提示',
@@ -236,7 +269,33 @@ export default {
         })
       })
     },
-
+    // 取消部署
+    closeDeploy (val) {
+      this.$confirm({
+        type: '提示',
+        msg: '你确定要取消当前部署吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
+        let params = { policyID: val.policyID }
+        req_undeploy(params).then(res => {
+          if (res.results.status) {
+            this.initTable()
+            this.$msg({
+              message: '取消部署成功',
+              type: 'success'
+            })
+          } else {
+            this.$msg({
+              message: '取消部署失败',
+              type: 'error'
+            })
+          }
+        })
+      })
+    },
     // 编辑
     edit (val) {
       this.actionFlag = 'edit'
