@@ -9,7 +9,7 @@
       <span class="titleCenter">为工业生产保驾护航</span><span class="protectDay">安全防护{{programObj.day}}天</span>
     </div>
     <div class="desSty">
-      保护您的系统安全、稳定运行、及时运行扫描更新您的白名单策略
+      {{wokeModeMsg}}
     </div>
     <div class="headerSty">
       <div class="flexCont">
@@ -46,7 +46,7 @@
         <div class="content">
           <div><span class="largText">{{programObj.workMode}}</span></div>
           <div class="textSty marginSty">
-            消除潜在威胁
+            {{wokeModeTxt}}
           </div>
           <div class="modeSty baseModeSty">
             <div>
@@ -55,9 +55,9 @@
               <div>集群服务</div>
             </div>
             <div>
-              <div class="textAlineSty">{{programObj.policy}}</div>
-              <div class="modeMargin textAlineSty">{{programObj.sysStatus}}</div>
-              <div class="textAlineSty clusterSty">{{programObj.itm}}</div>
+              <div class="textAlineSty">{{programObj.policy ? programObj.policy : '暂无'}}</div>
+              <div class="modeMargin textAlineSty">{{programObj.sysStatus ? programObj.sysStatus : '暂无'}}</div>
+              <div class="textAlineSty clusterSty">{{programObj.itm ? programObj.itm : '暂无'}}</div>
             </div>
           </div>
         </div>
@@ -128,6 +128,8 @@ export default {
       show: false,
       loading: true,
       drawer: false,
+      wokeModeMsg: '',
+      wokeModeTxt: '',
       programObj: {
         day: '',
         appStatus: '',
@@ -189,6 +191,13 @@ export default {
           this.programObj.clusterStatus = resultData.cluster_service ? '正常' : '异常' // 集群服务
           this.programObj.itm = resultData.itm
           this.programObj.workMode = resultData.work_mode === 0 ? '审计模式' : '保护模式'
+          if (resultData.work_mode) {
+            this.wokeModeMsg = '开启保护模式，您的主机将拥有更加安全的运行环境'
+            this.wokeModeTxt = '消除潜在威胁'
+          } else {
+            this.wokeModeMsg = '保护您的系统安全、稳定运行、及时运行扫描更新您的白名单策略'
+            this.wokeModeTxt = '实时监测威胁'
+          }
         }
       })
     },
