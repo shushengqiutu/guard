@@ -20,7 +20,7 @@
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight="'430'"
+                :tableHeight="'462'"
                 :radioBox='true'
                 @changeRadioData='changeRadioData'
                 :faterRowDblclick='faterRowDblclick'>
@@ -166,13 +166,13 @@ export default {
       pagination: {
         isShow: true,
         page: 1,
-        size: 10,
+        size: 14,
         pageSizesArr: [10, 20, 30, 40, 50], // 可选分页
         total: null // 总数据默认条数
       },
       initTableParams: {
         page: 0, // 第几页 0为第一页
-        size: 10 // 每页记录数，可选参数
+        size: 14 // 每页记录数，可选参数
         // type: ''
       },
       tHead: [

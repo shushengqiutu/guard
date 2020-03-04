@@ -166,14 +166,14 @@ export default {
       pagination: {
         isShow: true,
         page: 1,
-        size: 10,
+        size: 13,
         pageSizesArr: [10, 20, 30, 40, 50], // 可选分页
         total: null // 总数据默认条数
       },
       // 渲染表格参数
       initTableParams: {
         page: 0,
-        size: 10,
+        size: 13,
         policyID: -1,
         type: 1,
         params: {

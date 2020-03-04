@@ -4,9 +4,10 @@
   // padding: 0 10px 10px 10px;
 
   .operation {
+    display: none;
     height: 22px;
     padding: 10px 0;
-    @include childXRight;
+    // @include childXRight;
     // background: yellowgreen;
 
 

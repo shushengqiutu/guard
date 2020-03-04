@@ -6,11 +6,9 @@
                    :current-page="page"
                    :pager-count='5'
                    background
-                   prev-text='上一页'
-                   next-text='下一页'
                    :page-sizes="pageSizesArr"
                    :page-size="size"
-                   layout="sizes,total, prev, pager, next,jumper"
+                   layout="prev, pager, next, jumper"
                    :total="total">
       <!-- @size-change   每页显示条数修改触发 -->
       <!-- @current-change   切换显示哪页触发 -->

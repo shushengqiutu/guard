@@ -17,7 +17,7 @@
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight="'430'">
+                :tableHeight="'504'">
         <!-- 序号 -->
         <el-table-column slot="index"
                          type="index"

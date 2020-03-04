@@ -20,7 +20,7 @@
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight="'430'"
+                :tableHeight="'504'"
                 :faterRowDblclick='faterRowDblclick'>
         <el-table-column slot="index"
                          type="index"

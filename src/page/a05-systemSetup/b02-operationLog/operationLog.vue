@@ -38,8 +38,8 @@
                 :checkBox='false'>
         <el-table-column slot="index"
                          type="index"
-                         label="序号"
-                         :width="60">
+                         align="right"
+                         :width="44">
           <template slot-scope="scope">
 
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
