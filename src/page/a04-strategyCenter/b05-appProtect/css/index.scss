@@ -1,23 +1,101 @@
 @import './theme1.scss';
 @import './theme2.scss';
 
-.appProtect {
-  width: 740px;
+>>>.el-switch__core:after{
+  width: 12px;
+  height: 12px;
+  top: -1px;
+  left: -1px;
 }
-.headText{
-  padding-top: 94px;
-  margin-left: 42px;
-  font-size:20px;
+>>>.el-switch__core{
+  width: 25px !important;
+  height: 12px;
+}
+>>>.el-switch.is-checked .el-switch__core::after{
+  margin-left: -6px;
+}
+>>>.el-checkbox{
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,255,255,1);
+}
+>>>.el-checkbox__input.is-checked+.el-checkbox__label{
+  color:rgba(255,255,255,1);
+}
+.pathSty{
+  width: 320px;
+  height: 100px;
+  border:1px solid rgba(255,255,255,1);
+  border-radius: 1px;
+  overflow: auto;
+  font-size:12px;
+}
+.spanSty{
+  background: #880822;
+  margin: 5px;
+  display: table;
+  border-color: #e9e9eb;
+  border-radius: 3px;
+  padding: 3px;
   font-family:Microsoft YaHei;
   font-weight:400;
   color:rgba(255,255,255,1);
 }
-.device{
-  margin-top: 22px;
-  display: flex;
+.leftCont{
+  width: 160px;
+  text-align: right;
+  margin-right: 16px;
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,255,255,1);
 }
-.deviceItem{
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.baseDiv{
+  width: 320px;
+  height: 46px;
+  margin-right: 16px;
+  background:rgba(0,0,0,0.1);
+  overflow: auto;
+}
+.diySty{
+  width:87px;
+  height:29px;
+  background:rgba(0,0,0,0.25);
+  border-radius:2px;
+  text-align: center;
+  line-height: 29px;
+  cursor: pointer;
+}
+.diyTxt{
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,255,255,1);
+}
+.baseButton{
+  width:125px;
+  height:30px;
+  border-radius:2px;
+  background:rgba(255,255,255,0.2);
+  text-align: center;
+  line-height: 30px;
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,254,254,1);
+  cursor: pointer;
+}
+.active{
+  background:rgba(255,255,255,1) !important;
+  color:rgba(228,70,68,1) !important;
+}
+.buttonMargin{
+  margin-right: 18px;
+}
+.promptFont{
+  font-size:10px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(194,194,194,1);
 }

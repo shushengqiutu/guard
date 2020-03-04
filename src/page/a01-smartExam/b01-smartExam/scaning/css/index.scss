@@ -1,11 +1,39 @@
 @import './theme1.scss';
 @import './theme2.scss';
 
+.baseText{
+  font-size:12px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+}
+.scanLine{
+  display: flex;
+  margin-top: 25px
+}
+.lineItem{
+  flex: 1;
+  justify-content: center;
+  text-align: center
+}
+.img2{
+  width: 81px;
+  height: 97px;
+}
+.iconSty{
+  width:16px;
+  height:16px;
+  margin-right: 5px
+}
 .scaning {
   width: 740px;
 }
 .margin1{
-  margin-top: 28px
+  margin-top: 28px;
+  font-size:18px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,255,255,1);
 }
 .margin2{
   margin-top: 18px
@@ -26,10 +54,10 @@
   color: white;
 }
 .headerSty {
-  padding-top: 30px;
+  padding-top: 20px;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 .imgSty {
   width: 66px;
@@ -72,7 +100,7 @@
   color: rgba(255, 255, 255, 1);
 }
 .stopScan {
-  margin-top: 62px;
+  margin-top: 58px;
   display: flex;
   justify-content: space-around;
 }
@@ -81,10 +109,10 @@
   height: 40px;
   background: rgba(255, 255, 255, 1);
   border-radius: 3px;
-  font-size: 20px;
-  font-family: Microsoft YaHei;
-  font-weight: 400;
-  color: rgba(195, 58, 35, 1);
+  font-size:20px;
+  font-family:SourceHanSansCN-Medium;
+  font-weight:300;
+  color:rgba(195,58,35,1);
   text-align: center;
   line-height: 40px;
   cursor: pointer;
@@ -112,7 +140,7 @@
         darkgreen 0.95em,
         darkgreen 1em),
     linear-gradient(black, #ff415c);
-  font-size: 32px;
+  font-size: 25px;
   position: relative;
   border-radius: 50%;
 }

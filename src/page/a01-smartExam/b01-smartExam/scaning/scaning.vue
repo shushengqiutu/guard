@@ -1,16 +1,7 @@
 <template>
-  <div class="scaning"
-       v-loading="loading"
-       element-loading-text="拼命加载中"
-       element-loading-spinner="el-icon-loading"
-       element-loading-background="rgba(0, 0, 0, 0.8)">
+  <div class="scaning">
     <div class="headerSty">
       <div class="radar"></div>
-    </div>
-    <div class="headScanText">
-      <div>
-        {{scanName}}
-      </div>
     </div>
     <div class="headScanText margin1">
       <div class="scanText"
@@ -24,37 +15,45 @@
                      :color="color"></el-progress>
       </div>
     </div>
-    <div class="bodyScanText margin4">
-      <div class="bodyText">
+    <div class="baseText scanLine">
+      <div class="lineItem">
         <div>
-          <img class="iconImg"
-               src="@/assets/img/public/白名单@2x.png" />
+          <img class="img2"
+               src="@/assets/img/public/应用程序@2x.png" />
         </div>
         <div>
-          白名单文件数量:{{whiteListCount}}
+          <img v-if="whileListStatus" class="iconSty"
+               src="@/assets/img/public/组 18@2x.png" />
+          <i v-else  class="el-icon-loading"></i>
+          扫描系统应用程序
         </div>
+        <div>白名单文件数量：{{whiteListCount}}</div>
       </div>
-    </div>
-    <div class="bodyScanText">
-      <div class="bodyText">
+      <div class="lineItem">
         <div>
-          <img class="iconImg"
-               src="@/assets/img/public/小usb@2x.png" />
+          <img class="img2"
+               src="@/assets/img/public/网口@2x.png" />
         </div>
         <div>
-          USB数量：{{usbCount}}
+          <img v-if="netStatus" class="iconSty"
+               src="@/assets/img/public/组 18@2x.png" />
+          <i v-else class="el-icon-loading"></i>
+          扫描网卡
         </div>
+        <div>网卡个数：{{netCount}}</div>
       </div>
-    </div>
-    <div class="bodyScanText">
-      <div class="bodyText">
+      <div class="lineItem">
         <div>
-          <img class="iconImg"
-               src="@/assets/img/public/网卡管理@2x.png" />
+          <img class="img2"
+               src="@/assets/img/public/USB@2x.png" />
         </div>
         <div>
-          网卡个数：{{netCount}}
+          <img v-if="usbStatus" class="iconSty"
+               src="@/assets/img/public/组 18@2x.png" />
+          <i v-else class="el-icon-loading"></i>
+          扫描USB
         </div>
+        <div>USB数量：{{usbCount}}</div>
       </div>
     </div>
     <div class="stopScan"
@@ -74,7 +73,9 @@ export default {
   name: 'user',
   data () {
     return {
-      loading: false,
+      whileListStatus: false,
+      usbStatus: false,
+      netStatus: false,
       socket: '',
       color: 'white',
       policyID: '',
@@ -96,6 +97,7 @@ export default {
     scanProgress (val, oldVal) {
       // 普通的watch监听
       if (val === 100) {
+        this.whileListStatus = true
         this.$router.push({
           name: 'scanFinish'
         })
@@ -110,7 +112,6 @@ export default {
         console.log('发送信息')
       }
       that.global.ws.onmessage = function (res) {
-        that.loading = false
         that.scanType(JSON.parse(res.data))
       }
     },
@@ -127,17 +128,6 @@ export default {
           no: '不保存'
         }
       }).then((res) => {
-        // req_stopScan(data).then(res => {
-        //   if (res.results.status) {
-        //     let scanResult = {
-        //       whiteListCount: this.whiteListCount, // 白名单文件数量
-        //       usbCount: this.usbCount, // USB数量
-        //       netCount: this.netCount // 网卡数量
-        //     }
-        //     localStorage.removeItem('policyId')
-        //     this.$router.push({ name: 'scanFinish', params: scanResult })
-        //   }
-        // })
         this.sendStopScan(this.policyID, true).then((res) => {
           if (res.status) {
             // 执行成功 进度100% watch监听 保存结果 去完成页面
@@ -168,13 +158,18 @@ export default {
       // 判断扫描类型
       if (data.cmd === 133377) { // 文件扫描
         this.scanPath = data.results.name
-
         this.scanProgress = data.results.progress
         this.whiteListCount = data.results.pos
       } else if (data.cmd === 133378) { // USB扫描
         this.usbCount = data.results.total
+        if (data.results.usb_status === 2) {
+          this.usbStatus = true
+        }
       } else if (data.cmd === 133379) { // 网卡扫描
         this.netCount = data.results.total
+        if (data.results.net_status === 2) {
+          this.netStatus = true
+        }
       }
     },
     initPage () {
