@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "11277702",
+      "name": "收起",
+      "font_class": "shouqi",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
+      "icon_id": "10284537",
+      "name": "帮 助",
+      "font_class": "bangzhu1",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "1713200",
+      "name": "调查",
+      "font_class": "tiaocha",
+      "unicode": "e68a",
+      "unicode_decimal": 59018
+    },
+    {
+      "icon_id": "4527514",
+      "name": "鉴定",
+      "font_class": "jianding",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "11303359",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "11322142",
+      "name": "上移",
+      "font_class": "shangyi",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "11322143",
+      "name": "下移",
+      "font_class": "xiayi",
+      "unicode": "e6be",
+      "unicode_decimal": 59070
+    },
+    {
+      "icon_id": "11322144",
+      "name": "置底",
+      "font_class": "zhidi",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "11322145",
+      "name": "置顶",
+      "font_class": "zhiding",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
       "icon_id": "11761185",
       "name": "检查",
       "font_class": "jiancha",

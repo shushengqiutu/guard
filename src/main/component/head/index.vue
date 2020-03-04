@@ -51,16 +51,16 @@
     </div>
     <div class="right">
       <div class="mean iconWarp"
-           @click="subMean=!subMean"> <i class="el-icon-s-operation icon"></i> </div>
-      <div class="minimize iconWarp"><i class="el-icon-minus icon"> </i></div>
-      <div class="close iconWarp"><i class="el-icon-close icon"> </i></div>
+           @click="subMean=!subMean"><i class="icon iconfont iconliebiao"> </i></div>
+      <div class="minimize iconWarp"></div>
+      <div class="close iconWarp"><i class="icon iconfont iconguanbi"> </i></div>
       <transition name="el-fade-in-linear">
         <div class="subMean"
              v-show="subMean">
-          <p @click="switchTheme"> 切换主题 {{getTheme}}</p>
-          <p @click="switchLang"> 切换语言 {{getLang}}</p>
+          <!-- <p @click="switchTheme"> 切换主题 {{getTheme}}</p> -->
+          <!-- <p @click="switchLang"> 切换语言 {{getLang}}</p> -->
 
-          <p>更新版本</p>
+          <p>更新版本 </p>
           <p>关于</p>
         </div>
       </transition>
