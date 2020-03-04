@@ -17,17 +17,24 @@
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight="'430'"
-                :faterRowDblclick='faterRowDblclick'>
+                :tableHeight="'430'">
+        <!-- 序号 -->
         <el-table-column slot="index"
                          type="index"
-                         label="序号"
-                         :width="60">
+                         align="right">
           <template slot-scope="scope">
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
           </template>
         </el-table-column>
+        <el-table-column slot="os_vendor"
+                         label="系统厂商"
+                         :width="100">
+          <template slot-scope="scope">
 
+            {{scope.row.os_vendor}}
+          </template>
+        </el-table-column>
+        <!-- 类型 -->
         <el-table-column slot="wl_type"
                          label="类型"
                          :width="100">
@@ -36,10 +43,10 @@
             <span class="wl_type"> {{scope.row.wl_type|filterWlType}}</span>
           </template>
         </el-table-column>
-
+        <!-- 是否国产 -->
         <el-table-column slot="os_type"
                          label="是否国产"
-                         :width="100">
+                         :width="80">
           <template slot-scope="scope">
 
             <span class="os_type"> {{scope.row.os_type|filterOsType}} </span>
@@ -102,7 +109,6 @@ export default {
           state: true, // 是否显示列
           isCustom: true, // 是否自定义
           type: 'index', // type 类型
-
           slotName: 'index',
           prop: 'date',
           sortable: false // 是否排序
@@ -113,15 +119,25 @@ export default {
           state: true,
           isCustom: true,
           slotName: 'wl_type',
-          width: 100
+          with: 100
+
         },
         {
           label: '系统厂商',
           prop: 'os_vendor',
           state: true,
-          isCustom: false,
+          isCustom: true,
           slotName: 'os_vendor',
-          width: 100
+          with: 100
+        },
+
+        {
+          label: '系统版本',
+          prop: 'os_version',
+          state: true,
+          isCustom: false,
+          slotName: 'os_version'
+
         },
         {
           label: '是否国产',
@@ -129,14 +145,6 @@ export default {
           state: true,
           isCustom: true,
           slotName: 'os_type'
-
-        },
-        {
-          label: '系统版本',
-          prop: 'os_version',
-          state: true,
-          isCustom: false,
-          slotName: 'os_version'
 
         }
       ]
@@ -165,10 +173,10 @@ export default {
     },
     // 判断路由是否携带 wl_type os_version
     getRouterParams () {
-      let type = this.$route.query.wl_type
+      let type = parseInt(this.$route.query.wl_type)
       let version = this.$route.query.os_version
-      if (type && version) {
-        this.initTableParams.wl_type = parseInt(type)
+      if (type >= 0 && version) {
+        this.initTableParams.wl_type = type
         this.initTableParams.os_version = version
         return true
       } else {

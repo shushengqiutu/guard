@@ -24,21 +24,7 @@
                 :radioBox='true'
                 @changeRadioData='changeRadioData'
                 :faterRowDblclick='faterRowDblclick'>
-        <!-- 自定义展开列 -->
-        <el-table-column slot="expand"
-                         type="expand"
-                         :width="30">
-          <template slot-scope="props">
-            <el-form label-position="left"
-                     inline
-                     class="demo-table-expand">
-              <el-form-item label="商品名称">
-                <span>{{ props.row }}</span>
-              </el-form-item>
 
-            </el-form>
-          </template>
-        </el-table-column>
         <!-- 序号 -->
         <el-table-column slot="index"
                          type="index">
@@ -47,13 +33,21 @@
           </template>
         </el-table-column>
         <!-- 策略名称 -->
+
         <el-table-column slot="policyName"
                          label="策略名称">
           <template slot-scope="scope">
-            {{scope.row.status===1?scope.row.policyName:scope.row.policyName}}
+
+            <img v-if='scope.row.status===1'
+                 title="已部署"
+                 src="@/assets/img/theme1/a02-securityAudit/b02-allPolicy/img/deploy@2x.png"
+                 width="14">
+            {{scope.row.policyName}}
           </template>
         </el-table-column>
-        <!-- 策略类型 -->
+        <!--
+                 策略类型
+                 -->
         <el-table-column slot="type"
                          label="类型"
                          :width="100">
@@ -82,7 +76,37 @@
                   @click="seclectDeploy(scope.row)">{{scope.row.status===1?'取消部署':'部署'}}</span>
           </template>
         </el-table-column>
-
+        <!-- 自定义展开列 -->
+        <el-table-column slot="expand"
+                         type="expand"
+                         :width="30">
+          <template slot-scope="props">
+            <el-form label-position="left"
+                     class="securityPolicy">
+              <el-form-item label="策略名称">
+                <span>{{ props.row.policyName}}</span>
+              </el-form-item>
+              <el-form-item label="策略类型">
+                <span>{{ props.row.type|filterType}}</span>
+              </el-form-item>
+              <el-form-item label="策略状态">
+                <span>{{ props.row.status===1?'已部署':'未部署'}}</span>
+              </el-form-item>
+              <el-form-item label="用户">
+                <span>{{ props.row.user||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="描述">
+                <span>{{ props.row.desc||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="创建时间">
+                <span>{{ props.row.create_time||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="修改时间">
+                <span>{{ props.row.modify_time||'暂无'}}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
       </my-table>
     </div>
     <div class='myPaginationWarp'

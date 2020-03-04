@@ -38,8 +38,8 @@
                 :checkBox='false'>
         <el-table-column slot="index"
                          type="index"
-                         label="序号"
-                         :width="60">
+                         align="right"
+                         :width="42">
           <template slot-scope="scope">
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
           </template>
@@ -76,6 +76,53 @@
           </template>
 
         </el-table-column>
+
+        <el-table-column slot="link"
+                         label="操作"
+                         :width="125">
+          <template slot-scope="scope">
+            <!-- 在授信就不出现按钮 -->
+            <!-- 在当前不在授信出现授信 -->
+            <!-- 都不在都出现 -->
+            <span class="link"
+                  v-if="!scope.row.credit_policy"
+                  @click="addCredit(scope.row)">授信</span>
+            <span class="link"
+                  v-if="!scope.row.current_policy"
+                  @click="addcurrent(scope.row)">授权</span>
+          </template>
+        </el-table-column>
+        <!-- 自定义展开列 -->
+        <el-table-column slot="expand"
+                         type="expand"
+                         :width="30">
+          <template slot-scope="props">
+            <el-form label-position="left"
+                     class="securityPolicy">
+              <el-form-item label="执行对象">
+                <span>{{ props.row.operation_name}}</span>
+              </el-form-item>
+              <el-form-item label="执行特征">
+                <span>{{ props.row.operation_feature}}</span>
+              </el-form-item>
+              <el-form-item label=" 事件类型">
+                <span>{{ props.row.event_type|filterEventType}}</span>
+              </el-form-item>
+              <el-form-item label=" 重复次数">
+                <span>{{ props.row.repeat||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="用户名称">
+                <span>{{ props.row.user||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label=" 开始时间">
+                <span>{{ props.row.start_time||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="结束时间">
+                <span>{{ props.row. end_time ||'暂无'}}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
       </my-table>
     </div>
     <div class='myPaginationWarp'
@@ -100,7 +147,7 @@ import screen from '@/component/screen/'
 import {
 
   // eslint-disable-next-line camelcase
-  req_eventquery
+  req_eventquery, req_ShowPolicyList, req_addWhileList
 } from '@/api'
 export default {
   name: 'allPolicy',
@@ -146,16 +193,16 @@ export default {
           prop: 'operation_name',
           state: true,
           isCustom: false,
-          slotName: 'operation_name',
-          width: 100
+          slotName: 'operation_name'
+
         },
         {
           label: '对象特征',
           prop: 'operation_feature',
           state: true,
           isCustom: false,
-          slotName: 'operation_feature',
-          width: 70
+          slotName: 'operation_feature'
+
         },
         // {
         //   label: 'policyID',
@@ -165,18 +212,11 @@ export default {
         //   slotName: 'policyID',
         //   width: 80
         // },
-        {
-          label: '重复次数',
-          prop: 'repeat',
-          state: true,
-          isCustom: false,
-          slotName: 'repeat',
-          width: 80
-        },
+
         {
           label: '上报状态',
           prop: 'status',
-          state: true,
+          state: false,
           isCustom: true,
           slotName: 'status',
           width: 80
@@ -207,11 +247,35 @@ export default {
           width: 80
         },
         {
+          label: '重复次数',
+          prop: 'repeat',
+          state: true,
+          isCustom: false,
+          slotName: 'repeat',
+          width: 80
+        },
+        {
           label: '开始时间',
           prop: 'start_time',
           state: true,
           isCustom: false,
           slotName: 'start_time'
+
+        },
+        {
+          label: '操作',
+          state: true,
+          isCustom: true,
+          slotName: 'link',
+          width: 100
+        },
+        // 展开项
+        {
+          label: '展开列',
+          prop: 'expand',
+          state: true,
+          isCustom: true,
+          slotName: 'expand'
 
         }]
 
@@ -223,6 +287,104 @@ export default {
 
   methods: {
 
+    /** *********************************************操作授信 授权*************************************** */
+    // 授信
+    addCredit (row) {
+      this.$confirm({
+        type: '提示',
+        msg: '确定把当前文件追加到授信吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
+        let params = this.getParams(0, row)
+        req_addWhileList(params).then(res => {
+          if (res.results.status) {
+            this.initTable()
+            this.$msg({
+              message: '授信成功',
+              type: 'success'
+            })
+          } else {
+            this.$msg({
+              message: '授信失败',
+              type: 'error'
+            })
+          }
+        })
+      })
+    },
+    // 授权
+
+    addcurrent (row) {
+      this.$confirm({
+        type: '提示',
+        msg: '确定把当前文件追加到当前策略吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
+        }
+      }).then(res => {
+        this.getpolicyID().then(res => {
+          if (res) {
+            let params = this.getParams(res, row)
+            req_addWhileList(params).then(res => {
+              if (res.results.status) {
+                this.initTable()
+                this.$msg({
+                  message: '授权成功',
+                  type: 'success'
+                })
+              } else {
+                this.$msg({
+                  message: '授权失败',
+                  type: 'error'
+                })
+              }
+            })
+          } else {
+            this.$msg({
+              message: '授信失败,获取当前策略ID失败',
+              type: 'error'
+            })
+          }
+        })
+      })
+    },
+    // 如果是授权 添加到当前策略
+    // 获取当前策略ID
+    async getpolicyID () {
+      const result = await req_ShowPolicyList({
+        page: 0, // 第几页 0为第一页
+        size: 10, // 每页记录数，可选参数
+        status: 1
+        // type: '' // 可选参数 1为当前策略
+      })
+      if (result.results.list) {
+        let policyID = result.results.list[0].policyID
+        return policyID
+      } else {
+        return false
+      }
+    },
+    // 获取下发参数
+    getParams (policyID, row) {
+      let data = {
+        type: 1,
+        policyID: policyID,
+        files: []
+      }
+      let params = {}
+      params.name = row.operation_name
+      params.md5 = row.operation_feature
+
+      params.desc = ''
+      data.files.push(params)
+      return data
+    },
+    // 如果是授信 添加到授信策略
+    /** *********************************************表格*************************************** */
     changeStatus (status) {
       this.filtersWarpOpen = status
     },

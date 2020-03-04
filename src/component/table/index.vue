@@ -5,6 +5,7 @@
 
     <el-table :data="tableData"
               stripe
+              fit
               :height="tableHeight"
               @select="select"
               @select-all="selectAll"
@@ -17,7 +18,7 @@
         </el-table-column>
       </template>
       <template v-if="radioBox">
-        <el-table-column width="44"
+        <el-table-column width="50"
                          align="right">
           <template slot-scope="scope">
             <el-radio v-model="tableRadio"
@@ -35,8 +36,8 @@
                            :label="item.label"
                            :prop="item.prop?item.prop:''"
                            :key="index"
-                           show-overflow-tooltip
                            :width="item.width"
+                           show-overflow-tooltip
                            :sortable="item.sortable?item.sortable:false">
 
           </el-table-column>
