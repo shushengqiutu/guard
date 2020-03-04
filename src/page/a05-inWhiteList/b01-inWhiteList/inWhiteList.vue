@@ -1,6 +1,7 @@
 <template>
   <div class="allPolicy">
-    <div class='operation'>
+    <div class='operation'
+         style="display:none">
 
       <div class='search'>
         <!-- 搜索占时不启用 -->
@@ -10,11 +11,12 @@
 
     </div>
     <div class='tableWarp'>
-      <div class='func'>
+      <div class='func'
+           style="display:none">
         <!-- <my-option icon='icon iconfont iconshanchu2'
                    text='删除'> </my-option> -->
-        <my-option icon='icon iconfont iconxinzeng'
-                   text='添加'> </my-option>
+        <!-- <my-option icon='icon iconfont iconxinzeng'
+                   text='添加'> </my-option> -->
       </div>
       <my-table :tableData='tableData'
                 :tHead='tHead'
@@ -22,7 +24,7 @@
                 :faterRowDblclick='faterRowDblclick'>
         <el-table-column slot="index"
                          type="index"
-                         label="序号"
+                         align="center"
                          :width="60">
           <template slot-scope="scope">
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}

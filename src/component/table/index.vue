@@ -4,6 +4,7 @@
     <!-- <ai-scroll> -->
 
     <el-table :data="tableData"
+              stripe
               :height="tableHeight"
               @select="select"
               @select-all="selectAll"
@@ -11,12 +12,13 @@
       <template v-if="checkBox">
         <!-- 是否开启复选 -->
         <el-table-column type="selection"
-                         width="24">
+                         align="right"
+                         width="44">
         </el-table-column>
       </template>
       <template v-if="radioBox">
-        <el-table-column label="选择"
-                         width="55">
+        <el-table-column width="44"
+                         align="right">
           <template slot-scope="scope">
             <el-radio v-model="tableRadio"
                       @change.native="getTemplateRow(scope.row)"
@@ -33,6 +35,7 @@
                            :label="item.label"
                            :prop="item.prop?item.prop:''"
                            :key="index"
+                           show-overflow-tooltip
                            :width="item.width"
                            :sortable="item.sortable?item.sortable:false">
 

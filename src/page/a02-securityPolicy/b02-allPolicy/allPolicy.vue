@@ -39,20 +39,33 @@
             </el-form>
           </template>
         </el-table-column>
-
+        <!-- 序号 -->
         <el-table-column slot="index"
-                         type="index"
-                         label="序号"
-                         :width="60">
+                         type="index">
           <template slot-scope="scope">
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
           </template>
         </el-table-column>
+        <!-- 策略名称 -->
         <el-table-column slot="policyName"
-                         label="策略名称"
+                         label="策略名称">
+          <template slot-scope="scope">
+            {{scope.row.status===1?scope.row.policyName:scope.row.policyName}}
+          </template>
+        </el-table-column>
+        <!-- 策略类型 -->
+        <el-table-column slot="type"
+                         label="类型"
                          :width="100">
           <template slot-scope="scope">
-            {{scope.row.status===1?'当前策略':scope.row.policyName}}
+            {{scope.row.type|filterType}}
+          </template>
+        </el-table-column>
+
+        <el-table-column slot="modify_time"
+                         label="修改时间">
+          <template slot-scope="scope">
+            {{scope.row.modify_time||'暂无'}}
           </template>
         </el-table-column>
 
@@ -162,28 +175,11 @@ export default {
         {
           label: '状态',
           prop: 'status',
-          state: true,
+          state: false,
           isCustom: false,
           slotName: 'status',
           width: 50
         },
-        {
-          label: '描述',
-          prop: 'desc',
-          state: true,
-          isCustom: false,
-          slotName: 'desc'
-
-        },
-        {
-          label: '修改时间',
-          prop: 'modify_time',
-          state: true,
-          isCustom: false,
-          slotName: 'modify_time'
-          // width: 80
-        },
-
         {
           label: '类型',
           prop: 'type',
@@ -192,14 +188,38 @@ export default {
           slotName: 'type',
           width: 80
         },
+        {
+          label: '描述',
+          prop: 'desc',
+          state: false,
+          isCustom: false,
+          slotName: 'desc'
+
+        },
+        {
+          label: '创建时间',
+          prop: 'create_time',
+          state: false,
+          isCustom: false,
+          slotName: 'create_time',
+          width: 140
+        },
+        {
+          label: '修改时间',
+          prop: 'modify_time',
+          state: true,
+          isCustom: true,
+          slotName: 'modify_time',
+          width: 140
+        },
 
         {
           label: '用户',
           prop: 'user',
           state: true,
           isCustom: false,
-          slotName: 'user',
-          width: 80
+          slotName: 'user'
+
         },
         {
           label: '操作',

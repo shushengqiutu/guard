@@ -4,10 +4,19 @@
 .myTable {
   margin-bottom: 10px;
   box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  // border: 1px solid rgba(255, 255, 255, 0.1);
 
   >>>.el-table__expand-icon>.el-icon {
     color: #fff;
+  }
+
+  >>>.el-table__header-wrapper {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  >>>.el-table--striped .el-table__body tr.el-table__row--striped td {
+    background: rgba(0, 0, 0, 0.1);
   }
 
   >>>.el-table {
@@ -34,6 +43,7 @@
     font-size: 12px;
     transition: none;
     outline: none;
+
   }
 
   >>>.el-table thead {
@@ -48,11 +58,13 @@
     height: 14px;
     font-size: 12px;
     line-height: 14px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
 
   >>>.el-table td,
   >>>.el-table th.is-leaf {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
   }
 
   >>>.el-table th,
@@ -78,7 +90,33 @@
   }
 
   >>>.el-table--enable-row-hover .el-table__body tr:hover>td {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
+  >>>.el-radio__inner {
+    width: 12px;
+    height: 12px;
+  }
+
+  >>>.securityPolicy {
+    padding-left: 96px;
+    font-size: 12px !important;
+
+    .el-form-item--small.el-form-item {
+      margin-bottom: 0;
+    }
+
+    .el-form-item__label {
+      color: #fff;
+      padding-right: 10px;
+      width: 80px;
+      text-align: right;
+      font-size: 12px;
+    }
+
+    .el-form-item__content {
+      font-size: 12px;
+    }
+
+  }
 }

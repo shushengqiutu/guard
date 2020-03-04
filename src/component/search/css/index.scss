@@ -8,7 +8,7 @@
 
 
   .icon {
-    color: #666;
+    color: #fff;
     position: absolute;
     left: 6px;
     top: 4px;
@@ -17,8 +17,8 @@
   }
 
   input {
-    border-radius: 20px;
-    background: #fff;
+    // border-radius: 20px;
+    background: rgba(0, 0, 0, 0.1);
     outline: none;
     height: 22px;
     border: none;
@@ -27,7 +27,19 @@
     width: 150px;
     -webkit-transition: opacity 0.5s ease-out, width 0.5s ease-out;
     transition: opacity 0.5s ease-out, width 0.5s ease-out;
+    color: #fff;
+  }
 
+  input::-webkit-input-placeholder {
+    color: #fff;
+  }
+
+  input::-moz-input-placeholder {
+    color: #ffffff;
+  }
+
+  input::-ms-input-placeholder {
+    color: #ffffff;
   }
 
   input:focus,

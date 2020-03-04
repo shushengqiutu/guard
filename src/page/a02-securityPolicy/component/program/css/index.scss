@@ -2,7 +2,7 @@
 @import './theme2.scss';
 
 .program {
-  width: 720px;
+  width: 740px;
 
   .operation {
     height: 22px;
@@ -10,6 +10,9 @@
     @include childXRight;
     // background: yellowgreen;
 
+    .search {
+      margin-right: 10px;
+    }
 
     .screenBtn {
       margin-right: 10px;
@@ -33,11 +36,14 @@
     .func {
       position: absolute;
       top: -32px;
+      left: 10px;
       display: flex;
 
       .notClick {
         pointer-events: none;
-        background: #ccc;
+        // background: #ccc;
+        opacity: 0.5;
+        color: #fff;
       }
     }
   }

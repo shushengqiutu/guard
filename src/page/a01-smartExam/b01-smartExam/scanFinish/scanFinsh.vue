@@ -3,8 +3,7 @@
        v-loading="loading"
        element-loading-text="拼命加载中"
        element-loading-spinner="el-icon-loading"
-       element-loading-background="rgba(0, 0, 0, 0.8)"
-  >
+       element-loading-background="rgba(0, 0, 0, 0.8)">
     <div class="headerSty margin1">
       <div class="img1">
         <img class="img1"
@@ -143,7 +142,7 @@ export default {
       let policyID = parseInt(localStorage.getItem('policyId'))
       let result = await req_scanStatus({ policyID })
       this.loading = false
-      this.scanResult.whiteListCount = result.results.executor
+      this.scanResult.whiteListCount = result.results.pos
     }
   }
 

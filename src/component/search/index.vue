@@ -8,7 +8,7 @@
            v-model="content"
            @keyup.enter="$event.target.blur"
            :class="{ 'active':active }"
-           placeholder="搜索..."
+           placeholder="请输入搜索内容..."
            @blur="changeblur">
   </div>
 

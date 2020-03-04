@@ -3,8 +3,7 @@
        v-loading="loading"
        element-loading-text="拼命加载中"
        element-loading-spinner="el-icon-loading"
-       element-loading-background="rgba(0, 0, 0, 0.8)"
-  >
+       element-loading-background="rgba(0, 0, 0, 0.8)">
     <div class="headerSty">
       <div class="radar"></div>
     </div>
@@ -75,7 +74,7 @@ export default {
   name: 'user',
   data () {
     return {
-      loading: true,
+      loading: false,
       socket: '',
       color: 'white',
       policyID: '',
@@ -171,7 +170,7 @@ export default {
         this.scanPath = data.results.name
 
         this.scanProgress = data.results.progress
-        this.whiteListCount = data.results.executor
+        this.whiteListCount = data.results.pos
       } else if (data.cmd === 133378) { // USB扫描
         this.usbCount = data.results.total
       } else if (data.cmd === 133379) { // 网卡扫描

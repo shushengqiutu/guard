@@ -33,11 +33,58 @@
                 :checkBox='true'
                 @chooseData="chooseData">
         <el-table-column slot="index"
-                         type="index"
-                         label="序号"
-                         :width="60">
+                         type="index">
           <template slot-scope="scope">
             {{initTableParams.page * initTableParams.size + scope.$index+ 1}}
+          </template>
+        </el-table-column>
+
+        <el-table-column label="文件签名"
+                         slot="file_cert"
+                         prop="file_cert"
+                         :width="65">
+          <template slot-scope="scope">
+            {{scope.row.file_cert||'暂无'  }}
+          </template>
+        </el-table-column>
+        <el-table-column label="文件大小"
+                         slot="size"
+                         prop="size"
+                         :width="65">
+          <template slot-scope="scope">
+            {{scope.row.size|filterSize }}
+          </template>
+        </el-table-column>
+        <!-- 自定义展开列 -->
+        <el-table-column slot="expand"
+                         type="expand"
+                         :width="30">
+          <template slot-scope="props">
+            <el-form label-position="left"
+                     class="securityPolicy">
+              <el-form-item label="文件名">
+                <span>{{ props.row.name||'暂无' }}</span>
+              </el-form-item>
+              <el-form-item label="全路径">
+                <span>{{ props.row.file ||'暂无'}}</span>
+              </el-form-item>
+
+              <el-form-item label="指纹特征">
+                <span>{{ props.row.md5 ||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="文件类型">
+                <span>{{ props.row.file_type ||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="文件描述">
+                <span>{{ props.row.desc ||'暂无'}}</span>
+              </el-form-item>
+              <el-form-item label="文件大小">
+                <span>{{ props.row.size|filterSize}}</span>
+              </el-form-item>
+              <el-form-item label="文件签名">
+                <span>{{ props.row.file_cert||'暂无'}}</span>
+              </el-form-item>
+            </el-form>
           </template>
         </el-table-column>
       </my-table>
@@ -160,24 +207,16 @@ export default {
           prop: 'file',
           state: true,
           isCustom: false,
-          slotName: 'file',
-          width: 150
+          slotName: 'file'
+
         },
         {
           label: '描述',
           prop: 'desc',
-          state: true,
+          state: false,
           isCustom: false,
           slotName: 'desc',
           width: 150
-        },
-        {
-          label: '文件签名',
-          prop: 'file_cert',
-          state: true,
-          isCustom: true,
-          slotName: 'file_cert',
-          width: 80
         },
 
         {
@@ -190,21 +229,39 @@ export default {
         },
 
         {
-          label: 'MD5',
+          label: '指纹特征',
           prop: 'md5',
           state: true,
           isCustom: false,
           slotName: 'md5',
+          width: 240
+        },
+        {
+          label: '文件签名',
+          prop: 'file_cert',
+          state: true,
+          isCustom: true,
+          slotName: 'file_cert',
           width: 80
         },
         {
           label: '文件大小',
           prop: 'size',
           state: true,
-          isCustom: false,
+          isCustom: true,
           slotName: 'size'
 
-        }]
+        },
+        // 展开项
+        {
+          label: '展开列',
+          prop: 'expand',
+          state: true,
+          isCustom: true,
+          slotName: 'expand'
+
+        }
+      ]
 
     }
   },

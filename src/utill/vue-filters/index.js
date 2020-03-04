@@ -84,8 +84,40 @@ Vue.filter('filterOsType', function (osType) {
   let numOsType = parseInt(osType)
   switch (numOsType) {
     case 0:
-      return '国外'
+      return '否'
     case 1:
-      return '国产'
+      return '是'
+  }
+})
+// 格式化文件大小
+Vue.filter('filterSize', function (value) {
+  if (value == null || value === '') {
+    return '0 Bytes'
+  }
+  let unitArr = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  let index = 0
+  let srcsize = parseFloat(value)
+  index = Math.floor(Math.log(srcsize) / Math.log(1024))
+  let size = srcsize / Math.pow(1024, index)
+  size = size.toFixed(0)// 保留的小数位数
+  return size + unitArr[index]
+})
+
+// 格式化所有策略下的type类型
+Vue.filter('filterType', function (type) {
+  let numType = parseInt(type)
+  switch (numType) {
+    case 0:
+      return '授信白名单策略'
+    case 1:
+      return '内置白名单策略'
+    case 2:
+      return '扫描白名单策略'
+    case 3:
+      return '远程下发白名单策略'
+    case 4:
+      return '本地导入白名单策略'
+    case 5:
+      return '驱动授信白名单策略'
   }
 })
