@@ -1,11 +1,11 @@
 <template>
   <div class="appProtect">
-    <div>安全防护</div>
-    <div style="display: flex">
+    <div class="secDefSty">安全防护</div>
+    <div class="titleTopDef">
       <div class="leftCont">应用程序防护</div>
       <div>
         <el-switch
-        v-model="appDef"
+        v-model="app_def"
         @change="changeStatus"
         active-color="#13ce66"
         inactive-color="black">
@@ -16,9 +16,9 @@
     <div style="display: flex;margin-top: 14px">
       <div class="leftCont"></div>
       <div>
-        <el-checkbox v-model="exeStatus">exe</el-checkbox>
-        <el-checkbox v-model="batStatus">bat</el-checkbox>
-        <el-checkbox v-model="vbsStatus">vbs</el-checkbox>
+        <el-checkbox v-model="app_def_exe">exe</el-checkbox>
+        <el-checkbox v-model="app_def_bat">bat</el-checkbox>
+        <el-checkbox v-model="app_def_vbs">vbs</el-checkbox>
       </div>
     </div>
     <!--<div style="display: flex">
@@ -73,7 +73,7 @@
       <div class="leftCont">数据防护</div>
       <div>
         <el-switch
-          v-model="dataDef"
+          v-model="data_def"
           @change="changeStatus"
           active-color="#13ce66"
           inactive-color="black">
@@ -83,7 +83,7 @@
     <div style="display: flex;margin-top: 19px">
       <div class="leftCont"></div>
       <div style="display: flex">
-        <div class="baseDiv">
+        <div class="baseDiv" style="height:96px;">
           <span v-for="(value,index) in  path" :key="index" class="spanSty">
              <span style="margin-right: 5px">{{value}}</span>
              <i class="el-icon-circle-close" @click="delPath(index)"></i>
@@ -102,7 +102,7 @@
     <div style="display: flex;margin-top: 13px">
       <div class="leftCont"></div>
       <div style="display: flex">
-        <div class="baseDiv"></div>
+        <el-input  v-model="except_app_type"></el-input>
         <div class="diySty"><span class="diyTxt">自定义</span></div>
       </div>
     </div>
@@ -136,13 +136,13 @@ export default {
   },
   data () {
     return {
-      appDef: false, // 应用程序防护状态
-      exeStatus: '',
-      batStatus: '',
-      vbsStatus: '',
-      dataDef: false, // 数据防护开关状态
+      app_def: false, // 应用程序防护状态
+      app_def_exe: false,
+      app_def_bat: false,
+      app_def_vbs: false,
+      data_def: false, // 数据防护开关状态
       path: [],
-      fileType: '',
+      except_app_type: '',
       drawer: false,
       choosePath: true,
       okFlag: false,
@@ -150,54 +150,17 @@ export default {
     }
   },
   methods: {
-    // 获取系统参数配置
-    getConfig () {
-      let key = ['except_app_type', 'dir_def']
-      for (let i = 0; i < key.length; i++) {
-        let params = {
-          cmdlist: [{
-            'cmd': 132372,
-            'ncmd': 'getSystemConfig',
-            'data': {
-              'key': key[i] // 根据key获取配置值
-            }
-          }]
-        }
-        req_getConfig(params).then(res => {
-          if (res.results.config.key === 'except_app_type') {
-            this.fileType = res.results.config.value
-          } else {
-            this.path = res.results.config.value.split(';')
-          }
-        })
-      }
-    },
-    // 完整性目录中的删除功能
-    delPath (index) {
-      this.path.splice(index, 1)
-    },
-    changeDrawer (v) {
-      this.drawer = v
-    },
-    selectPath (pathArr) {
-      debugger
-      this.path = pathArr
-    },
-    changeStatus (status) {
-      alert(status)
-    },
+    // 确定
     submitForm () {
-      let fileTypeitem = {
-        'key': 'except_app_type',
-        'value': this.fileType
-      }
-      let pathItem = {
-        'key': 'dir_def',
-        'value': this.path.join(';')
-      }
+      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'data_def', 'dir_def', 'except_app_type']
       let data = []
-      data.push(pathItem)
-      data.push(fileTypeitem)
+      for (let i = 0; i < key.length; i++) {
+        let itemObj = {
+          'key': key[i],
+          'value': key[i] === 'dir_def' ? this.path.join(';') : (this[key[i]] ? 1 : 0)
+        }
+        data.push(itemObj)
+      }
       let params = {
         cmdlist: [{
           'cmd': 132374,
@@ -213,7 +176,37 @@ export default {
         }
       })
     },
+    // 取消
     resetForm () {
+
+    },
+    // 获取系统参数配置
+    getConfig () {
+      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'data_def', 'dir_def', 'except_app_type']
+      let params = {
+        cmdlist: [{
+          'cmd': 132372,
+          'ncmd': 'getSystemConfig',
+          'data': {
+            'key': key // 根据key获取配置值
+          }
+        }]
+      }
+      req_getConfig(params).then(res => {
+
+      })
+    },
+    // 完整性目录中的删除功能
+    delPath (index) {
+      this.path.splice(index, 1)
+    },
+    changeDrawer (v) {
+      this.drawer = v
+    },
+    selectPath (pathArr) {
+      this.path = pathArr
+    },
+    changeStatus (status) {
 
     }
   },
