@@ -1,0 +1,198 @@
+@import './theme1.scss';
+@import './theme2.scss';
+
+.updatebox {
+  .update {
+    position: absolute;
+    top: 50px;
+    z-index: 100;
+    left: 55px;
+    width: 450px;
+    height: 500px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    background: rgba(238, 238, 238, 1);
+    box-shadow: 6px 10px 15px 1px rgba(19, 19, 19, 0.25);
+    border-radius: 5px;
+
+
+    .title {
+      height: 16px;
+      font-size: 16px;
+      line-height: 16px;
+      color: #333;
+      padding: 13px 0;
+      text-align: center;
+      font-family: SourceHanSansCN-Medium;
+      font-weight: bolder;
+      position: relative;
+
+
+      .close {
+        position: absolute;
+        color: #BFBFBF;
+        right: 0;
+        top: 13px;
+        height: 16px;
+        font-size: 14px;
+        line-height: 16px;
+
+        cursor: pointer;
+      }
+    }
+
+    .versionWarp {
+      margin-top: 10px;
+
+      .version {
+        padding-left: 18px;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+
+    .content {
+      margin-top: 8px;
+      margin-bottom: 36px;
+      width: 429px;
+      height: 307px;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 5px;
+    }
+
+    .btnwarp {
+      height: 30px;
+
+      box-sizing: border-box;
+      padding: 0 75px;
+      @include childXBetween;
+
+      .btn {
+        padding: 8px 50px;
+        outline: none;
+        border: none;
+        line-height: 14px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .ok {
+        color: rgba(255, 255, 255, 1);
+        background: linear-gradient(0deg, rgba(229, 57, 53, 1) 0%, rgba(227, 93, 91, 1) 100%);
+      }
+
+      .close {
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid;
+        color: rgba(228, 70, 68, 1);
+        border-image: linear-gradient(0deg, rgba(229, 57, 53, 1), rgba(227, 93, 91, 1)) 10 10;
+      }
+    }
+
+
+  }
+
+  .updating {
+    position: absolute;
+    top: 150px;
+    z-index: 100;
+    left: 55px;
+    width: 450px;
+    height: 300px;
+    background: rgba(238, 238, 238, 1);
+    box-sizing: border-box;
+    padding: 0 10px;
+    box-shadow: 6px 10px 15px 1px rgba(19, 19, 19, 0.25);
+    border-radius: 5px;
+
+    .title {
+      height: 16px;
+      font-size: 16px;
+      line-height: 16px;
+      color: #333;
+      padding: 13px 0;
+      text-align: center;
+      font-family: SourceHanSansCN-Medium;
+      font-weight: bolder;
+      position: relative;
+
+
+      .close {
+        position: absolute;
+        color: #BFBFBF;
+        right: 0;
+        top: 13px;
+        height: 16px;
+        font-size: 14px;
+        line-height: 16px;
+
+        cursor: pointer;
+      }
+    }
+
+    .versionWarp {
+      margin-top: 10px;
+
+      .version {
+        padding-left: 18px;
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+
+    .content {
+      margin-top: 8px;
+
+      width: 429px;
+      height: 77px;
+      background: rgba(255, 255, 255, 1);
+      border-radius: 5px;
+    }
+
+    .progress {
+      margin-top: 13px;
+
+      >>>.el-progress-bar__inner {
+        background: linear-gradient(0deg, rgba(229, 57, 53, 1) 0%, rgba(227, 93, 91, 1) 100%);
+        border-radius: 4px;
+      }
+
+      >>>.el-progress-bar__outer {
+        background: rgba(0, 0, 0, 0.1);
+
+        border-radius: 4px;
+      }
+    }
+
+    .btnwarp {
+      margin-top: 35px;
+      height: 30px;
+
+      box-sizing: border-box;
+      padding: 0 75px;
+      @include childXBetween;
+
+      .btn {
+        padding: 8px 50px;
+        outline: none;
+        border: none;
+        line-height: 14px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .ok {
+        color: rgba(255, 255, 255, 1);
+        background: linear-gradient(0deg, rgba(229, 57, 53, 1) 0%, rgba(227, 93, 91, 1) 100%);
+      }
+
+      .close {
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid;
+        color: rgba(228, 70, 68, 1);
+        border-image: linear-gradient(0deg, rgba(229, 57, 53, 1), rgba(227, 93, 91, 1)) 10 10;
+      }
+    }
+
+  }
+}

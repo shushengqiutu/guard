@@ -60,12 +60,19 @@
           <!-- <p @click="switchTheme"> 切换主题 {{getTheme}}</p> -->
           <!-- <p @click="switchLang"> 切换语言 {{getLang}}</p> -->
 
-          <p>更新版本 </p>
+          <p @click="isUpdate=!isUpdate">更新版本 </p>
           <p>关于</p>
         </div>
       </transition>
 
     </div>
+    <!-- 更新版本 -->
+
+    <div v-if="isUpdate"
+         class="updateWarp">
+      <update @closeupdate='closeupdate'></update>
+    </div>
+
   </div>
 </template>
 
@@ -77,15 +84,16 @@ import {
   req_stopScan
 } from '@/api'
 import tabs from '@/component/tabs/'
-
+import update from '@/component/update/'
 export default {
   name: 'myHead',
   components: {
-    tabs
+    tabs, update
   },
   data () {
     return {
       policyID: '',
+      isUpdate: false, // 是否打开版本更新
       subMean: false,
       securityPolicyConfig: {
         routeNameArr: ['securityPolicy', 'creditPolicy', 'allPolicy', 'inWhiteList'],
@@ -195,13 +203,19 @@ export default {
       })
       return result.results
     },
+    // 切换主题
     switchTheme () {
       // debugger
       this.getTheme === '1' ? this.change_theme({ theme: '2' }) : this.change_theme({ theme: '1' })
     },
+    // 切换语言
     switchLang () {
       // debugger
       this.getLang === 'zh' ? this.change_lang({ lang: 'en' }) : this.change_lang({ lang: 'zh' })
+    },
+    // 关闭更新
+    closeupdate (bool) {
+      this.isUpdate = bool
     }
   }
 }

@@ -29,7 +29,9 @@ import {
   SYSCONFIG_URL,
   GETCONFIG_URL,
   DEPLOY_URL,
-  UNDEPLOY_URL
+  UNDEPLOY_URL,
+  UPDATE_URL
+
 }
   from './req_url'
 
@@ -385,3 +387,39 @@ export const req_undeploy = (data) => ajax(UNDEPLOY_URL, {
   }]
 }, 'POST')
 /** *************************************取消部署白名单策略********************************************/
+
+/** *************************************系统升级开始********************************************/
+// 检查版本
+export const req_updatecheck = () => ajax(UPDATE_URL, {
+  cmdlist: [{
+    cmd: 0x00022103,
+    ncmd: 'updatecheck'
+  }]
+}, 'POST')
+
+// 获取升级状态
+export const req_updatestatus = (data) => ajax(UPDATE_URL, {
+  cmdlist: [{
+    cmd: 0x00022104,
+    ncmd: 'updatestatus',
+    data: data
+  }]
+}, 'POST')
+// 开始升级
+export const req_startupdate = (data) => ajax(UPDATE_URL, {
+  cmdlist: [{
+    cmd: 0x00022102,
+    ncmd: 'startupdate',
+    data: data
+  }]
+}, 'POST')
+// 强制升级
+export const req_forceupdate = (data) => ajax(UPDATE_URL, {
+  cmdlist: [{
+    cmd: 0x00022105,
+    ncmd: '"forceupdate',
+    data: data
+  }]
+}, 'POST')
+
+/** *************************************系统升级结束********************************************/

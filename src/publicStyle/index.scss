@@ -24,6 +24,11 @@
   justify-content: space-between;
 }
 
+@mixin myBtn {
+  padding: 8px 50px;
+
+}
+
 @mixin childXRight {
   display: flex;
   justify-content: flex-end;

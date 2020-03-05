@@ -55,3 +55,8 @@ export const GETCONFIG_URL = `${BASE_URL}/system/systemconfigbykey`
 export const DEPLOY_URL = `${BASE_URL}/whitelist/deploy`
 // 取消部署白名单策略
 export const UNDEPLOY_URL = `${BASE_URL}/whitelist/undeploy`
+/* 系统升级 */
+// 检测升级
+export const UPDATE_URL = `${BASE_URL}/updateproc/message`
+
+/* 系统升级结束 */

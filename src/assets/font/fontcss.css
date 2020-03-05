@@ -2,11 +2,15 @@
   font-family: SourceHanSansCN-Bold;
   src: url('SourceHanSansCN-Bold.otf');
 }
+
+
+
 @font-face {
-  font-family:SourceHanSansCN-Light;
+  font-family: SourceHanSansCN-Light;
   src: url('SourceHanSansCN-Light.otf');
 }
+
 @font-face {
-  font-family:SourceHanSansCN-Medium ;
+  font-family: SourceHanSansCN-Medium;
   src: url('SourceHanSansCN-Medium.otf');
 }
