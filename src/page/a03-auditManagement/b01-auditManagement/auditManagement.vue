@@ -34,7 +34,7 @@
       </div> -->
       <my-table :tableData='tableData'
                 :tHead='tHead'
-                :tableHeight="'435'"
+                :tableHeight="'465'"
                 :checkBox='false'>
         <el-table-column slot="index"
                          type="index"

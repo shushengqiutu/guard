@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13279566",
+      "name": "未标题-2_画板 1",
+      "font_class": "weibiaoti-_huaban",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
       "icon_id": "11277702",
       "name": "收起",
       "font_class": "shouqi",
@@ -116,13 +123,6 @@
       "font_class": "baimingdan_",
       "unicode": "e671",
       "unicode_decimal": 58993
-    },
-    {
-      "icon_id": "13090623",
-      "name": "缩小",
-      "font_class": "suoxiao",
-      "unicode": "e66c",
-      "unicode_decimal": 58988
     },
     {
       "icon_id": "13090624",

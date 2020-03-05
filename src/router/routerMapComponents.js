@@ -26,7 +26,7 @@ export default {
   'InWhiteListInfo': () => import('@/page/a05-inWhiteList/b02-inWhiteListInfo/inWhiteListInfo.vue'),
   // 审计事件
   'AuditManagement': () => import('@/page/a03-auditManagement/b01-auditManagement/auditManagement.vue'),
-  // 策略中心-数据防护
+  // 策略中心-应用防护
   'DataProtect': () => import('@/page/a04-strategyCenter/b01-dataProtect/dataProtect.vue'),
   // 策略中心-外联探测设置
   'OutDetectionSet': () => import('@/page/a04-strategyCenter/b02-outDetectionSet/outDetectionSet.vue'),
@@ -34,7 +34,7 @@ export default {
   'UsbScanSet': () => import('@/page/a04-strategyCenter/b03-usbScanSet/usbScanSet.vue'),
   // 策略中心-工作模式
   'WorkMode': () => import('@/page/a04-strategyCenter/b04-workMode/workMode.vue'),
-  // 策略中心-防护应用
+  // 策略中心-安全防护
   'AppProtect': () => import('@/page/a04-strategyCenter/b05-appProtect/appProtect.vue'),
   // 策略中心-外防设置
   'PeripheralProtect': () => import('@/page/a04-strategyCenter/b06-peripheralProtect/peripheralProtect.vue'),

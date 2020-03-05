@@ -2,9 +2,8 @@
   <div class="menu-wrapper">
     <el-submenu :index="datas.path">
       <template slot="title">
-
         <i :class="datas.icon"
-           class="menuIcon"></i>
+           class="menuIcon icon iconfont"></i>
         <span slot="title">{{$t(`main.menu.${datas.redirect}`)}}</span>
       </template>
 

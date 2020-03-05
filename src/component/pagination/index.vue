@@ -1,24 +1,28 @@
 
 <template>
-  <div class="mypagination">
-    <el-pagination @size-change="handleSizeChange"
-                   @current-change="handleCurrentChange"
-                   :current-page="page"
-                   :pager-count='5'
-                   background
-                   :page-sizes="pageSizesArr"
-                   :page-size="size"
-                   layout="prev, pager, next, jumper"
-                   :total="total">
-      <!-- @size-change   每页显示条数修改触发 -->
-      <!-- @current-change   切换显示哪页触发 -->
-      <!-- current-change   当前显示哪一页 -->
-      <!-- page-sizes    可选每页显示多少数据 -->
-      <!-- page-size    默认每页显示多少数据 -->
-      <!--layout   分页显示哪些功能  -->
-      <!--total    数据总数  -->
-    </el-pagination>
+  <div class="warp">
+    <div class="tatal">当前总计：{{total}}数据 总计{{pageTotal(total,size)}}页 当前页{{mypage}}</div>
+    <div class="mypagination">
+      <el-pagination @size-change="handleSizeChange"
+                     @current-change="handleCurrentChange"
+                     :current-page="page"
+                     :pager-count='5'
+                     background
+                     :page-sizes="pageSizesArr"
+                     :page-size="size"
+                     layout="prev, pager, next, jumper"
+                     :total="total">
+        <!-- @size-change   每页显示条数修改触发 -->
+        <!-- @current-change   切换显示哪页触发 -->
+        <!-- current-change   当前显示哪一页 -->
+        <!-- page-sizes    可选每页显示多少数据 -->
+        <!-- page-size    默认每页显示多少数据 -->
+        <!--layout   分页显示哪些功能  -->
+        <!--total    数据总数  -->
+      </el-pagination>
+    </div>
   </div>
+
 </template>
 <script>
 export default {
@@ -51,14 +55,35 @@ export default {
 
     }
   },
+  data () {
+    return {
+      mypage: this.page
+    }
+  },
   methods: {
     handleSizeChange (size) {
       this.$emit('paginationChange', 'size', size)
       // 每页数据发生改变
     },
     handleCurrentChange (page) {
+      this.mypage = page
       this.$emit('paginationChange', 'page', page)
       // 显示页数发生改变
+    },
+    pageTotal (rowCount, pageSize) {
+      console.log('总条数' + rowCount + '每页总条数' + pageSize)
+      if (rowCount == null || rowCount === '') {
+        return 0
+      } else {
+        if (pageSize !== 0 &&
+          rowCount % pageSize === 0) {
+          return parseInt(rowCount / pageSize)
+        }
+        if (pageSize !== 0 &&
+          rowCount % pageSize !== 0) {
+          return parseInt(rowCount / pageSize) + 1
+        }
+      }
     }
   }
 

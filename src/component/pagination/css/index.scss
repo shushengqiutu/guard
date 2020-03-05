@@ -1,87 +1,102 @@
 @import './theme1.scss';
 @import './theme2.scss';
 
-.mypagination {
-  >>>.el-pagination__total {
+.warp {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  @include childXBetween;
+
+  line-height: 32px;
+
+  .tatal {
     color: #fff;
   }
 
-  >>>.el-pagination {
-    color: #fff;
+  .mypagination {
+    >>>.el-pagination__total {
+      color: #fff;
+    }
+
+    >>>.el-pagination {
+      color: #fff;
+    }
+
+    >>>.el-pagination__sizes {
+      color: #fff;
+    }
+
+    >>>.el-select .el-input.is-focus .el-input__inner {
+      border-color: #fff;
+    }
+
+    >>>.el-pagination__sizes .el-input .el-input__inner:hover {
+      border-color: #fff;
+    }
+
+    >>>.el-pagination__editor.el-input .el-input__inner {
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      height: 22px;
+    }
+
+    >>>.el-pagination .el-select .el-input .el-input__inner {
+      background: transparent;
+      color: #fff;
+    }
+
+    >>>.el-pager li {
+      background: transparent;
+    }
+
+    >>>.el-pager li.active {
+      color: #fff;
+    }
+
+    >>>.el-pager li:hover {
+      color: #fff;
+    }
+
+    >>>.el-pager .el-icon-d-arrow-right {
+      color: #fff;
+    }
+
+    >>>.el-pager .more::before {
+      line-height: 0.32609rem;
+      color: rgba(255, 255, 255, 0.1)
+    }
+
+    >>>.el-pagination button {
+      background: transparent;
+    }
+
+    >>>.el-select-dropdown__list {
+      background: transparent;
+    }
+
+    >>>.el-pagination button:hover {
+      color: #fff;
+    }
+
+    >>>.el-select-dropdown__item {
+      color: #fff !important;
+    }
+
+    >>>.el-pagination .btn-next .el-icon,
+    >>>.el-pagination .btn-prev .el-icon {
+      color: rgba(255, 255, 255, 0.1);
+
+      // background: rgba(255, 255, 255, 0.1);
+    }
+
+    >>>.el-pagination.is-background .el-pager li:not(.disabled).active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    >>>.el-pagination.is-background .el-pager li:not(.disabled):hover {
+      color: #fff;
+    }
   }
 
-  >>>.el-pagination__sizes {
-    color: #fff;
-  }
-
-  >>>.el-select .el-input.is-focus .el-input__inner {
-    border-color: #fff;
-  }
-
-  >>>.el-pagination__sizes .el-input .el-input__inner:hover {
-    border-color: #fff;
-  }
-
-  >>>.el-pagination__editor.el-input .el-input__inner {
-    background: transparent;
-    border: 1px solid #fff;
-  }
-
-  >>>.el-pagination .el-select .el-input .el-input__inner {
-    background: transparent;
-    color: #fff;
-  }
-
-  >>>.el-pager li {
-    background: transparent;
-  }
-
-  >>>.el-pager li.active {
-    color: #fff;
-  }
-
-  >>>.el-pager li:hover {
-    color: #fff;
-  }
-
-  >>>.el-pager .el-icon-d-arrow-right {
-    color: #fff;
-  }
-
-  >>>.el-pager .more::before {
-    line-height: 0.32609rem;
-    color: rgba(255, 255, 255, 0.1)
-  }
-
-  >>>.el-pagination button {
-    background: transparent;
-  }
-
-  >>>.el-select-dropdown__list {
-    background: transparent;
-  }
-
-  >>>.el-pagination button:hover {
-    color: #fff;
-  }
-
-  >>>.el-select-dropdown__item {
-    color: #fff !important;
-  }
-
-  >>>.el-pagination .btn-next .el-icon,
-  >>>.el-pagination .btn-prev .el-icon {
-    color: rgba(255, 255, 255, 0.1);
-
-    // background: rgba(255, 255, 255, 0.1);
-  }
-
-  >>>.el-pagination.is-background .el-pager li:not(.disabled).active {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-  }
-
-  >>>.el-pagination.is-background .el-pager li:not(.disabled):hover {
-    color: #fff;
-  }
 }

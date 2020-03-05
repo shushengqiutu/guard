@@ -19,7 +19,7 @@
                           :key="item.path"
                           :index="item.redirect">
               <i :class="item.icon"
-                 class="menuIcon"></i>
+                 class="menuIcon icon iconfont"></i>
               <span slot="title">{{$t(`main.menu.${item.children[0].name}`)}}</span>
             </el-menu-item>
             <!-- 需要显示子菜单 -->
@@ -53,8 +53,8 @@ export default {
         menuActiveText: ''
       },
       theme1Variables: {
-        menuText: '#ffffff',
-        menuActiveText: '#f48f48'
+        menuText: '#E6E6E6',
+        menuActiveText: '#ffffff'
       },
       theme2Variables: {
         menuText: '#ffffff',

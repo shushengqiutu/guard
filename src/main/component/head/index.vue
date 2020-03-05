@@ -52,7 +52,7 @@
     <div class="right">
       <div class="mean iconWarp"
            @click="subMean=!subMean"><i class="icon iconfont iconliebiao"> </i></div>
-      <div class="minimize iconWarp"></div>
+      <div class="minimize iconWarp"> <i class="icon iconfont iconweibiaoti-_huaban"> </i></div>
       <div class="close iconWarp"><i class="icon iconfont iconguanbi"> </i></div>
       <transition name="el-fade-in-linear">
         <div class="subMean"
