@@ -74,8 +74,10 @@ export default {
 
     }),
     defaultUrl: function () {
-      if (this.$route.name === 'allPolicy') {
+      if (this.$route.name === 'allPolicy' || this.$route.name === 'creditPolicy' || this.$route.name === 'inWhiteList') {
         return '/securityPolicy/securityPolicy'
+      } else if (this.$route.name === 'scaning' || this.$route.name === 'scanFinish') {
+        return '/smartExam'
       } else {
         return this.$route.path
       }

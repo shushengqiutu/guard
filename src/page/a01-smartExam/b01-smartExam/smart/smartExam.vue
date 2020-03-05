@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 <template>
-  <div class="smartWarp" v-loading="loading"
+  <div class="smartWarp"
+       v-loading="loading"
        element-loading-text="拼命加载中"
        element-loading-spinner="el-icon-loading"
-       element-loading-background="rgba(0, 0, 0, 0.8)"
-  >
+       element-loading-background="rgba(0, 0, 0, 0.8)">
     <div class="titleDes">
       <span class="titleCenter">为工业生产保驾护航</span><span class="protectDay">安全防护{{programObj.day}}天</span>
     </div>
@@ -26,17 +26,23 @@
             <div>
               <div>应用防护 </div>
               <div class="defendMargin">外设防护 </div>
-              <div class="defendMargin">网络防护 </div>
+              <div class="defendMargin"
+                   style="display:none">网络防护 </div>
               <div>目录防护 </div>
             </div>
             <div>
-              <div class="falseStatus" :class="{trueStatus:programObj.appStatus ==='运行'}">{{programObj.appStatus}}</div>
-              <div class="falseStatus defendStatus" :class="{trueStatus:programObj.peripherals ==='运行'}">{{programObj.peripherals}}</div>
-              <div class="falseStatus defendStatus" :class="{trueStatus:programObj.net ==='运行'}">{{programObj.net}}</div>
-              <div class="falseStatus defendStatus" :class="{trueStatus:programObj.dircetory ==='运行'}">{{programObj.dircetory}}</div>
+              <div class="falseStatus"
+                   :class="{trueStatus:programObj.appStatus ==='运行'}">{{programObj.appStatus}}</div>
+              <div class="falseStatus defendStatus"
+                   :class="{trueStatus:programObj.peripherals ==='运行'}">{{programObj.peripherals}}</div>
+              <div class="falseStatus defendStatus"
+                   style="display:none"
+                   :class="{trueStatus:programObj.net ==='运行'}">{{programObj.net}}</div>
+              <div class="falseStatus defendStatus"
+                   :class="{trueStatus:programObj.dircetory ==='运行'}">{{programObj.dircetory}}</div>
             </div>
           </div>
-          </div>
+        </div>
       </div>
       <div class="flexCont">
         <div class="margin1">
@@ -52,12 +58,13 @@
             <div>
               <div>当前策略</div>
               <div class="modeMargin">系统服务</div>
-              <div>集群服务</div>
+              <div style="display:none">集群服务</div>
             </div>
             <div>
               <div class="textAlineSty">{{programObj.policy ? programObj.policy : '暂无'}}</div>
               <div class="modeMargin textAlineSty">{{programObj.sysStatus ? programObj.sysStatus : '暂无'}}</div>
-              <div class="textAlineSty clusterSty">{{programObj.itm ? programObj.itm : '暂无'}}</div>
+              <div style="display:none"
+                   class="textAlineSty clusterSty">{{programObj.itm ? programObj.itm : '暂无'}}</div>
             </div>
           </div>
         </div>
@@ -86,7 +93,7 @@
                 <span class="countSty">{{homeObj.weekCount}}</span> 条
               </div>
               <div class="textAlineSty"><span class="countSty">
-                {{homeObj.dayThreatCount}}</span> <span style="line-height: 10px">次</span>
+                  {{homeObj.dayThreatCount}}</span> <span style="line-height: 10px">次</span>
               </div>
             </div>
           </div>
