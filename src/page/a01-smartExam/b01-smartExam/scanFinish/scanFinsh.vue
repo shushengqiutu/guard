@@ -143,6 +143,8 @@ export default {
       let result = await req_scanStatus({ policyID })
       this.loading = false
       this.scanResult.whiteListCount = result.results.pos
+      this.scanResult.netCount = result.results.net
+      this.scanResult.usbCount = result.results.usb
     }
   }
 
