@@ -39,25 +39,24 @@
         <div class="diySty"><span class="diyTxt">自定义</span></div>
       </div>
     </div>-->
-    <!--<div style="display: flex">
+    <div style="display: flex;margin-top: 19px">
       <div class="leftCont">外设防护</div>
       <div>
         <el-switch
-          v-model="appStatus"
-          @change="changeStatus"
+          v-model="peripheral_def"
+          @change="changePeripheral"
           active-color="#13ce66"
           inactive-color="black">
         </el-switch>
       </div>
     </div>
-    <div style="display: flex">
+    <div style="display: flex;margin-top: 14px">
       <div class="leftCont"></div>
       <div>
-        <el-checkbox v-model="exeObj.exeStatus">USB存储</el-checkbox>
-        <el-checkbox v-model="batObj.batStatus">USB摄像头</el-checkbox>
-        <el-checkbox v-model="vbsObj.vbsStatus">移动硬盘</el-checkbox>
+        <el-checkbox v-model="usb_storage" :disabled="perFlag">USB存储</el-checkbox>
+        <el-checkbox v-model="non_usb_storage" :disabled="perFlag">非USB存储</el-checkbox>
       </div>
-    </div>-->
+    </div>
    <!-- <div style="display: flex">
       <div class="leftCont">网络防护</div>
       <div>
@@ -108,12 +107,14 @@
     <div style="display: flex">
       <div class="leftCont"></div>
       <div style="display: flex;margin-top: 29px">
-        <div class="baseButton buttonMargin"
+        <div class="okButton buttonMargin"
              @mouseover="okFlag=true"
              @mouseleave="okFlag=false"
-             :class="{'active':okFlag}" @click="submitForm()"
+             :class="{'active':okFlag}"
+             @click="submitForm()"
         ><span>确定</span></div>
-        <div class="baseButton"
+        <div class="cancelButton"
+             @click="resetForm"
              @mouseover="cancelFlag=true"
              @mouseleave="cancelFlag=false"
              :class="{'active':cancelFlag}"
@@ -136,10 +137,14 @@ export default {
   data () {
     return {
       checkBoxFlag: true,
+      perFlag: true,
       app_def: false, // 应用程序防护状态
       app_def_exe: false,
       app_def_bat: false,
       app_def_vbs: false,
+      peripheral_def: false, // 外设防护开关状态
+      usb_storage: false, // USB存储
+      non_usb_storage: false, // 非USB存储
       data_def: false, // 数据防护开关状态
       path: [],
       except_app_type: '',
@@ -152,7 +157,7 @@ export default {
   methods: {
     // 确定
     submitForm () {
-      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'data_def', 'dir_def', 'except_app_type']
+      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'peripheral_def', 'usb_storage', 'non_usb_storage', 'data_def', 'dir_def', 'except_app_type']
       let data = []
       for (let i = 0; i < key.length; i++) {
         let itemObj = {
@@ -169,7 +174,7 @@ export default {
           if (key[i] === 'dir_def') {
             itemObj = {
               'key': key[i],
-              'value': this.path.join(';')
+              'value': this.path.length ? this.path.join(';') : ''
             }
             data.push(itemObj)
           } else {
@@ -201,11 +206,11 @@ export default {
     },
     // 取消
     resetForm () {
-
+      this.getConfig()
     },
     // 获取系统参数配置
     getConfig () {
-      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'data_def', 'dir_def', 'except_app_type']
+      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'peripheral_def', 'usb_storage', 'non_usb_storage', 'data_def', 'dir_def', 'except_app_type']
       let keyArr = []
       for (let i = 0; i < key.length; i++) {
         let keyItem = {
@@ -242,11 +247,29 @@ export default {
               case 'app_def_vbs':
                 this.app_def_vbs = resData[j].value === '1'
                 break
+              case 'peripheral_def':
+                this.peripheral_def = resData[j].value === '1'
+                if (this.peripheral_def) {
+                  this.perFlag = false
+                } else {
+                  this.perFlag = true
+                }
+                break
+              case 'usb_storage':
+                this.usb_storage = resData[j].value === '1'
+                break
+              case 'non_usb_storage':
+                this.non_usb_storage = resData[j].value === '1'
+                break
               case 'data_def':
                 this.data_def = resData[j].value === '1'
                 break
               case 'dir_def':
-                this.path = resData[j].value.split(';')
+                if (resData[j].value) {
+                  this.path = resData[j].value.split(';')
+                } else {
+                  this.path = []
+                }
                 break
               case 'except_app_type':
                 this.except_app_type = resData[j].value
@@ -276,6 +299,16 @@ export default {
         this.app_def_bat = false
         this.app_def_exe = false
         this.app_def_vbs = false
+      }
+    },
+    // 外设防护开关
+    changePeripheral (status) {
+      if (status) {
+        this.perFlag = false
+      } else {
+        this.perFlag = true
+        this.usb_storage = false
+        this.non_usb_storage = false
       }
     }
   },
