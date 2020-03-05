@@ -16,9 +16,9 @@
     <div style="display: flex;margin-top: 14px">
       <div class="leftCont"></div>
       <div>
-        <el-checkbox v-model="app_def_exe">exe</el-checkbox>
-        <el-checkbox v-model="app_def_bat">bat</el-checkbox>
-        <el-checkbox v-model="app_def_vbs">vbs</el-checkbox>
+        <el-checkbox v-model="app_def_exe" :disabled="checkBoxFlag">exe</el-checkbox>
+        <el-checkbox v-model="app_def_bat" :disabled="checkBoxFlag">bat</el-checkbox>
+        <el-checkbox v-model="app_def_vbs" :disabled="checkBoxFlag">vbs</el-checkbox>
       </div>
     </div>
     <!--<div style="display: flex">
@@ -74,7 +74,6 @@
       <div>
         <el-switch
           v-model="data_def"
-          @change="changeStatus"
           active-color="#13ce66"
           inactive-color="black">
         </el-switch>
@@ -136,6 +135,7 @@ export default {
   },
   data () {
     return {
+      checkBoxFlag: true,
       app_def: false, // 应用程序防护状态
       app_def_exe: false,
       app_def_bat: false,
@@ -156,10 +156,30 @@ export default {
       let data = []
       for (let i = 0; i < key.length; i++) {
         let itemObj = {
-          'key': key[i],
-          'value': key[i] === 'dir_def' ? this.path.join(';') : (this[key[i]] ? 1 : 0)
+          'key': '',
+          'value': ''
         }
-        data.push(itemObj)
+        if (key[i] !== 'dir_def' && key[i] !== 'except_app_type') {
+          itemObj = {
+            'key': key[i],
+            'value': this[key[i]] ? '1' : '0'
+          }
+          data.push(itemObj)
+        } else {
+          if (key[i] === 'dir_def') {
+            itemObj = {
+              'key': key[i],
+              'value': this.path.join(';')
+            }
+            data.push(itemObj)
+          } else {
+            itemObj = {
+              'key': key[i],
+              'value': this.except_app_type
+            }
+            data.push(itemObj)
+          }
+        }
       }
       let params = {
         cmdlist: [{
@@ -172,7 +192,10 @@ export default {
       }
       req_sysConfig(params).then(res => {
         if (res.results.status) {
-
+          this.$msg({
+            message: '配置成功',
+            type: 'success'
+          })
         }
       })
     },
@@ -183,17 +206,56 @@ export default {
     // 获取系统参数配置
     getConfig () {
       let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'data_def', 'dir_def', 'except_app_type']
+      let keyArr = []
+      for (let i = 0; i < key.length; i++) {
+        let keyItem = {
+          key: key[i]
+        }
+        keyArr.push(keyItem)
+      }
       let params = {
         cmdlist: [{
           'cmd': 132372,
           'ncmd': 'getSystemConfig',
-          'data': {
-            'key': key // 根据key获取配置值
-          }
+          'data': keyArr
         }]
       }
       req_getConfig(params).then(res => {
-
+        if (res.results.status) {
+          let resData = res.results.list
+          for (let j = 0; j < resData.length; j++) {
+            switch (resData[j].key) {
+              case 'app_def':
+                this.app_def = resData[j].value === '1'
+                if (this.app_def) {
+                  this.checkBoxFlag = false
+                } else {
+                  this.checkBoxFlag = true
+                }
+                break
+              case 'app_def_exe':
+                this.app_def_exe = resData[j].value === '1'
+                break
+              case 'app_def_bat':
+                this.app_def_bat = resData[j].value === '1'
+                break
+              case 'app_def_vbs':
+                this.app_def_vbs = resData[j].value === '1'
+                break
+              case 'data_def':
+                this.data_def = resData[j].value === '1'
+                break
+              case 'dir_def':
+                this.path = resData[j].value.split(';')
+                break
+              case 'except_app_type':
+                this.except_app_type = resData[j].value
+                break
+              default:
+                break
+            }
+          }
+        }
       })
     },
     // 完整性目录中的删除功能
@@ -207,7 +269,14 @@ export default {
       this.path = pathArr
     },
     changeStatus (status) {
-
+      if (status) {
+        this.checkBoxFlag = false
+      } else {
+        this.checkBoxFlag = true
+        this.app_def_bat = false
+        this.app_def_exe = false
+        this.app_def_vbs = false
+      }
     }
   },
   created () {
