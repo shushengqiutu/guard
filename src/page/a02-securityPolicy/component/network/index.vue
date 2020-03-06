@@ -119,16 +119,9 @@ export default {
           state: true,
           isCustom: false,
           slotName: 'name',
-          width: 100
+          width: 200
         },
-        {
-          label: '状态',
-          prop: 'status',
-          state: false,
-          isCustom: false,
-          slotName: 'file',
-          width: 150
-        },
+
         {
           label: '描述',
           prop: 'desc',
@@ -136,41 +129,8 @@ export default {
           isCustom: false,
           slotName: 'desc'
 
-        },
-        {
-          label: '文件签名',
-          prop: 'file_cert',
-          state: false,
-          isCustom: true,
-          slotName: 'file_cert',
-          width: 80
-        },
-
-        {
-          label: '文件类型',
-          prop: 'file_type',
-          state: false,
-          isCustom: true,
-          slotName: 'file_type',
-          width: 80
-        },
-
-        {
-          label: 'MD5',
-          prop: 'md5',
-          state: false,
-          isCustom: false,
-          slotName: 'md5',
-          width: 80
-        },
-        {
-          label: '文件大小',
-          prop: 'size',
-          state: false,
-          isCustom: false,
-          slotName: 'size'
-
-        }]
+        }
+      ]
     }
   },
   created () {

@@ -460,9 +460,9 @@ export default {
     // 重新渲染分页
     paramsChangeTableInit () {
       this.pagination.page = 1
-      this.pagination.size = 10
+      this.pagination.size = 13
       this.initTableParams.page = 0
-      this.initTableParams.size = 10
+      this.initTableParams.size = 13
       this.initTable()
       this.pagination.isShow = false// 让分页隐藏
       this.$nextTick(() => { // 重新渲染分页

@@ -5,6 +5,7 @@
     <el-drawer title="追加文件"
                :visible.sync="newDrawer"
                size="30%"
+               :append-to-body='true'
                :wrapperClosable="false"
                ref="drawer">
       <div class="demo-drawer__content">

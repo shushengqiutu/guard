@@ -104,3 +104,14 @@
 .el-switch.is-checked .el-switch__core::after {
   margin-left: -6px;
 }
+
+//所有弹窗改为absolut 定位
+.el-drawer__wrapper {
+  position: absolute;
+}
+
+//所有弹窗改为遮罩改为body定位 定位
+.v-modal {
+  position: absolute;
+
+}

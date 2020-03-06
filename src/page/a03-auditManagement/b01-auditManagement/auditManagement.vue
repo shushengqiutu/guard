@@ -162,13 +162,13 @@ export default {
       pagination: {
         isShow: true,
         page: 1,
-        size: 10,
+        size: 14,
         pageSizesArr: [10, 20, 30, 40, 50], // 可选分页
         total: null // 总数据默认条数
       },
       initTableParams: {
         page: 0,
-        size: 10, // 可选
+        size: 14, // 可选
         start_time: '1970-1-1 00:00:00',
         end_time: '',
         params: {
@@ -197,7 +197,7 @@ export default {
 
         },
         {
-          label: '对象特征',
+          label: '指纹',
           prop: 'operation_feature',
           state: true,
           isCustom: false,
@@ -251,15 +251,16 @@ export default {
           prop: 'repeat',
           state: true,
           isCustom: false,
-          slotName: 'repeat',
-          width: 80
+          slotName: 'repeat'
+
         },
         {
           label: '开始时间',
           prop: 'start_time',
           state: true,
           isCustom: false,
-          slotName: 'start_time'
+          slotName: 'start_time',
+          width: 140
 
         },
         {
@@ -438,9 +439,9 @@ export default {
     },
     paramsChangeTableInit () {
       this.pagination.page = 1
-      this.pagination.size = 10
+      this.pagination.size = 14
       this.initTableParams.page = 0
-      this.initTableParams.size = 10
+      this.initTableParams.size = 14
       this.initTable()
       this.pagination.isShow = false// 让分页隐藏
       this.$nextTick(() => { // 重新渲染分页

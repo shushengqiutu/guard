@@ -126,9 +126,10 @@ html {
   height: 100%;
 }
 body {
-   width: 920px;
+  width: 920px;
   height: 600px;
-  background:linear-gradient(152deg,#232526 0%,#414345 100%);
+  background: linear-gradient(152deg, #232526 0%, #414345 100%);
+  position: relative;
 }
 #app {
   width: 920px;
