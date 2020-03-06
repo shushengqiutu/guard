@@ -17,7 +17,6 @@
             </div>
             <div style="margin-left: 5px">
               <el-switch
-                :disabled="secondData.status"
                 v-model="firstData.status"
                 @change="changeFirstStatus"
                 active-color="#13ce66"
@@ -41,7 +40,7 @@
             <div style="margin-left: 5px">
               <el-switch
                 v-model="secondData.status"
-                :disabled="firstData.status"
+                disabled
                 @change="changeSecondStatus"
                 active-color="#13ce66"
                 inactive-color="black">
@@ -50,6 +49,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="timeSty">
+      您在 {{firstObj.startTime}} 启用了{{firstObj.status ? '保护模式':'审计模式'}}
     </div>
   </div>
 </template>
@@ -73,12 +75,12 @@ export default {
     imgSty: { // 图片样式
       type: String,
       required: false,
-      default: 'width:175px;height:175px'
+      default: 'width:179px;height:180px'
     },
     boxSty: {
       type: String,
       required: false,
-      default: 'width:175px;height:175px'
+      default: 'width:179px;height:180px'
     }
   },
   data () {
@@ -103,45 +105,4 @@ export default {
 </script>
 <style lang='scss'  scoped>
 @import "./css/index.scss";
->>>.el-switch__core:after{
-  width: 12px;
-  height: 12px;
-  top: -1px;
-  left: -1px;
-}
->>>.el-switch__core{
-  width: 25px !important;
-  height: 12px;
-}
->>>.el-switch.is-checked .el-switch__core::after{
-  margin-left: -6px;
-}
-.scanTypeSty{
-  display: flex;
-  justify-content:center;
-  font-size:12px;
-  font-family:Microsoft YaHei;
-  font-weight:400;
-  color:rgba(255,255,255,1) !important;
-  width: 175px;
-  text-align: center;
-}
-.headText{
-  padding-top: 94px;
-  margin-left: 42px;
-  font-size:20px;
-  font-family:Microsoft YaHei;
-  font-weight:400;
-  color:rgba(255,255,255,1);
-}
-.device{
-  margin-top: 21px;
-  display: flex;
-}
-.deviceItem1{
-  margin-left: 143px;
-}
-.deviceItem2{
-  margin-left: 105px;
-}
 </style>

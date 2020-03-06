@@ -28,7 +28,7 @@
               <div class="defendMargin">外设防护 </div>
               <div class="defendMargin"
                    style="display:none">网络防护 </div>
-              <div>目录防护 </div>
+              <div>数据防护</div>
             </div>
             <div>
               <div class="falseStatus"
