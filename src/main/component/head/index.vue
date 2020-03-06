@@ -205,12 +205,10 @@ export default {
     },
     // 切换主题
     switchTheme () {
-      // debugger
       this.getTheme === '1' ? this.change_theme({ theme: '2' }) : this.change_theme({ theme: '1' })
     },
     // 切换语言
     switchLang () {
-      // debugger
       this.getLang === 'zh' ? this.change_lang({ lang: 'en' }) : this.change_lang({ lang: 'zh' })
     },
     // 关闭更新

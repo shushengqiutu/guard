@@ -22,7 +22,7 @@
             <el-input type="textarea"
                       v-model="form.name">
             </el-input>
-            <button @click='addFlieSrc'>选择文件</button>
+            <button @click='addFlieSrc()'>选择文件</button>
           </el-form-item>
           <el-form-item label="MD5">
             <el-input type="textarea"
@@ -144,6 +144,8 @@ export default {
       })
     },
     addFlieSrc () {
+      // addFlieSrc
+      // debugger
       this.listDrawer = true
     },
     // 添加文件函数

@@ -3,7 +3,7 @@
 
   <div>
     <el-drawer title="本地目录"
-               :visible.sync="newDrawer"
+               :visible.sync="newDrawer1"
                :append-to-body="true"
                :wrapperClosable="false">
       <div style="height: 500px;overflow: auto">
@@ -53,7 +53,7 @@ export default {
     }
   },
   computed: {
-    newDrawer: {
+    newDrawer1: {
       get () {
         return this.drawer
       },
@@ -82,7 +82,7 @@ export default {
       this.$emit('selectPath', this.pathArr)
     },
     getFiles () {
-      this.newDrawer = false
+      this.newDrawer1 = false
       this.$emit('getFiles', this.pathArr)
     },
     // 选择目录扫描
@@ -94,7 +94,6 @@ export default {
         // 追加
         console.log(this.policyID)
         if (this.pathArr.length) {
-          debugger
           this.sendScan({
             policyID: this.policyID,
             path: this.pathArr
@@ -143,7 +142,6 @@ export default {
       } else {
         if (data2.checkedKeys.length > 0) {
           this.$refs.tree.setCheckedNodes([data1])
-          debugger
           this.pathArr = data1.path
         }
       }

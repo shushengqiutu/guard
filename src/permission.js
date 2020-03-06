@@ -27,7 +27,6 @@ router.beforeEach((to, from, next) => {
         // 开始拉取用户信息
         store.dispatch('GetInfo')
           .then(res => {
-            // debugger
             // 根据后端路由生成动态路由表
             const routes = res.result.router
 

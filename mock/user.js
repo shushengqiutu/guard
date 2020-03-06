@@ -50,7 +50,7 @@ const users = {
 export default {
   login: res => {
     const { username, password } = JSON.parse(res.body) // 解构 username
-    // debugger
+
     // if (username || password) {
 
     //   return { aa: 11 }
@@ -61,7 +61,6 @@ export default {
         result: tokens[username].token
       }
     } else {
-      // debugger
       return 1
     }
   },

@@ -140,7 +140,6 @@ export default {
   methods: {
     /** ***********************************追加usb***********************************************/
     addNet () {
-      debugger
       this.netDrawer = true
     },
     changeNetDrawer (v) {
