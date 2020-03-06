@@ -115,3 +115,23 @@
   position: absolute;
 
 }
+
+//所有的switch样式
+.el-switch__core:after{
+  width: 12px;
+  height: 12.5px;
+  left: -2px;
+  top: 0;
+}
+.el-switch__core{
+  width: 24.5px !important;
+  height: 12.5px;
+  background:rgba(0,0,0,0.3) !important;
+  border: 0 !important;
+}
+.el-switch.is-checked .el-switch__core{
+  background:rgba(73,188,52,1) !important;
+}
+.el-switch.is-checked .el-switch__core::after{
+  margin-left: -6px;
+}
