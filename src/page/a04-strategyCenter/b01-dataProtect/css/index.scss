@@ -9,6 +9,19 @@
 >>>.el-radio__input.is-checked+.el-radio__label{
   color:rgba(255,255,255,1);
 }
+>>>.el-radio__inner::after{
+  width: 6px;
+  height: 6px;
+  background-color:rgba(255,255,255,1);
+}
+>>>.el-radio__input.is-checked .el-radio__inner{
+  background-color:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,1)!important;
+}
+>>>.el-radio__inner{
+  background-color:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,1)!important;
+}
 .titleSty{
   font-size:20px;
   font-family:SourceHanSansCN-Medium;
