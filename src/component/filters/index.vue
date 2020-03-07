@@ -5,6 +5,7 @@
       <el-date-picker v-model="timeArry"
                       type="datetimerange"
                       size='mini'
+                      popper-class='mydata'
                       @change="timeChange"
                       validate-event
                       unlink-panels

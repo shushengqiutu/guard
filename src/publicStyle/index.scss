@@ -13,6 +13,11 @@
   justify-content: center;
 }
 
+>>>.mydata {
+  background: red;
+  left: 20px;
+}
+
 @mixin childXYCenter {
   display: flex;
   justify-content: center;
@@ -47,9 +52,11 @@
   border-radius: 0;
 }
 
-.el-date-range-picker.has-sidebar {
+.el-date-range-picker.has-sidebar.mydata {
   width: 650px;
   font-size: 12px !important;
+
+  left: 230px !important;
 }
 
 .el-date-range-picker__content {
@@ -117,21 +124,24 @@
 }
 
 //所有的switch样式
-.el-switch__core:after{
+.el-switch__core:after {
   width: 12px;
   height: 12.5px;
   left: -2px;
   top: 0;
 }
-.el-switch__core{
+
+.el-switch__core {
   width: 24.5px !important;
   height: 12.5px;
-  background:rgba(0,0,0,0.3) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
   border: 0 !important;
 }
-.el-switch.is-checked .el-switch__core{
-  background:rgba(73,188,52,1) !important;
+
+.el-switch.is-checked .el-switch__core {
+  background: rgba(73, 188, 52, 1) !important;
 }
-.el-switch.is-checked .el-switch__core::after{
+
+.el-switch.is-checked .el-switch__core::after {
   margin-left: -6px;
 }
