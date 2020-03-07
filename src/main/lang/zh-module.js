@@ -10,7 +10,7 @@ exports.main = {
     'inWhiteListInfo': '内置白名单详情',
     'auditManagement': '审计事件',
     '/policyCentral/dataProtect': '策略中心',
-    'dataProtect': '应用防护',
+    'dataProtect': '防护策略',
     'outDetectionSet': '外联探测设置',
     'usbScanSet': 'U盘扫描设置',
     'workMode': '工作模式',
