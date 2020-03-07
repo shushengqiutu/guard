@@ -32,7 +32,8 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <button @click="startSendUsb()">确定</button>
+            <button type="button"
+                    @click="startSendUsb()">确定</button>
           </el-form-item>
         </el-form>
       </div>

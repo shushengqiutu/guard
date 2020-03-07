@@ -9,6 +9,7 @@
                :wrapperClosable="false"
                ref="drawer">
       <div class="demo-drawer__content">
+
         <el-form ref="form"
                  :model="form"
                  label-width="80px">
@@ -22,7 +23,8 @@
             <el-input type="textarea"
                       v-model="form.name">
             </el-input>
-            <button @click='addFlieSrc()'>选择文件</button>
+            <button type="button"
+                    @click='addFlieSrc()'>选择文件</button>
           </el-form-item>
           <el-form-item label="MD5">
             <el-input type="textarea"
@@ -35,7 +37,9 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <button @click="startSend()">确定</button> <button>取消</button>
+            <button type="button"
+                    @click="startSend()">确定</button>
+            <button type="button">取消</button>
           </el-form-item>
         </el-form>
       </div>
@@ -146,6 +150,7 @@ export default {
     addFlieSrc () {
       // addFlieSrc
       // debugger
+      debugger
       this.listDrawer = true
     },
     // 添加文件函数
