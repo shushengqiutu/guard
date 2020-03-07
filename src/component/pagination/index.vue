@@ -1,7 +1,7 @@
 
 <template>
   <div class="warp">
-    <div class="tatal">当前总计：{{total}}数据 总计{{pageTotal(total,size)}}页 当前页{{mypage}}</div>
+    <div class="tatal">当前总计：{{total||'0'}}条 总计{{pageTotal(total,size)}}页</div>
     <div class="mypagination">
       <el-pagination @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
@@ -57,7 +57,7 @@ export default {
   },
   data () {
     return {
-      mypage: this.page
+
     }
   },
   methods: {
@@ -66,7 +66,6 @@ export default {
       // 每页数据发生改变
     },
     handleCurrentChange (page) {
-      this.mypage = page
       this.$emit('paginationChange', 'page', page)
       // 显示页数发生改变
     },
