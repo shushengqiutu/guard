@@ -82,8 +82,8 @@ export default {
       this.$emit('selectPath', this.pathArr)
     },
     getFiles () {
-      this.newDrawer1 = false
       this.$emit('getFiles', this.pathArr)
+      this.newDrawer1 = false
     },
     // 选择目录扫描
     // 开始扫描
@@ -92,7 +92,7 @@ export default {
 
       if (this.policyID >= 0) {
         // 追加
-        console.log(this.policyID)
+
         if (this.pathArr.length) {
           this.sendScan({
             policyID: this.policyID,
@@ -148,7 +148,7 @@ export default {
     },
     // 点击子节点
     handleNodeClick (data) {
-      console.log('node', data)
+
     },
     // 异步树叶子节点懒加载逻辑
     loadNode (node, resolve) {
@@ -200,7 +200,7 @@ export default {
             }
 
             item.path = scanPath + '\\' + item.name
-            console.log(item)
+
             return item
           })
         }

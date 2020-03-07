@@ -179,7 +179,7 @@ export default {
     // 获取表格数据
     async getTableData (data) {
       const result = await req_Inwhitelist(data)
-      console.log(result, 77)
+
       return result
     },
     // 处理数据
@@ -221,7 +221,6 @@ export default {
     // rowDblclick
     faterRowDblclick (row, column, event) {
       this.linkTo(row.wl_type, row.os_version)
-      console.log(row, column, event, 99)
     },
     // 双击Row或者点击详情
     linkTo (type, version) {

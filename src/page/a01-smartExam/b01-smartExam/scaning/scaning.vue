@@ -22,9 +22,11 @@
                src="@/assets/img/public/应用程序@2x.png" />
         </div>
         <div>
-          <img v-if="whileListStatus" class="iconSty"
+          <img v-if="whileListStatus"
+               class="iconSty"
                src="@/assets/img/public/组 18@2x.png" />
-          <i v-else  class="el-icon-loading"></i>
+          <i v-else
+             class="el-icon-loading"></i>
           扫描系统应用程序
         </div>
         <div>白名单文件数量：{{whiteListCount}}</div>
@@ -35,9 +37,11 @@
                src="@/assets/img/public/网口@2x.png" />
         </div>
         <div>
-          <img v-if="netStatus" class="iconSty"
+          <img v-if="netStatus"
+               class="iconSty"
                src="@/assets/img/public/组 18@2x.png" />
-          <i v-else class="el-icon-loading"></i>
+          <i v-else
+             class="el-icon-loading"></i>
           扫描网卡
         </div>
         <div>网卡个数：{{netCount}}</div>
@@ -48,9 +52,11 @@
                src="@/assets/img/public/USB@2x.png" />
         </div>
         <div>
-          <img v-if="usbStatus" class="iconSty"
+          <img v-if="usbStatus"
+               class="iconSty"
                src="@/assets/img/public/组 18@2x.png" />
-          <i v-else class="el-icon-loading"></i>
+          <i v-else
+             class="el-icon-loading"></i>
           扫描USB
         </div>
         <div>USB数量：{{usbCount}}</div>
@@ -89,7 +95,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      console.log(to, from, 88)
+
     },
     scanPath (val, oldVal) {
 
@@ -203,7 +209,6 @@ export default {
     next(vm => {
       // 通过 `vm` 访问组件实例
       vm.initPage()
-      console.log(vm, 88)
     })
   },
   created () {

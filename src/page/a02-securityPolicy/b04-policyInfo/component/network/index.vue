@@ -205,7 +205,7 @@ export default {
     // 获取表格数据
     async getTableData (data) {
       const result = await req_ShowWhiteUsbNetList(data)
-      console.log(result, 77)
+
       return result
     },
     // 处理数据

@@ -128,7 +128,6 @@ export default {
             type: 'error'
           })
         }
-        console.log(res, 999)
       })
     },
     // 添加usb函数
@@ -141,7 +140,6 @@ export default {
   watch: {
     policyID (id) {
       this.form.policyID = id
-      console.log(id, 99)
     }
   }
 

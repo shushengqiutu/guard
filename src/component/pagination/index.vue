@@ -71,7 +71,6 @@ export default {
       // 显示页数发生改变
     },
     pageTotal (rowCount, pageSize) {
-      console.log('总条数' + rowCount + '每页总条数' + pageSize)
       if (rowCount == null || rowCount === '') {
         return 0
       } else {

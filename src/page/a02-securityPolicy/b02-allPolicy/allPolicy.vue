@@ -501,7 +501,6 @@ export default {
     // rowDblclick
     faterRowDblclick (row, column, event) {
       this.linkTo(row.policyID, row.status)
-      console.log(row, column, event, 99)
     },
     // 双击Row或者点击详情
     linkTo (policyID, status) {

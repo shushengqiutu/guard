@@ -271,7 +271,6 @@ export default {
     next(vm => {
       // 通过 `vm` 访问组件实例
       vm.initPage()
-      console.log(vm, 88)
     })
   }
 }

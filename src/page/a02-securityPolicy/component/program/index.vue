@@ -380,7 +380,7 @@ export default {
     // 判断路由是否携带 policyID 路由有根据policyID加载数据
     getRouterPolicyID () {
       let policyID = this.$route.query.policyID
-      console.log(policyID, this.$route)
+
       if (policyID === 0 || policyID) {
         this.initTableParams.policyID = parseInt(policyID)
         this.policyID = parseInt(policyID)

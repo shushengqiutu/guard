@@ -105,7 +105,7 @@ export default {
 
       // 数据处理
       // 文件地址转数组去空
-      console.log(this.form.name, 99)
+
       let filesArr = this.form.name.split(/[\r\n]+/).filter(item => item !== '')
 
       // 去重
@@ -168,7 +168,6 @@ export default {
   watch: {
     policyID (id) {
       this.form.policyID = id
-      console.log(id, 99)
     }
   }
 

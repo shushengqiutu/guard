@@ -61,7 +61,6 @@ export default {
         } else {
           this.policyName = '获取失败'
         }
-        console.log(res, 99)
       })
     }
   }

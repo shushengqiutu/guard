@@ -116,7 +116,7 @@ export default {
             setInterval(this.updatestatus, 1000)
           }
         } else {
-          console.log()
+
         }
       })
     },
@@ -125,7 +125,6 @@ export default {
       req_updatestatus().then(
         res => {
           this.percentage = res.results.curstat
-          console.log(res, 88)
         }
       )
     }

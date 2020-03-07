@@ -13,6 +13,7 @@ const formatRoutes = function (routes) {
 }
 
 router.beforeEach((to, from, next) => {
+  console.log(to, from, 9999)
   if (store.getters.gettoken) {
     // 判断是否有token
     // 有token访问登录页面跳到首页智能扫描

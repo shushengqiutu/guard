@@ -191,7 +191,7 @@ export default {
     // 判断路由是否携带 policyID
     getRouterPolicyID () {
       let policyID = this.$route.query.policyID
-      console.log(policyID, this.$route)
+
       if (policyID === 0 || policyID) {
         this.initTableParams.policyID = parseInt(policyID)
         return true
@@ -226,7 +226,7 @@ export default {
     // 获取表格数据
     async getTableData (data) {
       const result = await req_ShowWhiteUsbNetList(data)
-      console.log(result, 77)
+
       return result
     },
     // 处理数据

@@ -41,7 +41,6 @@ export default {
       if (this.tabsConfig.openPage) {
         this.tabsConfig.openPage(tab)
       }
-      console.log(tab, event, 111)
     }
   }
 }

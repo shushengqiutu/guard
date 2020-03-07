@@ -58,12 +58,11 @@ export default {
     ...mapActions(['Login']),
     signIn (formName) {
       let valid = this.submitForm(formName)
-      console.log(valid)
+
       if (valid) {
         // 账号密码通过前台验证
         this.loading = true
         this.Login(this.userInfo).then(res => {
-          console.log(res, 888)
           if (res.code === 200) {
             // let pathName = 'smartExam'
             // console.log(this, 9944)
