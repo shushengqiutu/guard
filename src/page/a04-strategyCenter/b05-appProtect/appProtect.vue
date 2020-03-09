@@ -123,19 +123,25 @@
     </div>
     <choose-path :drawer="drawer" :choosePath="choosePath" @selectPath="selectPath" @changeDrawer="changeDrawer">
     </choose-path>
+    <show-tipmsg :tipmsg="tipmsg">
+    </show-tipmsg>
   </div>
 </template>
 <script>
 import choosePath from '@/component/choosePath/'
+import showTipmsg from '@/component/showTipmsg/'
+import { secProtectTip } from '@/component/showTipmsg/lang/zh-module.js'
 // eslint-disable-next-line
 import {req_getConfig,req_sysConfig} from '@/api'
 export default {
   name: 'usbScanSet',
   components: {
-    choosePath
+    choosePath,
+    showTipmsg
   },
   data () {
     return {
+      tipmsg: secProtectTip.replace(/\n/g, ' <br>'),
       checkBoxFlag: true,
       perFlag: true,
       app_def: false, // 应用程序防护状态

@@ -6,7 +6,7 @@
     <div class="headScanText margin1">
       <div class="scanText"
            :title="scanPath">
-        {{scanPath}}
+        {{scanPath | filterFile(50)}}
       </div>
     </div>
     <div class="headScanText margin2">
