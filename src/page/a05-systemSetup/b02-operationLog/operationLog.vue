@@ -151,6 +151,14 @@ export default {
           isCustom: false,
           slotName: 'operate_time'
           // width: 450
+        },
+        {
+          label: '用户',
+          prop: 'user',
+          state: true,
+          isCustom: false,
+          slotName: 'user'
+          // width: 450
         }
       ]
 

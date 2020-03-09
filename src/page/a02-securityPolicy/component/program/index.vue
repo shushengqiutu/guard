@@ -42,16 +42,33 @@
         <el-table-column label="全路径"
                          slot="file"
                          prop="file"
-                         :width="200">
+                         :width="258">
           <template slot-scope="scope">
             <el-tooltip class="item"
                         effect="dark"
                         :content="scope.row.file"
                         placement="top-start">
-              <span>{{scope.row.file|filterFile(28)}} </span>
+              <span>{{scope.row.file|filterFile(38)}} </span>
             </el-tooltip>
 
           </template>
+        </el-table-column>
+        <el-table-column slot="md5"
+                         prop="md5"
+                         label="指纹特征"
+                         :width="80">
+          <template slot-scope="scope">
+
+            <el-tooltip class="item"
+                        effect="dark"
+                        :content="scope.row.md5"
+                        placement="top-start">
+              <span>{{scope.row.md5?
+                scope.row.md5.substring(0,8)+'...':
+                '暂无'}} </span>
+            </el-tooltip>
+          </template>
+
         </el-table-column>
 
         <el-table-column label="文件签名"
@@ -248,7 +265,7 @@ export default {
           label: '指纹特征',
           prop: 'md5',
           state: true,
-          isCustom: false,
+          isCustom: true,
           slotName: 'md5',
           width: 75
         },

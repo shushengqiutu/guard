@@ -45,6 +45,38 @@
           </template>
         </el-table-column>
 
+        <el-table-column slot="operation_name"
+                         prop="operation_name"
+                         label="执行对象"
+                         :width="200">
+          <template slot-scope="scope">
+
+            <el-tooltip class="item"
+                        effect="dark"
+                        :content="scope.row.operation_name"
+                        placement="top-start">
+              <span>{{scope.row.operation_name|filterFile(28)}} </span>
+            </el-tooltip>
+          </template>
+
+        </el-table-column>
+        <el-table-column slot="operation_feature"
+                         prop="operation_feature"
+                         label="指纹特征"
+                         :width="80">
+          <template slot-scope="scope">
+
+            <el-tooltip class="item"
+                        effect="dark"
+                        :content="scope.row.operation_feature"
+                        placement="top-start">
+              <span>{{scope.row.operation_feature?
+                scope.row.operation_feature.substring(0,8)+'...':
+                '暂无'}} </span>
+            </el-tooltip>
+          </template>
+
+        </el-table-column>
         <el-table-column slot="status"
                          prop="status"
                          label="上报状态"
@@ -79,7 +111,7 @@
 
         <el-table-column slot="link"
                          label="操作"
-                         :width="125">
+                         :width="70">
           <template slot-scope="scope">
             <!-- 在授信就不出现按钮 -->
             <!-- 在当前不在授信出现授信 -->
@@ -102,8 +134,8 @@
               <el-form-item label="执行对象">
                 <span>{{ props.row.operation_name}}</span>
               </el-form-item>
-              <el-form-item label="执行特征">
-                <span>{{ props.row.operation_feature}}</span>
+              <el-form-item label="指纹特征">
+                <span>{{ props.row.operation_feature||'暂无'}}</span>
               </el-form-item>
               <el-form-item label=" 事件类型">
                 <span>{{ props.row.event_type|filterEventType}}</span>
@@ -192,16 +224,25 @@ export default {
           label: '执行对象',
           prop: 'operation_name',
           state: true,
-          isCustom: false,
+          isCustom: true,
           slotName: 'operation_name'
 
         },
         {
-          label: '指纹',
+          label: '事件类型',
+          prop: 'event_type',
+          state: true,
+          isCustom: true,
+          slotName: 'event_type',
+          width: 80
+        },
+        {
+          label: '指纹特征',
           prop: 'operation_feature',
           state: true,
-          isCustom: false,
-          slotName: 'operation_feature'
+          isCustom: true,
+          slotName: 'operation_feature',
+          width: 75
 
         },
         // {
@@ -230,18 +271,11 @@ export default {
           slotName: 'tag_status',
           width: 80
         },
-        {
-          label: '事件类型',
-          prop: 'event_type',
-          state: true,
-          isCustom: true,
-          slotName: 'event_type',
-          width: 80
-        },
+
         {
           label: '用户',
           prop: 'user',
-          state: true,
+          state: false,
           isCustom: false,
           slotName: 'user',
           width: 80
