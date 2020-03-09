@@ -16,7 +16,8 @@
     <el-collapse-transition>
       <div class="filtersWarp"
            v-show="filtersWarpOpen">
-        <filters @paramsChange='paramsChange'></filters>
+        <filters @paramsChange='paramsChange'
+                 :enventTypeSelect='true'></filters>
       </div>
     </el-collapse-transition>
     <div class='tableWarp'>
@@ -467,6 +468,8 @@ export default {
         } else {
           delete (this.initTableParams.params[type])
         }
+      } else {
+        this.initTableParams.params[type] = val
       }
 
       this.paramsChangeTableInit()

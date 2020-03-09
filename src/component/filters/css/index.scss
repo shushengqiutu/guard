@@ -2,14 +2,19 @@
 @import './theme2.scss';
 
 .filters {
-  .demonstration {
-    font-size: 12px;
-    line-height: 12px;
-    padding: 3px 0;
-    color: #fff;
-  }
-
   .datePicker {
+    display: flex;
+    align-items: center;
+
+    .demonstration {
+      font-size: 12px;
+      line-height: 12px;
+      padding: 3px 0;
+      color: #fff;
+      width: 64px;
+      text-align: right;
+    }
+
     >>>.el-picker-panel__body-wrapper {
       font-size: 12px !important;
     }
@@ -39,14 +44,34 @@
     }
 
   }
-}
 
->>>.el-date-range-picker.has-sidebar {
-  background: red;
-  width: none;
-}
+  .enventType {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
 
-.mydata {
-  background: red;
-  left: 20px;
+    .type {
+      font-size: 12px;
+      line-height: 12px;
+      padding: 3px 0;
+      color: #fff;
+      width: 64px;
+      text-align: right;
+    }
+
+    >>>.el-input--small .el-input__inner {
+      height: 22px;
+      line-height: 22px;
+      font-size: 12px;
+      border-radius: 3px;
+      padding-left: 10px;
+
+    }
+
+    >>>.el-input--small .el-input__icon {
+      line-height: 22px;
+    }
+
+
+  }
 }

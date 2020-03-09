@@ -145,3 +145,8 @@
 .el-switch.is-checked .el-switch__core::after {
   margin-left: -6px;
 }
+
+//审计事件 事件类型筛选下拉框调整样式
+.myEnventType .el-select-dropdown__item {
+  font-size: 12px;
+}
