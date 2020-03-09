@@ -1,13 +1,18 @@
 <template>
   <div>
-    <div class="tipSty" @click="showTip">
-      <i class="el-icon-arrow-left iconSty
-"></i>
+    <div class="tipSty" @click="drawer = true" v-show="!drawer">
+      <i class="el-icon-arrow-left"></i>
+    </div>
+    <div class="tipCloseSty" @click="drawer = false" v-if="drawer">
+      <i class="el-icon-arrow-right"></i>
     </div>
     <el-drawer
       title="提示信息"
+      size="322px"
       :visible.sync="drawer"
-      :wrapperClosable="true"
+      :wrapperClosable="false"
+      :with-header="false"
+      :modal="false"
     >
       <div v-html="tipmsg" class="fontCss">
       </div>
@@ -29,9 +34,7 @@ export default {
     }
   },
   methods: {
-    showTip () {
-      this.drawer = true
-    }
+
   }
 }
 </script>

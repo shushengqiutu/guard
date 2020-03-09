@@ -1,23 +1,44 @@
 @import './theme1.scss';
 @import './theme2.scss';
 .tipSty{
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 76px;
   position: absolute;
-  left: 98%;
   top: 50%;
-  margin-top: -20px;
-  line-height: 40px;
+  margin-top: -38px;
+  line-height: 76px;
   cursor: pointer;
-  background:rgba(0,0,0,1);
-  opacity:0.5;
-  border-radius:2px 0px 0px 2px;
+  background:rgba(0,0,0,0.3);
+  border-radius:40px 0px 0px 40px;
+  right: 0;
 }
-.iconSty{
-  color: white;
+.tipCloseSty{
+  width: 20px;
+  height: 76px;
+  position: absolute;
+  top: 50%;
+  margin-top: -38px;
+  line-height: 76px;
+  cursor: pointer;
+  background:rgba(0,0,0,0.3);
+  border-radius:40px 0px 0px 40px;
+  margin-left: 400px;
+  z-index: 10000;
 }
 .fontCss{
   font-size:12px;
-  font-family:Microsoft YaHei;
-  font-weight:400;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,254,254,1);
+}
+>>>.el-drawer{
+  background:rgba(0,0,0,0.7);
+}
+>>>.el-icon-arrow-right:before {
+  font-size: 20px;
+  color: white;
+}
+>>>.el-icon-arrow-left:before{
+  font-size: 20px;
+  color: white;
 }
