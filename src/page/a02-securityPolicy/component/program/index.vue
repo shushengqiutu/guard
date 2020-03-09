@@ -44,10 +44,18 @@
                          prop="file"
                          :width="200">
           <template slot-scope="scope">
-            {{scope.row.file||'暂无'  }}
+            <el-tooltip class="item"
+                        effect="dark"
+                        :content="scope.row.file"
+                        placement="top-start">
+              <span>{{scope.row.file|filterFile(28)}} </span>
+            </el-tooltip>
+
           </template>
         </el-table-column>
+
         <el-table-column label="文件签名"
+                         show-overflow-tooltip
                          slot="file_cert"
                          prop="file_cert"
                          :width="65">

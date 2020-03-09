@@ -26,7 +26,8 @@ import {
   Tree,
   Drawer,
   Checkbox,
-  Loading
+  Loading,
+  Tooltip
 } from 'element-ui'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css'
@@ -56,6 +57,7 @@ Vue.use(Tree)
 Vue.use(Drawer)
 Vue.use(Checkbox)
 Vue.use(Loading)
+Vue.use(Tooltip)
 Vue.use(DatePicker, { size: 'small', zIndex: 3000 })
 Vue.component(Message.name, Message)
 Vue.component(MessageBox.name, MessageBox)

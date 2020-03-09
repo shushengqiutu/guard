@@ -121,3 +121,31 @@ Vue.filter('filterType', function (type) {
       return '驱动授信白名单策略'
   }
 })
+
+// 格式化所有策略下的type类型
+Vue.filter('filterFile', function (file, num) {
+  // 获取字节长度
+  let str = file
+  let count = str.replace(/[\u4e00-\u9fa5]/g, 'aa').length
+  // 如果字节小于定义
+  if (count < num) {
+    return file
+  } else {
+    // 取最后一个文件
+    let endStr = file.split('\\').pop()
+    let endCount = endStr.replace(/[\u4e00-\u9fa5]/g, 'aa').length + 4
+    if (endCount > num) {
+      return `...\\${endStr}`
+    } else {
+      let startLen = num - endCount
+      let startStr
+      if (startLen < 3) {
+        startStr = '\\'
+      } else {
+        startStr = file.substring(0, startLen)
+      }
+
+      return `${startStr}...\\${endStr}`
+    }
+  }
+})
