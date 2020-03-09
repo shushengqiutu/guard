@@ -206,7 +206,7 @@ export default {
           this.programObj.appStatus = resultData.app_def ? '运行' : '停止' // 应用防护（0-停止，1-运行）
           this.programObj.peripherals = resultData.peripheral_def ? '运行' : '停止' // 外设防护（0-停止，1-运行）
           this.programObj.net = resultData.net_def ? '运行' : '停止' // 网络防护（0-停止，1-运行）
-          this.programObj.dircetory = resultData.dir_def ? '运行' : '停止' // 目录防护（0-停止，1-运行）
+          this.programObj.dircetory = resultData.data_def ? '运行' : '停止' // 数据防护（0-停止，1-运行）
           this.programObj.sysStatus = resultData.drive ? '正常' : '异常' // 驱动运行状态，检测是否正常
           this.programObj.policy = resultData.policy_name // 当前策略
           this.programObj.clusterStatus = resultData.cluster_service ? '正常' : '异常' // 集群服务
