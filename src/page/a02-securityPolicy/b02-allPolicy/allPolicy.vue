@@ -33,16 +33,21 @@
           </template>
         </el-table-column>
         <!-- 策略名称 -->
-
-        <el-table-column slot="policyName"
-                         label="策略名称">
+        <el-table-column slot="icon"
+                         label=""
+                         :width="19">
           <template slot-scope="scope">
-
             <img v-if='scope.row.status===1'
                  title="已部署"
                  src="@/assets/img/theme1/a02-securityAudit/b02-allPolicy/img/deploy@2x.png"
                  width="14">
-            {{scope.row.policyName}}
+
+          </template>
+        </el-table-column>
+        <el-table-column slot="policyName"
+                         label="策略名称">
+          <template slot-scope="scope">
+            {{scope.row.policyName||'暂无'}}
           </template>
         </el-table-column>
         <!--
@@ -57,7 +62,8 @@
         </el-table-column>
 
         <el-table-column slot="modify_time"
-                         label="修改时间">
+                         label="修改时间"
+                         :width="135">
           <template slot-scope="scope">
             {{scope.row.modify_time||'暂无'}}
           </template>
@@ -187,7 +193,14 @@ export default {
           prop: 'date',
           sortable: false // 是否排序
         },
-
+        {
+          label: 'icon',
+          prop: 'icon',
+          state: true,
+          isCustom: true,
+          slotName: 'icon',
+          width: 100
+        },
         {
           label: '策略名称',
           prop: 'policyName',
