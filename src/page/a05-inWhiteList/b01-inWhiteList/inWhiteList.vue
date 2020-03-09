@@ -54,7 +54,11 @@
                          :width="80">
           <template slot-scope="scope">
             <span class="link"
-                  @click="linkTo(scope.row.wl_type,scope.row.os_version)"> 详情</span>
+                  @click="linkTo(scope.row.wl_type,scope.row.os_version)"> 详情
+            </span>
+            <span class="link"
+                  @click="apply(scope.row.os_version)"> 应用
+            </span>
           </template>
 
         </el-table-column>
@@ -70,6 +74,10 @@
                     @paginationChange='paginationChange'>
       </myPagination>
     </div>
+    <apply-white :applyWhiteDrawer="applyWhiteDrawer"
+                 :version='version'
+                 @changeApplyWhiteDrawer='changeApplyWhiteDrawer'>
+    </apply-white>
   </div>
 
 </template>
@@ -80,6 +88,7 @@ import mySearch from '@/component/search/'
 import myOption from '@/component/option/'
 import myTable from '@/component/table/'
 import myPagination from '@/component/pagination/'
+import applyWhite from '@/component/applyWhite/'
 import {
 
   // eslint-disable-next-line camelcase
@@ -89,12 +98,14 @@ export default {
   name: 'allPolicy',
 
   components: {
-    mySearch, myOption, myTable, myPagination
+    mySearch, myOption, myTable, myPagination, applyWhite
   },
   data: function () {
     return {
       ss: '',
       filtersWarpOpen: false,
+      applyWhiteDrawer: false, // 应用弹窗
+      version: '', // 弹窗需要的版本
       tableData: [],
       pagination: {
         isShow: true,
@@ -167,6 +178,14 @@ export default {
   },
 
   methods: {
+    /** *********************************************应用功能*************************************** */
+    changeApplyWhiteDrawer (v) {
+      this.applyWhiteDrawer = v
+    },
+    apply (version) {
+      this.version = version
+      this.applyWhiteDrawer = true
+    },
     /** *********************************************表格*************************************** */
 
     // 表格初始化

@@ -1,7 +1,9 @@
 
 <template>
   <div class="warp">
-    <div class="tatal">当前总计：{{total||'0'}}条 总计{{pageTotal(total,size)}}页</div>
+    <div v-if="totalWarp"
+         class="tatal">当前总计：{{total||'0'}}条 总计{{pageTotal(total,size)}}页</div>
+    <div v-else></div>
     <div class="mypagination">
       <el-pagination @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
@@ -41,6 +43,10 @@ export default {
     size: {
       // 当前页码默认显示数据
       type: Number
+    },
+    totalWarp: {
+      type: Boolean,
+      default: true
     },
     // 当前页码默认显示数据
     total: {

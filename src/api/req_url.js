@@ -58,5 +58,5 @@ export const UNDEPLOY_URL = `${BASE_URL}/whitelist/undeploy`
 /* 系统升级 */
 // 检测升级
 export const UPDATE_URL = `${BASE_URL}/updateproc/message`
-
-/* 系统升级结束 */
+/* 应用内置白名单 */
+export const APPLYCREDITWHITELIST_URL = `${BASE_URL}/whitelist/applycreditwhitelist`

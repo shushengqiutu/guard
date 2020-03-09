@@ -30,7 +30,8 @@ import {
   GETCONFIG_URL,
   DEPLOY_URL,
   UNDEPLOY_URL,
-  UPDATE_URL
+  UPDATE_URL,
+  APPLYCREDITWHITELIST_URL
 
 }
   from './req_url'
@@ -423,3 +424,14 @@ export const req_forceupdate = (data) => ajax(UPDATE_URL, {
 }, 'POST')
 
 /** *************************************系统升级结束********************************************/
+
+/** **************************************************应用内置白名单 *****************************/
+// 接口52
+export const req_applycreditwhitelist = (data) => ajax(APPLYCREDITWHITELIST_URL, {
+  cmdlist: [{
+    cmd: 0x00020513,
+    ncmd: 'applycreditwhitelist',
+    data: data
+  }]
+}, 'POST')
+/** **************************************************应用内置白名单结束 *****************************/
