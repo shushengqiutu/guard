@@ -20,7 +20,7 @@
           <img class="img1" v-if="programColor === 'yellow'"
                src="@/assets/img/public/安全防护-中@2x.png" />
           <img class="img1" v-if="programColor === 'green'"
-               src="@/assets/img/public/安全防护-低@2x.png" />
+               src="@/assets/img/public/安全防护-高.png" />
         </div>
         <div class="content">
           <div><span class="largText">安全防护</span></div>
