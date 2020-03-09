@@ -39,6 +39,14 @@
           </template>
         </el-table-column>
 
+        <el-table-column label="全路径"
+                         slot="file"
+                         prop="file"
+                         :width="200">
+          <template slot-scope="scope">
+            {{scope.row.file||'暂无'  }}
+          </template>
+        </el-table-column>
         <el-table-column label="文件签名"
                          slot="file_cert"
                          prop="file_cert"
@@ -200,13 +208,13 @@ export default {
           state: true,
           isCustom: false,
           slotName: 'name',
-          width: 100
+          width: 150
         },
         {
           label: '全路径',
           prop: 'file',
           state: true,
-          isCustom: false,
+          isCustom: true,
           slotName: 'file'
 
         },
@@ -234,7 +242,7 @@ export default {
           state: true,
           isCustom: false,
           slotName: 'md5',
-          width: 240
+          width: 75
         },
         {
           label: '文件签名',

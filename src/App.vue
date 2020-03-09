@@ -124,12 +124,13 @@ html {
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin: 1% auto;
 }
 body {
   width: 920px;
   height: 600px;
-  background: linear-gradient(152deg, #232526 0%, #414345 100%);
   position: relative;
+  background: #232526;
 }
 #app {
   width: 920px;

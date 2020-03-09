@@ -31,6 +31,7 @@
 
         <template v-if="item.state">
           <!-- 无需自定义的列 -->
+
           <el-table-column v-if="!item.isCustom"
                            :type="item.type?item.type:''"
                            :label="item.label"
@@ -41,6 +42,7 @@
                            :sortable="item.sortable?item.sortable:false">
 
           </el-table-column>
+
           <!-- 需要自定义的列 -->
           <slot v-else
                 :name="item.slotName?item.slotName:''">

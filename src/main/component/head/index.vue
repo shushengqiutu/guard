@@ -52,8 +52,10 @@
     <div class="right">
       <div class="mean iconWarp"
            @click="subMean=!subMean"><i class="icon iconfont iconliebiao"> </i></div>
-      <div class="minimize iconWarp"> <i class="icon iconfont iconweibiaoti-_huaban"> </i></div>
-      <div class="close iconWarp"><i class="icon iconfont iconguanbi"> </i></div>
+      <div class="minimize iconWarp"> <i @click="minimize"
+           class="icon iconfont iconweibiaoti-_huaban"> </i></div>
+      <div class="close iconWarp"><i @click="close"
+           class="icon iconfont iconguanbi"> </i></div>
       <transition name="el-fade-in-linear">
         <div class="subMean"
              v-show="subMean">
@@ -150,6 +152,18 @@ export default {
   },
   methods: {
     ...mapMutations(['change_theme', 'change_lang']),
+    minimize () {
+      console.log('点击最小化')
+      let win = nw.Window.get()
+      console.log('点击最小化结束')
+      win.minimize()
+    },
+    close () {
+      let win = nw.Window.get()
+      console.log('点击关闭')
+      win.minimize()
+      win.close()
+    },
     linkTo (name) {
       this.$router.push({ name })
     },
