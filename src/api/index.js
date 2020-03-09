@@ -430,7 +430,7 @@ export const req_forceupdate = (data) => ajax(UPDATE_URL, {
 export const req_applycreditwhitelist = (data) => ajax(APPLYCREDITWHITELIST_URL, {
   cmdlist: [{
     cmd: 0x00020513,
-    ncmd: 'applycreditwhitelist',
+    ncmd: 'WhiteListCreditCategoryList',
     data: data
   }]
 }, 'POST')

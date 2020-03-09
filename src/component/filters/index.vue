@@ -21,6 +21,7 @@
          v-if="enventTypeSelect">
       <span class="type">事件类型：</span>
       <el-select v-model="enventType.value"
+                 clearable
                  @change='enventTypechange'
                  popper-class='myEnventType'
                  placeholder="请选择">
@@ -140,6 +141,7 @@ export default {
       console.log(11, this.pickerOptions.timeArry, 111)
     },
     enventTypechange () {
+      debugger
       this.$emit('paramsChange', 'event_type', this.enventType.value)
     }
   }
