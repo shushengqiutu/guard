@@ -48,10 +48,13 @@
   height: 4px !important;
 }
 >>> .el-progress-bar__outer {
-  background: grey;
+  background:rgba(238,238,238,0.1);
 }
 >>> .el-progress__text {
   color: white;
+}
+>>>.el-progress-bar__inner{
+  background:rgba(238,238,238,1);
 }
 .headerSty {
   padding-top: 20px;
@@ -71,7 +74,7 @@
   display: flex;
   justify-content: space-around;
   font-size: 18px;
-  font-family: Microsoft YaHei;
+  font-family:SourceHanSansCN-Light;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
 }
@@ -80,6 +83,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size:18px;
+  font-family:SourceHanSansCN-Light;
+  font-weight:300;
+  color:rgba(255,255,255,1);
 }
 .bodyText {
   width: 470px;
@@ -95,7 +102,7 @@
   display: flex;
   justify-content: space-around;
   font-size: 14px;
-  font-family: Microsoft YaHei;
+  font-family: SourceHanSansCN-Light;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
 }
