@@ -126,12 +126,16 @@ export default {
     },
     // 停止扫描
     stopScan () {
-      this.$confirm({
+      this.$stopConfirm({
         type: '提示',
-        msg: '停止扫描并保存数据？',
+        msg: '您将停止策略扫描，当前扫描结果是否需要保存？<br>' +
+          '【是】将保存当前扫描的结果并停止扫描<br>' +
+          '【否】将不保留当前的结果并停止扫描<br>' +
+          '【取消】继续扫描',
         btn: {
-          ok: '保存',
-          no: '不保存'
+          ok: '是',
+          no: '否',
+          cancel: '取消'
         }
       }).then((res) => {
         this.sendStopScan(this.policyID, true).then((res) => {
@@ -141,15 +145,16 @@ export default {
           }
         })
       })
-        .catch(() => {
-          this.sendStopScan(this.policyID, false).then((res) => {
-            console.log(res)
-            if (res.status) {
-              // 执行成功 不保存 去首页
-              localStorage.removeItem('policyId')
-              this.$router.push({ name: 'smartExam' })
-            }
-          })
+        .catch((res) => {
+          if (res === 'noSave') {
+            this.sendStopScan(this.policyID, false).then((res) => {
+              if (res.status) {
+                // 执行成功 不保存 去首页
+                localStorage.removeItem('policyId')
+                this.$router.push({ name: 'smartExam' })
+              }
+            })
+          }
         })
     },
     async  sendStopScan (policyID, issave) {
