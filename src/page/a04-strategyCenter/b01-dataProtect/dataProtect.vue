@@ -62,30 +62,39 @@ export default {
   methods: {
     // 确定
     submitForm () {
-      let data = [{
-        'key': 'match_policy',
-        'value': this.radio
-      },
-      {
-        'key': 'audit_policy',
-        'value': this.radio2
-      }]
-      let params = {
-        cmdlist: [{
-          'cmd': 132374,
-          'ncmd': 'setSystemConfig',
-          data: {
-            params: data
-          }
-        }]
-      }
-      req_sysConfig(params).then(res => {
-        if (res.results.status) {
-          this.$msg({
-            message: '配置成功',
-            type: 'success'
-          })
+      this.$confirm({
+        type: '提示',
+        msg: '确定下发应用防护策略配置吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
         }
+      }).then(res => {
+        let data = [{
+          'key': 'match_policy',
+          'value': this.radio
+        },
+        {
+          'key': 'audit_policy',
+          'value': this.radio2
+        }]
+        let params = {
+          cmdlist: [{
+            'cmd': 132374,
+            'ncmd': 'setSystemConfig',
+            data: {
+              params: data
+            }
+          }]
+        }
+        req_sysConfig(params).then(res => {
+          if (res.results.status) {
+            this.$msg({
+              message: '配置成功',
+              type: 'success'
+            })
+          }
+        })
       })
     },
     resetForm () {

@@ -81,6 +81,7 @@ export default {
     // 将选择的数据传递给父级
     addPath () {
       this.$emit('selectPath', this.pathArr)
+      this.newDrawer1 = false
     },
     getFiles () {
       this.$emit('getFiles', this.pathArr)
@@ -113,6 +114,11 @@ export default {
               localStorage.setItem('policyId', res.policyID)
               this.$router.push({ name: 'scaning' })
             }
+          })
+        } else {
+          this.$msg({
+            message: '请先选择目录',
+            type: 'warning'
           })
         }
       }

@@ -62,9 +62,8 @@
         <div>USB数量：{{usbCount}}</div>
       </div>
     </div>
-    <div class="stopScan"
-         @click="stopScan">
-      <div class="stopScanText">
+    <div class="stopScan">
+      <div class="stopScanText" @click="stopScan">
         <span>停止扫描</span>
       </div>
     </div>

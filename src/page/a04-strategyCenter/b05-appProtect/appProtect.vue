@@ -113,12 +113,12 @@
              :class="{'active':okFlag}"
              @click="submitForm()"
         ><span>确定</span></div>
-        <div class="cancelButton"
+        <!--<div class="cancelButton"
              @click="resetForm"
              @mouseover="cancelFlag=true"
              @mouseleave="cancelFlag=false"
              :class="{'active':cancelFlag}"
-        ><span>取消</span></div>
+        ><span>取消</span></div>-->
       </div>
     </div>
     <choose-path :drawer="drawer" :choosePath="choosePath" @selectPath="selectPath" @changeDrawer="changeDrawer">
@@ -163,51 +163,60 @@ export default {
   methods: {
     // 确定
     submitForm () {
-      let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'peripheral_def', 'usb_storage', 'non_usb_storage', 'data_def', 'dir_def', 'except_app_type']
-      let data = []
-      for (let i = 0; i < key.length; i++) {
-        let itemObj = {
-          'key': '',
-          'value': ''
+      this.$confirm({
+        type: '提示',
+        msg: '确定下发安全防护配置吗？',
+        btn: {
+          ok: '确定',
+          no: '取消'
         }
-        if (key[i] !== 'dir_def' && key[i] !== 'except_app_type') {
-          itemObj = {
-            'key': key[i],
-            'value': this[key[i]] ? '1' : '0'
+      }).then(res => {
+        let key = ['app_def', 'app_def_exe', 'app_def_bat', 'app_def_vbs', 'peripheral_def', 'usb_storage', 'non_usb_storage', 'data_def', 'dir_def', 'except_app_type']
+        let data = []
+        for (let i = 0; i < key.length; i++) {
+          let itemObj = {
+            'key': '',
+            'value': ''
           }
-          data.push(itemObj)
-        } else {
-          if (key[i] === 'dir_def') {
+          if (key[i] !== 'dir_def' && key[i] !== 'except_app_type') {
             itemObj = {
               'key': key[i],
-              'value': this.path.length ? this.path.join(';') : ''
+              'value': this[key[i]] ? '1' : '0'
             }
             data.push(itemObj)
           } else {
-            itemObj = {
-              'key': key[i],
-              'value': this.except_app_type
+            if (key[i] === 'dir_def') {
+              itemObj = {
+                'key': key[i],
+                'value': this.path.length ? this.path.join(';') : ''
+              }
+              data.push(itemObj)
+            } else {
+              itemObj = {
+                'key': key[i],
+                'value': this.except_app_type
+              }
+              data.push(itemObj)
             }
-            data.push(itemObj)
           }
         }
-      }
-      let params = {
-        cmdlist: [{
-          'cmd': 132374,
-          'ncmd': 'setSystemConfig',
-          data: {
-            params: data
-          }
-        }]
-      }
-      req_sysConfig(params).then(res => {
-        if (res.results.status) {
-          this.$msg({
-            message: '配置成功',
-            type: 'success'
-          })
+        let params = {
+          cmdlist: [{
+            'cmd': 132374,
+            'ncmd': 'setSystemConfig',
+            data: {
+              params: data
+            }
+          }]
         }
+        req_sysConfig(params).then(res => {
+          if (res.results.status) {
+            this.$msg({
+              message: '配置成功',
+              type: 'success'
+            })
+          }
+        })
       })
     },
     // 取消
