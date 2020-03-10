@@ -56,7 +56,7 @@ export default {
       }
       that.global.ws.onmessage = function (res) {
         let receiveData = JSON.parse(res.data)
-        if (receiveData.cmd === 133380) {
+        if (receiveData.cmd === 133380) { // 威胁事件
           let resData = receiveData.results
           let startTime = resData.start_time // 开始时间
           let operationName = resData.operation_name // 执行对象
@@ -75,13 +75,34 @@ export default {
             60: 'VBS执行',
             61: 'VBS阻止'
           }
+          let titleName = '威胁事件'
           let eventType = eventTypeObj[resData.event_type] // 事件类型
+          let msgArr = [] // 第一行按照15个字节切割，往后按照25个字节切割，组装数组
+          while (that.getLength(operationName) > 15) {
+            let cutStr = ''
+            if (msgArr.length === 0) {
+              cutStr = that.cutStr(operationName, 15)
+            } else {
+              cutStr = that.cutStr(operationName, 25)
+            }
+            msgArr.push(cutStr)
+            operationName = operationName.substr(cutStr.length)
+          }
+          msgArr.push(operationName)
+          let htmlDiv = ''
+          htmlDiv += `<div>开始时间:${startTime}</div>`
+          for (let i = 0; i < msgArr.length; i++) {
+            if (i === 0) {
+              htmlDiv += `<div style="word-wrap: break-word;width: 200px;">事件类型：${msgArr[i]}</div>`
+            } else {
+              htmlDiv += `<div style="word-wrap: break-word;width: 200px;">${msgArr[i]}</div>`
+            }
+          }
+          htmlDiv += `<div>事件类型:${eventType}</div>`
           that.$notify({
-            title: '安全事件',
+            title: titleName,
             dangerouslyUseHTMLString: true,
-            message: `<div>开始时间:${startTime}</div>
-                      <div>执行对象:${operationName}</div>
-                      <div>事件类型:${eventType}</div>`,
+            message: htmlDiv,
             type: 'warning'
           })
         }
@@ -102,6 +123,42 @@ export default {
       } else {
         this.theme = this.getTheme
       }
+    },
+    // 按照字节切割字符串
+    cutStr (str, L) {
+      var result = '',
+        strlen = str.length, // 字符串长度
+        chrlen = str.replace(/[^\x00-\xff]/g, '**').length // 字节长度
+
+      if (chrlen <= L) { return str }
+
+      for (var i = 0, j = 0; i < strlen; i++) {
+        var chr = str.charAt(i)
+        if (/[\x00-\xff]/.test(chr)) {
+          j++ // ascii码为0-255，一个字符就是一个字节的长度
+        } else {
+          j += 2 // ascii码为0-255以外，一个字符就是两个字节的长度
+        }
+        if (j <= L) { // 当加上当前字符以后，如果总字节长度小于等于L，则将当前字符真实的+在result后
+          result += chr
+        } else { // 反之则说明result已经是不拆分字符的情况下最接近L的值了，直接返回
+          return result
+        }
+      }
+    },
+    // 获取字节长度
+    getLength (val) {
+      var str = new String(val)
+      var bytesCount = 0
+      for (var i = 0, n = str.length; i < n; i++) {
+        var c = str.charCodeAt(i)
+        if ((c >= 0x0001 && c <= 0x007e) || (c >= 0xff60 && c <= 0xff9f)) {
+          bytesCount += 1
+        } else {
+          bytesCount += 2
+        }
+      }
+      return bytesCount
     }
   },
   watch: {
