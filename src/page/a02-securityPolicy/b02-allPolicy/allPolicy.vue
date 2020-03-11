@@ -126,12 +126,15 @@
     </div>
     <el-drawer title="策略名称"
                :visible.sync="drawer"
+               @close='resetForm'
                :wrapperClosable="false">
       <el-form ref="form"
+               :model="form"
                label-width="80px"
                size="mini">
-        <el-form-item label="策略名称">
-          <el-input v-model="policyName"></el-input>
+        <el-form-item label="策略名称"
+                      prop="policyName">
+          <el-input v-model="form.policyName"></el-input>
         </el-form-item>
         <el-form-item size="large">
           <el-button type="primary"
@@ -164,8 +167,11 @@ export default {
     return {
       drawer: false,
       actionFlag: '',
-      policyName: '',
+      open: '',
       editPolicyId: '',
+      form: {
+        policyName: ''
+      },
       filtersWarpOpen: false,
       tableData: [],
       radioData: {},
@@ -203,6 +209,7 @@ export default {
         },
         {
           label: '策略名称',
+
           prop: 'policyName',
           state: true,
           isCustom: true,
@@ -358,7 +365,7 @@ export default {
       this.actionFlag = 'edit'
       this.drawer = true
       this.editPolicyId = val.policyID
-      this.policyName = val.policyName
+      this.form.policyName = val.policyName
     },
     // 提交按钮
     onSubmit () {
@@ -368,7 +375,7 @@ export default {
             cmd: 132363,
             ncmd: 'CreatePolicy',
             data: {
-              name: this.policyName,
+              name: this.form.policyName,
               type: 2 // 用户添加类型
             }
           }]
@@ -395,7 +402,7 @@ export default {
             ncmd: 'updatePolicy',
             data: {
               policyID: this.editPolicyId,
-              name: this.policyName
+              name: this.form.policyName
             }
           }]
         }
@@ -419,7 +426,7 @@ export default {
     // 取消
     closeDrawer () {
       this.drawer = false
-      this.policyName = ''
+      this.form.policyName = ''
     },
     add () {
       this.actionFlag = 'add'
@@ -462,12 +469,23 @@ export default {
         })
       }
     },
+    // 重置表单
+    resetForm () {
+      this.$nextTick(() => {
+        this.$refs.form.resetFields()
+      })
+    },
     /** *********************************************表格*************************************** */
     // 表格初始化
     initTable () {
       this.getTableData(this.initTableParams)
         .then(res => {
-          this.setTableData(res.results.list, res.results.total)
+          if (res.results.list) {
+            res.results.list.sort(function (item1, item2) {
+              return item2.status - item1.status
+            })
+            this.setTableData(res.results.list, res.results.total)
+          }
         })
     },
     // 获取表格数据

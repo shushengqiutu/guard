@@ -4,6 +4,7 @@
   <div>
 
     <el-drawer title="追加网卡"
+               @open="resetForm"
                :visible.sync="newDrawer"
                size="30%"
                :wrapperClosable="false"
@@ -13,17 +14,20 @@
         <el-form ref="form"
                  :model="form"
                  label-width="80px">
-          <el-form-item label="当前策略">
+          <el-form-item label="当前策略"
+                        prop="policyID">
             <el-input disabled
                       v-model="form.policyID">
             </el-input>
 
           </el-form-item>
-          <el-form-item label="网卡名称">
+          <el-form-item label="网卡名称"
+                        prop="name">
             <el-input v-model="form.name">
             </el-input>
           </el-form-item>
-          <el-form-item label="网卡状态">
+          <el-form-item label="网卡状态"
+                        prop="status">
             <el-switch v-model="form.status"
                        active-color="#13ce66"
                        inactive-color="black"
@@ -31,7 +35,8 @@
                        inactive-value="0">
             </el-switch>
           </el-form-item>
-          <el-form-item label="网卡描述">
+          <el-form-item label="网卡描述"
+                        prop="desc">
             <el-input type="textarea"
                       v-model="form.desc">
             </el-input>
@@ -95,6 +100,12 @@ export default {
 
   },
   methods: {
+    // 重置表单
+    resetForm () {
+      this.$nextTick(() => {
+        this.$refs.form.resetFields()
+      })
+    },
     /** ***********追加网卡确定******************************* */
     startSendNet () {
       // 对数据验证

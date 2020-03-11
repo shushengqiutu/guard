@@ -77,9 +77,11 @@
                          prop="file_cert"
                          :width="65">
           <template slot-scope="scope">
+
             {{scope.row.file_cert||'暂无'  }}
           </template>
         </el-table-column>
+
         <el-table-column label="文件大小"
                          slot="size"
                          prop="size"

@@ -3,6 +3,7 @@
 
   <div>
     <el-drawer title="追加usb"
+               @open='resetForm'
                :visible.sync="newDrawer"
                size="30%"
                :wrapperClosable="false"
@@ -12,21 +13,25 @@
         <el-form ref="form"
                  :model="form"
                  label-width="80px">
-          <el-form-item label="当前策略">
+          <el-form-item label="当前策略"
+                        prop="policyID">
             <el-input disabled
                       v-model="form.policyID">
             </el-input>
 
           </el-form-item>
-          <el-form-item label="USB名称">
+          <el-form-item label="USB名称"
+                        prop="name">
             <el-input v-model="form.name">
             </el-input>
           </el-form-item>
-          <el-form-item label="硬件id">
+          <el-form-item label="硬件id"
+                        prop="hardware_id">
             <el-input v-model="form.hardware_id">
             </el-input>
           </el-form-item>
-          <el-form-item label="文件描述">
+          <el-form-item label="文件描述"
+                        prop="desc">
             <el-input type="textarea"
                       v-model="form.desc">
             </el-input>
@@ -86,10 +91,19 @@ export default {
       }
     }
   },
+  created () {
+
+  },
   mounted () {
 
   },
   methods: {
+    // 重置表单
+    resetForm () {
+      this.$nextTick(() => {
+        this.$refs.form.resetFields()
+      })
+    },
     /** ***********追加usb确定******************************* */
     startSendUsb () {
       // 对数据验证

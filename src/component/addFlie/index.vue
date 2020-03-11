@@ -3,6 +3,7 @@
 
   <div>
     <el-drawer title="追加文件"
+               @close="resetForm"
                :visible.sync="newDrawer"
                size="30%"
                :append-to-body='true'
@@ -13,25 +14,29 @@
         <el-form ref="form"
                  :model="form"
                  label-width="80px">
-          <el-form-item label="当前策略">
+          <el-form-item label="当前策略"
+                        prop="policyID">
             <el-input disabled
                       v-model="form.policyID">
             </el-input>
 
           </el-form-item>
-          <el-form-item label="文件路径">
+          <el-form-item label="文件路径"
+                        prop="name">
             <el-input type="textarea"
                       v-model="form.name">
             </el-input>
             <button type="button"
                     @click='addFlieSrc()'>选择文件</button>
           </el-form-item>
-          <el-form-item label="MD5">
+          <el-form-item label="md5"
+                        prop="md5">
             <el-input type="textarea"
                       v-model="form.md5">
             </el-input>
           </el-form-item>
-          <el-form-item label="文件描述">
+          <el-form-item label="文件描述"
+                        prop="desc">
             <el-input type="textarea"
                       v-model="form.desc">
             </el-input>
@@ -104,6 +109,12 @@ export default {
 
   },
   methods: {
+    // 重置表单
+    resetForm () {
+      this.$nextTick(() => {
+        this.$refs.form.resetFields()
+      })
+    },
     startSend () {
       // 对数据验证 name不能为空
 

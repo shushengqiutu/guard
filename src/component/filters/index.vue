@@ -10,7 +10,7 @@
                       @change="timeChange"
                       validate-event
                       unlink-panels
-                      value-format="yyyy-MM-dd hh:mm:ss"
+                      value-format="yyyy-MM-dd HH:mm:ss"
                       range-separator="至"
                       start-placeholder="开始日期"
                       end-placeholder="结束日期"

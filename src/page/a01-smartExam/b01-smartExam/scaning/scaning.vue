@@ -100,6 +100,7 @@ export default {
 
     },
     scanProgress (val, oldVal) {
+      debugger
       // 普通的watch监听
       if (val === 100) {
         this.whileListStatus = true
@@ -117,6 +118,7 @@ export default {
         console.log('发送信息')
       }
       that.global.ws.onmessage = function (res) {
+        console.log(res, 11)
         that.scanType(JSON.parse(res.data))
       }
     },
@@ -148,6 +150,7 @@ export default {
           if (res === 'noSave') {
             this.sendStopScan(this.policyID, false).then((res) => {
               if (res.status) {
+                debugger
                 // 执行成功 不保存 去首页
                 localStorage.removeItem('policyId')
                 this.$router.push({ name: 'smartExam' })
@@ -166,6 +169,7 @@ export default {
     // 判断扫描类型
     scanType (data) {
       // 判断扫描类型
+      debugger
       if (data.cmd === 133377) { // 文件扫描
         this.scanPath = data.results.name
         this.scanProgress = data.results.progress
